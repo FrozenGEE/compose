@@ -31,27 +31,48 @@ aaa代表docker容器的配置文件目录；bbb代表某个共享文件夹
 *代表第几个存储池，根据实际情况来写，适配模板将会默认都用/volume1，请根据实际情况修改
 
 unraid的docker配置文件存放路径：/mnt/user/appdata/aaa
+
+
 unraid的数据存放路径开头：/mnt/user/bbb
+
+
 熟悉unraid的玩家会知道另一个绝对路径写法，这里不展开说明
 
+
+
 群晖的docker配置文件存放路径：/volume*/docker/aaa
+
+
 群晖的数据存放路径开头：/volume*/bbb
 
 
+
 威联通的docker配置文件存放路径：
+
+
 威联通的数据存放路径开头：
 
 
+
 omv的docker配置文件存放路径：
+
+
 omv的数据存放路径开头：
 
 
+
 casaos的docker配置文件存放路径：/DATA/AppData/aaa
+
+
 casaos的数据存放路径开头：/DATA/bbb
 
 
+
 TrueNAS的docker配置文件存放路径：
+
+
 TrueNAS的数据存放路径开头：
+
 
 
 绿联旧系统(基于op)的docker配置文件存放路径：/mnt/dm-*/.ugreen_nas/用户ID/docker/aaa
@@ -63,11 +84,17 @@ TrueNAS的数据存放路径开头：
 dm-* 中的*代表第几个存储池，从0开始算起，但实际你自己是怎么设置的请视情况修改
 
 
+
 绿联新系统(基于debian)的docker配置文件存放路径：/volume*/docker/aaa
+
+
 绿联旧系统(基于debian)的数据存放路径开头：/volume*/bbb
 
 
+
 极空间系统的docker配置文件存放路径：/volume*/docker/aaa
+
+
 极空间系统的数据存放路径开头：/volume*/bbb
 
 
