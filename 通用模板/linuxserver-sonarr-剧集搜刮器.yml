@@ -1,0 +1,54 @@
+# 官网
+# https://sonarr.tv
+# 官方文档
+# https://hub.docker.com/r/linuxserver/sonarr
+# https://docs.linuxserver.io/images/docker-sonarr
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  sonarr:
+    image: linuxserver/sonarr:latest
+    # 镜像地址
+    container_name: sonarr
+    # 容器名字
+    hostname: sonarr
+    # 主机名
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/sonarr:/config
+      # 配置目录
+      - 【媒体库总目录】:/data
+      # 本地媒体库目录
+      - 【这里替换为你的数据存放目录】/downloads:/downloads
+      # 下载存放目录
+      # - 【这里替换为你的数据存放目录】:/【自定义目录名字】
+      # 可自定义目录，可以写多个
+    environment:
+      - PUID=1000
+      # 用户权限，群晖用户一般写1026，unraid用户写1000，视情况写0，即root
+      - PGID=100
+      # 用户组权限
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # 部署完成后，在设置中可以自定义容器端口
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8989:8989/tcp
+      # WebUI 端口，设置内可以自定义端口号
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/sonarr_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:8989]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/sonarr.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
