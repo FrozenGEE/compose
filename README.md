@@ -68,7 +68,7 @@ unraid的数据存放路径开头
 💡绿联旧系统(基于op)的docker配置文件存放路径
 /mnt/dm-*/.ugreen_nas/用户ID/docker/aaa
 💡绿联旧系统(基于op)的数据存放路径开头
-/mnt/dm-*/.ugreen_nas/用户ID/data
+/mnt/dm-*/.ugreen_nas/用户ID/data/bbb
 
 dm-* 中的*代表第几个存储池，从0开始算起，但实际你自己是怎么设置的请视情况修改
 ```
@@ -113,12 +113,12 @@ docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/dock
 docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /DATA/AppData/portainer-zh:/data 6053537/portainer-ce
 ```
 
-### debian/ubuntu/armbian(其实可以随便自定义路径都可以，这里写和casaos一样)
+### debian/ubuntu/armbian(其实随便自定义路径都可以，这里写和casaos一样)
 ```shell
 docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /DATA/AppData/portainer-zh:/data 6053537/portainer-ce
 ```
 
-### 绿联旧系统
+### 绿联旧系统(记得把用户ID替换掉)
 ```shell
 docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/dm-0/.ugreen_nas/用户ID/docker/portainer-zh:/data 6053537/portainer-ce
 ```
@@ -128,7 +128,7 @@ docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/dock
 docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce
 ```
 
-### 极空间docker用的是魔改的portainer，官方没有开放ssh，但可以通过一些途径获取到，然而本人的Z2pro（rk3568）使用portainer会和极空间的魔改portainer冲突，x86网友表示不会，所以这里修改portainer的启动参数为不自启动
+### 极空间docker用的是魔改的portainer，官方没有开放ssh，但可以通过一些途径获取到，然而本人的Z2pro（rk3568）使用portainer会和极空间的魔改portainer冲突，x86的根据网友表示不会，所以这里修改portainer的启动参数为不自启动，以免有问题
 ```shell
 (待补充)
 ```
