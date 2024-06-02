@@ -36,14 +36,14 @@ unraid的数据存放路径开头
 ```
 
 ```shell
-群晖的docker配置文件存放路径
-- /volume*/docker/aaa
-群晖的数据存放路径开头
-- /volume*/bbb
+💡群晖的docker配置文件存放路径
+💡💡/volume*/docker/aaa
+💡群晖的数据存放路径开头
+💡💡/volume*/bbb
 ```
 
 ```shell
-~ 威联通的docker配置文件存放路径
+💡威联通的docker配置文件存放路径
 威联通的数据存放路径开头
 ```
 
