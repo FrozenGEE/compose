@@ -1,0 +1,67 @@
+# 官方文档
+# https://www.photoprism.app
+# https://hub.docker.com/r/photoprism/photoprism
+# 前排提醒，没有官方客户端，有第三方APP但不好用，建议不要玩这个，去用MT-Photos或者Immich
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  photoprism:
+    image: photoprism/photoprism:latest
+    # 镜像地址
+    container_name: photoprism
+    # 容器名字
+    hostname: photoprism
+    # 主机名
+    devices:
+      - /dev/dri:/dev/dri
+      # 开启硬件转码
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/photoprism:/photoprism/storage
+      # 配置目录
+      - 【用来存放你的数据的地方】/PhotoPrism/import:/photoprism/import
+      # 上传目录
+      - 【用来存放你的数据的地方】/PhotoPrism/originals:/photoprism/originals
+      # 本地相册目录
+      # 可以自定义多个
+    environment:
+      - PHOTOPRISM_ADMIN_USER=这里写你的用户名字
+      - PHOTOPRISM_ADMIN_PASSWORD=新建一个密码
+      - PHOTOPRISM_AUTH_MODE=password
+      # PHOTOPRISM的管理者账号密码和使用密码的模式进行管理
+      - PHOTOPRISM_UID=1000
+      # 用户权限，群晖用户一般写1026，unraid用户写1000，视情况写0，即root
+      - PHOTOPRISM_GID=100
+      # 用户组权限
+      - PHOTOPRISM_UMASK=0022
+      # 默认创建新文件的权限
+      - TZ=Asia/Shanghai
+      # 时区
+      - PHOTOPRISM_DATABASE_DRIVER=mysql
+      - PHOTOPRISM_DATABASE_SERVER=【IP:PORT】
+      - PHOTOPRISM_DATABASE_NAME=photoprism
+      - PHOTOPRISM_DATABASE_USER=photoprism
+      - PHOTOPRISM_DATABASE_PASSWORD=photoprism
+      # PHOTOPRISM的数据库类型，数据库的访问地址，子数据库的名字账号密码
+    # network_mode: bridge
+    network_mode: host
+    # 推荐直接使用host模式
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 2342:2342/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/photoprism_C.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:2342]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/photoprism.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
