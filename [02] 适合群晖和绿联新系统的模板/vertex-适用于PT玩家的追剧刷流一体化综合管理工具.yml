@@ -1,0 +1,56 @@
+# 官网
+# https://wiki.vertex.icu
+# 官方文档
+# https://hub.docker.com/r/lswl/vertex
+# https://wiki.vertex.icu/xin-shou-ru-men/an-zhuang-cao-zuo
+
+---
+version: "3"
+# 最后编辑时间：2024-04-25
+services:
+  vertex:
+    image: lswl/vertex:stable
+    # 镜像地址
+    container_name: vertex
+    # 容器名字
+    hostname: vertex
+    # 主机名
+    volumes:
+      - /volume1/docker/vertex:/vertex
+      # 配置目录
+    environment:
+      # - HTTP_PORT=43110
+      # 自定义容器http端口
+      # - HTTPS_PORT=3443
+      # 自定义容器https端口
+      # - HTTPS_ENABLE=ture
+      # 开启https支持，前提是已经生成或下载 HTTPS 证书并放入ssl文件夹
+      - TZ=Asia/Shanghai
+      # 时区
+      - PUID=1026
+      # 用户权限，群晖用户一般写1026，unraid用户写1000，视情况写0，即root，默认为0
+      - PGID=100
+      # 用户组权限，默认为0
+    # network_mode: bridge
+    network_mode: host
+    # 推荐自定义VERTEX的WebUI端口，然后直接用host模式
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 3000:3000/tcp
+      # WebUI HTTP端口
+      # - 3443:3443/tcp
+      # WebUI HTTPS端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/vertex_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:3000]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/vertex_A.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑

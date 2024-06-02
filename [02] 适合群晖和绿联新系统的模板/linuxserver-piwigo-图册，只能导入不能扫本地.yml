@@ -1,0 +1,48 @@
+# 官方文档
+# https://piwigo.org
+# https://docs.linuxserver.io/images/docker-piwigo
+# 不适合作为相册备份使用，适合当图册，画廊
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  piwigo:
+    image: linuxserver/piwigo:latest
+    # 镜像地址
+    container_name: piwigo
+    # 容器名字
+    hostname: piwigo
+    # 主机名
+    volumes:
+      - /volume1/docker/piwigo:/config
+      # 配置目录
+      - /volume1/photo/piwigo:/gallery
+      # 上传目录
+    environment:
+      - PUID=1000
+      # 用户权限，群晖用户一般写1026，unraid用户写1000，视情况写0，即root
+      - PGID=100
+      # 用户组权限
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 7080:80/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/piwigo.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:80]
+      net.unraid.docker.icon: /mnt/user/LOGO/piwigo.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑

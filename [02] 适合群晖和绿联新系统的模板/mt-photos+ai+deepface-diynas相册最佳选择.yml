@@ -1,0 +1,186 @@
+# 官方文档
+# https://mtmt.tech
+# https://docs.docker.com/engine/install
+# 想知道更多细节，强烈推荐查看官方文档
+# 前排提示，可免费试用一个月，99买断，试用结束后话可以用，但是无法更新显示以后添加的内容
+# 强烈推荐无脑入
+# N卡驱动AI识别镜像编译教程：https://www.bilibili.com/video/BV1AA4m1V7AX
+
+---
+version: "3"
+# 最后编辑时间：2024-04-28
+# 更新日志：新增mt-photos-deepface，修正部分错误内容，删减不需要的内容，新增人脸识别API使用支持cpu无avx指令的镜像，新增N卡驱动AI识别镜像编译教程
+services:
+  mt-photos:
+    image: mtphotos/mt-photos:latest
+    # 镜像地址
+    container_name: mt-photos
+    # 容器名字
+    hostname: mt-photos
+    # 主机名
+    # privileged: true
+    # 赋予容器最高权限
+    volumes:
+      - /volume1/docker/mt-photos/config:/config
+      # 配置目录
+      - /volume1/photo/MT-Photos/upload:/upload
+      # 上传目录
+      - /volume1:/volume1
+      # - /volume2:/volume2
+      # - 【这里替换为你的数据存放目录】:/【自定义目录名字】
+      # 可自定义目录，可以写多个
+    environment:
+      - MT_SERVER_PORT=8063
+      # 指定MT Photos服务端的端口，默认为8063，可自定义端口后直接使用host网络模式
+      - PUID=1000
+      # 用户权限，群晖用户一般写1026，unraid用户写1000，视情况写0，即root
+      - PGID=100
+      # 用户组权限
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+      # - REDIS_HOST=127.0.0.1
+      # 指定要连接的Redis的地址，默认为127.0.0.1
+      # - REDIS_PORT=6379
+      # 指定要连接的Redis的端口号，默认为6379
+      # - REDIS_PASSWORD=Redis的密码
+      # 指定要连接的Redis的密码，具体看自己的配置单
+      ######################################
+      # https://mtmt.tech/docs/advanced/env
+      # 以下内容来源于官方文档，均为默认，可以不写
+      # - RAW_SUPPORT=open
+      # RAW格式支持，默认开启
+      # - SCAN_INTERVAL=15
+      # 指定自动扫描图库的间隔时间，单位为分钟，默认为15，最大支持9999
+      # - EXIF_OVERWRITE_TYPE=overwrite_original_in_place
+      # 指定exiftool写入模式，默认为overwrite_original
+      # - DAY_MAX_FILE_NUM=298
+      # 时间线模式中单天显示的照片数量上限，默认为298
+      # - STREAM_LINK_TTL=30
+      # 分享的串流地址有效时间，单位为分钟，默认为30
+      # CACHE_DIR_PATH=/config/cache
+      # 自定义保存缩略图的位置，默认为/config/cache
+      ######################################
+      # 以下设置均可在设置内进行设置
+      # - PROXY_HOST_AMAP=http://xxx.com/
+      # 指定代理地址-高德api，默认为空，可在设置中设置
+      # - PROXY_HOST_MAPBOX=http://xxx.com/
+      # 指定代理地址-mapbox api，默认为空，可在设置中设置
+      ######################################
+      # - PROXY_HOST_AUTH=http://xxx.com/
+      # 指定代理地址-授权服务器，默认为空，仅作预留，不写
+      ######################################
+    # network_mode: bridge
+    network_mode: host
+    # 推荐自定义MT的WebUI端口，然后直接用host模式
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8063:8063/tcp
+      # WebUI http端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    depends_on:
+       - mt-photos-ai
+       # 关联mt-photos-ai，可以分开部署，部署后在mt-photos内可以设置，unRAID玩家建议分开部署
+       - mt-photos-deepface
+       # 关联mt-photos-deepface，可以分开部署，部署后在mt-photos内可以设置，unRAID玩家建议分开部署
+    labels:
+      icon: http://IP:PORT/i/user_01/MT-photos-3.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:8063]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/MT-photos-3.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+
+############################################################################
+
+# 官方文档
+# https://mtmt.tech/docs/advanced/ocr_api
+  mt-photos-ai:
+    image: mtphotos/mt-photos-ai:latest
+    # 镜像地址
+    container_name: mt-photos-ai
+    # 容器名字
+    hostname: mt-photos-ai
+    # 主机名
+    environment:
+      - API_AUTH_KEY=1234567890
+      # 智能识别API，可以随便写，在mt-photos内设置要对应该项
+    network_mode: bridge
+    # network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    #ports:
+      - 8060:8000/tcp
+      # API 端口
+      # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/MT-photos-2.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.icon: /mnt/user/LOGO/MT-photos-2.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+
+############################################################################
+
+# 官方文档
+# https://mtmt.tech/docs/advanced/facial_api
+  mt-photos-deepface:
+    image: mtphotos/mt-photos-deepface:latest
+    # 镜像地址
+    # 如果改容器无法启动，尝试使用这支持cpu无avx指令的镜像，mtphotos/mt-photos-deepface:noavx-latest
+    container_name: mt-photos-deepface
+    # 容器名字
+    hostname: mt-photos-deepface
+    # 主机名
+    environment:
+      - API_AUTH_KEY=1234567890
+      # 人脸识别API，可以随便写，在mt-photos内设置要对应该项
+      ######################################
+      # 以下为默认变量
+      # - DETECTOR_BACKEND=retinaface
+      # 自定义人脸检测模型
+      # DETECTOR_BACKEND 有以下可选 
+      # 'opencv', 'ssd', 'dlib', 'mtcnn', 'retinaface', 'mediapipe', 'yolov8', 'yunet', 'fastmtcnn'
+      # - RECOGNITION_MODEL=Facenet512
+      # 自定义人脸特征提取模型，设置中可以修改
+      # RECOGNITION_MODEL 有以下可选
+      # "VGG-Face", "Facenet", "Facenet512", "OpenFace", "DeepFace", "DeepID", "ArcFace", "Dlib", "SFace", "GhostFaceNet"
+      ######################################
+    # volumes:
+      # - 【这里替换为你的数据存放目录】/mt-photos/mt-photos-deepface/models:/models
+      # 镜像已内置 retinaface.h5 和 facenet512_weights.h5，如果不修改识别模型，不需要添加目录映射
+      # 当指定了别的模型，容器内下载模型很慢，可以增加 /models 目录映射
+      # 预训练模型下载地址：https://github.com/serengil/deepface_models/releases/tag/v1.0
+      # 如果访问下载github速度慢，请打开下面这个github代理加速下载网站进行下载
+      # https://mirror.ghproxy.com/
+      # 将对应的预训练模型放到容器内的 /models/.deepface/weights/ 下，请对应放到实际路径上
+      ######################################
+    network_mode: bridge
+    # network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8066:8066/tcp
+      # API 端口
+      # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:8089/i/user_1/mt-photos-deepface.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.icon: /mnt/user/LOGO/mt-photos-deepface.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
