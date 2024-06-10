@@ -50,6 +50,8 @@ unraid的数据存放路径开头
 ```shell
 💡omv的docker配置文件存放路径
 💡omv的数据存放路径开头
+
+(待补充...)
 ```
 
 ```shell
@@ -61,7 +63,11 @@ unraid的数据存放路径开头
 
 ```shell
 💡TrueNAS的docker配置文件存放路径
+/mnt/共享文件夹/docker/aaa
 💡TrueNAS的数据存放路径开头
+/mnt/共享文件夹/bbb
+
+共享文件夹需要自己设置好
 ```
 
 ```shell
@@ -82,7 +88,20 @@ dm-* 中的*代表第几个存储池，从0开始算起，但实际你自己是�
 
 ```shell
 💡极空间系统的docker配置文件存放路径
+/tmp/zfsv3/sata*/手机号码/data/docker/aaa
+/tmp/zfsv3/nvme*/手机号码/data/docker/aaa
+/tmp/zfsv3/sata*/手机号码+字母/data/docker/aaa
+/tmp/zfsv3/nvme*/手机号码+字母/data/docker/aaa
+
 💡极空间系统的数据存放路径开头
+/tmp/zfsv3/sata*/手机号码/data/bbb
+/tmp/zfsv3/nvme*/手机号码/data/bbb
+/tmp/zfsv3/sata*/手机号码+字母/data/bbb
+/tmp/zfsv3/nvme*/手机号码+字母/data/bbb
+
+"nvme*"和"sata*"根据自己实际情况修改，*为数字；"手机号码"为个人手机号码
+如果你有第二台极空间，并且用同一个手机号绑定注册，则为需要在手机号码后添加上a-z的字母
+例如：1688888888，1688888888a，1688888888b，1688888888c，这样类推
 ```
 
 ## 【各nas portainer 部署】
@@ -118,9 +137,11 @@ docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/dock
 docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /DATA/AppData/portainer-zh:/data 6053537/portainer-ce
 ```
 
-### 绿联旧系统(记得把用户ID替换掉)
+### 绿联旧系统
+(记得把"用户ID"替换掉)
 ```shell
 docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/dm-0/.ugreen_nas/用户ID/docker/portainer-zh:/data 6053537/portainer-ce
+
 ```
 
 ### 绿联新系统(和群晖一样，但不需要预先创建对应的文件夹)
@@ -129,8 +150,10 @@ docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/dock
 ```
 
 ### 极空间docker用的是魔改的portainer，官方没有开放ssh，但可以通过一些途径获取到，然而本人的Z2pro（rk3568）使用portainer会和极空间的魔改portainer冲突，x86的根据网友表示不会，所以这里修改portainer的启动参数为不自启动，以免有问题
+(记得把"/nvme*/手机号码+字母"替换掉)
 ```shell
-(待补充)
+docker run -d -p 9595:9000 --name=portainer-zh --restart=no -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/zfsv3/nvme*/手机号码+字母/data/docker/portainer-zh:/data 6053537/portainer-ce
+
 ```
 
 # 【食用方法】
