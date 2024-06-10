@@ -1,0 +1,53 @@
+# 官方文档
+# https://v2raya.org/docs/prologue/introduction
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  v2raya:
+    image: mzz2017/v2raya:latest
+    # 镜像地址
+    container_name: v2raya
+    # 容器名字
+    hostname: v2raya
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    # environment:
+      # - V2RAYA_ADDRESS=0.0.0.0:2017
+      # 可在设置内修改
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      # 内核，如果不支持或者不想使用全局透明代理，则注释掉
+      - /etc/resolv.conf:/etc/resolv.conf
+      # 需要预先创建好一个文件，不然会创建成文件夹；上面这条如果/etc内没有或不会进去新建resolv.conf，可以写下面这条
+      # - 【这里替换为你的docker数据存放目录】/v2raya/etc/resolv.conf:/etc/resolv.conf
+      - 【这里替换为你的docker数据存放目录】/v2raya:/etc/v2raya
+      # 配置文件
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 2017:2017
+      # WebUI 端口
+      # - 20170:20170
+      # sock代理端口
+      # - 20171:20171
+      # http代理端口
+      # - 20172:20172
+      # https代理端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/v2raya_C.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:2017]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/v2raya.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑

@@ -1,0 +1,59 @@
+# https://hub.docker.com/r/hsuyelin/nas-tools
+# 原作者不再维护nas-tools，因为被派派助手（也叫群晖助手）的作者破解了，这是接盘后的镜像，也是破解了的，支持BT，不需要认证
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  nas-tools:
+    image: hsuyelin/nas-tools:latest
+    # 镜像地址
+    container_name: nas-tools
+    # 容器名字
+    hostname: nas-tools
+    # 主机名
+    # privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/nas-tools:/config
+      # 配置文件目录
+      - 【这里替换为你的数据下载存放目录】:/downloads
+      # 下载目录，多个目录需要分别映射进来，需要满足配置文件说明中的要求
+      # 新手不懂就和qb一样的/downloads映射路径，也不要乱改qb设置里面的/downloads，tr同理
+      - 【这里替换为你的媒体库总目录】:/Media
+      # 媒体库目录
+      - 【这里替换为你想映射到NST内的路径】:/【NST内显示的目录的名字】
+      # 可以自定义多个，容器和路径均可一样，建议映射一个较为最上级的路径作为总目录
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+      - NASTOOL_AUTO_UPDATE=false
+      # 不推荐自动更新
+    network_mode: bridge
+    # network_mode: host
+    # 推荐使用bridge模式，3000有别的docker镜像要用
+    # 也可以使用host模式，设置内可以修改容器端口
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    ports:
+      - 3390:3000/tcp
+      # WebUI http端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/nastools.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:3000]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/nastools.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
