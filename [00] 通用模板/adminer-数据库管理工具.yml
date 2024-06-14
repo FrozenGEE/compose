@@ -7,7 +7,7 @@ version: "3"
 # 最后编辑时间：2024-05-01
 services:
   adminer:
-    image: adminer
+    image: adminer:latest
     # 镜像地址
     container_name: adminer
     # 容器名字
