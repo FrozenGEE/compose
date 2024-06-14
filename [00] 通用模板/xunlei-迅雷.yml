@@ -20,6 +20,7 @@ services:
       # 配置文件目录
       - 【这里替换为你的数据下载目录】:/xunlei/downloads
       # 下载目录
+      # 可以自定义，可以写多个
     environment:
       - XL_DASHBOARD_PORT=2345
       # 自定义迅雷的容器端口，默认为2345
