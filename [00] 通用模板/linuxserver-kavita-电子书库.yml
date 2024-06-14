@@ -1,8 +1,9 @@
 # 官方文档
-# https://www.kavitareader.com
-# https://github.com/Kareadita/Kavita
 # https://hub.docker.com/r/linuxserver/kavita
+# https://github.com/Kareadita/Kavita
+# https://github.com/linuxserver/docker-kavita
 # https://docs.linuxserver.io/images/docker-kavita
+# https://wiki.kavitareader.com
 
 ---
 version: "3"
