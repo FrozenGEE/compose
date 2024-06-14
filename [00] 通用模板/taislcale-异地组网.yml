@@ -4,16 +4,16 @@
 # curl -fsSL https://tailscale.com/install.sh | sh
 
 # 可以在该容器内的ssh终端进行一些命令操作
-# tailscale up					#启动
-# tailscale login				#登录，复制提示的命令，在网页上打开进行登录
-# tailscale logout				#登出
-# tailscale check				#查看当前设备的组网信息
-# tailscale ip					#查看该设备的组网IP
-# tailscale status				#查看组网内的所有设备的IP，设备名，在线情况
+# tailscale up	  			    	#启动
+# tailscale login				    	#登录，复制提示的命令，在网页上打开进行登录
+# tailscale logout			    	#登出
+# tailscale check				    	#查看当前设备的组网信息
+# tailscale ip				      	#查看该设备的组网IP
+# tailscale status			     	#查看组网内的所有设备的IP，设备名，在线情况
 # tailscale ping 其他组网的IP	#ping其他组网IP的网络延迟
-# tailscale update			#TS程序更新
-# tailscale version			#查看TS的版本号
-# taislcale help				#帮助，查看其他可以执行的命令，其余命令不一一写出了
+# tailscale update		      	#TS程序更新
+# tailscale version	      		#查看TS的版本号
+# taislcale help			      	#帮助，查看其他可以执行的命令，其余命令不一一写出了
 
 ---
 version: "3"
@@ -33,10 +33,10 @@ services:
       - NET_RAW
     environment:
       - TS_STATE_DIR=/var/lib/tailscale
-      # 配置文件目录
-      - TS_ROUTES=192.168.1.0/24
+      # 配置文件目录，默认的
+      # - TS_ROUTES=192.168.1.0/24
       # 192.168.1.0/24为本机所在的局域网网段，注意修改，允许本机作为流量出站点这个需要用到
-      - TS_EXTRA_ARGS=--advertise-exit-node
+      # - TS_EXTRA_ARGS=--advertise-exit-node
       # 允许本机作为流量出站点
       # 需要到TS官网-Machine，点击设备右侧的三个点，点击Edit route settings，在Exit node和Subnet routes下方的选项勾选上
       # 当其他设置需要使用本机器作为流量出站口，看官方设置，太长了，不教
@@ -47,7 +47,8 @@ services:
       # 如果去容器内的ssh终端内使用tailscale login命令登录，则不需要配置该项
     volumes:
       - /dev/net/tun:/dev/net/tun
-      # 不懂，不动
+      # 照抄，如果要在webui上部署，则参考以下这条
+      # - 【这里替换为你的docker数据存放目录】/tailscale/tun:/dev/net/tun
       - 【这里替换为你的docker数据存放目录】/tailscale/config:/var/lib/tailscale
       # 配置文件目录
     network_mode: host
