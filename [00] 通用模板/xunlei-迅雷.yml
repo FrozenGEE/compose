@@ -16,9 +16,9 @@ services:
     privileged: true
     # 特权，赋予容器与主机几乎一致的权限，必须开启
     volumes:
-      - /volume1/docker/xunlei/data:/xunlei/data
+      - 【这里替换为你的docker数据存放目录】/xunlei:/xunlei/data
       # 配置文件目录
-      - /volume1/docker/xunlei/downloads:/xunlei/downloads
+      - 【这里替换为你的数据下载目录】:/xunlei/downloads
       # 下载目录
     environment:
       - XL_DASHBOARD_PORT=2345
