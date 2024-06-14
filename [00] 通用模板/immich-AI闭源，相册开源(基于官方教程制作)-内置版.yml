@@ -9,6 +9,16 @@
 # https://immich.app/docs/features/command-line-interface
 # 官方硬件转码说明
 # https://immich.app/docs/features/hardware-transcoding
+# 部署教程
+# https://wiki.slarker.me/unraid/deploy_immich.html
+# AI模型替换教程
+# https://wiki.slarker.me/unraid/immich_ai_model.html
+# https://www.bilibili.com/read/cv33865669
+# AI模型列表，推荐 XLM-Roberta-Large-Vit-B-16Plus
+# https://huggingface.co/immich-app
+# AI模型，国内源分流
+# https://www.123pan.com/s/WXqA-EGL6d.html
+# https://www.123pan.com/s/YuAUVv-Qp1nA.html 提取码:fgee
 
 # 指定数据库，注意tag，截至2024-05-13前，官方支持版本tag为 pg16-v0.2.0
 # https://hub.docker.com/r/tensorchord/pgvecto-rs
