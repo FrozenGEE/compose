@@ -57,7 +57,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       # 时区
     environment:
-      - SERVER_PORT=2283
+      - IMMICH_PORT=2283
       # 自定义容器端口，默认为3001，这里预设为2283
       # 2024-06-11，v1.106.3版本开始，这里的变量由SERVER_PORT改为IMMICH_PORT
       - REDIS_HOSTNAME=immich-redis
@@ -176,7 +176,7 @@ services:
       # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       #
       # 以下均为默认不需要修改，除非有特殊需要
-      - MACHINE_LEARNING_PORT=3003
+      - IMMICH_PORT=3003
       # 自定义容器端口，默认为3003
       # 2024-06-11，v1.106.3版本开始，这里的变量由MACHINE_LEARNING_PORT改为IMMICH_PORT
       - MACHINE_LEARNING_REQUEST_THREADS=0
