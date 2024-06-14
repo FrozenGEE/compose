@@ -3,6 +3,8 @@
 # https://hub.docker.com/r/linuxserver/calibre-web
 # https://github.com/linuxserver/docker-calibre-web
 # https://github.com/technosoft2000/calibre-web
+# 注意，需要电脑安装calibre，然后把生成的metadata.db数据库文件，放到/config内，在初始化设置时，选中才可以正常使用，现成提供的文件的下载地址见下
+# https://www.123pan.com/s/YuAUVv-Qp1nA.html 提取码:fgee
 
 ---
 version: "3"
