@@ -24,9 +24,9 @@ services:
     environment:
       - XL_DASHBOARD_PORT=2345
       # 自定义迅雷的容器端口，默认为2345
-      # - XL_DASHBOADR_USER=
-      # - XL_DASHBOADR_PASSWORD=
-      # 设置迅雷WebUI的访问账号密码，可以不设
+      # - XL_DASHBOADR_USER=xunlei
+      # - XL_DASHBOADR_PASSWORD=xunlei
+      # 设置迅雷WebUI的访问账号密码，可以不设，预设为xunlei
       - XL_UID=1000
       - XL_GID=100
       # 迅雷的用户、用户组权限
