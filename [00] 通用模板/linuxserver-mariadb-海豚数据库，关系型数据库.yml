@@ -17,8 +17,8 @@ services:
       - 【这里替换为你的docker数据存放目录】/mariadb:/config
       # 配置文件目录
     environment:
-      - MYSQL_ROOT_PASSWORD=【root账号的密码，切勿泄露】
-      # mariadb管理者密码，账户为root
+      - MYSQL_ROOT_PASSWORD=mariadb
+      # mariadb管理者密码，账户为root，预设为mariadb
       # 不推荐其他容器都直接使用root管理者账号使用数据库，而是在数据库中创建子账号来访问子数据库
       - PUID=1000
       - PGID=100
