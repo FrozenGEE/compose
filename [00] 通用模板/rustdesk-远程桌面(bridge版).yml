@@ -1,6 +1,6 @@
 # 官方文档
-# https://hub.docker.com/r/hrustdesk/rustdesk-server
-# https://rustdesk.com/docs/en/self-host/rustdesk-server-oss/docker/
+# https://hub.docker.com/r/rustdesk/rustdesk-server
+# https://rustdesk.com/docs/en/self-host/rustdesk-server-oss/docker
 
 # 默认情况下，hbbs 监听21115(tcp), 21116(tcp/udp), 21118(tcp)，hbbr 监听21117(tcp), 21119(tcp)
 # 确保在防火墙中打开这些端口。请注意，对于 TCP 和 UDP 都应该启用21116
