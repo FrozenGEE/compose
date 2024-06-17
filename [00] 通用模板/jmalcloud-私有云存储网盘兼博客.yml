@@ -108,9 +108,9 @@ services:
     command: --wiredTigerCacheSizeGB 0.5
     # 设置缓冲文件大小为0.5G
     volumes:
-      # - 【这里替换为你的docker数据存放目录】/jmalcloud/mongodb/data/configdb:/data/configdb
+      - 【这里替换为你的docker数据存放目录】/jmalcloud/mongodb/data/configdb:/data/configdb
       # 配置文件目录
-      - 【这里替换为你的docker数据存放目录】/jmalcloud/mongodb/data:/data
+      - 【这里替换为你的docker数据存放目录】/jmalcloud/mongodb/data/db:/data/db
       # 数据库目录
       - 【这里替换为你的docker数据存放目录】/jmalcloud/mongodb/backup:/dump
       # 备份目录
