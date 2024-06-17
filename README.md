@@ -166,9 +166,9 @@ docker run -d -p 9595:9000 --name=portainer-zh --restart=no -v /var/run/docker.s
 ```
 
 # 【食用方法】
-- [ ] 视频教程：
+:x: 视频教程：
 
-- [ ] 图文教程：
+:white_check_mark: 图文教程：
 
 - 1、使用文本编辑器先把自己的docker文件路径，存储池路径记录下来（见上说明）
 
@@ -192,12 +192,12 @@ docker run -d -p 9595:9000 --name=portainer-zh --restart=no -v /var/run/docker.s
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-12.png)
 
 - 8、未映射卷 & 残留卷
-- 
+
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-13.png)
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-14.png)
 
 - 9、镜像导出 & 镜像导入 & 镜像删除
-- 
+
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-15.png)
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-16.png)
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-17.png)
