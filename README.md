@@ -175,7 +175,16 @@ docker run -d -p 9595:9000 --name=portainer-zh --restart=no -v /var/run/docker.s
 - 2、下载模板，按照模板内的注释修改内容
 
 - 3、这里拿汉化版作为演示便于理解，官方版一样的位置的，部署好portainer（见上）并打开，点击docker，左侧的堆栈（stack），右侧的新增（Add）
-
+![image](https://github.com/FrozenGEE/compose/blob/main/.cache/portainer/portainer-01-04.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.cache/portainer/portainer-05.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.cache/portainer/portainer-06.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.cache/portainer/portainer-07.png)
 - 4、命名stack的名字，把预先写好的compose内容复制到文本框中，点击部署，等待完成，如果有报错，看右上交报文提示，寻找网友帮助
-
+![image](https://github.com/FrozenGEE/compose/blob/main/.cache/portainer/portainer-08-10.png)
 - 6、可先提前拉取好镜像再进行部署，这里就不说了
+- 7、后续修改更新 及 更新镜像
+![image](https://github.com/FrozenGEE/compose/blob/main/.cache/portainer/portainer-11.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.cache/portainer/portainer-12.png)
+- 8、未映射卷 及 残留卷
+![image](https://github.com/FrozenGEE/compose/blob/main/.cache/portainer/portainer-13.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.cache/portainer/portainer-14.png)
