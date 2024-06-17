@@ -174,7 +174,7 @@ docker run -d -p 9595:9000 --name=portainer-zh --restart=no -v /var/run/docker.s
 
 - 2、下载模板，按照模板内的注释修改内容
 
-- 3、部署好portainer（见上）并打开，点击docker，左侧的堆栈（stack），右侧的新增（Add）
+- 3、这里拿汉化版作为演示便于理解，官方版一样的位置的，部署好portainer（见上）并打开，点击docker，左侧的堆栈（stack），右侧的新增（Add）
 
 - 4、命名stack的名字，把预先写好的compose内容复制到文本框中，点击部署，等待完成，如果有报错，看右上交报文提示，寻找网友帮助
 
