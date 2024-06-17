@@ -19,10 +19,10 @@ services:
       # 数据存放目录
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://【IP:PORT】/blossom?useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&allowMultiQueries=true&useSSL=false&&serverTimezone=GMT%2B8
-      # IP:PORT替换为自己的数据库的IP地址和访问端口，需要额外部署一个mariadb
+      # 【IP:PORT】替换为自己的数据库的IP地址和访问端口，需要额外部署一个mariadb
       - SPRING_DATASOURCE_USERNAME=blossom
       - SPRING_DATASOURCE_PASSWORD=blossom
-      # 子数据库的账号和密码，需要额外部署一个mariadb并设置好子数据库及其账号和密码
+      # 子数据库的账号和密码，需要额外部署一个mariadb并设置好子数据库及其账号和密码，预设为blossom
       - PUID=1000
       - PGID=100
       # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
