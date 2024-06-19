@@ -61,7 +61,7 @@ services:
       # 自定义容器端口，默认为3001，这里预设为2283
       # 2024-06-11，v1.106.3版本开始，这里的变量由SERVER_PORT改为IMMICH_PORT
       - REDIS_HOSTNAME=immich-redis
-      # 指定要连接的redis，预设为redis
+      # 指定要连接的redis，预设为immich-redis
       - DB_HOSTNAME=immich-pgsql
       - DB_DATABASE_NAME=immich
       - DB_USERNAME=immich
@@ -122,7 +122,7 @@ services:
       - MICROSERVICES_PORT=3002
       # 自定义容器端口，默认为3002
       - REDIS_HOSTNAME=immich-redis
-      # 指定要连接的redis，预设为redis
+      # 指定要连接的redis，预设为immich-redis
       - DB_HOSTNAME=immich-pgsql
       - DB_DATABASE_NAME=immich
       - DB_USERNAME=immich
