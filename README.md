@@ -195,10 +195,10 @@ docker run -d -p 9595:9000 --name=portainer-zh --restart=no -v /var/run/docker.s
 
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-13.png)
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-14.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-15.png)
 
 - 9、镜像导出 & 镜像导入 & 镜像删除
 
-![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-15.png)
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-16.png)
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-17.png)
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-18.png)
