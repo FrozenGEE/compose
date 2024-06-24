@@ -19,7 +19,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # 用于管理docker，必须
-      - 【这里替换为你的数据存放目录】/docker/dockercopilot:/data
+      - 【这里替换为你的docker数据存放目录】/dockercopilot:/data
       # 配置文件目录
     environment:
       - secretKey=dokcer123
