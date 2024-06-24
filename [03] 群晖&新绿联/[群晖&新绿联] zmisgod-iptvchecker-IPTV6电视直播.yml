@@ -1,0 +1,23 @@
+# 官方文档
+# https://github.com/zhimin-dev/iptv-checker
+# https://hub.docker.com/r/zhimin/iptvchecker
+
+---
+version: "3"
+# 最后编辑时间：2024-05-06
+services:
+  iptv-checker:
+    image: zmisgod/iptvchecker:latest
+    # 镜像地址
+    container_name: iptv-checker
+    # 容器名字
+    hostname: iptv-checker
+    # 主机名
+    network_mode: bridge
+    network_mode: host
+    # 推荐使用bridge模式，8089有别的docker镜像要用
+    ports:
+      - 8289:8089/tcp
+      # WebUI 端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

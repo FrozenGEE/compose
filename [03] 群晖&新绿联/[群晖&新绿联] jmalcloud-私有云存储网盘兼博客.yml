@@ -1,0 +1,145 @@
+# 官方文档
+# https://hub.docker.com/r/jmal/jmalcloud
+# https://github.com/jamebal/jmal-cloud-view
+# https://gitee.com/jmal/jmal-cloud-view
+
+# 1. 重置密码
+# docker exec -it jmalcloud_mongodb mongo jmalcloud --eval "db.getCollection('user').update({ 'creator': true }, {\$set: { 'password': '1000:c5b705ea13a1221f5e59110947ed806f8a978e955fbd2ed6:22508de12228c34a235454a0caf3bcaa5552858543258e56' }}, { 'multi': false, 'upsert': false })"
+# 2. 重启容器
+# docker restart jmalcloud_server
+# 重置后的密码为: jmalcloud
+
+# 备份数据库
+# docker exec -it jmalcloud_mongodb mongodump -d jmalcloud -o /dump/xxx --gzip --quiet
+# 恢复数据库
+# docker exec -it jmalcloud_mongodb mongorestore -d jmalcloud --dir /dump/xxx --gzip --quiet
+
+# 官方作者的模板几乎写死，注意切勿随意修改
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  jmalcloud:
+  # ↑切勿修改
+    image: jmal/jmalcloud:latest
+    # 镜像地址
+    container_name: jmalcloud
+    # 容器名字
+    hostname: jmalcloud
+    # 主机名
+    volumes:
+      - /volume1/docker/jmalcloud:/jmalcloud
+      # 配置文件目录
+      - /volume1/docker:/jmalcloud-data
+      # 映射本地其他路径使其可以访问，可以自定义多个
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/jmalcloud
+      # mongodb数据库的配置信息，切勿修改
+      - TZ=Asia/Shanghai
+      # 时区
+    ports:
+      - 8088:8088/tcp
+      # WebUI 端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+########################################
+
+  nginx:
+  # ↑切勿修改
+    image: jmal/jmalcloud-nginx:latest
+    # 镜像地址
+    container_name: jmalcloud-nginx
+    # 容器名字
+    hostname: jmalcloud-nginx
+    # 主机名
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    ports:
+      - 7070:80/tcp
+      # 管理页面 端口
+      - 7071:8089/tcp
+      # 博客页面 端口
+      # ↓切勿修改
+    depends_on:
+      - jmalcloud
+      - office
+      - drawio-webapp
+      # ↑切勿修改
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+########################################
+
+  mongo:
+  # ↑切勿修改
+    image: mongo:4.4
+    # 镜像地址，切勿修改
+    container_name: jmalcloud-mongodb
+    # 容器名字
+    hostname: jmalcloud-mongodb
+    # 主机名
+    command: --wiredTigerCacheSizeGB 0.5
+    # 设置缓冲文件大小为0.5G
+    volumes:
+      - /volume1/docker/jmalcloud/mongodb/data/configdb:/data/configdb
+      # 配置文件目录
+      - /volume1/docker/jmalcloud/mongodb/data/db:/data/db
+      # 数据库目录
+      - /volume1/docker/jmalcloud/mongodb/backup:/dump
+      # 备份目录
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+      # mongodb的访问端口，该镜像无WebUI页面，只需要通过IP:PORT访问即可，预设为44429
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+########################################
+
+  office:
+  # ↑切勿修改
+    image: onlyoffice/documentserver:latest
+    # 镜像地址
+    container_name: jmalcloud-onlyoffice
+    # 容器名字
+    hostname: jmalcloud-onlyoffice
+    # 主机名
+    volumes:
+      - /volume1/docker/jmalcloud/onlyoffice/data:/var/www/onlyoffice/Data
+      # 数据目录
+      - /volume1/docker/jmalcloud/onlyoffice/lib:/var/lib/onlyoffice
+      - /volume1/docker/jmalcloud/onlyoffice/log:/var/log/onlyoffice
+      # 日志目录
+      - /volume1/docker/jmalcloud/onlyoffice/redis:/var/lib/redis
+      - /volume1/docker/jmalcloud/onlyoffice/pgsql:/var/lib/postgresql
+      # onlyoffice的redis，pgsql目录
+      - /volume1/docker/jmalcloud/onlyoffice/rabbitmq:/var/lib/rabbitmq
+      # onlyoffice的消息队列
+      - /volume1/docker/jmalcloud/onlyoffice/custom:/usr/share/fonts/truetype/custom
+      # onlyoffice的字体库目录
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+########################################
+
+  drawio-webapp:
+  # ↑切勿修改
+    image: jgraph/drawio:latest
+    # 镜像地址
+    container_name: jmalcloud-drawio
+    # 容器名字
+    hostname: jmalcloud-drawio
+    # 主机名
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+########################################
