@@ -16,7 +16,7 @@ services:
     volumes:
       - /volume1/docker/qinglong:/ql/data
     environment:
-      - QlPort=5700
+      - QlPort=5699
       # 自定义WebUI端口号，默认为5700
     network_mode: host
     restart: unless-stopped
