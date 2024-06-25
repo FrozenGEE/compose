@@ -25,7 +25,7 @@ services:
     container_name: tailscale
     # 容器名字
     hostname: nas
-    # 主机名，这里写你的设备名字，在网页上会显示对应的
+    # 主机名，这里修改为设备的名字，在网页上就会显示对应的名字
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     cap_add:
