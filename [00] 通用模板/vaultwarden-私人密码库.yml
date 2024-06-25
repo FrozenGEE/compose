@@ -20,7 +20,7 @@ services:
       - INVITATIONS_ALLOWED=ture
       - WEBSOCKET_ENABLED=false
       # 是否启用WEBSOCKET，true/false
-      - ADMIN_TOKEN=新建一个密码，注意不要泄露
+      - ADMIN_TOKEN=【新建一个密码，注意不要泄露】
       # 管理员密钥
       - PUID=1000
       - PGID=100
