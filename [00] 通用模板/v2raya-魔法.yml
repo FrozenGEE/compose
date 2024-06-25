@@ -29,13 +29,13 @@ services:
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 2017:2017
+      # - 2017:2017/tcp
       # WebUI 端口
-      # - 20170:20170
+      # - 20170:20170/tcp
       # sock代理端口
-      # - 20171:20171
+      # - 20171:20171/tcp
       # http代理端口
-      # - 20172:20172
+      # - 20172:20172/tcp
       # https代理端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
