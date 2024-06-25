@@ -17,8 +17,8 @@ version: "3"
 # 最后编辑时间：2024-03-11
 services:
   clouddrive2:
-    image: cloudnas/clouddrive2-unstable:latest
-    # 镜像地址，该镜像使用的是测试版，如需使用正式版，镜像改为cloudnas/clouddrive2:latest
+    image: cloudnas/clouddrive2:latest
+    # 镜像地址，该镜像使用的是测试版，如需使用非正式版，镜像改为cloudnas/clouddrive2-unstable:latest
     container_name: clouddrive2
     # 容器名字
     hostname: clouddrive2
