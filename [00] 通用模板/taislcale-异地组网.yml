@@ -24,8 +24,8 @@ services:
     # 镜像地址
     container_name: tailscale
     # 容器名字
-    hostname: tailscale
-    # 主机名
+    hostname: nas
+    # 主机名，这里写你的设备名字，在网页上会显示对应的
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     cap_add:
