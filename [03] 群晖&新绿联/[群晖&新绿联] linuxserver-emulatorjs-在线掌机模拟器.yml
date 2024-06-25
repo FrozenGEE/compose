@@ -17,7 +17,7 @@ services:
     volumes:
       - /volume1/docker/emulatorjs:/config
       # 配置文件目录
-      - 【这里替换为你的ROM存放目录】:/data
+      - /volume1/ROM:/data
       # ROM目录
     environment:
       - SUBFOLDER=/
