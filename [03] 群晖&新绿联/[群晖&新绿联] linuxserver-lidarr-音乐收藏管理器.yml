@@ -20,7 +20,7 @@ services:
       # 配置文件目录
       - /volume1:/music
       # 音乐库的总目录
-      - 【这里替换为你的数据存放目录】:/downloads
+      - /volume1/downloads:/downloads
       # QB的下载目录，需要和QB的容器路径保持一致
       # QB的下载目录，需要和QB的容器路径保持一致
       # QB的下载目录，需要和QB的容器路径保持一致
