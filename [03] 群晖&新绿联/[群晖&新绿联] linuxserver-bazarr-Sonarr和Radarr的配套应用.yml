@@ -18,7 +18,7 @@ services:
     volumes:
       - /volume1/docker/bazarr:/config
       # 配置文件目录
-      - 【这里替换为你的媒体库总目录】/bazarr:/data
+      - 【这里替换为你的媒体库总目录】:/data
       # 媒体库目录
     environment:
       - PUID=1000
