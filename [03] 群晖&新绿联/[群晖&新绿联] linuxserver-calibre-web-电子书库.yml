@@ -20,7 +20,7 @@ services:
     volumes:
       - /volume1/docker/calibre-web:/config
       # 配置文件目录
-      - 【这里替换为你的电子书库的总目录】:/books
+      - /volume1:/books
       # 电子书库的总目录
     environment:
       - DOCKER_MODS=linuxserver/mods:universal-calibre
