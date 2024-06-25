@@ -47,9 +47,8 @@ services:
       - DB_URL=jdbc:mysql://【IP:PORT】/surveyking
       # 数据库地址，默认模板：jdbc:mysql://mysql:3306/surveyking
       - MYSQL_USER=surveyking
-      # 子数据库账号，预设为surveyking
       - MYSQL_PASS=surveyking
-      # 子数据库密码，预设为surveyking
+      # 子数据库账号、密码，预设为surveyking
     # network_mode: bridge
     network_mode: host
     # 推荐自定义容器端口，然后直接使用host模式
