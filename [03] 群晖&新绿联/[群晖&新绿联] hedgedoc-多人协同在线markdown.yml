@@ -28,7 +28,7 @@ services:
       - DB_PASS=hedgedoc
       # 子数据库名字，用户名，密码，预设为hedgedoc
       - CMD_PORT=3000
-      # 自定义容器端口，默认为3000
+      # 自定义容器端口，默认为3110
       - CMD_ALLOW_ANONYMOUS=false
       # 是否允许任何人匿名创建md
       - CMD_ALLOW_ANONYMOUS_EDITS=true
@@ -37,10 +37,6 @@ services:
       # 是否允许邮箱注册
       - CMD_DEFAULT_PERMISSION=protected
       # 文档默认权限
-    network_mode: bridge
-    # 推荐使用bridge模式，3000有别的docker镜像要用
-    ports:
-      - 3400:3000/tcp
-      # WebUI http端口
+    network_mode: host
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
