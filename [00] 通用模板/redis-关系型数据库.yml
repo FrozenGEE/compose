@@ -1,6 +1,7 @@
 # 官方文档
 # https://hub.docker.com/_/redis
 # https://redis.io
+# https://www.cnblogs.com/nhdlb/p/14048083.html
 
 ---
 version: "3"
@@ -25,7 +26,7 @@ services:
       - 【这里替换为你的docker数据存放目录】/redis/data:/data
       # 数据目录
       - 【这里替换为你的docker数据存放目录】/redis/redis.conf:/etc/redis/redis.conf
-      # 配置文件，需要预先创建好一个文件，不然会创建成文件夹
+      # 配置文件映射，需要预先创建好一个文件并配置好内容，不然会创建成文件夹
     # network_mode: bridge
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
