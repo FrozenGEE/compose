@@ -25,10 +25,10 @@ services:
       # 写mysql或者pgsql
       - DB_HOST=【数据库的IP地址】
       - DB_PORT=【数据库端口】
-      - DB_USERNAME=【可访问子数据库的账号】
-      - DB_PASSWORD=【可访问子数据库的密码】
-      - DB_DATABASE=【子数据库名字】
-      # 数据库类型，地址，端口，账号密码，子数据库，根据自己使得实际情况填写
+      - DB_USERNAME=lychee
+      - DB_PASSWORD=lychee
+      - DB_DATABASE=lychee
+      # 数据库类型，地址，端口，账号密码，子数据库，预设为lychee，请先创建好
       - PUID=1000
       - PGID=100
       # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
