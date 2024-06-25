@@ -172,6 +172,7 @@ docker run -d -p 9595:9000 --name=portainer-zh --restart=no -v /var/run/docker.s
 
 # 【食用方法】
 :x: 视频教程：
+https://www.bilibili.com/video/BV1TCgNeLEtu
 
 :white_check_mark: 图文教程：
 
