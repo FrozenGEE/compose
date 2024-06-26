@@ -13,7 +13,7 @@ services:
     # 镜像地址，如需测试版追新，latest更改为beta，支持X86和arm，开心
     container_name: emby
     # 容器名字
-    hostname: unRAID
+    hostname: emby
     # 主机名
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
