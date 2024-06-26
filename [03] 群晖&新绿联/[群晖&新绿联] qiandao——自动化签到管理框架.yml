@@ -6,7 +6,7 @@
 version: "3"
 # 最后编辑时间：2024-06-26
 services:
-  easyimage:
+  qiandao:
     image: qdtoday/qd:latest
     # 镜像地址
     container_name: qiandao
@@ -14,7 +14,7 @@ services:
     hostname: qiandao
     # 主机名
     volumes:
-      - /volume1/docker/qiandao/config:/usr/src/app/config
+      - /volume1/docker/qiandao:/usr/src/app/config
       # 配置文件目录
     environment:
       - PUID=1000
