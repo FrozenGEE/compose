@@ -17,7 +17,7 @@ services:
     # arm64v7设备使用emby/embyserver_arm64v7
     container_name: emby
     # 容器名字
-    hostname: emby
+    hostname: unRAID
     # 主机名
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
