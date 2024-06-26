@@ -24,7 +24,7 @@ services:
     hostname: bark-server
     # 主机名
     volumes:
-      - /volume1/docker/bark-server/:/data
+      - /volume1/docker/bark-server:/data
       # 配置文件目录
     # environment:
       # - PUID=1000
