@@ -35,11 +35,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # 使MP支持内建的重启操作，用于自动更新后重启
       - /volume1/docker/moviepilot/main:/moviepilot 
-      ## 程序主目录
+      # 程序主目录
       - /volume1/docker/moviepilot/config:/config
-      ## 配置目录
+      # 配置目录
       - /volume1:/volume1
-      ## 设置一个总目录，以便于后续目录配置的统一修改，也可以自定义，但一定要确认参数无误
+      # 设置一个总目录，以便于后续目录配置的统一修改，也可以自定义，但一定要确认参数无误
       ## 容器路径和本机路径可以一样
       - /volume1/downloads:/downloads
       # 下载目录，多个目录需要分别映射进来，需要满足配置文件说明中的要求
@@ -49,15 +49,19 @@ services:
 ########################################
     environment:
       - NGINX_PORT=3500
-      ## WebUI服务端口默认为3000，可自行修改，不能和API服务端口冲突
+      # WebUI服务端口默认为3000，可自行修改，不能和API服务端口冲突
       - SUPERUSER=admin
-      ## 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效，分享模板时切勿泄露
-      ## 超级管理者密码，可在MP内修改，分享模板时切勿泄露
-      ## 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效
+      # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效
+      # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效
       #  - PROXY_HOST=【IP:PORT】
       # 网络代理，以便于访问一些网站，如果你没有配置魔法就注释掉，也支持sock5，具体看作者github项目的地址
       - BIG_MEMORY_MODE=false
-      # 是否使用大内存模式，true/false，默认不启动
+      # 是否使用大内存模式，true/false，默认不使用
+      # - PUID=1000
+      # - PGID=100
+      # 用户权限和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      # 可以不写，MP默认均为0，即root，有需要就写，这里作为保留
       - UMASK=022
       # 默认创建新文件的权限，一般写022，MP默认为000，可以不写，也可以考虑设置为022
       - TZ=Asia/Shanghai
