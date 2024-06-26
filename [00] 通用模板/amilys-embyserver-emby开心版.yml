@@ -15,8 +15,6 @@ services:
     # 容器名字
     hostname: amliys-emby
     # 主机名
-    # command: --runtime=nvidia
-    # 调用N卡
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限，给root即可，开心用
     devices:
