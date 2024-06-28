@@ -1,7 +1,9 @@
 # 官方文档
-# https://bark.day.app/
+# https://bark.day.app
 # https://github.com/Finb/bark-server
-# https://day.app/2018/06/bark-server-document/
+# # https://hub.docker.com/r/finab/bark-server
+# 部署教程
+# https://day.app/2018/06/bark-server-document
 
 # Bark 是完整开源的 iOS APP，用来接收自定义推送。
 # bark-server 是完整开源的 Bark 服务后端，用来接收用户的推送请求并转发给苹果APNS。
@@ -10,7 +12,6 @@
 # 依赖苹果APNs，及时、稳定、可靠
 # 不会消耗设备的电量， 基于系统推送服务与推送扩展，APP本体并不需要运行。
 # 隐私安全，可以通过一些方式确保包含作者本人在内的所有人都无法窃取你的隐私。
-
 
 ---
 version: "3"
@@ -40,3 +41,15 @@ services:
       # WebUI 端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/bark-server.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:8080]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/bark-server.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
