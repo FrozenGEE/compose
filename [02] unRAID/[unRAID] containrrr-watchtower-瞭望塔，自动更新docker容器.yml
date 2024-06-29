@@ -14,6 +14,8 @@ services:
     # 容器名字
     hostname: watchtower
     # 主机名
+    network_mode: host
+    # 并不存在端口，只是减少新增网络
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # docker核心
