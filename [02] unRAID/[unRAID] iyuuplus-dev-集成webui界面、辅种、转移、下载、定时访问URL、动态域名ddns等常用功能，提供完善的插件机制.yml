@@ -1,0 +1,34 @@
+# 官网
+# https://doc.iyuu.cn
+# 官方文档
+# https://doc.iyuu.cn/guide/getting-started
+# https://hub.docker.com/r/iyuucn/iyuuplus-dev
+# IYUU旧的 v2.x.x 版本，已于2024年6月1日，停止服务
+
+---
+version: "3"
+# 最后编辑时间：2024-06-25
+services:
+  iyuuplus:
+    image: iyuucn/iyuuplus-dev:latest
+    # 镜像地址
+    container_name: IYUUPlus
+    # 容器名字
+    hostname: IYUUPlus
+    # 主机名
+    # privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    volumes:
+      - /mnt/user/appdata/iyuuplus/iyuu:/iyuu
+      # 配置文件目录，存放源码
+      - /mnt/user/appdata/iyuuplus/data:/data
+      # 数据库目录，存放mysql数据库
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8780:8780/tcp
+      # WebUI 端口
+      # 注：8780是容器内nginx的监听端口，反向代理了 8787、3131
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
