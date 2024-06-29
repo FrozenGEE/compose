@@ -12,16 +12,16 @@ services:
   iyuuplus:
     image: iyuucn/iyuuplus-dev:latest
     # 镜像地址
-    container_name: IYUUPlus
+    container_name: iyuuplus
     # 容器名字
-    hostname: IYUUPlus
+    hostname: iyuuplus
     # 主机名
     # privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
-      - 【这里替换为你的docker数据存放目录】/iyuu/iyuu:/iyuu
+      - 【这里替换为你的docker数据存放目录】/iyuuplus/iyuu:/iyuu
       # 配置文件目录，存放源码
-      - 【这里替换为你的docker数据存放目录】/iyuu/data:/data
+      - 【这里替换为你的docker数据存放目录】/iyuuplus/data:/data
       # 数据库目录，存放mysql数据库
     # network_mode: bridge
     network_mode: host
