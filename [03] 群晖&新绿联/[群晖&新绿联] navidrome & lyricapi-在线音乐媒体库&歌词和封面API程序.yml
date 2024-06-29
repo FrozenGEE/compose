@@ -79,6 +79,7 @@ services:
     # 主机名
     environment:
       - TZ=Asia/Shanghai
+      # 时区
       # - API_AUTH=1234567980
       # 用于header鉴权，留空则跳过鉴权
     volumes:
