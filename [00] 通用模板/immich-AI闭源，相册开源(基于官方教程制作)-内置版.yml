@@ -50,7 +50,7 @@ services:
     volumes:
       - 【这里替换为你的照片上传存放目录】:/usr/src/app/upload
       # 上传目录
-      - 【这里替换为你的本地相册存放目录】:/usr/src/app/external
+      - 【这里替换为你的本地相册存放目录】:/local
       # 外部库目录，此文件夹将定期扫描，内容将自动导入immich，需要在immich上进行设置，容器路径可以自定义多个，理解映射就会明白了，默认为/usr/src/app/external
       - 【这里替换为你的本地相册存放目录】:/【这里替换为你的本地相册存放目录的名字】
       # 自定义外部库目录，可以写多个，容器路径可随便自定义
@@ -71,6 +71,8 @@ services:
       # - NVIDIA_DRIVER_CAPABILITIES=all
       # - NVIDIA_VISIBLE_DEVICES=【N卡的ID】
       # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
+      - TZ=Asia/Shanghai
+      # 时区
     ports:
       - 2283:2283/tcp
       # WebUI 端口
@@ -112,15 +114,13 @@ services:
     volumes:
       - 【这里替换为你的照片上传存放目录】:/usr/src/app/upload
       # 上传目录
-      - 【这里替换为你的本地相册存放目录】:/usr/src/app/external
+      - 【这里替换为你的本地相册存放目录】:/local
       # 外部库目录，此文件夹将定期扫描，内容将自动导入immich，需要在immich上进行设置，容器路径可以自定义多个，理解映射就会明白了，默认为/usr/src/app/external
       - 【这里替换为你的本地相册存放目录】:/【这里替换为你的本地相册存放目录的名字】
       # 自定义外部库目录，可以写多个，容器路径可随便自定义
       - /etc/localtime:/etc/localtime:ro
       # 时区
     environment:
-      - MICROSERVICES_PORT=3002
-      # 自定义容器端口，默认为3002
       - REDIS_HOSTNAME=immich-redis
       # 指定要连接的redis，预设为immich-redis
       - DB_HOSTNAME=immich-pgsql
@@ -132,6 +132,8 @@ services:
       # - NVIDIA_DRIVER_CAPABILITIES=all
       # - NVIDIA_VISIBLE_DEVICES=【N卡的ID】
       # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
+      - TZ=Asia/Shanghai
+      # 时区
     depends_on:
        - immich-redis
        - immich-pgsql
@@ -169,6 +171,8 @@ services:
       # 目录结构：/xxx/immich/immich-machine-learning/clip/XLM-Roberta-Large-Vit-B-16Plus
       # 
     environment:
+      - TZ=Asia/Shanghai
+      # 时区
       ####################
       #
       # - NVIDIA_DRIVER_CAPABILITIES=all
@@ -190,9 +194,11 @@ services:
       - MACHINE_LEARNING_WORKER_TIMEOUT=120
       # AI深度学习的超时时间，默认为120
       - MACHINE_LEARNING_PRELOAD__CLIP=XLM-Roberta-Large-Vit-B-16Plus
-      # 要预加载并保存在缓存中的 CLIP 模型的名称，需要把模型下载到本地并放到对应目录，然后在此写上模型名称
-      # - MACHINE_LEARNING_PRELOAD__FACIAL_RECOGNITION=
-      # 要预先加载并保存在缓存中的面部识别模型的名称，需要把模型下载到本地并放到对应目录，然后在此写上模型名称
+      # 要预加载并保存在缓存中的 CLIP 模型的名称，建议把模型下载到本地并放到对应目录，然后在此写上模型名称
+      # 推荐 XLM-Roberta-Large-Vit-B-16Plus
+      # - MACHINE_LEARNING_PRELOAD__FACIAL_RECOGNITION=antelopev2
+      # 要预先加载并保存在缓存中的面部识别模型的名称，建议把模型下载到本地并放到对应目录，然后在此写上模型名称
+      # 推荐 antelopev2
       #
       ####################
     restart: always
@@ -244,6 +250,8 @@ services:
       - POSTGRES_USER=immich
       - POSTGRES_PASSWORD=immich
       # pgsql的子数据库，账号密码均为预设的immich
+      - TZ=Asia/Shanghai
+      # 时区
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
