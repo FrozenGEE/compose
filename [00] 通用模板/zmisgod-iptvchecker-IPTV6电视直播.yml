@@ -15,6 +15,7 @@ services:
     # 主机名
     volumes:
       - 【这里替换为docker的数据存放目录】/iptv-checker:/app/static/output
+      # 输出文件目录
     environment:
       - WEB_PORT=8089
       # 自定义容器端口，默认为8089
