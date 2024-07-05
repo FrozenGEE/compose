@@ -45,7 +45,7 @@ services:
       # - 9993:9993/tcp
       # - 9993:9993/udp
       # 传输端口
-      # - 3000:3180/tcp
+      # - 3180:3180/tcp
       # WebUI HTTP端口
       # - 3443:43443/tcp
       # WebUI HTTPS端口
