@@ -13,7 +13,7 @@ version: '3.8'
 services:
   grafana:
     image: grafana/grafana-enterprise:latest
-    # 镜像名字，官方推荐企业版，他是免费内购的，带开源版的全部功能且可以安装插件，你喜欢可以升级到企业级获取更多功能
+    # 镜像地址，官方推荐企业版，他是免费内购的，带开源版的全部功能且可以安装插件，你喜欢可以升级到企业级获取更多功能
     # 开源版：grafana/grafana-oss
     # 企业版：grafana/grafana-enterprise
     container_name: grafana
