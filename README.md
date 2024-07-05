@@ -1,4 +1,11 @@
-## 【更新日志-2024-06-25】
+## 【更新日志-2024-07-05】
+- 来自casaos的项目，YAML Generator 生成器：https://play.cuse.eu.org/generate
+- 通过“在线docker面板”生成对应的compose模板，666666，流下没有技术的泪水
+- 项目来源：https://github.com/Cp0204/CasaOS-AppStore-Play
+- 另外推举一个cli转compose的网站：https://www.composerize.com
+- 123盘的docker离线镜像好久没更新了，这里附上docker加速源项目：https://github.com/cmliu/CF-Workers-docker.io ，推荐自建，只需要域名+cloudflare即可
+
+##### 【更新日志-2024-06-25】
 - 上传一些针对于群晖和新绿联的预设写好的模板，默认存储池均为/volume1，部分内容还需要自己稍微修改，或者增添，注意看注释
 - 群晖用户请预先创建好对应的路径的文件夹，绿联用户请预先创建好共享文件夹
 - unRAID用户不需要预先创建文件夹，对于unRAID的模板，linux原生系统都可以直接用
