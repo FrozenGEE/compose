@@ -16,13 +16,15 @@ services:
     hostname: bili-sync-rs
     # 主机名
     volumes:
-    - /mnt/user/appdata/bili-sync-rs:/app/.config/bili-sync
-    # 配置目录
-    - /mnt/user/video/B站收藏同步:/downloads
-    # 默认下载目录
+      - /mnt/user/appdata/bili-sync-rs:/app/.config/bili-sync
+      # 配置目录
+      - /mnt/user/video/B站收藏同步:/downloads
+      # 默认下载目录
     environment:
-    - TZ=Asia/Shanghai
-    # 时区
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: host
+    # 不存在webui，这一条网络模式仅用于不然它创建一个私有网段，强迫症而已
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
