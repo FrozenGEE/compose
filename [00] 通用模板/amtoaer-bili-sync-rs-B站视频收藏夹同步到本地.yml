@@ -3,7 +3,7 @@
 # https://hub.docker.com/r/amtoaer/bili-sync-rs
 # 部署教程
 # https://blog.hesuisui.top/archives/Docker-Bili-Sync
-
+# 部署前，请先把配置文件弄好再启动启动
 
 ---
 version: "3"
