@@ -87,7 +87,7 @@ services:
     # hostname: rustdesk-api-server
     # 主机名
     # volumes:
-      # - 【这里替换为你的docker数据存放目录】/rustdesk:/rustdesk-api-server/db
+      # - /mnt/user/appdata/rustdesk:/rustdesk-api-server/db
       # 宿主机数据库挂载目录，要和上面对应一致，目录内要有db文件
     # environment:
       # - LANGUAGE_CODE=zh-hans
