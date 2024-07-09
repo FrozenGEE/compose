@@ -1,0 +1,53 @@
+# 官方文档
+# 开源免费的全平台数据同步神器 Syncthing
+# https://hub.docker.com/r/linuxserver/syncthing
+# https://github.com/syncthing/syncthing
+# 安卓客户端：https://github.com/syncthing/syncthing-android
+# MacOS客户端：https://github.com/syncthing/syncthing-macos
+# Win客户端1（推荐）：https://github.com/Martchus/syncthingtray
+# Win客户端2：https://github.com/canton7/SyncTrayzor
+# Win客户端3：https://github.com/kozec/syncthing-gtk
+# IOS客户端：https://apps.apple.com/us/app/m%C3%B6bius-sync/id1539203216
+
+---
+version: "3"
+# 最后编辑时间：2024-06-30
+services:
+  Syncthing:
+    image: linuxserver/syncthing:latest
+    # 镜像地址
+    container_name: Syncthing
+    # 容器名字
+    hostname: Syncthing
+    # 主机名
+    volumes:
+      - /volume1/docker/syncthing/config:/config
+      # 挂载宿主机上的指定目录到容器内部特定路径，这里是配置文件所在目录
+      - /volume4/syncthing/data:/data
+      # 挂载宿主机上的指定目录到容器内部特定路径，这里主要是需要同步的数据所在的目录,
+      # 可以指定多个，比如data2，data3等，也可以直接将宿主机上原有的需要同步的目录直接映射过来，
+      # 不过需要注意权限问题，比如755改成777，否则可能会同步不了，不要问我怎么知道的
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # 推荐使用host模式
+    # ports:
+      # - 8384:8384 
+      # 管理gui的端口，请根据自己实际环境情况指定
+      # - 22000:22000/tcp 
+      # 指定宿主机上tcp的监听端口，请根据自己实际情况修改，最好不变
+      # - 22000:22000/udp
+      # 指定宿主机上udp的监听端口，请根据自己实际环境修改，最好不变
+      # - 21027:21027/udp
+      # 发现协议使用的端口，请根据自己实际环境修改，最好不变
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
