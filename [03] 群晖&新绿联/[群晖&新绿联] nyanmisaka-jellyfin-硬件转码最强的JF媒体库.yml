@@ -25,7 +25,7 @@ services:
     volumes:
       - /volume1/docker/jellyfin/config:/config
       # 配置文件目录
-      - /volume1/docker:/media
+      - /volume1:/media
       # 可以自定义，可以写多个
       - /volume1/docker/jellyfin/cache:/cache
       # 缓存目录
