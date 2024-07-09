@@ -12,8 +12,8 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-04-23
-# 更新日志：新增青蛙和麒麟的认证站点的支持
+# 最后编辑时间：2024-07-09
+# 更新日志：新增蝶粉和海胆的认证站点的支持
 services:
   moviepilot:
     image: jxxghp/moviepilot:latest
@@ -97,17 +97,17 @@ services:
       # 启动时自动检测和更新资源包（站点和索引及认证等），仅支持Docker镜像
 ########################################
 #### 认证站点 ####
-      - AUTH_SITE=iyuu,agsvpt,audiences,freefarm,hddolby,hdfans,hhclub,icc2022,ptba,ptlsp,ptvicomo,wintersakura,xingtan,zmpt
+      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptlsp,ptvicomo,wintersakura,xingtan,zmpt
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔
       ## 会依次执行认证操作，直到有一个站点认证成功
       ## 只需要写一个即可，这里已经全写上了，但是会启动时会轮着进行认证，影响启动速度
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
       ## 密钥在控制面板中查看，切勿泄露
-      ## 【备用】- AUTH_SITE=iyuu,agsvpt,audiences,freefarm,hddolby,hdfans,hhclub,hdkyl,icc2022,ptba,ptlsp,ptvicomo,qingwa,wintersakura,xingtan,zmpt
+      ## 【备用】- AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,hdkyl,icc2022,ptba,ptlsp,ptvicomo,qingwa,wintersakura,xingtan,zmpt
       ## 以下认证只需要写一个即可，记得把#注释去掉
       ## 推荐红豆饭，因为支持iyuu和mp的认证（2024年5月注释）
 ########################################
-      # - IYUU-SIGN=
+      # - IYUU_SIGN=
       # iyuu的认证，输入IYUU的登录令牌即可，IYUU本身也是需要认证的
 ########################################
       # - AGSVPT_UID=
@@ -118,17 +118,25 @@ services:
       # - AUDIENCES_PASSKEY=
       # audiences的用户UID和密钥
 ########################################
+      # - DISCFAN_UID=
+      # - DISCFAN_PASSKEY=
+      # discfan的用户UID和密钥
+########################################
       # - FREEFARM_UID=
       # - FREEFARM_PASSKEY=
       # freefarm的用户UID和密钥
 ########################################
-      # - HDFANS_UID=
-      # - HDFANS_PASSKEY=
-      # hdfans的用户UID和密钥
+      # - HAIDAN_UID=
+      # - HAIDAN_PASSKEY=
+      # haidan的用户UID和密钥
 ########################################
       # - HDDOLBY_UID=
       # - HDDOLBY_PASSKEY=
       # hddolby的用户UID和密钥
+########################################
+      # - HDFANS_UID=
+      # - HDFANS_PASSKEY=
+      # hdfans的用户UID和密钥
 ########################################
       # - HHCLUB_USERNAME=
       # - HHCLUB_PASSKEY=
