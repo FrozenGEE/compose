@@ -1,0 +1,68 @@
+# 由 HexiaoyeTop 编写提供
+# 官方文档
+# 开源免费的全平台数据同步神器 Syncthing
+# https://hub.docker.com/r/linuxserver/syncthing
+# https://github.com/syncthing/syncthing
+# 安卓客户端：https://github.com/syncthing/syncthing-android
+# MacOS客户端：https://github.com/syncthing/syncthing-macos
+# Win客户端1（推荐）：https://github.com/Martchus/syncthingtray
+# Win客户端2：https://github.com/canton7/SyncTrayzor
+# Win客户端3：https://github.com/kozec/syncthing-gtk
+# IOS客户端：https://apps.apple.com/us/app/m%C3%B6bius-sync/id1539203216
+
+---
+version: "3"
+# 最后编辑时间：2024-07-10
+services:
+  Syncthing:
+    image: linuxserver/syncthing:latest
+    # 镜像地址
+    container_name: syncthing
+    # 容器名字
+    hostname: syncthing
+    # 主机名
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/syncthing:/config
+      # 挂载宿主机上的指定目录到容器内部特定路径，这里是配置文件所在目录
+      - 【这里替换为你想要同步的数据的存放目录】:/data
+      # 挂载宿主机上的指定目录到容器内部特定路径，这里主要是需要同步的数据所在的目录,
+      # 可以指定多个，比如data2，data3等，也可以直接将宿主机上原有的需要同步的目录直接映射过来，
+      # 不过需要注意权限问题，比如755改成777，否则可能会同步不了，不要问我怎么知道的
+      # - 【这里替换为你想要同步的数据的存放目录】:/data2
+      # - 【这里替换为你想要同步的数据的存放目录】:/【这里替换为你想要同步的数据的存放目录的名字】
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # 推荐使用host模式
+    # ports:
+      # - 8384:8384/tcp
+      # 管理gui的端口，请根据自己实际环境情况指定，设置内可自定义容器端口
+      # - 22000:22000/tcp 
+      # 指定宿主机上tcp的监听端口，请根据自己实际情况修改，最好不变
+      # - 22000:22000/udp
+      # 指定宿主机上udp的监听端口，请根据自己实际环境修改，最好不变
+      # - 21027:21027/udp
+      # 发现协议使用的端口，请根据自己实际环境修改，最好不变
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/syncthing.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:8384]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/syncthing.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
