@@ -1,6 +1,11 @@
 # 官方文档
-# https://space.bilibili.com/262880702
+# https://space.bilibili.com/262880702/dynamic
+# https://www.bilibili.com/video/BV1em41117Vu
 # https://hub.docker.com/r/wangao/iptv-tool
+# IPTV常用地址
+# https://m3u.ibert.me/
+# http://tonkiang.us/
+# https://iptv.b2og.com/
 
 ---
 version: '3'
