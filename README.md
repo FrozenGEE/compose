@@ -1,9 +1,14 @@
-## 【更新日志-2024-07-05】
+## 【更新日志-2024-07-10】
+- 提供logo图，可用于unRAID，CasaOS的图标显示，也可以用于Sun-Panel当中使用，其余同理
+- logo源于 [xushier/HD-Icons](https://github.com/xushier/HD-Icons)、[junhuahuang/HD-Icons](https://github.com/walkxcode/dashboard-icons)、casaos和unraid商店、有些是从网上找的
+- [整合包-2024-07-10](https://www.123pan.com/s/YuAUVv-eW1nA.html)
+
+##### 【更新日志-2024-07-05】
 - 来自casaos的项目，YAML Generator 生成器：https://play.cuse.eu.org/generate
 - 通过“在线docker面板”生成对应的compose模板，666666，流下没有技术的泪水
-- 项目来源：https://github.com/Cp0204/CasaOS-AppStore-Play
+- 项目来源：[CasaOS-AppStore-Play](https://github.com/Cp0204/CasaOS-AppStore-Play)
 - 另外推举一个cli转compose的网站：https://www.composerize.com
-- 123盘的docker离线镜像好久没更新了，这里附上docker加速源项目：https://github.com/cmliu/CF-Workers-docker.io ，推荐自建，只需要域名+cloudflare即可
+- 123盘的docker离线镜像好久没更新了，这里附上docker加速源项目：[cmliu/CF-Workers-docker.io](https://github.com/cmliu/CF-Workers-docker.io) ，推荐自建，只需要域名+cloudflare即可
 
 ##### 【更新日志-2024-06-25】
 - 上传一些针对于群晖和新绿联的预设写好的模板，默认存储池均为/volume1，部分内容还需要自己稍微修改，或者增添，注意看注释
@@ -177,7 +182,7 @@ docker run -d -p 9595:9000 --name=portainer-zh --restart=no -v /var/run/docker.s
 
 ```
 
-# 【食用方法】
+# 【portainer 食用方法】
 :white_check_mark: 视频教程：
 https://www.bilibili.com/video/BV1TCgNeLEtu
 
@@ -215,3 +220,23 @@ https://www.bilibili.com/video/BV1TCgNeLEtu
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-16.png)
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-17.png)
 ![image](https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-18.png)
+
+# 【logo 食用方法】
+- unRAID：先创建一个名为"LOGO"的共享文件夹，然后把图标的压缩包解压到目录内，路径为 /mnt/user/LOGO/LOGO.png 这样的格式即可，提供的compose均预设好，也可以选择使用网址访问
+ 
+![image](https://github.com/FrozenGEE/compose/blob/main/.logo/unraid-01.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.logo/unraid-02.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.logo/unraid-03.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.logo/unraid-04.png)
+
+- CasaOS：使用图床，然后将图片上传后，在logo的地址栏上输入logo的访问地址即可
+  
+![image](https://github.com/FrozenGEE/compose/blob/main/.logo/casaos-01.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.logo/casaos-02.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.logo/casaos-03.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.logo/casaos-04.png)
+
+- Sun-Panel：先在nas中找个地方存放好logo图标，将"/app/conf/uploads"该路径映射，映射到logo文件夹上，具体请看compose的注释，然后在图标编辑的时候，输入"/uploads/LOGO.PNG"即可
+  
+![image](https://github.com/FrozenGEE/compose/blob/main/.logo/sun-panel-01.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.logo/sun-panel-02.png)
