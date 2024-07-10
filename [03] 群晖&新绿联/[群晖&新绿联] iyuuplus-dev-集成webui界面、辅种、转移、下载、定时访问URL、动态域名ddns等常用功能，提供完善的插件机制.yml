@@ -23,11 +23,11 @@ services:
       # 配置文件目录，存放源码
       - /volume1/docker/iyuuplus/data:/data
       # 数据库目录，存放mysql数据库
-    # network_mode: bridge
-    network_mode: host
+    network_mode: bridge
+    # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    # ports:
-      # - 8780:8780/tcp
+    ports:
+      - 8780:8780/tcp
       # WebUI 端口
       # 注：8780是容器内nginx的监听端口，反向代理了 8787、3131
     restart: unless-stopped
