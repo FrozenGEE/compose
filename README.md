@@ -1,6 +1,6 @@
 ## 【更新日志-2024-07-10】
 - 提供logo图，可用于unRAID，CasaOS的图标显示，也可以用于Sun-Panel当中使用，其余同理
-- logo源于 [xushier/HD-Icons](https://github.com/xushier/HD-Icons)、[junhuahuang/HD-Icons](https://github.com/walkxcode/dashboard-icons)、casaos和unraid商店、有些是从网上找的
+- logo源于 [xushier/HD-Icons](https://github.com/xushier/HD-Icons)、[walkxcode/dashboard-icons](https://github.com/walkxcode/dashboard-icons)、casaos和unraid商店、有些是从网上找的
 - [整合包-2024-07-10](https://www.123pan.com/s/YuAUVv-eW1nA.html)
 
 ##### 【更新日志-2024-07-05】
