@@ -14,7 +14,8 @@ services:
     hostname: cloudflared-web
     # 主机名
     volumes:
-      - /volume1/docker/cloudflared-web:/config
+      - /volume1/docker/cloudflared-web/config:/config
+      - /volume1/docker/cloudflared-web:/root/.cloudflared
       # 配置文件目录
     # network_mode: bridge
     network_mode: host
