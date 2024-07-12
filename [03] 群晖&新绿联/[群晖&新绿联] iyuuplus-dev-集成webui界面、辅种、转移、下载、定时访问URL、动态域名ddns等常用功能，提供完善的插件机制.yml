@@ -5,6 +5,10 @@
 # https://hub.docker.com/r/iyuucn/iyuuplus-dev
 # IYUU旧的 v2.x.x 版本，已于2024年6月1日，停止服务
 
+# 注意：使用host模式会占用3306端口，因为会内置安装一个mysql，如果本身就使用host模式安装了mysql/maraidb(或者其他3306端口占用)，会产生冲突
+# 该问题在2024-05-06，作者已经知晓，待后续出一个无内置数据库版本的iyuu，目前解决办法是iyuu不使用host网络模式
+# https://gitee.com/ledc/iyuuplus-dev/issues/I9MD1X
+
 ---
 version: "3"
 # 最后编辑时间：2024-06-25

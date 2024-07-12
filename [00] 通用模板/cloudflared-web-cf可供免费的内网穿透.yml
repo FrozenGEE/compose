@@ -14,7 +14,8 @@ services:
     hostname: cloudflared-web
     # 主机名
     volumes:
-      - 【这里替换为你的docker数据存放目录】/cloudflared-web:/config
+      - 【这里替换为你的docker数据存放目录】/cloudflared-web/config:/config
+      - 【这里替换为你的docker数据存放目录】/cloudflared-webb:/root/.cloudflared
       # 配置文件目录
     # network_mode: bridge
     network_mode: host

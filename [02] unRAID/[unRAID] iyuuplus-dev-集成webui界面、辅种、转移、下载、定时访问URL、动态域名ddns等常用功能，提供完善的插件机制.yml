@@ -5,6 +5,10 @@
 # https://hub.docker.com/r/iyuucn/iyuuplus-dev
 # IYUU旧的 v2.x.x 版本，已于2024年6月1日，停止服务
 
+# 注意：使用host模式会占用3306端口，因为会内置安装一个mysql，如果本身就使用host模式安装了mysql/maraidb(或者其他3306端口占用)，会产生冲突
+# 该问题在2024-05-06，作者已经知晓，待后续出一个无内置数据库版本的iyuu，目前解决办法是iyuu不使用host网络模式
+# https://gitee.com/ledc/iyuuplus-dev/issues/I9MD1X
+
 ---
 version: "3"
 # 最后编辑时间：2024-06-25
@@ -23,11 +27,11 @@ services:
       # 配置文件目录，存放源码
       - /mnt/user/appdata/iyuuplus/data:/data
       # 数据库目录，存放mysql数据库
-    # network_mode: bridge
-    network_mode: host
+    network_mode: bridge
+    # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    # ports:
-      # - 8780:8780/tcp
+    ports:
+      - 8780:8780/tcp
       # WebUI 端口
       # 注：8780是容器内nginx的监听端口，反向代理了 8787、3131
     restart: unless-stopped
