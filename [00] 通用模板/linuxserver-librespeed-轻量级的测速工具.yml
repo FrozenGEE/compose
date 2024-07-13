@@ -16,7 +16,7 @@ services:
     hostname: librespeed
     # 主机名
     volumes:
-      - 【这里替换为你的数据存放目录】/librespeed:/config
+      - 【这里替换为你的docker数据存放目录】/librespeed:/config
       # 数据文件存放目录
     environment:
       - CUSTOM_RESULTS=true
