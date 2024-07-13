@@ -4,7 +4,7 @@
 # https://docs.watercalmx.com/docker-jing-xiang/docker-embystat
 
 ---
-version: '3'
+version: '2.1'
 # 最后编辑时间：2024-07-09
 services:
   embystat:
