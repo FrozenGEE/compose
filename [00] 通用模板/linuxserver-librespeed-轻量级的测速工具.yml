@@ -1,0 +1,62 @@
+# 官方文档
+# https://hub.docker.com/r/linuxserver/librespeed
+# https://docs.linuxserver.io/images/docker-librespeed
+# https://github.com/linuxserver/librespeed
+# https://docs.watercalmx.com/docker-jing-xiang/docker-librespeed
+
+---
+version: '2.1'
+# 最后编辑时间：2024-07-09
+services:
+  librespeed:
+    image: linuxserver/librespeed:latest
+    # 镜像地址
+    container_name: librespeed
+    # 容器名字
+    hostname: librespeed
+    # 主机名
+    volumes:
+      - 【这里替换为你的数据存放目录】/librespeed:/config
+      # 数据文件存放目录
+    environment:
+      - CUSTOM_RESULTS=true
+      # 预设为false，改为true则启用/config/www/results/index.php中的自定义结果页面，可选
+      # 打开 http://SERVERIP/results/stats.php ，输入下面预设的密码可访问结果数据库
+      # 默认的模板基于example-singleServer-full.html，但 /config/www/ 提供了所有模板供参考
+      # 随意自定义/config/www/index.html 文件。若要恢复默认模板，删除该文件即可。
+      - PASSWORD=password
+      # 设置结果数据库的密码，和下面的不同，不要混淆，预设为password
+      - DB_TYPE=sqlite
+      # 默认为sqlite，也可以设置为mysql或postgresql
+      # - DB_HOSTNAME=【数据库的IP地址和端口】
+      # - DB_NAME=【数据库的名字】
+      # - DB_USERNAME=【数据库的账号】
+      # - DB_PASSWORD=【数据库的密码】
+      # 数据库的地址和端口，子数据库的名字，账号和密码，根据实际填写
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 44080:80/tcp
+      #  WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/librespeed.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:80]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/librespeed.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
