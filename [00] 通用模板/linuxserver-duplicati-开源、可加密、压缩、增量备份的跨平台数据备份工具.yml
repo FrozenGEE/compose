@@ -7,7 +7,7 @@
 # https://zhuanlan.zhihu.com/p/588678612
 
 ---
-version: "3"
+version: "2.1"
 # 最后编辑时间：2024-03-11
 services:
   duplicati:
