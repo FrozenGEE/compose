@@ -65,7 +65,9 @@
 
 ```shell
 💡威联通的docker配置文件存放路径
+/share/container-station-data/aaa
 💡威联通的数据存放路径开头
+/share/bbb
 ```
 
 ```shell
@@ -150,7 +152,7 @@ docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/dock
 
 ### 威联通
 ```shell
-(待补充)
+docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /share/container-station-data/portainer-zh:/data 6053537/portainer-ce
 ```
 
 ### casaos，商店中就可以一键安装，但非汉化版
