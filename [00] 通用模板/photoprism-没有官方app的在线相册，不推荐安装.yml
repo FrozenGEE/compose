@@ -20,9 +20,9 @@ services:
     volumes:
       - 【这里替换为你的docker数据存放目录】/photoprism:/photoprism/storage
       # 配置文件目录
-      - 【用来存放你的数据的地方】/PhotoPrism/import:/photoprism/import
+      - 【这里替换为你的数据存放目录】/PhotoPrism/import:/photoprism/import
       # 上传目录
-      - 【用来存放你的数据的地方】/PhotoPrism/originals:/photoprism/originals
+      - 【这里替换为你的数据存放目录】/PhotoPrism/originals:/photoprism/originals
       # 本地相册目录
       # 可以自定义多个
     environment:
