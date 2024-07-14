@@ -1,0 +1,34 @@
+# 官方文档
+# https://hub.docker.com/r/gitlab/gitlab-ce
+# 部署成功后，登录账号为root，密码通过在SSH命令获取，需要切换为root账号，登陆后记得修改密码，密码会失效
+# docker exec -it gitlab-ce grep 'Password:' /etc/gitlab/initial_root_password
+
+---
+version: "3"
+# 最后编辑时间：2024-04-30
+services:
+  gitlab-ce:
+    image: gitlab/gitlab-ce:latest
+    # 镜像地址
+    container_name: gitlab-ce
+    # 容器名字
+    hostname: gitlab-ce
+    # 主机名
+    volumes:
+      - /share/container-station-data/docker/gitlab/config:/etc/gitlab
+      # 配置文件目录
+      - /share/container-station-data/docker/gitlab/data:/var/opt/gitlab
+      # 数据目录
+      - /share/container-station-data/docker/gitlab/log:/var/log/gitlab
+      # 日志目录
+    network_mode: bridge
+    # 端口均被占用，只能bridge网络模式进行端口映射
+    ports:
+      - 9022:22/tcp
+      # gitlab-ce的 SSH 端口
+      - 9080:80/tcp
+      # WebUI http端口
+      - 9443:443/tcp
+      # WebUI https端口
+    restart: always
+    # 重启策略

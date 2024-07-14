@@ -1,0 +1,22 @@
+# 官方文档
+# http://hub.docker.com/hausen1012/squoosh
+# http://hub.docker.com/dko0/squoosh
+
+---
+version: "3"
+# 最后编辑时间：2024-06-13
+services:
+  squoosh:
+    image: dko0/squoosh:latest
+    # 镜像地址
+    container_name: squoosh
+    # 容器名字
+    hostname: squoosh
+    # 主机名
+    network_mode: bridge
+    # 8080端口被占用，不能用host
+    ports:
+      - 1980:8080/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -1,0 +1,63 @@
+# 官网
+# https://emby.media
+# https://docs.linuxserver.io/images/docker-emby
+# https://hub.docker.com/r/linuxserver/emby
+# 媒体库规范化命名手册
+# https://emby.media/support/articles/Home.html
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  emby:
+    image: linuxserver/emby:latest
+    # 镜像地址，如需测试版追新，latest更改为beta，不区分设备架构
+    container_name: emby
+    # 容器名字
+    hostname: emby
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    devices:
+      - /dev/dri:/dev/dri
+      # 开启硬件转码，其实能访问到核显的目录也是可以
+    # runtime: nvidia
+    # 使用N卡的需要装好N卡驱动，并且设置这个参数
+    volumes:
+      - /share/container-station-data/emby:/config
+      # 配置文件目录
+      - /share:/data
+      # 可以自定义，可以写多个
+      # - /dev/shm:/config/transcodes
+      # 使用内存作为转码缓冲目录，推荐至少8G才使用
+    environment:
+      # - NVIDIA_DRIVER_CAPABILITIES=all
+      # - NVIDIA_VISIBLE_DEVICES=N卡的ID
+      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
+      - PUID=0
+      - PGID=0
+      # 用户和用户组权限，这里写0 0以确保硬件转码能正常使用
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      # 保持默认
+      # - ALL_PROXY=http://【IP:PORT】
+      # 更换为自己的http代理
+      # - HTTP_PROXY=http://【IP:PORT】
+      # 更换为自己的http代理
+    # network_mode: bridge
+    network_mode: host
+    # 设置内可以自定义容器端口，这样就可以愉快地用host模式
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8096:8096/tcp
+      # WebUI 端口
+      # - 8920:8920/tcp
+      # WebUI https端口
+      # - 1900:1900/udp
+      # - 7359:7359/udp
+      # DLNA端口，基本不用
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
