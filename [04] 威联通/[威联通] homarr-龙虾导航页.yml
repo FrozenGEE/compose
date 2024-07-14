@@ -1,0 +1,43 @@
+# 官方文档
+# https://homarr.dev
+# https://github.com/ajnart/homarr
+# https://homarr.dev/docs/getting-started/installation
+# 部署教程
+# https://www.huluohu.com/posts/395
+
+---
+version: "3"
+# 最后编辑时间：2024-07-11
+services:
+  homarr:
+    image: ghcr.io/ajnart/homarr:latest
+    # 镜像地址
+    container_name: homarr
+    # 容器名字
+    hostname: homarr
+    # 主机名
+    environment:
+      # - PORT=7575
+      # 自定义容器端口，默认为7575
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，威联通为1000，新绿联为1001，linux类系统一般为1000，后续用户均+1
+      - TZ=Asia/Shanghai
+      # 时区
+    volumes:
+      - /share/container-station-data/homarr/configs:/app/data/configs
+      # 配置文件目录
+      - /share/container-station-data/homarr/icons:/app/public/icons
+      # 图标文件目录
+      - /share/container-station-data/homarr/data:/data
+      # 数据目录
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # 使能支持docker容器的监控
+    network_mode: bridge
+    # 穷举法尝试了很多次，不知道为啥，使用host会显示 Internal Server Error，因此只能用bridge，希望有大佬能解答
+    ports:
+      - 7575:7575/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

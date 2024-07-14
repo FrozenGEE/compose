@@ -1,0 +1,53 @@
+# 官网
+# https://key-networks.com/ztncui
+# 官方文档
+# https://github.com/key-networks/ztncui
+# https://github.com/key-networks/ztncui-aio
+# https://hub.docker.com/r/keynetworks/ztncui
+
+# Zerotier 根服务器 (另一个项目)
+# https://github.com/xubiaolin/docker-zerotier-planet
+# PLANET：行星服务器，Zerotier 根服务器
+# MOON：卫星服务器，用户自建的私有根服务器，起到代理加速的作用
+# LEAF：网络客户端，就是每台连接到网络节点。
+
+# ZerotierFix 安卓魔改版ZT
+# https://github.com/kaaass/ZerotierFix
+
+# 初始账号密码为admin/password，登陆后立马修改
+
+---
+version: '3'
+# 最后编辑时间：2024-07-05
+services:
+  ztncui:
+    image: keynetworks/ztncui:latest
+    # 镜像地址
+    container_name: ztncui
+    # 容器名字
+    hostname: ztncui
+    # 主机名
+    volumes:
+      - /share/container-station-data/ztncui/etc:/opt/key-networks/ztncui/etc
+      - /share/container-station-data/ztncui/zerotier-one:/var/lib/zerotier-one
+      # 两个配置文件目录
+    environment:
+      - HTTP_ALL_INTERFACES=yes
+      # 监听所有接口，对反向代理有用，仅 HTTP
+      - HTTP_PORT=3180
+      # 自定义容器的 WebUI HTTP端口，默认为3000，该端口很多镜像都用，为了避免冲突建议修改为3180
+      - HTTPS_PORT=3443
+      # 自定义容器的 WebUI HTTPS端口，默认为3443
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 9993:9993/tcp
+      # - 9993:9993/udp
+      # 传输端口
+      # - 3180:3180/tcp
+      # WebUI HTTP端口
+      # - 3443:43443/tcp
+      # WebUI HTTPS端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -1,0 +1,40 @@
+# 官方文档
+# https://hub.docker.com/r/linuxserver/kavita
+# https://github.com/Kareadita/Kavita
+# https://github.com/linuxserver/docker-kavita
+# https://docs.linuxserver.io/images/docker-kavita
+# https://wiki.kavitareader.com
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  kavita:
+    image: linuxserver/kavita:latest
+    # 镜像地址
+    container_name: kavita
+    # 容器名字
+    hostname: kavita
+    # 主机名
+    volumes:
+      - /share/container-station-data/kavita:/config
+      # 配置文件目录
+      - /share:/data
+      # 电子书库的总目录
+      # 可以自定义，可以写多个
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，威联通为1000，新绿联为1001，linux类系统一般为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 自定义容器WebUI端口，默认为5000，由于群晖也用了5000，所以这里修改掉
+    ports:
+      - 5520:5000/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

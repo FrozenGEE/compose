@@ -1,0 +1,30 @@
+# 官方文档
+# http://hub.docker.com/dnomd343/kms-server
+# https://github.com/dnomd343/kms-server
+
+# kms-server 预留了以下JSON接口，用于输出内置的KMS密钥
+# /json：输出全部KMS密钥
+# /win/json：输出各版本Windows的KMS密钥
+# /win-server/json：输出各版本Windows Server的KMS密钥
+
+---
+version: "3"
+# 最后编辑时间：2024-05-16
+services:
+  kms-server:
+    image: dnomd343/kms-server
+    # 镜像地址
+    container_name: kms-server
+    # 容器名字
+    hostname: kms-server
+    # 主机名
+    environment:
+      - KMS_PORT=1688
+      # 指定KMS激活端口，默认值为 21688
+      - HTTP_PORT=1689
+      # 指定HTTP服务端口，默认值为 21689
+      - DISABLE_HTTP=false
+      # 禁用HTTP服务，默认值为 false
+    network_mode: host
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
