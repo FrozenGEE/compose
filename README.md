@@ -1,6 +1,6 @@
 ## 【更新日志-2024-07-15】
 - 上传适用于威联通的compose模板，味精测试，但应该冇问题，仅支持QuTScloud，QTS5.0版本及其以上，Container Station(docker)的路径可能和以前的qnap不太一样，冇求证过
-- 威联通的第一个用户的权限：uid=1000(FrozenGEE) gid=100(everyone) groups=100(everyone),0(administrators)
+- 威联通的第一个用户的权限：uid=1000(用户的名字) gid=100(everyone) groups=100(everyone),0(administrators)
 
 #### 【更新日志-2024-07-10】
 - 提供logo图，可用于unRAID，CasaOS的图标显示，也可以用于Sun-Panel当中使用，其余同理
