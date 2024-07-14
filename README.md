@@ -1,4 +1,7 @@
-## 【更新日志-2024-07-10】
+## 【更新日志-2024-07-15】
+- 上传适用于威联通的compaose模板，味精测试，但应该不会有什么问题
+
+#### 【更新日志-2024-07-10】
 - 提供logo图，可用于unRAID，CasaOS的图标显示，也可以用于Sun-Panel当中使用，其余同理
 - logo源于 [xushier/HD-Icons](https://github.com/xushier/HD-Icons)、[walkxcode/dashboard-icons](https://github.com/walkxcode/dashboard-icons)、casaos和unraid商店、有些是从网上找的
 - [整合包-2024-07-10](https://www.123pan.com/s/YuAUVv-eW1nA.html)
@@ -67,12 +70,11 @@
 💡威联通的docker配置文件存放路径
 /share/container-station-data/aaa
 💡威联通的数据存放路径开头
-/share/bbb
+/share/共享文件夹/bbb
 
 💡另一种写法
-/share/CACHEDEV*_DATA/bbb
-对于这两种写法，个人建议是先在创建好存储池和共享文件夹后，使用第二种写法，模板将以第二种管理写法为主
-因为这样第一种写法/share后就是共享文件夹，为了避免创建在错误的路径上，故采取第二种写法
+/share/CACHEDEV*_DATA/共享文件夹/bbb
+对于这两种写法，模板以第一种写法为主，因为创建好第一个存储池，会预设创建好部分文件夹，因此模板将会以这些文件夹作为预设的模板，
 ```
 
 ```shell
