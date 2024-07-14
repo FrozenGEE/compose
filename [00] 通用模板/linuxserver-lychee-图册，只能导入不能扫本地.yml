@@ -18,7 +18,7 @@ services:
     volumes:
       - 【这里替换为你的docker数据存放目录】/lychee:/config
       # 配置文件目录
-      - 【用来存放你的数据的地方】/lychee:/pictures
+      - 【这里替换为你的docker数据存放目录】/lychee:/pictures
       # 图册目录
     environment:
       - DB_CONNECTION=【数据库类型】
