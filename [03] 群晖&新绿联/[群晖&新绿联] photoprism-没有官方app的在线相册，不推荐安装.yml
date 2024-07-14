@@ -20,16 +20,16 @@ services:
     volumes:
       - /volume1/docker/photoprism:/photoprism/storage
       # 配置文件目录
-      - 【用来存放你的数据的地方】/PhotoPrism/import:/photoprism/import
+      - 【这里替换为你的数据存放目录】/PhotoPrism/import:/photoprism/import
       # 上传目录
-      - 【用来存放你的数据的地方】/PhotoPrism/originals:/photoprism/originals
+      - 【这里替换为你的数据存放目录】/PhotoPrism/originals:/photoprism/originals
       # 本地相册目录
       # 可以自定义多个
     environment:
-      - PHOTOPRISM_ADMIN_USER=【这里写你的用户名字】
-      - PHOTOPRISM_ADMIN_PASSWORD=【新建一个密码】
+      - PHOTOPRISM_ADMIN_USER=admin
+      - PHOTOPRISM_ADMIN_PASSWORD=password
       - PHOTOPRISM_AUTH_MODE=password
-      # PHOTOPRISM的管理者账号密码和使用密码的模式进行管理
+      # PHOTOPRISM的管理者账号密码和使用密码的模式进行管理，账号密码预设为admin/passwrod
       - PHOTOPRISM_UID=1000
       - PHOTOPRISM_GID=100
       # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
