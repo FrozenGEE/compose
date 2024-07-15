@@ -103,11 +103,11 @@
 
 ```shell
 💡绿联旧系统(基于op)的docker配置文件存放路径
-/mnt/media_rw/硬盘序列号/.ugreen_nas/用户ID/docker/aaa
+/mnt/media_rw/存储池序列号/.ugreen_nas/用户ID/docker/aaa
 另一种写法
 /mnt/dm-*/.ugreen_nas/用户ID/docker/aaa
 💡绿联旧系统(基于op)的数据存放路径开头
-/mnt/media_rw/硬盘序列号/.ugreen_nas/用户ID/文件夹名字/bbb
+/mnt/media_rw/存储池序列号/.ugreen_nas/用户ID/文件夹名字/bbb
 另一种写法
 /mnt/dm-*/.ugreen_nas/用户ID/data/bbb
 
