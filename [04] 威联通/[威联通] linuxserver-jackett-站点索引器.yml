@@ -14,9 +14,9 @@ services:
     hostname: jackett
     # 主机名
     volumes:
-      - /share/container-station-data/jackett/config:/config
+      - /share/Container/jackett/config:/config
       # 配置文件目录
-      - /share/container-station-data/jackett/downloads:/downloads
+      - /share/Container/jackett/downloads:/downloads
       # 种子目录
     environment:
       - PUID=1000

@@ -27,7 +27,7 @@ services:
     # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
     # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
     volumes:
-      - /share/container-station-data/navidrome:/data
+      - /share/Container/navidrome:/data
       # 配置文件目录
       - /share/Public/music:/music:ro
       # 音乐媒体库，ro代表只读不写，建议写的层级靠前

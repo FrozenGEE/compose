@@ -15,7 +15,7 @@ services:
     hostname: homeassistant
     # 主机名
     volumes:
-      - /share/container-station-data/homeassistant:/config
+      - /share/Container/homeassistant:/config
       # 配置文件
     environment:
       - TZ=Asia/Shanghai

@@ -15,7 +15,7 @@ services:
     hostname: emulatorjs
     # 主机名
     volumes:
-      - /share/container-station-data/emulatorjs:/config
+      - /share/Container/emulatorjs:/config
       # 配置文件目录
       - /share/Public/ROM:/data
       # ROM目录

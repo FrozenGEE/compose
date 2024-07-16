@@ -26,11 +26,11 @@ services:
       - TZ=Asia/Shanghai
       # 时区
     volumes:
-      - /share/container-station-data/homarr/configs:/app/data/configs
+      - /share/Container/homarr/configs:/app/data/configs
       # 配置文件目录
-      - /share/container-station-data/homarr/icons:/app/public/icons
+      - /share/Container/homarr/icons:/app/public/icons
       # 图标文件目录
-      - /share/container-station-data/homarr/data:/data
+      - /share/Container/homarr/data:/data
       # 数据目录
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # 使能支持docker容器的监控

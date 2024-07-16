@@ -21,7 +21,7 @@ services:
     # runtime: nvidia
     # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
-      - /share/container-station-data/plex:/config
+      - /share/Container/plex:/config
       # 配置文件目录
       - /share:/data
       # 可以自定义，可以写多个

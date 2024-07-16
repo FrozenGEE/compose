@@ -26,7 +26,7 @@ services:
     # privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
-      - /share/container-station-data/alist:/opt/alist/data
+      - /share/Container/alist:/opt/alist/data
       # 配置文件目录
       - /share:/data
       # 映射本地其他路径使其可以访问，可以自定义多个

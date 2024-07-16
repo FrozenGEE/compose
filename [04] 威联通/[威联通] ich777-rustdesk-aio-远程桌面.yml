@@ -29,7 +29,7 @@ services:
     hostname: rustdesk-server-aio
     # 主机名
     volumes:
-      - /share/container-station-data/rustdesk-server-aio:/rustdesk-server
+      - /share/Container/rustdesk-server-aio:/rustdesk-server
       # 配置文件目录
     environment:
       - UID=1000

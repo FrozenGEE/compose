@@ -14,7 +14,7 @@ services:
     hostname: postgres-16
     # 主机名
     volumes:
-      - /share/container-station-data/postgresql-16:/var/lib/postgresql/data
+      - /share/Container/postgresql-16:/var/lib/postgresql/data
       # 数据目录
     environment:
       - POSTGRES_PASSWORD=postgres

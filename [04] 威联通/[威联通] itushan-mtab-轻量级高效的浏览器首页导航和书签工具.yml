@@ -19,7 +19,7 @@ services:
     hostname: mtab
     # 主机名
     volumes:
-      - /share/container-station-data/mtab:/app
+      - /share/Container/mtab:/app
       # 数据目录
     network_mode: bridge
     # 80端口被占用，不能用host

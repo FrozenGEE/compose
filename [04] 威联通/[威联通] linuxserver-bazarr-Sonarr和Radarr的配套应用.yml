@@ -16,7 +16,7 @@ services:
     hostname: bazarr
     # 主机名
     volumes:
-      - /share/container-station-data/bazarr:/config
+      - /share/Container/bazarr:/config
       # 配置文件目录
       - /share:/data
       # 媒体库目录

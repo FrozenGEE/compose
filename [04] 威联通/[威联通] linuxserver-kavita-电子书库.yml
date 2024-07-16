@@ -17,7 +17,7 @@ services:
     hostname: kavita
     # 主机名
     volumes:
-      - /share/container-station-data/kavita:/config
+      - /share/Container/kavita:/config
       # 配置文件目录
       - /share:/data
       # 电子书库的总目录

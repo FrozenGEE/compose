@@ -14,7 +14,7 @@ services:
     hostname: filecodebox
     # 主机名
     volumes:
-      - /share/container-station-data:/app/data
+      - /share:/app/data
       # 数据目录
     # network_mode: bridge
     network_mode: host

@@ -19,7 +19,7 @@ services:
       - HTTPS_PORT=8388
       # 默认为8088，由于用host模式可能会导致与其他docker容器产生端口冲突，因此修改掉
     volumes:
-      - /share/container-station-data/lsky:/var/www/html
+      - /share/Container/lsky:/var/www/html
       # 数据文件目录
       - /share/Multimeeida/兰空图床:/var/www/html/storage/app/uploads
       # 图片上传目录

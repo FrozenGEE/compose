@@ -53,7 +53,7 @@ services:
     hostname: kkfileview
     # 主机名
     volumes:
-       - /share/container-station-data/kkfileview:/opt/kkFileView-4.4.0
+       - /share/Container/kkfileview:/opt/kkFileView-4.4.0
        # 配置文件目录
     environment: 
       - KK_OFFICE_PREVIEW_TYPE=pdf

@@ -14,7 +14,7 @@ services:
     hostname: iptv-checker
     # 主机名
     volumes:
-      - /share/container-station-data/iptv-checker:/app/static/output
+      - /share/Container/iptv-checker:/app/static/output
       # 输出文件目录
     environment:
       - WEB_PORT=8089

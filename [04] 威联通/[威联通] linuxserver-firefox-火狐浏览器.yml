@@ -14,11 +14,11 @@ services:
     hostname: firefox
     # 主机名
     volumes:
-      - /share/container-station-data/firefox:/config
+      - /share/Container/firefox:/config
       # 配置文件目录
       - /share/Public/downloads:/config/downloads
       # 下载目录
-      # - /share/container-station-data:/【这里替换为你的数据存放目录的名字】
+      # - /share/Container:/【这里替换为你的数据存放目录的名字】
       # 数据目录，用于浏览器访问本地目录，可以自定义多个
     environment:
       - CUSTOM_PORT=3010

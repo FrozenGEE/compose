@@ -16,7 +16,7 @@ services:
     hostname: memos
     # 主机名
     volumes:
-      - /share/container-station-data/memos:/var/opt/memos
+      - /share/Container/memos:/var/opt/memos
       # 配置文件目录
     environment:
       # - MEMOS_DRIVER=mysql

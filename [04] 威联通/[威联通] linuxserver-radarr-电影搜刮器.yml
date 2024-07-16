@@ -16,7 +16,7 @@ services:
     hostname: radarr
     # 主机名
     volumes:
-      - /share/container-station-data/radarr:/config
+      - /share/Container/radarr:/config
       # 配置文件目录
       - /share:/data
       # 本地媒体库目录

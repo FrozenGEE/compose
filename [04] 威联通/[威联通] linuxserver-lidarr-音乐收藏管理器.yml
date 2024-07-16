@@ -16,7 +16,7 @@ services:
     hostname: lidarr
     # 主机名
     volumes:
-      - /share/container-station-data/lidarr:/config
+      - /share/Container/lidarr:/config
       # 配置文件目录
       - /share/Multimeida:/music
       # 音乐库的总目录

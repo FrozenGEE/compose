@@ -34,9 +34,9 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # 使MP支持内建的重启操作，用于自动更新后重启
-      - /share/container-station-data/moviepilot/main:/moviepilot 
+      - /share/Container/moviepilot/main:/moviepilot 
       # 程序主目录
-      - /share/container-station-data/moviepilot/config:/config
+      - /share/Container/moviepilot/config:/config
       # 配置目录
       - /share:/data
       # 设置一个总目录，以便于后续目录配置的统一修改，也可以自定义，但一定要确认参数无误

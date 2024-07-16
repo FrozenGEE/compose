@@ -23,9 +23,9 @@ services:
         max-file: 2
         # 最大日志数量
     volumes:
-      - /share/container-station-data/redis/data:/data
+      - /share/Container/redis/data:/data
       # 数据目录
-      - /share/container-station-data/redis/redis.conf:/etc/redis/redis.conf
+      - /share/Container/redis/redis.conf:/etc/redis/redis.conf
       # 配置文件映射，需要预先创建好一个文件并配置好内容，不然会创建成文件夹
     # network_mode: bridge
     network_mode: host

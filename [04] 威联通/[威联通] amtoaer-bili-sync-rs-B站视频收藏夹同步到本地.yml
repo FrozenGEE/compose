@@ -17,7 +17,7 @@ services:
     hostname: bili-sync-rs
     # 主机名
     volumes:
-      - /share/container-station-data/bili-sync-rs:/app/.config/bili-sync
+      - /share/Container/bili-sync-rs:/app/.config/bili-sync
       # 配置目录
       - /share/Multimeida/B站收藏同步:/downloads
       # 默认下载目录

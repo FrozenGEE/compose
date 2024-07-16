@@ -15,7 +15,7 @@ services:
     hostname: lucky
     # 主机名
     volumes:
-      - /share/container-station-data/lucky:/goodluck
+      - /share/Container/lucky:/goodluck
       # 配置文件目录
       - /share:/share
       # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】

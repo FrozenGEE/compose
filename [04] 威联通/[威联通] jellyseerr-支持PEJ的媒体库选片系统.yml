@@ -14,7 +14,7 @@ services:
     hostname: jellyseerr
     # 主机名
     volumes:
-      - /share/container-station-data/jellyseerr:/app/config
+      - /share/Container/jellyseerr:/app/config
       # 配置文件目录
     environment:
       - TZ=Asia/Shanghai

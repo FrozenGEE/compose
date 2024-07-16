@@ -16,7 +16,7 @@ services:
     hostname: sonarr
     # 主机名
     volumes:
-      - /share/container-station-data/sonarr:/config
+      - /share/Container/sonarr:/config
       # 配置文件目录
       - /share:/data
       # 本地媒体库目录

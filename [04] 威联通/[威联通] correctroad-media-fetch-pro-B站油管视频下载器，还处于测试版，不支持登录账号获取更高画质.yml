@@ -13,8 +13,8 @@ services:
     hostname: media-fetch-pro
     # 主机名
     volumes:
-      - /share/container-station-data/media-fetch-pro/tools:/var/opt/tools
-      - /share/container-station-data/media-fetch-pro/config:/var/opt/config
+      - /share/Container/media-fetch-pro/tools:/var/opt/tools
+      - /share/Container/media-fetch-pro/config:/var/opt/config
       # 配置文件目录
       - /share/Multimeida/网络视频下载:/var/opt/video
       # 视频下载目录

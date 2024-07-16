@@ -28,8 +28,8 @@ services:
     hostname: ztncui
     # 主机名
     volumes:
-      - /share/container-station-data/ztncui/etc:/opt/key-networks/ztncui/etc
-      - /share/container-station-data/ztncui/zerotier-one:/var/lib/zerotier-one
+      - /share/Container/ztncui/etc:/opt/key-networks/ztncui/etc
+      - /share/Container/ztncui/zerotier-one:/var/lib/zerotier-one
       # 两个配置文件目录
     environment:
       - HTTP_ALL_INTERFACES=yes

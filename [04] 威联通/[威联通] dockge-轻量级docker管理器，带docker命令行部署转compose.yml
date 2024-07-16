@@ -16,7 +16,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # docker核心
-      - /share/container-station-data/dockege:/app/data
+      - /share/Container/dockege:/app/data
       # 配置文件目录
     environment:
       - DOCKGE_STACKS_DIR=/opt/stacks

@@ -16,7 +16,7 @@ services:
     hostname: pixman
     # 主机名
     volumes:
-      - /share/container-station-data/pixman:/app/app/data/m3u
+      - /share/Container/pixman:/app/app/data/m3u
       # 导入外部的 m3u 文件，从而通过 http://ip:port/your.m3u 访问
     # environment:
       # - http_proxy=http://【IP:PORT】

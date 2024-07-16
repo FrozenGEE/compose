@@ -23,11 +23,11 @@ services:
     # runtime: nvidia
     # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
-      - /share/container-station-data/jellyfin/config:/config
+      - /share/Container/jellyfin/config:/config
       # 配置文件目录
       - /share:/media
       # 可以自定义，可以写多个
-      - /share/container-station-data/jellyfin/cache:/cache
+      - /share/Container/jellyfin/cache:/cache
       # 缓存目录
       # - /dev/shm:/config/transcodes
       # 使用内存作为转码缓冲目录，推荐至少8G才使用

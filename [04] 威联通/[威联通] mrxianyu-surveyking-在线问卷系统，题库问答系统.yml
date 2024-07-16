@@ -36,11 +36,11 @@ services:
     hostname: surveyking
     # 主机名
     volumes:
-      # - /share/container-station-data/surveyking/surveyking-v1.7.2.jar:/app/surveyking.jar
+      # - /share/Container/surveyking/surveyking-v1.7.2.jar:/app/surveyking.jar
       # jar文件映射，可不映射，截至至2024-05-17，镜像内的版本为1.6.0版本，自行获取新版jar文件并映射就可以更新到官方最新版本
-      - /share/container-station-data/surveyking/files:/app/files
+      - /share/Container/surveyking/files:/app/files
       # 数据目录
-      - /share/container-station-data/surveyking/logs:/app/logs
+      - /share/Container/surveyking/logs:/app/logs
       # 日志目录    environment:
       - SERVER_PORT=1991
       # 自定义容器的WebUI端口

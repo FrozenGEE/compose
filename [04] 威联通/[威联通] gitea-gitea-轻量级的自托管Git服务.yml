@@ -17,7 +17,7 @@ services:
     hostname: gitea
     # 主机名
     volumes:
-      - /share/container-station-data/gitea:/data
+      - /share/Container/gitea:/data
       # 数据目录
     environment:
       - USER_UID=1000

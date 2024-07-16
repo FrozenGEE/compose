@@ -15,7 +15,7 @@ services:
     hostname: pichome
     # 主机名
     volumes:
-      - /share/container-station-data/pichome:/var/www/html
+      - /share/Container/pichome:/var/www/html
       # 配置文件目录
     network_mode: bridge
     # 80端口被占用，不能用host

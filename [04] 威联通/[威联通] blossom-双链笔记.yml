@@ -15,7 +15,7 @@ services:
     hostname: blossom
     # 主机名
     volumes:
-      - /share/container-station-data/blossom:/home/bl/
+      - /share/Container/blossom:/home/bl/
       # 数据存放目录
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://【IP:PORT】/blossom?useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&allowMultiQueries=true&useSSL=false&&serverTimezone=GMT%2B8

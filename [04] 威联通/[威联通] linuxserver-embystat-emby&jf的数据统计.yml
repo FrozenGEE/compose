@@ -15,7 +15,7 @@ services:
     hostname: embystat
     # 主机名
     volumes:
-      - /share/container-station-data/embystat:/app/data
+      - /share/Container/embystat:/app/data
       # 数据文件存放目录
     environment:
       - PUID=1000

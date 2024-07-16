@@ -15,9 +15,9 @@ services:
     hostname: hedgedoc
     # 主机名
     volumes:
-      - /share/container-station-data/hedgedoc:/config
+      - /share/Container/hedgedoc/config:/config
       # 配置文件目录
-      - /share/container-station-data/hedgedoc:/hedgedoc/public/uploads
+      - /share/Container/hedgedoc/uploads:/hedgedoc/public/uploads
       # 文件上传目录
     environment:
       - DB_HOST=【IP】
@@ -27,8 +27,8 @@ services:
       - DB_USER=hedgedoc
       - DB_PASS=hedgedoc
       # 子数据库名字，用户名，密码，预设为hedgedoc
-      - CMD_PORT=3000
-      # 自定义容器端口，默认为3110
+      - CMD_PORT=3110
+      # 自定义容器端口，默认为3000
       - CMD_ALLOW_ANONYMOUS=false
       # 是否允许任何人匿名创建md
       - CMD_ALLOW_ANONYMOUS_EDITS=true

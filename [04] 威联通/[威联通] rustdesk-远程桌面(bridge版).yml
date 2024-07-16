@@ -31,7 +31,7 @@ services:
     command: hbbs -r 【你的域名或者IP】:【hbbr的21117的映射端口】
     # -r 后面输入你的域名或者IP:hbbr的21117的映射端口，这里建议写域名和端口
     volumes:
-      - /share/container-station-data/rustdesk-bridge:/root
+      - /share/Container/rustdesk-bridge:/root
       # 配置文件目录
     network_mode: bridge
     ports:
@@ -57,7 +57,7 @@ services:
     # 主机名
     command: hbbr
     volumes:
-      - /share/container-station-data/rustdesk-bridge:/root
+      - /share/Container/rustdesk-bridge:/root
       # 配置文件目录
     network_mode: bridge
     ports:
@@ -77,7 +77,7 @@ services:
     # hostname: rustdesk-api-server
     # 主机名
     # volumes:
-      # - /share/container-station-data/rustdesk-bridge:/rustdesk-api-server/db
+      # - /share/Container/rustdesk-bridge:/rustdesk-api-server/db
       # 宿主机数据库挂载目录，要和上面对应一致，目录内要有db文件
     # environment:
       # - LANGUAGE_CODE=zh-hans

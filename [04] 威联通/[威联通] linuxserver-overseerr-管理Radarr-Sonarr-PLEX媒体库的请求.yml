@@ -16,7 +16,7 @@ services:
     hostname: overseerr
     # 主机名
     volumes:
-      - /share/container-station-data/overseerr:/config
+      - /share/Container/overseerr:/config
       # 配置文件目录
     environment:
       - PUID=1000

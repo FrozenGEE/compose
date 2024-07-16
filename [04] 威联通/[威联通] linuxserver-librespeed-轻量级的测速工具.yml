@@ -16,7 +16,7 @@ services:
     hostname: librespeed
     # 主机名
     volumes:
-      - /share/container-station-data/librespeed:/config
+      - /share/Container/librespeed:/config
       # 数据文件存放目录
     environment:
       - CUSTOM_RESULTS=true

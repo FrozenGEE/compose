@@ -18,7 +18,7 @@ services:
     hostname: calibre-web
     # 主机名
     volumes:
-      - /share/container-station-data/calibre-web:/config
+      - /share/Container/calibre-web:/config
       # 配置文件目录
       - /share/Multimeida/books:/books
       # 电子书库的总目录

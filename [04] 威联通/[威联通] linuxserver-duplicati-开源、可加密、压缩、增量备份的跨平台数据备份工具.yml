@@ -20,7 +20,7 @@ services:
     # privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
-      - /share/container-station-data/duplicati:/config
+      - /share/Container/duplicati:/config
       # 配置文件目录
       - /share/Public/duplicati备份:/backups
       # 存储本地备份的路径，用于从其他地方备份到本机

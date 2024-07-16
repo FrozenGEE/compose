@@ -24,7 +24,7 @@ services:
       # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
       # 第一个用户而言，群晖为1026，威联通为1000，新绿联为1001，linux类系统一般为1000，后续用户均+1
     volumes:
-      - /share/container-station-data/homepage:/app/config
+      - /share/Container/homepage:/app/config
       # 配置文件目录
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # 使能支持docker容器的监控

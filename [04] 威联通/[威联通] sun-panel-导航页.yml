@@ -20,7 +20,7 @@ services:
     volumes:
       - /var/run.docker.sock:/var/run.docker.sock
       # 用于访问docker
-      - /share/container-station-data/sun-panel:/app/conf
+      - /share/Container/sun-panel:/app/conf
       # 配置文件目录，包含配置文件，数据库，css，图标等文件夹
       # - 【这里替换为你的图标库路径】:/app/conf/uploads
       # 图标目录，可选，如果你希望设置另一个路径作为图标库

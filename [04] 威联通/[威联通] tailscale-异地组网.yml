@@ -46,9 +46,9 @@ services:
       # 如果使用密钥方式登录，则不需要去容器内的ssh终端内进行tailscale login命令登录
       # 如果去容器内的ssh终端内使用tailscale login命令登录，则不需要配置该项
     volumes:
-      - /share/container-station-data/tailscale/tun:/dev/net/tun
+      - /share/Container/tailscale/tun:/dev/net/tun
       # 照抄
-      - /share/container-station-data/tailscale/config:/var/lib/tailscale
+      - /share/Container/tailscale/config:/var/lib/tailscale
       # 配置文件目录
     network_mode: host
     # host模式，无WebUI网页

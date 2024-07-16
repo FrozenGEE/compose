@@ -16,7 +16,7 @@ services:
     # command：-u admin -p 123456
     # 预设的账号和密码
     volumes:
-      - /share/container-station-data/gopeed:/app/storage
+      - /share/Container/gopeed:/app/storage
       # 配置文件目录
       - /share/Public/downloads:/root/Downloads
       # 下载目录

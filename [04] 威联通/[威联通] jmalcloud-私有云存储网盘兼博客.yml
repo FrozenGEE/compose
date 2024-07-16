@@ -29,7 +29,7 @@ services:
     hostname: jmalcloud
     # 主机名
     volumes:
-      - /share/container-station-data/jmalcloud:/jmalcloud
+      - /share/Container/jmalcloud:/jmalcloud
       # 配置文件目录
       - /share/Public/jmalcloud-data:/jmalcloud-data
       # 映射本地其他路径使其可以访问，可以自定义多个
@@ -84,11 +84,11 @@ services:
     command: --wiredTigerCacheSizeGB 0.5
     # 设置缓冲文件大小为0.5G
     volumes:
-      - /share/container-station-data/jmalcloud/mongodb/data/configdb:/data/configdb
+      - /share/Container/jmalcloud/mongodb/data/configdb:/data/configdb
       # 配置文件目录
-      - /share/container-station-data/jmalcloud/mongodb/data/db:/data/db
+      - /share/Container/jmalcloud/mongodb/data/db:/data/db
       # 数据库目录
-      - /share/container-station-data/jmalcloud/mongodb/backup:/dump
+      - /share/Container/jmalcloud/mongodb/backup:/dump
       # 备份目录
     environment:
       - TZ=Asia/Shanghai
@@ -108,17 +108,17 @@ services:
     hostname: jmalcloud-onlyoffice
     # 主机名
     volumes:
-      - /share/container-station-data/jmalcloud/onlyoffice/data:/var/www/onlyoffice/Data
+      - /share/Container/jmalcloud/onlyoffice/data:/var/www/onlyoffice/Data
       # 数据目录
-      - /share/container-station-data/jmalcloud/onlyoffice/lib:/var/lib/onlyoffice
-      - /share/container-station-data/jmalcloud/onlyoffice/log:/var/log/onlyoffice
+      - /share/Container/jmalcloud/onlyoffice/lib:/var/lib/onlyoffice
+      - /share/Container/jmalcloud/onlyoffice/log:/var/log/onlyoffice
       # 日志目录
-      - /share/container-station-data/jmalcloud/onlyoffice/redis:/var/lib/redis
-      - /share/container-station-data/jmalcloud/onlyoffice/pgsql:/var/lib/postgresql
+      - /share/Container/jmalcloud/onlyoffice/redis:/var/lib/redis
+      - /share/Container/jmalcloud/onlyoffice/pgsql:/var/lib/postgresql
       # onlyoffice的redis，pgsql目录
-      - /share/container-station-data/jmalcloud/onlyoffice/rabbitmq:/var/lib/rabbitmq
+      - /share/Container/jmalcloud/onlyoffice/rabbitmq:/var/lib/rabbitmq
       # onlyoffice的消息队列
-      - /share/container-station-data/jmalcloud/onlyoffice/custom:/usr/share/fonts/truetype/custom
+      - /share/Container/jmalcloud/onlyoffice/custom:/usr/share/fonts/truetype/custom
       # onlyoffice的字体库目录
     environment:
       - TZ=Asia/Shanghai

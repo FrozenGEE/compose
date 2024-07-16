@@ -19,7 +19,7 @@ services:
     # /minio为对象存储的目录
     # 9090为WebUI容器端口
     volumes:
-      - /share/container-station-data/MinIO:/data
+      - /share/Container/MinIO:/data
       # 配置文件目录
       - /share/Public/MinIO:/minio
       # 对象存储的目录

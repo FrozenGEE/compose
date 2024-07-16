@@ -19,7 +19,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # 用于管理docker，必须
-      - /share/container-station-data/dockercopilot:/data
+      - /share/Container/dockercopilot:/data
       # 配置文件目录
     environment:
       - secretKey=dokcer123

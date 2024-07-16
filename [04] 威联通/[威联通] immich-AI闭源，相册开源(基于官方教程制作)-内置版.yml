@@ -142,7 +142,7 @@ services:
     # runtime: nvidia
     # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
-      - /share/container-station-data/immich/immich-machine-learning:/cache
+      - /share/Container/immich/immich-machine-learning:/cache
       # 缓存目录
       # 请将XLM-Roberta-Large-Vit-B-16Plus.zip解压缩后的XLM-Roberta-Large-Vit-B-16Plus文件夹放到/cache/clip内
       # 目录结构：/xxx/immich/immich-machine-learning/clip/XLM-Roberta-Large-Vit-B-16Plus
@@ -199,7 +199,7 @@ services:
     hostname: immich-pgsql
     # 主机名
     volumes:
-      - /share/container-station-data/immich/immich-pgsql:/var/lib/postgresql/data
+      - /share/Container/immich/immich-pgsql:/var/lib/postgresql/data
       # 数据库目录
     environment:
       - POSTGRES_DB=immich

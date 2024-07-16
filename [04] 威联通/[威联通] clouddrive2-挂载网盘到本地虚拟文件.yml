@@ -30,7 +30,7 @@ services:
       - /dev/fuse:/dev/fuse
       # Clouddrive 使用 fuse3 来挂载云存储服务，使用fuse3在Docker容器中挂载云存储服务时，需要在主机系统上启用共享挂载
     volumes:
-      - /share/container-station-data/clouddrive2:/config
+      - /share/Container/clouddrive2:/config
       # 配置文件目录，可在变量中进行配置
       - /share/Multimeida/CloudNAS:/CloudNAS:shared
       # - 【这里替换为你的数据存放目录】:/【自定义一个名字】:shared

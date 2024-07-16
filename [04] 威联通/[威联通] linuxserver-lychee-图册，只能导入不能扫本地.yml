@@ -16,7 +16,7 @@ services:
     hostname: lychee
     # 主机名
     volumes:
-      - /share/container-station-data/lychee:/config
+      - /share/Container/lychee:/config
       # 配置文件目录
       - /share/Multimeida/lychee:/pictures
       # 图册目录

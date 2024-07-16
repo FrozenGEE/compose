@@ -22,7 +22,7 @@ services:
     # privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
-      - /share/container-station-data/qbittorrent:/config
+      - /share/Container/qbittorrent:/config
       # 配置文件目录
       - /share/Public/downloads:/downloads
       # 默认下载目录

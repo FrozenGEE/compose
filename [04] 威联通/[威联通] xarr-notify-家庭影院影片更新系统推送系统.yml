@@ -18,9 +18,9 @@ services:
     hostname: xarr-notify
     # 主机名
     volumes:
-      - /share/container-station-data/xarr-notify/conf:/app/conf
+      - /share/Container/xarr-notify/conf:/app/conf
       # 配置文件目录
-      - /share/container-station-data/xarr-notify/images:/app/images
+      - /share/Container/xarr-notify/images:/app/images
       # 用于存放Radarr和Sonarr的缩略图
     environment:
       - TZ=Asia/Shanghai

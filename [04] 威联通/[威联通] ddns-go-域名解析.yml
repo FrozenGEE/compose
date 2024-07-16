@@ -16,7 +16,7 @@ services:
       # 9876为WebUI端口，可自定义
       # 300为刷新解析间隔时间，可自定义
     volumes:
-      - /share/container-station-data/ddns-go:/root
+      - /share/Container/ddns-go:/root
       # 配置文件目录，文件是隐藏的，需要通过ssh进行访问，很重要，切勿泄露
     # network_mode: bridge
     network_mode: host

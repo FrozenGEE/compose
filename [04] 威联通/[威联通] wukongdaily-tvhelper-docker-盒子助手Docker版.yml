@@ -27,7 +27,7 @@ services:
     hostname: tvhelper
     # 主机名
     volumes:
-      - /share/container-station-data/tvhelper:/tvhelper/shells/data
+      - /share/Container/tvhelper:/tvhelper/shells/data
       # 配置文件目录
     environment:
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/android-sdk/platform-tools

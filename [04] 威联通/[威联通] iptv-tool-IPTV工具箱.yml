@@ -19,7 +19,7 @@ services:
     hostname: iptv-tool
     # 主机名
     volumes:
-      - /share/container-station-data/iptv-tool:/app/data
+      - /share/Container/iptv-tool:/app/data
       # 数据文件存放目录
     network_mode: bridge
     # network_mode: host

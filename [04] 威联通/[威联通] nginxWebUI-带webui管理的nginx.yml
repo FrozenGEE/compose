@@ -14,7 +14,7 @@ services:
     hostname: nginx-webui
     # 主机名
     volumes:
-      - /share/container-station-data/nginxWebUI:/home/nginxWebUI
+      - /share/Container/nginxWebUI:/home/nginxWebUI
       # 配置文件目录
     environment:
       - BOOT_OPTIONS=--server.port=9090

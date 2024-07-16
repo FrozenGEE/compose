@@ -21,7 +21,7 @@ services:
     # privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
-      - /share/container-station-data/mt-photos/config:/config
+      - /share/Container/mt-photos/config:/config
       # 配置文件目录
       - 【这里替换为你的数据存放目录】/MT-Photos/upload:/upload
       # 上传目录

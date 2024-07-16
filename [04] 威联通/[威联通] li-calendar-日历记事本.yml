@@ -21,11 +21,11 @@ services:
     hostname: li-calendar
     # 主机名
     volumes:
-      - /share/container-station-data/li-calendar:/app/conf
+      - /share/Container/li-calendar:/app/conf
       # 配置文件目录
-      # - /share/container-station-data/li-calendar/upload:/app/upload
+      # - /share/Container/li-calendar/upload:/app/upload
       # 图标目录
-      # - /share/container-station-data/li-calendar/database:/app/database
+      # - /share/Container/li-calendar/database:/app/database
       # 数据库目录
     environment:
       - TZ=Asia/Shanghai

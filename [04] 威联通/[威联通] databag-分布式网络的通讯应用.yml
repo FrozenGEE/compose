@@ -14,7 +14,7 @@ services:
     hostname: databag
     # 主机名
     volumes:
-      - /share/container-station-data/databag:/var/lib/databag
+      - /share/Container/databag:/var/lib/databag
       # 配置文件目录
     # network_mode: bridge
     network_mode: host

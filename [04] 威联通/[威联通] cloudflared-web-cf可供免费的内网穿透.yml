@@ -14,8 +14,8 @@ services:
     hostname: cloudflared-web
     # 主机名
     volumes:
-      - /share/container-station-data/cloudflared-web/config:/config
-      - /share/container-station-data/cloudflared-web:/root/.cloudflared
+      - /share/Container/cloudflared-web/config:/config
+      - /share/Container/cloudflared-web:/root/.cloudflared
       # 配置文件目录
     # network_mode: bridge
     network_mode: host

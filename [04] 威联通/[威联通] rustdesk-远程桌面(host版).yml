@@ -31,7 +31,7 @@ services:
     command: hbbs # -r 【你的域名或者IP】:【hbbr的21117的映射端口】
     # hhbs的-r参数不是必须的，它只是方便你不用在客户端指定中继服务器，如果是默认21117端口，可以不填port。客户端指定的中继服务器优先级高于这个，这里建议写域名和端口
     volumes:
-      - /share/container-station-data/rustdesk-host:/root
+      - /share/Container/rustdesk-host:/root
       # 配置文件目录
     network_mode: host
     restart: always
@@ -48,7 +48,7 @@ services:
     # 主机名
     command: hbbr
     volumes:
-      - /share/container-station-data/rustdesk-host:/root
+      - /share/Container/rustdesk-host:/root
       # 配置文件目录
     network_mode: host
     restart: always
@@ -63,7 +63,7 @@ services:
     # hostname: rustdesk-api-server
     # 主机名
     # volumes:
-      # - /share/container-station-data/rustdesk-host:/rustdesk-api-server/db
+      # - /share/Container/rustdesk-host:/rustdesk-api-server/db
       # 宿主机数据库挂载目录，要和上面对应一致，目录内要有db文件
     # environment:
       # - LANGUAGE_CODE=zh-hans

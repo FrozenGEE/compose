@@ -14,9 +14,9 @@ services:
     hostname: easyimage
     # 主机名
     volumes:
-      - /share/container-station-data/easyimage:/app/web/config
+      - /share/Container/easyimage:/app/web/config
       # 配置文件目录
-      - /share/container-station-data/简单图床:/app/web/i
+      - /share/Container/简单图床:/app/web/i
       # 图床目录
     environment:
       - PUID=1000

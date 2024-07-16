@@ -18,7 +18,7 @@ services:
     hostname: xarr-rss
     # 主机名
     volumes:
-      - /share/container-station-data/xarr-rss:/app/conf
+      - /share/Container/xarr-rss:/app/conf
       # 配置文件目录
     environment:
       - TZ=Asia/Shanghai

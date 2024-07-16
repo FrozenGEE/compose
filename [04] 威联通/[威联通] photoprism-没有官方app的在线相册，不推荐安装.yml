@@ -18,7 +18,7 @@ services:
       - /dev/dri:/dev/dri
       # 开启硬件转码
     volumes:
-      - /share/container-station-data/photoprism:/photoprism/storage
+      - /share/Container/photoprism:/photoprism/storage
       # 配置文件目录
       - /share/Multimeeida/PhotoPrism/import:/photoprism/import
       # 上传目录

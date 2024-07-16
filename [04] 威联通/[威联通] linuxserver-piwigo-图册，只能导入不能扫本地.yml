@@ -15,7 +15,7 @@ services:
     hostname: piwigo
     # 主机名
     volumes:
-      - /share/container-station-data/piwigo:/config
+      - /share/Container/piwigo:/config
       # 配置文件目录
       - /share/Multimeid/piwigo:/gallery
       # 上传目录

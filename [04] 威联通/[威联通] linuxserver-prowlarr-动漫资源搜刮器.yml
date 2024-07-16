@@ -14,7 +14,7 @@ services:
     hostname: prowlarr
     # 主机名
     volumes:
-      - /share/container-station-data/prowlarr:/config
+      - /share/Container/prowlarr:/config
       # 配置文件目录
     environment:
       - PUID=1000

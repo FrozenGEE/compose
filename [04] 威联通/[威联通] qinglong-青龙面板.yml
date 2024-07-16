@@ -14,7 +14,7 @@ services:
     # 主机名
     # network_mode: bridge
     volumes:
-      - /share/container-station-data/qinglong:/ql/data
+      - /share/Container/qinglong:/ql/data
     environment:
       - QlPort=5699
       # 自定义WebUI端口号，默认为5700
