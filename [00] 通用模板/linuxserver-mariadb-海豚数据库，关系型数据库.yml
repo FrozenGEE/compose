@@ -30,11 +30,9 @@ services:
       # 时区
       # - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql
       # 远程连接别的服务器上的数据库，需要就写
-    # network_mode: bridge
-    network_mode: host
-    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    # ports:
-      # - 3306:3306/tcp
+    network_mode: bridge
+    ports:
+      - 3306:3306/tcp
       # 非WebUI网页界面，直接调用即可
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
