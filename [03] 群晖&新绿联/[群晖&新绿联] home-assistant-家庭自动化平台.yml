@@ -26,6 +26,6 @@ services:
     # 推荐使用host模式
     # ports:
       # - 8123:8123/tcp
-      #  webui端口
+      # WebUI 端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
