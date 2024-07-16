@@ -69,7 +69,7 @@
 
 ```shell
 💡威联通的docker配置文件存放路径
-/share/container-station-data/aaa
+/share/Container/aaa
 💡威联通的数据存放路径开头
 /share/共享文件夹/bbb
 
