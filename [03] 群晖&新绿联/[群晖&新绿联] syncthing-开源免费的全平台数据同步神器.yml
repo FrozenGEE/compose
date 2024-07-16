@@ -24,7 +24,7 @@ services:
       - /volume1/docker/syncthing/config:/config
       # 挂载宿主机上的指定目录到容器内部特定路径，这里是配置文件所在目录
       # 
-      - /volume1/syncthing/data:/data
+      - /volume1:/data
       # - 【这里替换为你想要同步的数据的存放目录】:/data
       # - 【这里替换为你想要同步的数据的存放目录】:/【这里替换为你想要同步的数据的存放目录的名字】
       # 
