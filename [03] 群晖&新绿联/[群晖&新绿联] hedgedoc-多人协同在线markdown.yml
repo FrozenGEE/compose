@@ -15,9 +15,9 @@ services:
     hostname: hedgedoc
     # 主机名
     volumes:
-      - /volume1/docker/hedgedoc:/config
+      - /volume1/docker/hedgedoc/config:/config
       # 配置文件目录
-      - /volume1/docker/hedgedoc:/hedgedoc/public/uploads
+      - /volume1/docker/hedgedoc/uploads:/hedgedoc/public/uploads
       # 文件上传目录
     environment:
       - DB_HOST=【IP】
