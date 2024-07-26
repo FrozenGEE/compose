@@ -21,21 +21,20 @@ services:
     volumes:
       - /volume1/docker/aria2/config:/config
       # 配置文件目录
-      - /volume1/docker/aria2/www:/www
+      # - /volume1/docker/aria2/www:/www
       # WebUI页面，不推荐使用
-      # 如果webui显示异常，要先把这个路径注释掉，在portainer内找到容器内部路径，将内部路径的东西提取到你要映射出来的路径内
-      # 再删掉#注释，重新部署一次
+      # 如果webui显示异常，要先把这个路径注释掉，在portainer内找到容器内部路径，将内部路径的东西提取到你要映射出来的路径内，再删掉#注释，重新部署一次
       - /volume1/downloads:/downloads
       # 下载目录
     environment:
-      - WEBUI_PORT=45321
+      - WEBUI_PORT=5321
       # WebUI 端口
       - BTPORT=32516
       # DHT和BT监听端口
       - PORT=6800
       # 设置RPC通讯端口（与宿主主机的端口映射一致）
-      - SECRET=新建一个密码
-      # 设置RPC密钥，用于AriaNg与Aria2的通讯验证使用
+      - SECRET=password
+      # 设置RPC密钥，用于AriaNg与Aria2的通讯验证使用，预设为password，记得修改
       - CACHE=1024M
       # Aria2磁盘缓存配置
       - PUID=1000
@@ -56,7 +55,7 @@ services:
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 45321:45321/tcp
+      # - 5321:5321/tcp
       # WebUI 端口
       # - 6800:6800/tcp
       # RPC 通讯端口映射
