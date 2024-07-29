@@ -1,6 +1,6 @@
 # 官方文档
 # https://hub.docker.com/r/wisdomsky/cloudflared-web
-# https://zerotier.com
+# https://www.cloudflare.com
 
 ---
 version: "3"
