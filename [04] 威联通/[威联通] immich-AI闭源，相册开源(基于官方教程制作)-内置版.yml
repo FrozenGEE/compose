@@ -30,7 +30,8 @@
 
 ---
 version: "3.8"
-# 最后编辑时间：2024-05-13
+# 最后编辑时间：2024-08-01
+# 官方新的模板删除了immich-microservices该容器的部署
 services:
   immich-server:
     image: ghcr.io/immich-app/immich-server:release
@@ -80,52 +81,6 @@ services:
        - immich-redis
        - immich-pgsql
        # 关联所需的其他docker容器
-
-############################################################################
-
-  immich-microservices:
-    image: ghcr.io/immich-app/immich-server:release
-    # 镜像地址，注意tag
-    container_name: immich-microservices
-    # 容器名字
-    hostname: immich-microservices
-    # 主机名
-    # privileged: true
-    # 特权模式，赋予容器几乎与主机相同的权限
-    devices:
-      - /dev/dri:/dev/dri
-      # 开启硬件转码
-    ##########
-    command: [ "start.sh", "microservices" ]
-    volumes:
-      - 【这里替换为你的照片上传存放目录】:/usr/src/app/upload
-      # 上传目录
-      - /share:/share
-      # 外部库目录，此文件夹将定期扫描，内容将自动导入immich，需要在immich上进行设置，容器路径可以自定义多个，理解映射就会明白了，默认为/usr/src/app/external
-      # - 【这里替换为你的本地相册存放目录】:/【这里替换为你的本地相册存放目录的名字】
-      # 自定义外部库目录，可以写多个，容器路径可随便自定义
-      - /etc/localtime:/etc/localtime:ro
-      # 时区
-    environment:
-      - MICROSERVICES_PORT=3002
-      # 自定义容器端口，默认为3002
-      - REDIS_HOSTNAME=immich-redis
-      # 指定要连接的redis，预设为immich-redis
-      - DB_HOSTNAME=immich-pgsql
-      - DB_DATABASE_NAME=immich
-      - DB_USERNAME=immich
-      - DB_PASSWORD=immich
-      # 指定要连接的postgres，预设为immich-pgsql
-      # pgsql的子数据库，账号密码均为预设的immich
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=【N卡的ID】
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
-    depends_on:
-       - immich-redis
-       - immich-pgsql
-       # 关联所需的其他docker容器
-    restart: always
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ############################################################################
 
