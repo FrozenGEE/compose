@@ -36,18 +36,15 @@ services:
   immich-server:
     image: ghcr.io/immich-app/immich-server:release
     # 镜像地址
+    # 如果使用n卡，则tag改为release-cuda
     container_name: immich-server
     # 容器名字
     hostname: immich-server
     # 主机名
-    # privileged: true
+    privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
-    devices:
-      - /dev/dri:/dev/dri
-      # 开启硬件转码
     # runtime: nvidia
     # 使用N卡的需要装好N卡驱动，并且设置这个参数
-    command: [ "start.sh", "immich" ]
     volumes:
       - /mnt/user/immich:/usr/src/app/upload
       # 上传目录
@@ -55,8 +52,6 @@ services:
       # 外部库目录，此文件夹将定期扫描，内容将自动导入immich，需要在immich上进行设置，容器路径可以自定义多个，理解映射就会明白了，默认为/usr/src/app/external
       # - 【这里替换为你的本地相册存放目录】:/【这里替换为你的本地相册存放目录的名字】
       # 自定义外部库目录，可以写多个，容器路径可随便自定义
-      - /etc/localtime:/etc/localtime:ro
-      # 时区
     environment:
       - IMMICH_PORT=2283
       # 自定义容器端口，默认为3001，这里预设为2283
@@ -136,6 +131,9 @@ services:
       # 要预先加载并保存在缓存中的面部识别模型的名称，需要把模型下载到本地并放到对应目录，然后在此写上模型名称
       #
       ####################
+    ports:
+      - 3003:3003/tcp
+      # 访问端口，可以用于被别的nas调用
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
