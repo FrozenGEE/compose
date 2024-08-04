@@ -1,9 +1,11 @@
 # 官方文档
+# https://bitwarden.com
 # https://hub.docker.com/r/vaultwarden/server
+# 广域网中使用，需要https，建议使用lucky/npm进行反代
 
 ---
 version: "3"
-# 最后编辑时间：2024-03-11
+# 最后编辑时间：2024-08-03
 services:
   vaultwarden:
     image: vaultwarden/server:latest
@@ -16,18 +18,14 @@ services:
       - 【这里替换为你的docker数据存放目录】/vaultwarden:/data
       # 配置文件目录
     environment:
+      - ADMIN_TOKEN=【管理者密钥】
+      # 管理者密钥，写复杂点的密码增加安全性，访问 http://IP:PORT/admin 后台中使用
       - SIGNUPS_ALLOWED=true
-      - INVITATIONS_ALLOWED=ture
+      # 是否允许登录，默认为true
+      - INVITATIONS_ALLOWED=true
+      # 是否允许邀请，默认为true
       - WEBSOCKET_ENABLED=false
-      # 是否启用WEBSOCKET，true/false
-      - ADMIN_TOKEN=【新建一个密码，注意不要泄露】
-      # 管理员密钥
-      - PUID=1000
-      - PGID=100
-      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
-      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
-      - UMASK=022
-      # 默认创建新文件的权限，一般写022
+      # websocket启动，默认为false
       - TZ=Asia/Shanghai
       # 时区
     network_mode: bridge
