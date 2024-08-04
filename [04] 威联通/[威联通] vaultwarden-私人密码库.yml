@@ -18,8 +18,8 @@ services:
       - /share/Container/vaultwarden:/data
       # 配置文件目录
     environment:
-      - ADMIN_TOKEN=【管理者密钥，写复杂点增加安全性】
-      # 管理者密钥，自定义一个密钥，访问 http://IP:PORT/admin 中使用
+      - ADMIN_TOKEN=【管理者密钥】
+      # 管理者密钥，写复杂点增加安全性，访问 http://IP:PORT/admin 中使用
       - SIGNUPS_ALLOWED=true
       # 是否允许登录，默认为true
       - INVITATIONS_ALLOWED=true
