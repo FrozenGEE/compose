@@ -19,7 +19,7 @@ services:
       # 配置文件目录
     environment:
       - ADMIN_TOKEN=【管理者密钥】
-      # 管理者密钥，写复杂点的密码增加安全性，访问 http://IP:PORT/admin 后台中使用
+      # 管理者密钥，写复杂点增加安全性，访问 http://IP:PORT/admin 中使用
       - SIGNUPS_ALLOWED=true
       # 是否允许登录，默认为true
       - INVITATIONS_ALLOWED=true
