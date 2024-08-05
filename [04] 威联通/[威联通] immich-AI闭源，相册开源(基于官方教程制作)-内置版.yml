@@ -45,9 +45,6 @@ services:
     devices:
       - /dev/dri:/dev/dri
       # 开启硬件转码
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
-    command: [ "start.sh", "immich" ]
     volumes:
       - 【这里替换为你的照片上传存放目录】:/usr/src/app/upload
       # 上传目录
@@ -94,8 +91,6 @@ services:
     devices:
       - /dev/dri:/dev/dri
       # 开启硬件转码
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
       - /share/Container/immich/immich-machine-learning:/cache
       # 缓存目录
@@ -104,10 +99,6 @@ services:
       # 
     environment:
       ####################
-      #
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=【N卡的ID】
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       #
       # 以下均为默认不需要修改，除非有特殊需要
       - IMMICH_PORT=3003
