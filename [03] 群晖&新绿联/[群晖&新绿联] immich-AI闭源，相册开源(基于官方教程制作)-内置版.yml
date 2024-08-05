@@ -64,9 +64,6 @@ services:
       - DB_PASSWORD=immich
       # 指定要连接的postgres，预设为immich-pgsql
       # pgsql的子数据库，账号密码均为预设的immich
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=【N卡的ID】
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
     ports:
       - 2283:2283/tcp
       # WebUI 端口
