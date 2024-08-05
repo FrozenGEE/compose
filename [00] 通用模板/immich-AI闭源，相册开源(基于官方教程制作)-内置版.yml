@@ -64,9 +64,6 @@ services:
       - DB_PASSWORD=immich
       # 指定要连接的postgres，预设为immich-pgsql
       # pgsql的子数据库，账号密码均为预设的immich
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=【N卡的ID】
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       - TZ=Asia/Shanghai
       # 时区
     ports:
@@ -105,7 +102,7 @@ services:
       # 开启硬件转码
     volumes:
       - 【这里替换为你的docker数据存放目录】/immich/immich-machine-learning:/cache
-      # 缓存目录
+      # clip与人脸识别模型的目录
       # 请将XLM-Roberta-Large-Vit-B-16Plus.zip解压缩后的XLM-Roberta-Large-Vit-B-16Plus文件夹放到/cache/clip内
       # 目录结构：/xxx/immich/immich-machine-learning/clip/XLM-Roberta-Large-Vit-B-16Plus
       # 
