@@ -45,9 +45,6 @@ services:
     devices:
       - /dev/dri:/dev/dri
       # 开启硬件转码
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
-    command: [ "start.sh", "immich" ]
     volumes:
       - 【这里替换为你的照片上传存放目录】:/usr/src/app/upload
       # 上传目录
@@ -55,8 +52,6 @@ services:
       # 外部库目录，此文件夹将定期扫描，内容将自动导入immich，需要在immich上进行设置，容器路径可以自定义多个，理解映射就会明白了，默认为/usr/src/app/external
       - 【这里替换为你的本地相册存放目录】:/【这里替换为你的本地相册存放目录的名字】
       # 自定义外部库目录，可以写多个，容器路径可随便自定义
-      - /etc/localtime:/etc/localtime:ro
-      # 时区
     environment:
       - IMMICH_PORT=2283
       # 自定义容器端口，默认为3001，这里预设为2283
@@ -108,8 +103,6 @@ services:
     devices:
       - /dev/dri:/dev/dri
       # 开启硬件转码
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
       - 【这里替换为你的docker数据存放目录】/immich/immich-machine-learning:/cache
       # 缓存目录
@@ -121,14 +114,7 @@ services:
       # 时区
       ####################
       #
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=【N卡的ID】
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
-      #
       # 以下均为默认不需要修改，除非有特殊需要
-      - IMMICH_PORT=3003
-      # 自定义容器端口，默认为3003
-      # 2024-06-11，v1.106.3版本开始，这里的变量由MACHINE_LEARNING_PORT改为IMMICH_PORT
       - MACHINE_LEARNING_REQUEST_THREADS=0
       # cpu核心数，根据实际情况填写，默认0为禁用
       - MACHINE_LEARNING_MODEL_INTER_OP_THREADS=1
