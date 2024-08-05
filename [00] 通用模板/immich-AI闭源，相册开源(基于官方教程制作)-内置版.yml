@@ -115,22 +115,16 @@ services:
       ####################
       #
       # 以下均为默认不需要修改，除非有特殊需要
-      - MACHINE_LEARNING_REQUEST_THREADS=0
+      # - MACHINE_LEARNING_REQUEST_THREADS=0
       # cpu核心数，根据实际情况填写，默认0为禁用
-      - MACHINE_LEARNING_MODEL_INTER_OP_THREADS=1
+      # - MACHINE_LEARNING_MODEL_INTER_OP_THREADS=1
       # 同时处理的文件数量，默认为1
-      - MACHINE_LEARNING_MODEL_INTRA_OP_THREADS=2
+      # - MACHINE_LEARNING_MODEL_INTRA_OP_THREADS=2
       # AI深度学习的线程数，默认为2
-      - MACHINE_LEARNING_WORKERS=1
+      # - MACHINE_LEARNING_WORKERS=1
       # AI深度学习的步数，默认为1
-      - MACHINE_LEARNING_WORKER_TIMEOUT=120
+      # - MACHINE_LEARNING_WORKER_TIMEOUT=120
       # AI深度学习的超时时间，默认为120
-      - MACHINE_LEARNING_PRELOAD__CLIP=XLM-Roberta-Large-Vit-B-16Plus
-      # 要预加载并保存在缓存中的 CLIP 模型的名称，建议把模型下载到本地并放到对应目录，然后在此写上模型名称
-      # 推荐 XLM-Roberta-Large-Vit-B-16Plus
-      # - MACHINE_LEARNING_PRELOAD__FACIAL_RECOGNITION=antelopev2
-      # 要预先加载并保存在缓存中的面部识别模型的名称，建议把模型下载到本地并放到对应目录，然后在此写上模型名称
-      # 推荐 antelopev2
       #
       ####################
     restart: unless-stopped
