@@ -49,7 +49,7 @@ services:
     volumes:
       - /mnt/user/immich:/usr/src/app/upload
       # 上传目录
-      - /mnt/user:/usr/src/app/external
+      - /mnt/user:/local
       # 外部库目录，此文件夹将定期扫描，内容将自动导入immich，需要在immich上进行设置，容器路径可以自定义多个，理解映射就会明白了，默认为/usr/src/app/external
       # - 【这里替换为你的本地相册存放目录】:/【这里替换为你的本地相册存放目录的名字】
       # 自定义外部库目录，可以写多个，容器路径可随便自定义
@@ -96,8 +96,6 @@ services:
     devices:
       - /dev/dri:/dev/dri
       # 开启硬件转码
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
       - /mnt/user/appdata/immich/immich-machine-learning:/cache
       # clip与人脸识别模型的目录
