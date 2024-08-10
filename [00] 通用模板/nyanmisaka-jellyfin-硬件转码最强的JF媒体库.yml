@@ -25,7 +25,7 @@ services:
     volumes:
       - 【这里替换为你的docker数据存放目录】/jellyfin/config:/config
       # 配置文件目录
-      - 【这里替换为你的docker数据存放目录】:/media
+      - 【这里替换为你的媒体库总目录】:/media
       # 可以自定义，可以写多个
       - 【这里替换为你的docker数据存放目录】/jellyfin/cache:/cache
       # 缓存目录
