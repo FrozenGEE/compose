@@ -95,12 +95,15 @@ services:
   immich-machine-learning:
     image: ghcr.io/immich-app/immich-machine-learning:release
     # 镜像地址
+    # 如果使用n卡，则tag改为release-cuda，同理还有 armnn, openvino, openvino-wsl
     container_name: immich-machine-learning
     # 容器名字
     hostname: immich-machine-learning
     # 主机名
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
+    # runtime: nvidia
+    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
       - 【这里替换为你的docker数据存放目录】/immich/immich-machine-learning:/cache
       # clip与人脸识别模型的目录，推荐使用XLM-Roberta-Large-Vit-B-16Plus
@@ -110,6 +113,9 @@ services:
     environment:
       - TZ=Asia/Shanghai
       # 时区
+      # - NVIDIA_DRIVER_CAPABILITIES=all
+      # - NVIDIA_VISIBLE_DEVICES【=N卡的ID】
+      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       ####################
       #
       # 以下均为默认不需要修改，除非有特殊需要
