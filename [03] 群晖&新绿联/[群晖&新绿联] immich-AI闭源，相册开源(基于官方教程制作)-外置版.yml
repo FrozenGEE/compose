@@ -164,7 +164,6 @@ services:
     # 主机名
     volumes:
       - /volume1/docker/pgvecto-rs:/var/lib/postgresql/data
-      - /volume1/docker/pgvecto-rs:/var/lib/postgresql/data
       # 数据库目录
     environment:
       - POSTGRES_DB=immich
