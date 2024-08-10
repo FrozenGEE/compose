@@ -45,11 +45,8 @@ services:
     # 容器名字
     hostname: immich-server
     # 主机名
-    # privileged: true
+    privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
-    devices:
-      - /dev/dri:/dev/dri
-      # 开启硬件转码
     volumes:
       - 【这里替换为你的照片上传存放目录】:/usr/src/app/upload
       # 上传目录
@@ -102,12 +99,11 @@ services:
     # 容器名字
     hostname: immich-machine-learning
     # 主机名
-    devices:
-      - /dev/dri:/dev/dri
-      # 开启硬件转码
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
       - 【这里替换为你的docker数据存放目录】/immich/immich-machine-learning:/cache
-      # clip与人脸识别模型的目录
+      # clip与人脸识别模型的目录，推荐使用XLM-Roberta-Large-Vit-B-16Plus
       # 请将XLM-Roberta-Large-Vit-B-16Plus.zip解压缩后的XLM-Roberta-Large-Vit-B-16Plus文件夹放到/cache/clip内
       # 目录结构：/xxx/immich/immich-machine-learning/clip/XLM-Roberta-Large-Vit-B-16Plus
       # 
