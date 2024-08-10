@@ -1,6 +1,7 @@
 # 基于官方模板制作
 # 官方文档
 # https://immich.app
+# https://github.com/immich-app/immich
 # 官方compose教程
 # https://immich.app/docs/install/docker-compose
 # 官方变量说明
@@ -28,9 +29,13 @@
 # https://hub.docker.com/r/altran1502/immich-server
 # https://hub.docker.com/r/altran1502/immich-machine-learning
 
+# 外置版和内置版的区别只是在于各个镜像均可分别单独部署，但反正最后还是要用的
+# redis和pgvecto-rs这两个数据库均可被别的容器调用，进而减少部署太多容器
+# 同时immich-machine-learning，可以被另一台nas的immich-server所调用
+
 ---
 version: "3.8"
-# 最后编辑时间：2024-08-01
+# 最后编辑时间：2024-08-10
 # 官方新的模板删除了immich-microservices该容器的部署
 services:
   immich-server:
@@ -145,6 +150,9 @@ services:
     # 容器名字
     hostname: immich-redis
     # 主机名
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/immich/immich-redis:/data
+      # 数据库目录
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
