@@ -129,6 +129,9 @@ services:
     # 容器名字
     hostname: immich-redis
     # 主机名
+    volumes:
+      - /volume1/docker/immich/immich-redis:/data
+      # 数据库目录
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
