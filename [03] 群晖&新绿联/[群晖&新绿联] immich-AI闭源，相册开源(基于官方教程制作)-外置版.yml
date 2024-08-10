@@ -60,7 +60,10 @@ services:
       # 2024-06-11，v1.106.3版本开始，这里的变量由SERVER_PORT改为IMMICH_PORT
       - REDIS_URL=【IP地址】
       - REDIS_PORT=6379
+      # - REDIS_USERNAME=【用户名，如果有设置的话】
+      # - REDIS_PASSWORD=【密码，如果有设置的话】
       # 指定要连接的redis的ip和端口，替换为redis的ip地址及对应的端口，如果部署在别的设备上，写上那个设备的IP，以及映射出来的端口，默认为6379
+      # redis的用户和密码可以设置可以不设置，下面的模板是不设置的，另一份redis单独的模板编写是时是写好了设置的，可以参照下面那份redis不设置密码使用
       - DB_URL=【IP地址】
       - DB_PORT=5432
       - DB_DATABASE_NAME=immich
