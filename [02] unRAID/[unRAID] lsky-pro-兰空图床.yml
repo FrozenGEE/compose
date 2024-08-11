@@ -18,6 +18,24 @@ services:
       # 自定义WebUI端口号，默认为8089
       - HTTPS_PORT=8388
       # 默认为8088，由于用host模式可能会导致与其他docker容器产生端口冲突，因此修改掉
+      ##############################
+      # 以下信息在初始化安装的是否就可以填写，如果后续需要修改，可以在这里修改
+      #
+      # - DB_CONNECTION=【数据库类型】
+      # 关联的数据库类型，可选sqlite,mysql,postgresql
+      # - DB_HOST=【IP地址】
+      # - DB_PORT=【对应的端口】
+      # 关联的数据库的IP地址和端口，预设端口mariadb/mysql为3306，postgresql为5432
+      # - DB_DATABASE=lsky
+      # - DB_USERNAME=lsky
+      # - DB_PASSWORD=lsky
+      # 关联的数据库的子数据库的名字、账号、密码，这里预设是lsky
+      # - REDIS_HOST=【IP地址】
+      # - REDIS_PORT=【对应的端口】
+      # - REDIS_PASSWORD=【redis的访问密码，如果有】
+      # 关联的redis的子IP地址和端口，密码(如果有)，预设端口为6379
+      # 
+      ##############################
     volumes:
       - /mnt/user/appdata/lsky:/var/www/html
       # 数据文件目录
