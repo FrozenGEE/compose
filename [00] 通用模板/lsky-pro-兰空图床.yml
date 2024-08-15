@@ -20,9 +20,9 @@ services:
       # 默认为8088，由于用host模式可能会导致与其他docker容器产生端口冲突，因此修改掉
     volumes:
       - 【这里替换为你的docker数据存放目录】/lsky:/var/www/html
-      # 数据文件目录
-      - 【用来存放你的数据的地方】/兰空图床:/var/www/html/storage/app/uploads
-      # 图片上传目录
+      # 配置文件目录
+      # - 【用来存放你的数据的地方】/兰空图床:/var/www/html/storage/app/uploads
+      # 图片上传目录，不写则默认在配置文件目录内，如有特殊需要可单独映射出来
       ##############################
       # 以下信息在初始化安装的是否就可以填写，如果后续需要修改，可以在这里修改
       #
@@ -46,7 +46,7 @@ services:
     # 推荐直接使用host模式
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 8089:8089
+      # - 8089:8089/tcp
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
