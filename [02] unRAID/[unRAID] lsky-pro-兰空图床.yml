@@ -13,6 +13,11 @@ services:
     # 容器名字
     hostname: lsky
     # 主机名
+    volumes:
+      - /mnt/user/appdata/lsky:/var/www/html
+      # 配置文件目录
+      - /mnt/user/photo/兰空图床:/var/www/html/storage/app/uploads
+      # 图片上传目录，不写则默认在配置文件目录内，如有特殊需要可单独映射出来
     environment:
       - WEB_PORT=8289
       # 自定义WebUI端口号，默认为8089
@@ -36,11 +41,6 @@ services:
       # 关联的redis的子IP地址和端口，密码(如果有)，预设端口为6379
       # 
       ##############################
-    volumes:
-      - /mnt/user/appdata/lsky:/var/www/html
-      # 数据文件目录
-      - /mnt/user/photo/兰空图床:/var/www/html/storage/app/uploads
-      # 图片上传目录
     network_mode: host
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
