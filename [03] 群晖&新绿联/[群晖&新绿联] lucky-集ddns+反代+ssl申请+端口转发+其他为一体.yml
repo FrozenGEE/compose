@@ -17,7 +17,8 @@ services:
     volumes:
       - /volume1/docker/lucky:/goodluck
       # 配置文件目录
-      # - /volume1/docker:/【这里替换为你的数据存放目录的名字】
+      # - /volume1:/volume1
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
       # 映射本地其他路径使其可以访问，可以自定义多个
       # 如需文件管理，FTP，WebDAV功能，去掉#注释
     network_mode: host
