@@ -1,7 +1,6 @@
 ## 【更新日志-2024-08-27】
 - 速更新增fnOS的支持，其实就是把模板稍微改改替换一下就完事了，新NAS系统简单体验了一下，还挺不错的
-- [飞牛OS](https://www.fnnas.com)
-- 飞牛OS的第一个用户的权限（也是管理员账号）：uid=1000(用户的名字) gid=1001(Users) groups=1001(Users),1000(Administrators)
+- [飞牛OS](https://www.fnnas.com)的第一个用户的权限（也是管理员账号）：uid=1000(用户的名字) gid=1001(Users) groups=1001(Users),1000(Administrators)
 
 #### 【更新日志-2024-07-15】
 - 上传适用于威联通的compose模板，味精测试，但应该冇问题，仅支持QuTScloud，QTS5.0版本及其以上，Container Station(docker)的路径可能和以前的qnap不太一样，冇求证过
