@@ -1,0 +1,89 @@
+# 官方文档
+# https://hub.docker.com/r/ich777/docker-rustdesk-server-aio
+# https://github.com/ich777/docker-rustdesk-server-aio
+# rustdesk-api-server的官方文档
+# https://github.com/kingmo888/rustdesk-api-server
+
+# 默认情况下，hbbs 监听21115(tcp), 21116(tcp/udp), 21118(tcp)，hbbr 监听21117(tcp), 21119(tcp)
+# 确保在防火墙中打开这些端口。请注意，对于 TCP 和 UDP 都应该启用21116
+
+# 21114 用于 rustdesk-api-server 的WebUI使用，非必要
+# 21115 用于 NAT 类型测试
+# 21116/UDP 用于 ID 注册和心跳服务
+# 21116/TCP 用于 TCP打洞和连接服务
+# 21117 用于中继服务
+# 21118和21119用于支持 web 客户端。如果您不需要 Web 客户端(21118,21119)支持，可以禁用相应的端口
+
+# hbbs在第一次运行时，会自动产生一对加密私钥和公钥（分别位于运行目录下的id_ed25519和id_ed25519.pub文件中），其主要用途是为了通讯加密
+# 部署完成后，使用文本格式打开/config/id_ed25519.pub这个公钥文件，里面的内容是key
+
+---
+version: "3"
+# 最后编辑时间：2024-05-14
+services:
+  rustdesk-server-aio:
+    image: ich777/rustdesk-server-aio:latest
+    # 镜像地址
+    container_name: rustdesk-server-aio
+    # 容器名字
+    hostname: rustdesk-server-aio
+    # 主机名
+    volumes:
+      - /vol1/1000/docker/rustdesk-server-aio:/rustdesk-server
+      # 配置文件目录
+    environment:
+      - UID=1000
+      - GID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022，默认为000
+      - DATA_PERM=770
+      # 数据权限，默认为770
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 21115-21119:21115-21119/tcp
+      # - 21116:21116/udp
+      # 21115用于 NAT 类型测试
+      # 21116用于 TCP打洞和连接服务，ID 注册和心跳服务
+      # 21117用于中继服务
+      # 21118，21119用于支持 web 客户端
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+# 非必要
+  # rustdesk-api-server:
+    # image: ghcr.io/kingmo888/rustdesk-api-server:latest
+    # 镜像地址
+    # container_name: rustdesk-api-server
+    # 容器名字
+    # hostname: rustdesk-api-server
+    # 主机名
+    # volumes:
+      # - 【这里替换为你的docker数据存放目录】/rustdesk-server-aio:/rustdesk-api-server/db
+      # 宿主机数据库挂载目录，要和上面对应一致，目录内要有db文件
+    # environment:
+      # - LANGUAGE_CODE=zh-hans
+      # 设置语言为中文
+      # - TZ=Asia/Shanghai
+      # 时区
+      ####################
+      # - CSRF_TRUSTED_ORIGINS=http://【域名解析公网IP的地址】:21114
+      # 防跨域信任来源，可选，默认关闭验证；如需开启填写你的访问地址 http://yourdomain.com:21114，如需关闭验证请删除此变量，而不是留空；21114如果使用bridge，则修改为对应的本机端口
+      # - ID_SERVER=【域名解析公网IP的地址】
+      # Web控制端使用的ID服务器，可选，默认为和API服务器同主机。可自定义如 yourdomain.com
+      # - SECRET_KEY=1234567890
+      # 程序加密秘钥，可选，自定义一串随机字符，预设为1234567890
+      # - HOST=0.0.0.0
+      # 绑定服务的IP，默认 0.0.0.0
+      ####################
+    # network_mode: bridge
+    # network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 21114:21114/tcp
+      # WebUI 端口
+    # restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

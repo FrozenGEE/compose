@@ -1,0 +1,42 @@
+# 官网
+# https://radarr.video
+# 官方文档
+# https://hub.docker.com/r/linuxserver/radarr
+# https://docs.linuxserver.io/images/docker-radarr
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  radarr:
+    image: linuxserver/radarr:latest
+    # 镜像地址
+    container_name: radarr
+    # 容器名字
+    hostname: radarr
+    # 主机名
+    volumes:
+      - /vol1/1000/docker/radarr:/config
+      # 配置文件目录
+      - /vol1/1000:/data
+      # 本地媒体库目录
+      - /vol1/1000/downloads:/downloads
+      # 下载存放目录
+      # - 【这里替换为你的数据存放目录】:/【自定义目录名字】
+      # 可自定义目录，可以写多个
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # 部署完成后，在设置中可以自定义容器端口
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 7878:7878/tcp
+      # WebUI 端口，设置内可以自定义端口号
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

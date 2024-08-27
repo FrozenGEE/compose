@@ -1,0 +1,37 @@
+# 官方文档
+# https://piwigo.org
+# https://docs.linuxserver.io/images/docker-piwigo
+# 不适合作为相册备份使用，适合当图册，画廊
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  piwigo:
+    image: linuxserver/piwigo:latest
+    # 镜像地址
+    container_name: piwigo
+    # 容器名字
+    hostname: piwigo
+    # 主机名
+    volumes:
+      - /vol1/1000/docker/piwigo:/config
+      # 配置文件目录
+      - 【这里替换为你的数据存放目录】/piwigo:/gallery
+      # 上传目录
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 7080:80/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

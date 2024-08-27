@@ -1,0 +1,42 @@
+# 官方文档
+# https://hub.docker.com/r/hedgedoc/hedgedoc
+# https://hub.docker.com/r/linuxserver/hedgedoc
+# https://docs.linuxserver.io/images/docker-hedgedoc
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  hedgedoc:
+    image: linuxserver/hedgedoc:latest
+    # 镜像地址
+    container_name: hedgedoc
+    # 容器名字
+    hostname: hedgedoc
+    # 主机名
+    volumes:
+      - /vol1/1000/docker/hedgedoc/config:/config
+      # 配置文件目录
+      - /vol1/1000/docker/hedgedoc/uploads:/hedgedoc/public/uploads
+      # 文件上传目录
+    environment:
+      - DB_HOST=【IP】
+      - DB_PORT=【PORT】
+      # 数据库地址，端口，推荐用mariadb
+      - DB_NAME=hedgedoc
+      - DB_USER=hedgedoc
+      - DB_PASS=hedgedoc
+      # 子数据库名字，用户名，密码，预设为hedgedoc
+      - CMD_PORT=3000
+      # 自定义容器端口，默认为3110
+      - CMD_ALLOW_ANONYMOUS=false
+      # 是否允许任何人匿名创建md
+      - CMD_ALLOW_ANONYMOUS_EDITS=true
+      # 是否允许任何人编辑
+      - CMD_ALLOW_EMAIL_REGISTER=true
+      # 是否允许邮箱注册
+      - CMD_DEFAULT_PERMISSION=protected
+      # 文档默认权限
+    network_mode: host
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
