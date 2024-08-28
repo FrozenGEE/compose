@@ -18,7 +18,7 @@ services:
       # 配置文件目录
       - /vol1/1000/downloads:/config/downloads
       # 下载目录
-      # - /vol1/1000/docker:/【这里替换为你的数据存放目录的名字】
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
       # 数据目录，用于浏览器访问本地目录，可以自定义多个
     environment:
       - CUSTOM_PORT=3010
