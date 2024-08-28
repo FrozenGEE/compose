@@ -26,7 +26,7 @@ services:
     volumes:
       - /vol1/1000/docker/emby:/config
       # 配置文件目录
-      - /vol1/1000:/data
+      - /vol1:/data
       # 可以自定义，可以写多个
       # - /dev/shm:/config/transcodes
       # 使用内存作为转码缓冲目录，推荐至少8G才使用
