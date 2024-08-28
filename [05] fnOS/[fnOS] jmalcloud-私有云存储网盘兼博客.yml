@@ -31,7 +31,7 @@ services:
     volumes:
       - /vol1/1000/docker/jmalcloud:/jmalcloud
       # 配置文件目录
-      - /vol1/1000/docker:/jmalcloud-data
+      - /vol1:/jmalcloud-data
       # 映射本地其他路径使其可以访问，可以自定义多个
     environment:
       - MONGODB_URI=mongodb://mongo:27017/jmalcloud
