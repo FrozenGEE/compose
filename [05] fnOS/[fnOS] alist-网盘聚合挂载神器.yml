@@ -28,7 +28,7 @@ services:
     volumes:
       - /vol1/1000/docker/alist:/opt/alist/data
       # 配置文件目录
-      - /vol1/1000:/vol1/1000
+      - /vol1:/vol1
       # 映射本地其他路径使其可以访问，可以自定义多个
     environment:
       - PUID=0
