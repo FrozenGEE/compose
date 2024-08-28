@@ -17,7 +17,7 @@ services:
     volumes:
       - /vol1/1000/kodbox:/var/www/html
       # 数据目录
-      - /vol1/1000:/vol1/1000
+      - /vol1:/vol1
       # 映射本地其他路径使其可以访问，可以自定义多个
     network_mode: bridge
     # 80端口被占用，不能用host
