@@ -18,7 +18,7 @@ services:
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
       - /vol1/1000/docker:/srv
-      - /vol1/1000:/vol1/1000
+      - /vol1:/vol1
       # 映射本地其他路径使其可以访问，可以自定义多个
     environment:
       - TZ=Asia/Shanghai
