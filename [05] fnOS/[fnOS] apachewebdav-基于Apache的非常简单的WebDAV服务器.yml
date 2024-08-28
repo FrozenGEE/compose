@@ -21,7 +21,7 @@ services:
     volumes:
       - /vol1/1000/docker/webdav:/var/lib/dav
       # 配置文件夹
-      - /vol1/1000:/var/lib/dav/data
+      - /vol1:/var/lib/dav/vol1
       # WebDAV共享文件夹
       # - 【这里替换为你的数据存放目录】:/var/lib/dav/【这里替换为你的数据存放目录的名字】
       # 映射本地其他路径使其可以访问，可以自定义多个
