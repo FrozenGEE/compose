@@ -18,7 +18,7 @@ services:
     volumes:
       - /vol1/1000/docker/bazarr:/config
       # 配置文件目录
-      - /vol1/1000:/data
+      - /vol1:/data
       # 媒体库目录
     environment:
       - PUID=1000
