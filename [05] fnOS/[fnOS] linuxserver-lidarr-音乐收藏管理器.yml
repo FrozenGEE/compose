@@ -18,7 +18,7 @@ services:
     volumes:
       - /vol1/1000/docker/lidarr:/config
       # 配置文件目录
-      - /vol1/1000:/music
+      - /vol1:/music
       # 音乐库的总目录
       - /vol1/1000/downloads:/downloads
       # QB的下载目录，需要和QB的容器路径保持一致
