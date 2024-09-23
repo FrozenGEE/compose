@@ -29,7 +29,7 @@ services:
     hostname: rustdesk-hbbs-bridge
     # 主机名
     command: hbbs -r 【你的域名或者IP】:【hbbr的21117的映射端口】
-    # -r 后面输入你的域名或者IP:hbbr的21117的映射端口，这里建议写域名和端口
+    # -r 后面输入你的域名或者IP:hbbr的21117的映射端口，这里建议写域名和端口，例子：hbbs -r abc.xyz:21117
     volumes:
       - 【这里替换为你的docker数据存放目录】/rustdesk-bridge:/root
       # 配置文件目录
@@ -46,7 +46,7 @@ services:
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     depends_on:
-      - hbbr
+      - rustdesk-hbbr-bridge
     labels:
       icon: http://IP:PORT/i/user_01/rustdesk_A.png
       # 适用于CasaOS导入时自动写上图标地址
