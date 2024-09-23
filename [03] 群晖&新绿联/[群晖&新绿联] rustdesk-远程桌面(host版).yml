@@ -37,7 +37,7 @@ services:
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     depends_on:
-      - hbbr
+      - rustdesk-hbbr-host
 
   rustdesk-hbbr-host:
     image: rustdesk/rustdesk-server:latest
