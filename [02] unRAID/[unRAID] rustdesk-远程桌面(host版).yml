@@ -29,7 +29,7 @@ services:
     hostname: rustdesk-hbbs-host
     # 主机名
     command: hbbs # -r 【你的域名或者IP】:【hbbr的21117的映射端口】
-    # hhbs的-r参数不是必须的，它只是方便你不用在客户端指定中继服务器，如果是默认21117端口，可以不填port。客户端指定的中继服务器优先级高于这个，这里建议写域名和端口
+    # hhbs的-r参数不是必须的，它只是方便你不用在客户端指定中继服务器，如果是默认21117端口，可以不填port。客户端指定的中继服务器优先级高于这个，这里建议写域名和端口，例子：hbbs -r abc.xyz:21117
     volumes:
       - /mnt/user/appdata/rustdesk-host:/root
       # 配置文件目录
@@ -37,7 +37,7 @@ services:
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     depends_on:
-      - hbbr
+      - rustdesk-hbbr-host
     labels:
       net.unraid.docker.managed: dockerman
       net.unraid.docker.icon: /mnt/user/LOGO/rustdesk.png
