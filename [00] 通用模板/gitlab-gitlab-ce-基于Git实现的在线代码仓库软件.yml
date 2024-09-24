@@ -15,11 +15,11 @@ services:
     hostname: gitlab-ce
     # 主机名
     volumes:
-      - 【这里替换为你的docker数据存放目录】/docker/gitlab/config:/etc/gitlab
+      - 【这里替换为你的docker数据存放目录】/gitlab/config:/etc/gitlab
       # 配置文件目录
-      - 【这里替换为你的docker数据存放目录】/docker/gitlab/data:/var/opt/gitlab
+      - 【这里替换为你的docker数据存放目录】/gitlab/data:/var/opt/gitlab
       # 数据目录
-      - 【这里替换为你的docker数据存放目录】/docker/gitlab/log:/var/log/gitlab
+      - 【这里替换为你的docker数据存放目录】/gitlab/log:/var/log/gitlab
       # 日志目录
     network_mode: bridge
     # 端口均被占用，只能bridge网络模式进行端口映射
@@ -31,7 +31,7 @@ services:
       - 9443:443/tcp
       # WebUI https端口
     restart: always
-    # 重启策略
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       icon: http://IP:PORT/i/user_01/gitlab.png
       # 适用于CasaOS导入时自动写上图标地址
