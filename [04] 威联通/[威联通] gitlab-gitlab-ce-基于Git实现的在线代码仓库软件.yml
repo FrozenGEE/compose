@@ -15,11 +15,11 @@ services:
     hostname: gitlab-ce
     # 主机名
     volumes:
-      - /share/Container/docker/gitlab/config:/etc/gitlab
+      - /share/Container/gitlab/config:/etc/gitlab
       # 配置文件目录
-      - /share/Container/docker/gitlab/data:/var/opt/gitlab
+      - /share/Container/gitlab/data:/var/opt/gitlab
       # 数据目录
-      - /share/Container/docker/gitlab/log:/var/log/gitlab
+      - /share/Container/gitlab/log:/var/log/gitlab
       # 日志目录
     network_mode: bridge
     # 端口均被占用，只能bridge网络模式进行端口映射
@@ -31,4 +31,4 @@ services:
       - 9443:443/tcp
       # WebUI https端口
     restart: always
-    # 重启策略
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
