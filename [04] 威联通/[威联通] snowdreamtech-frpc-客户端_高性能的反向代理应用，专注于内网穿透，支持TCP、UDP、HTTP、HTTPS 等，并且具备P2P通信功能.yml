@@ -1,0 +1,107 @@
+# 官方文档
+# https://github.com/snowdreamtech/frp
+# https://github.com/fatedier/frp
+# https://github.com/stilleshan/frps
+# 镜像地址
+# https://hub.docker.com/r/snowdreamtech/frpc
+
+# 最新版使用的是toml的书写格式，服务运行中修改 frpc.toml 配置后需重启 frpc 服务
+
+# 相关教程
+# https://gofrp.org/zh-cn/docs
+# https://freefrp.net/docs
+
+# 相关命令
+# sudo systemctl start frpc				启动服务 
+# sudo systemctl enable frpc			开机自启
+# sudo systemctl status frpc			状态查询
+# sudo systemctl restart frpc			重启服务
+# sudo systemctl stop frpc				停止服务
+
+---
+version: "3"
+# 最后编辑时间：2024-08-11
+services:
+  frpc:
+    image: snowdreamtech/frpc:latest
+    # 镜像地址
+    container_name: frpc
+    # 容器名字
+    hostname: frpc
+    # 主机名
+    volumes:
+      - /share/Container/frp/frpc:/etc/frp
+      # 配置文件目录，把 frpc.toml 文件存放到该目录之下，否则容器将无法启动
+    network_mode: host
+    # 推荐直接使用host网络模式，不具备WebUI
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.icon: /mnt/user/LOGO/frpc.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+
+# 以下为 frpc.toml 的内容，来源于 https://freefrp.net/docs，不懂就多看看文档，在执行compose前，先把下面的内容复制到 frpc.toml 中
+##############################
+# frpc 的基础配置内容
+serverAddr = "frp.freefrp.net"
+# 服务提供商提供的 frp 服务器 IP 地址或者域名地址，根据实际情况修改双引号中的内容
+serverPort = 7000
+# 服务提供商提供的 frp 服务端口号，根据实际情况修改
+auth.method = "token"
+# 服务鉴权方式，保持默认
+auth.token = "freefrp.net"
+# 服务提供商提供的 token 密码，根据实际情况修改双引号中的内容
+
+##############################
+#
+# 以下两种写作模板选其一即可，也可以都用 #
+# 推荐使用TCP / UDP 协议 Web 穿透服务
+# 
+##############################
+# HTTP / HTTPS 协议 Web 穿透服务 模板
+# 使用前，先把frps的配置文件中的以下内容修改好
+# vhostHTTPPort = 80
+# vhostHTTPSPort = 443
+
+[[proxies]]
+name = "nas_yourdomain_com_http"
+# 服务的名称，必须修改，且不能与其他用户重复，根据实际情况修改
+type = "http"
+# 协议类型，确保本条穿透服务使用此协议能够在内网正常使用或访问
+# 可选：http/https
+localIP = "192.168.1.8"
+# 内网 IP，本地服务所在设备的内网 IP 地址，可以是别的设备的IP。由于 frp 客户端有可能安装在 docker 容器中，所以请不要使用 127.0.0.1 来表示本机 IP
+localPort = 5000
+# 本地端口，本地服务的端口号，可以是别的设备的端口。例如群晖 NAS 的 HTTP 管理端口号为 5000
+customDomains = ["nas.yourdomain.com"]
+# 自定义域名，为本条穿透服务提供的域名，根据实际情况修改双引号中的内容
+subdomain = "nas"
+# 子域名，如果 frp 服务商提供了免费的子域名，可以使用 subdomain 参数来为本条穿透服务设置子域名
+# 如果 frps 配置了 subdomainHost，则frpc.toml中的 customDomains 中不能是属于 subdomainHost 的子域名或者泛域名
+# 重点提示：当 type = "http" 或者 "https" 协议时, custom_domains 和 subdomain 至少需要任意一条参数，也可以同时存在。如果没有此参数会导致 frp 客户端无法启动
+
+
+##############################
+# TCP / UDP 协议 Web 穿透服务 模板
+[[proxies]]
+name = "yourname_linux_ssh"
+# 服务的名称，必须修改，且不能与其他用户重复，根据实际情况修改
+type = "tcp"
+# 协议类型，确保本条穿透服务使用此协议能够在内网正常使用或访问。例如，尝试在本地终端执行 ssh root@192.168.1.21 确保能够正常登录
+localIP = "192.168.1.21"
+# 内网 IP，本地服务所在设备的内网 IP 地址，可以是别的设备的IP。由于 frp 客户端有可能安装在 docker 容器中，所以请不要使用 127.0.0.1 来表示本机 IP
+localPort = 22
+# 本地端口，本地服务的端口号，可以是别的设备的端口。例如，本地 linux 服务器的默认 SSH 登录端口为 22
+remotePort = 22222
+# 远程端口，远程服务的端口号。自定义填写一个远程服务端口号，例如 22222，成功连接后，可以使用 ssh -p 22222 root@frp.freefrp.net 来远程登录你的内网 Linux 服务器
+############################################################
+#
+# 远程端口号必须根据服务提供商提供的服务端口范围进行自选填写，确保不要与其他用户重复
+# 如果访问的内容不是自己的服务，则表示该端口号已被其他用户使用
+# 此条记录重复或者超出端口号范围会导致无法连接或者 frp 客户端无法启动
+# 重点提示：当 type = tcp 时，无需配置上文的域名记录，可以直接使用 frp 服务器的地址作为域名，也可以将自己的域名 CNAME 或 A 记录 指向 frp 服务器的域名或 IP
+# 
+############################################################
