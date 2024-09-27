@@ -29,8 +29,6 @@ services:
       # 可以自定义，可以写多个
       - /mnt/user/appdata/jellyfin/cache:/cache
       # 缓存目录
-      # - /dev/shm:/config/transcodes
-      # 使用内存作为转码缓冲目录，推荐至少8G才使用
     environment:
       # - NVIDIA_DRIVER_CAPABILITIES=all
       # - NVIDIA_VISIBLE_DEVICES=N卡的ID
