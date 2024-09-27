@@ -31,7 +31,6 @@ services:
       # 配置文件目录
       - /share:/data
       # 可以自定义，可以写多个
-
     environment:
       # - NVIDIA_DRIVER_CAPABILITIES=all
       # - NVIDIA_VISIBLE_DEVICES=N卡的ID
