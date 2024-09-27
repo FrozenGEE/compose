@@ -14,7 +14,6 @@ services:
     # 容器名字
     hostname: jellyfin
     # 主机名
-    # 调用N卡
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     devices:
