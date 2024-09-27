@@ -18,7 +18,7 @@ services:
     hostname: sun-panel
     # 主机名
     volumes:
-      - /var/run.docker.sock:/var/run.docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       # 用于访问docker
       - /share/Container/sun-panel:/app/conf
       # 配置文件目录，包含配置文件，数据库，css，图标等文件夹
