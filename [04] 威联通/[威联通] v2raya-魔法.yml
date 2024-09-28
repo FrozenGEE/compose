@@ -15,7 +15,7 @@ services:
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
-      - /share/Container/v2raya/modules:/lib/modules
+      - /lib/modules:/lib/modules:ro
       # 内核，如果不支持或者不想使用全局透明代理，则注释掉
       - /share/Container/v2raya/etc/resolv.conf:/etc/resolv.conf
       # 需要预先创建好一个文件，不然会创建成文件夹；上面这条如果/etc内没有或不会进去新建resolv.conf，可以写下面这条
