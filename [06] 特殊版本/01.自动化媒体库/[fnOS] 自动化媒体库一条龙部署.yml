@@ -25,7 +25,7 @@
 # iyuu使用host模式会占用mariadb/mysql的3306端口，所以使用bridge
 # 
 # EMBY和JF在【控制台-高级】中生成【API密钥】，MP需要用
-# PLEX需要注册登录生成登录密钥，用于登录使用
+# PLEX需要注册登录生成登录密钥，用于登录使用，设置好后，浏览器F12->网络，从Plex请求URL中获取的X-Plex-Token，MP需要用
 # 
 # QB 4.3.9 初始化账号密码：admin/adminadmin
 # QB修改：用于传入连接的端口，随机生成一个，记得看站规
