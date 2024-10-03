@@ -35,9 +35,9 @@ services:
       # WEBUI主页路径，写容器路径，用于放汉化文件
       # 4.x版本的汉化文件下载地址：https://github.com/ronggang/transmission-web-control
       # 将 "/src" 这个文件夹里的东西放到 "/config/webui" 内即可
-      - USER=这里写你的用户名字
-      - PASS=新建一个密码
-      # TR账号密码
+      - USER=cheems
+      - PASS=cheems
+      # TR账号密码，预设为cheems，记住一定要修改密码，否则后果自负
       - PEERPORT=14569
       # 自定义peer传输端口
       - PUID=1000
