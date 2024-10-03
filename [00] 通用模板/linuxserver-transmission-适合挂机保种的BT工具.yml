@@ -1,4 +1,4 @@
-# 官方文档
+？# 官方文档
 # https://docs.linuxserver.io/images/docker-transmission
 # https://hub.docker.com/r/linuxserver/transmission
 # PT玩家看站规！！！
@@ -23,8 +23,8 @@ services:
       # 配置文件目录
       - 【这里替换为你的数据下载存放目录】:/downloads
       # 默认下载目录
-      - 【这里替换为你的数据存放目录】/Torrents监控自动下载目录:/watch
-      # 种子监控自动下载目录
+      # - 【这里替换为你的数据存放目录】/Torrents监控自动下载目录:/watch
+      # 种子监控自动下载目录，非必须，用于把种子放到目录内后，自动添加下载任务
       # - 【这里替换为你想映射到TR内的路径】:/【这里替换为你想映射到TR内的路径】
       # 可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
       # 如果你不理解映射，不要修改tr设置里的下载目录，保持/downloads，要分类下载就写在/downloads后面！！！如/downloads/电影
@@ -34,6 +34,7 @@ services:
       - TRANSMISSION_WEB_HOME=/config/webui
       # WEBUI主页路径，写容器路径，用于放汉化文件
       # 4.x版本的汉化文件下载地址：https://github.com/ronggang/transmission-web-control
+      # 将 "/src" 这个文件夹里的东西放到 "/config/webui" 内即可
       - USER=这里写你的用户名字
       - PASS=新建一个密码
       # TR账号密码
