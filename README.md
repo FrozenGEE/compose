@@ -3,6 +3,9 @@
 - 例如：媒体库自动化一条路部署 PEJ+mp+qb+tr+iyuu+cookiecloud(附带一个v2raya)
 - 注意：仅供参考学习交流，有一定概率挖坑不填，比较要反复测试，懒癌......
 - y1s1，自动化其实不一定好使，或者符合个人习惯/需求，比如我，顶多算个好找资源，方便整理，降低工作量的手段
+  
+![image]([https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-01-03.png](https://github.com/FrozenGEE/compose/blob/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/01.%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AA%92%E4%BD%93%E5%BA%93/MP-01.png))
+![image]([https://github.com/FrozenGEE/compose/blob/main/.portainer/portainer-01-03.png](https://github.com/FrozenGEE/compose/blob/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/01.%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AA%92%E4%BD%93%E5%BA%93/MP-02.png))
 
 #### 【更新日志-2024-09-24】
 #### 💡【紧急】plex/emby/jf模板删除使用内存作为缓冲目录的参数💡
