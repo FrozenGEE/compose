@@ -1,0 +1,57 @@
+# 官方文档
+# https://docs.halo.run
+# https://github.com/halo-dev/halo
+# https://gitee.com/halo-dev/halo
+# https://hub.docker.com/r/halo-dev/halo
+
+# 目前 Halo 2 并未更新 Docker 的 latest 标签镜像，主要因为 Halo 2 不兼容 1.x 版本，防止使用者误操作。我们推荐使用固定版本的标签，比如 2.19 或者 2.19.0
+# halohub/halo:2：表示最新的 2.x 版本，即每次发布新版本都会更新此镜像
+
+# 备份与恢复
+# https://docs.halo.run/user-guide/backup
+
+# 目前 Halo 官方维护的 Docker 镜像仓库，可以根据自己的需求选择合适的镜像源
+# registry.fit2cloud.com/halo/halo
+# halohub/halo
+# ghcr.io/halo-dev/halo
+
+---
+version: "3"
+# 最后编辑时间：2024-10-03
+services:
+  halo:
+    image: halohub/halo:2
+    # 镜像地址，上面三个镜像均可
+    container_name: halo
+    # 容器名字
+    hostname: halo
+    # 主机名
+    # 以下内容不懂可以参考官方文档：https://docs.halo.run/getting-started/install/docker-compose
+    command:
+      - --spring.r2dbc.url=r2dbc:pool:mysql://localhost:3306/halo
+      - --spring.r2dbc.username=【数据库用户名】
+      - --spring.r2dbc.password=【数据库密码】
+      - --spring.sql.init.platform=【数据库类型，复制下方括号中的内容】
+      - --halo.external-url=http://localhost:8090/
+      - --server.port=8090
+      # 修改为自己已有的数据库配置
+      # spring.r2dbc.url=r2dbc，数据库连接地址，书写格式见下
+      # halo.external-url，外部访问链接，如果需要在公网访问，需要配置为实际访问地址
+      # 外部访问地址，请根据实际需要修改
+      # 端口号 默认8090
+      # 数据库配置 书写格式
+      # [postgresql] r2dbc:pool:postgresql://{HOST}:{PORT}/{DATABASE}
+      # [mysql] r2dbc:pool:postgresql://{HOST}:{PORT}/{DATABASE}
+      # [mariadb] r2dbc:pool:mariadb://{HOST}:{PORT}/{DATABASE}
+      # [h2] r2dbc:h2:file:///${halo.work-dir}/db/halo-next?MODE=MySQL&DB_CLOSE_ON_EXIT=FALSE
+    volumes:
+      - /vol1/1000/docker/halo:/root/.halo2
+      # 配置文件目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8090:8090/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
