@@ -297,5 +297,5 @@ https://www.bilibili.com/video/BV1TCgNeLEtu
 
 - Sun-Panel：先在nas中找个地方存放好logo图标，将"/app/conf/uploads"该路径映射，映射到logo文件夹上，具体请看compose的注释，然后在图标编辑的时候，输入"/uploads/LOGO.PNG"即可
   
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/03.Sun-Panel/Sun-Panel-01.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/03.Sun-Panel/Sun-Panel-02.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/04.Sun-Panel/Sun-Panel-01.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/04.Sun-Panel/Sun-Panel-02.png)
