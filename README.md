@@ -254,48 +254,48 @@ https://www.bilibili.com/video/BV1TCgNeLEtu
 
 - 3、这里拿汉化版作为演示便于理解，官方版一样的位置的，部署好portainer（见上）并打开，点击docker，左侧的堆栈（stack），右侧的新增（Add）
 
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-01-03.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-04.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-05.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-06.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-07.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-01-03.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-04.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-05.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-06.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-07.png)
 
 - 4、命名stack的名字，把预先写好的compose内容复制到文本框中，点击部署，等待完成，如果有报错，看右上交报文提示，寻找网友帮助
 
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-08-10.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-08-10.png)
 
 - 5、后续修改更新 & 更新镜像
 
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-11.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-12.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-11.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-12.png)
 
 - 8、未映射卷 & 残留卷
 
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-13.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-14.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-15.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-13.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-14.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-15.png)
 
 - 9、镜像导出 & 镜像导入 & 镜像删除
 
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-16.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-17.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/portainer-18.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-16.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-17.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/00.Portainer/Portainer-18.png)
 
 # 【logo 食用方法】
 - unRAID：先创建一个名为"LOGO"的共享文件夹，然后把图标的压缩包解压到目录内，路径为 /mnt/user/LOGO/LOGO.png 这样的格式即可，提供的compose均预设好，也可以选择使用网址访问
  
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/01.unRAID/unraid-01.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/01.unRAID/unraid-02.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/01.unRAID/unraid-03.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/01.unRAID/unraid-04.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/01.unRAID/unRAID-01.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/01.unRAID/unRAID-02.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/01.unRAID/unRAID-03.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/01.unRAID/unRAID-04.png)
 
 - CasaOS：使用图床，然后将图片上传后，在logo的地址栏上输入logo的访问地址即可
   
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/02.CasaOS/casaos-01.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/02.CasaOS/casaos-02.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/02.CasaOS/casaos-03.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/02.CasaOS/CasaOS-01.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/02.CasaOS/CasaOS-02.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/02.CasaOS/CasaOS-03.png)
 
 - Sun-Panel：先在nas中找个地方存放好logo图标，将"/app/conf/uploads"该路径映射，映射到logo文件夹上，具体请看compose的注释，然后在图标编辑的时候，输入"/uploads/LOGO.PNG"即可
   
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/03.Sun-Panel/sun-panel-01.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/.images/03.Sun-Panel/sun-panel-02.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/03.Sun-Panel/Sun-Panel-01.png)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/03.Sun-Panel/Sun-Panel-02.png)
