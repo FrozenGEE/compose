@@ -32,6 +32,9 @@ services:
     volumes:
       - /vol1/1000/docker/frp/frpc:/etc/frp
       # 配置文件目录，把 frpc.toml 文件存放到该目录之下，否则容器将无法启动
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
     network_mode: host
     # 推荐直接使用host网络模式，不具备WebUI
     restart: unless-stopped
