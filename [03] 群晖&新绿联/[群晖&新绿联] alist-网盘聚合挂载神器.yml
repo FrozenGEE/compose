@@ -1,7 +1,9 @@
 # 官方文档
 # https://alist.nn.ci/zh/guide
-# 如果需要自带离线下载功能，使用该docker镜像，预装了aria2
-# https://hub.docker.com/r/xhofe/alist-aria2
+# https://hub.docker.com/r/xhofe/alist
+# 正式版tag为latest，测试版为beta
+# 如果需要自带离线下载功能，预装aria2，使用xhofe/alist-aria2
+# 如果需要自带ffmpeg，则在任何一个tag后面加入-ffmpeg，如 xhofe/alist-aria2:beta-ffmpeg
 
 ## 低于v3.25.0版本，重置密码，admin为账号名，注意替换
 # docker exec -it alist ./alist admin
@@ -17,8 +19,8 @@ version: "3"
 # 最后编辑时间：2024-03-11
 services:
   alist:
-    image: xhofe/alist:latest
-    # 镜像地址
+    image: xhofe/alist-aria2:beta-ffmpeg
+    # 镜像地址，此为测试版，内置ffmpeg和aria2
     container_name: alist
     # 容器名字
     hostname: alist
@@ -33,8 +35,7 @@ services:
     environment:
       - PUID=0
       - PGID=0
-      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
-      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射
       - UMASK=022
       # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
