@@ -12,8 +12,8 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-07-09
-# 更新日志：新增蝶粉和海胆的认证站点的支持
+# 最后编辑时间：2024-10-09
+# 更新日志：精简部分内容
 services:
   moviepilot:
     image: jxxghp/moviepilot:latest
@@ -66,41 +66,22 @@ services:
     environment:
       - NGINX_PORT=3000
       ## WebUI服务端口默认为3000，可自行修改，不能和API服务端口冲突
-      # - PORT=3001
-      # API服务端口，默认为3001，可自行修改，不能和WebUI服务端口冲突，MP内可以设置
       - SUPERUSER=admin
       ## 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效，分享模板时切勿泄露
       ## 超级管理者密码，可在MP内修改，分享模板时切勿泄露
       ## 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效
-      # - API_TOKEN=moviepilot
-      # API密钥，默认为moviepilot
       # 在媒体服务器WebHook微信回调等地址配置时用到，建议修改为复杂字符串，MP内可设置
       #  - PROXY_HOST=【IP:PORT】
       # 网络代理，以便于访问一些网站，如果你没有配置魔法就注释掉，也支持sock5，具体看作者github项目的地址
       - BIG_MEMORY_MODE=false
       # 是否使用大内存模式，true/false，默认不启动
-      - PUID=1000
-      - PGID=100
-      # 用户权限和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
-      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
-      # 可以不写，MP默认均为0，即root
       - UMASK=022
       # 默认创建新文件的权限，一般写022，MP默认为000，可以不写，也可以考虑设置为022
-      - TZ=Asia/Shanghai
-      # 时区
-########################################
-## 如果不希望每次重启后启动要等很久，在第一次安装后以后，可以把这里改成false以禁止检查更新
-## 但是要是使用MP设置里面的自动更新插件，就需要改为release，这一部分可以不写，默认的
-      # - MOVIEPILOT_AUTO_UPDATE=release
-      # MP重启时自动更新，true/release/dev/false，默认release
-      # - AUTO_UPDATE_RESOURCE=true
-      # 启动时自动检测和更新资源包（站点和索引及认证等），仅支持Docker镜像
 ########################################
 #### 认证站点 ####
       - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptlsp,ptvicomo,wintersakura,xingtan,zmpt
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔
       ## 会依次执行认证操作，直到有一个站点认证成功
-      ## 只需要写一个即可，这里已经全写上了，但是会启动时会轮着进行认证，影响启动速度
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
       ## 密钥在控制面板中查看，切勿泄露
       ## 【备用】- AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,hdkyl,icc2022,ptba,ptlsp,ptvicomo,qingwa,wintersakura,xingtan,zmpt
