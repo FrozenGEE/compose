@@ -12,8 +12,8 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-07-09
-# 更新日志：新增蝶粉和海胆的认证站点的支持
+# 最后编辑时间：2024-10-09
+# 更新日志：精简部分内容
 services:
   moviepilot:
     image: jxxghp/moviepilot:latest
@@ -46,6 +46,7 @@ services:
       # 新手不懂就和qb一样的/downloads映射路径，也不要乱改qb设置里面的/downloads，tr同理
       # 新手不懂就和qb一样的/downloads映射路径，也不要乱改qb设置里面的/downloads，tr同理
       # 新手不懂就和qb一样的/downloads映射路径，也不要乱改qb设置里面的/downloads，tr同理
+
 ########################################
     environment:
       - NGINX_PORT=3500
@@ -57,22 +58,14 @@ services:
       # 网络代理，以便于访问一些网站，如果你没有配置魔法就注释掉，也支持sock5，具体看作者github项目的地址
       - BIG_MEMORY_MODE=false
       # 是否使用大内存模式，true/false，默认不使用
-      # - PUID=1000
-      # - PGID=100
-      # 用户权限和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
-      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
-      # 可以不写，MP默认均为0，即root，有需要就写，这里作为保留
       - UMASK=022
       # 默认创建新文件的权限，一般写022，MP默认为000，可以不写，也可以考虑设置为022
-      - TZ=Asia/Shanghai
-      # 时区
 
 ########################################
 #### 认证站点 ####
       - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptlsp,ptvicomo,wintersakura,xingtan,zmpt
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔
       ## 会依次执行认证操作，直到有一个站点认证成功
-      ## 只需要写一个即可，这里已经全写上了，但是会启动时会轮着进行认证，影响启动速度
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
       ## 密钥在控制面板中查看，切勿泄露
       ## 【备用】- AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,hdkyl,icc2022,ptba,ptlsp,ptvicomo,qingwa,wintersakura,xingtan,zmpt
