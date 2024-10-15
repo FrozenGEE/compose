@@ -3,7 +3,7 @@
 # https://hub.docker.com/r/xhofe/alist
 # 正式版tag为latest，测试版为beta
 # 如果需要自带离线下载功能，预装aria2，使用xhofe/alist-aria2
-# 如果需要自带ffmpeg，则在任何一个tag后面加入-ffmpeg，如 xhofe/alist-aria2:beta-ffmpeg
+# 如果需要自带ffmpeg，则在tag后面加入-ffmpeg，如 xhofe/alist:beta-ffmpeg
 
 ## 低于v3.25.0版本，重置密码，admin为账号名，注意替换
 # docker exec -it alist ./alist admin
@@ -19,8 +19,8 @@ version: "3"
 # 最后编辑时间：2024-03-11
 services:
   alist:
-    image: xhofe/alist-aria2:beta-ffmpeg
-    # 镜像地址，此为测试版，内置ffmpeg和aria2
+    image: xhofe/alist-aria2:latest
+    # 镜像地址，此为正式版，内置aria2
     container_name: alist
     # 容器名字
     hostname: alist
