@@ -241,7 +241,7 @@ docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/dock
 
 ### 极空间docker用的是魔改的portainer，官方没有开放ssh，但可以通过一些途径获取到，然而本人的Z2pro（rk3568）使用portainer会和极空间的魔改portainer冲突，x86的根据网友表示不会，所以这里修改portainer的启动参数为不自启动，以免有问题
 [2024-09-28更新] 现在arm也不会冲突重启了，命令行修改为自启动
-(记得把"/nvme*/手机号码+字母"替换掉)
+(记得把"/nvmel*/手机号码+字母"替换掉)
 ```shell
 docker run -d -p 9595:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/zfsv3/nvmel*/手机号码+字母/data/docker/portainer-zh:/data 6053537/portainer-ce
 
