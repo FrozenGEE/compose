@@ -1,6 +1,5 @@
 ##  【更新日志-2024-10-09】
 - QB和TR如果下载出错，可以尝试给root权限，即PUID和PGID为0（已写入注释中）
-- 翻新了alist模板，镜像改为xhofe/alist-aria2:beta-ffmpeg，alist测试版aria2和ffmpeg的版本，buff叠满，滑稽
 - MP模板推荐去看 [06] 里面的 aio模板 和 附带的图片 作为部署，下载路径，媒体库路径的设置参考
 
 ####  【更新日志-2024-10-03】
