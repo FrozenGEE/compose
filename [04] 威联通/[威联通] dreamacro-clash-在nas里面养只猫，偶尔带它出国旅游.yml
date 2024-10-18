@@ -24,7 +24,7 @@ services:
     # network_mode: bridge
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-      # 注意：minio用到9090端口，如果都要部署，建议修改config.yaml中的9090端口再用host模式，或者使用bridge模式把9090端口改成别的，只要保证不冲突即可
+    # 注意：minio用到9090端口，如果都要部署，建议修改config.yaml中的9090端口再用host模式，或者使用bridge模式把9090端口改成别的，只要保证不冲突即可
     # ports:
       # - 7890:7890/tcp
       # http/https 监听端口
