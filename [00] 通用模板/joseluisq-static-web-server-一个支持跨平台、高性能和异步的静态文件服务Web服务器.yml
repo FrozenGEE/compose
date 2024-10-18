@@ -1,0 +1,41 @@
+# 官方文档
+# https://static-web-server.net
+# https://github.com/static-web-server/static-web-server
+# https://hub.docker.com/joseluisq/static-web-server
+
+---
+version: "3"
+# 最后编辑时间：2024-10-18
+services:
+  static-web-server:
+    image: joseluisq/static-web-server:2-alpine
+    # 镜像地址
+    container_name: static-web-server
+    # 容器名字
+    hostname: static-web-server
+    # 主机名
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/static-web-server:/public
+      # 静态页面存储路径
+    environment:
+      - SERVER_ROOT=/public
+      # 自定义容器的静态页面存储路径，一般不用动，保持默认
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 5680:80/tcp
+      # WebUI http端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/SWS_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:80]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/SWS.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
