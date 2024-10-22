@@ -31,10 +31,11 @@ services:
       # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
       # 时区
-    network_mode: bridge
-    # 自定义容器WebUI端口，默认为5000，由于群晖也用了5000，所以这里修改掉
-    ports:
-      - 5520:5000/tcp
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5000:5000/tcp
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
