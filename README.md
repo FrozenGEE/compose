@@ -1,4 +1,9 @@
-##  【更新日志-2024-10-09】
+##  【更新日志-2024-10-22】
+- 上传适用于铁威马的compose模板，味精测试，但应该冇问题
+- 铁威马的第一个用户的权限：uid=0(用户的名字) gid=0(everyone) groups=0(everyone),3(admin),4(allusers)
+- 新增部分WebUI端口说明，见下方内容，模板写的时候不一定都有考虑到NAS本身服务所用到的端口，所以有的模板可能没有写好，导致冲突，这部分自行修改了
+
+####  【更新日志-2024-10-09】
 - QB和TR如果下载出错，可以尝试给root权限，即PUID和PGID为0（已写入注释中）
 - MP模板推荐去看 [06] 里面的 aio模板 和 附带的图片 作为部署，下载路径，媒体库路径的设置参考
 
@@ -106,9 +111,19 @@
 ```
 
 ```shell
-💡OMV的docker配置文件存放路径
-💡OMV的数据存放路径开头
+💡TrueNAS的docker配置文件存放路径
+/mnt/共享文件夹/docker/aaa
+💡TrueNAS的数据存放路径开头
+/mnt/共享文件夹/bbb
 
+共享文件夹需要自己设置好
+```
+
+```shell
+💡铁威马的docker配置文件存放路径
+/Volume1/User/docker/aaa
+💡铁威马的数据存放路径开头
+/Volume1/User/bbb
 (待补充...)
 ```
 
@@ -170,7 +185,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 /tmp/zfsv3/sata*/手机号码+字母/data/bbb
 /tmp/zfsv3/nvme*/手机号码+字母/data/bbb
 
-"nvme*"和"sata*"根据自己实际情况修改，*为数字；"手机号码"为个人手机号码
+"nvme*"和"sata*"根据自己实际情况修改，*为数字；"手机号码"为个人手机号码，到处都是手机号，真他妈恶心
 如果你有第二台极空间，并且用同一个手机号绑定注册，则为需要在手机号码后添加上a-z的字母
 例如：1688888888，1688888888a，1688888888b，1688888888c，这样类推
 ```
@@ -190,6 +205,20 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 ...
 类推
 ```
+
+## 【NAS默认端口说明】
+```shell
+只列举WebUI和WebDAV
+💡debian/ubentu/unRAID/CasaOS/fnOS/OMV/TrueNAS等众多linux系统的WebUI http和https端口为80和443，ssh端口为22
+💡群晖和绿联：WbeUI端口为5000，5001，WebDav为5005，5006，ssh端口为22（前者为http，后者为https）
+* 绿联旧系统WebUI为9999，ssh端口为922
+💡威联通：WebUI端口为8080，5443，WebDav为5000，5001，ssh端口为22（前者为http，后者为https）
+💡铁威马：WbeUI端口为8181，WebDav为5005，5006，ssh端口为9222（前者为http，后者为https）
+💡极空间：WbeUI端口为5055，WebDav为5005，官方的ssh端口为10022
+💡
+💡
+```
+
 
 ## 【各nas portainer 部署】
 - 汉化版镜像：6053537/portainer-ce
