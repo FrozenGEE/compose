@@ -1,0 +1,50 @@
+# 官方文档
+# https://alist.nn.ci/zh/guide
+# https://hub.docker.com/r/xhofe/alist
+# 正式版tag为latest，测试版为beta
+# 如果需要自带离线下载功能，预装aria2，使用xhofe/alist-aria2
+# 如果需要自带ffmpeg，则在tag后面加入-ffmpeg，如 xhofe/alist:beta-ffmpeg
+
+## 低于v3.25.0版本，重置密码，admin为账号名，注意替换
+# docker exec -it alist ./alist admin
+
+## 3.25.0以上版本将密码改成加密方式存储的hash值，无法直接反算出密码，如果忘记了密码只能通过重新 随机生成 或者 手动设置
+# 随机生成一个密码，`admin`为账号名，注意替换
+# docker exec -it alist ./alist admin random
+# 手动设置一个密码，`admin`为账号名，`NEW_PASSWORD`是指你需要设置的密码，注意替换
+# docker exec -it alist ./alist admin set NEW_PASSWORD
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  alist:
+    image: xhofe/alist-aria2:latest
+    # 镜像地址，此为正式版，内置aria2
+    container_name: alist
+    # 容器名字
+    hostname: alist
+    # 主机名
+    # privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    volumes:
+      - /Volume1/User/docker/alist:/opt/alist/data
+      # 配置文件目录
+      - /Volume1:/Volume1
+      # 映射本地其他路径使其可以访问，可以自定义多个
+    environment:
+      - PUID=0
+      - PGID=0
+      # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5244:5244/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

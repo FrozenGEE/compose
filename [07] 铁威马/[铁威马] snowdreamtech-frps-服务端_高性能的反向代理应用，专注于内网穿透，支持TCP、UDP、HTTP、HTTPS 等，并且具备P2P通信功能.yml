@@ -1,0 +1,132 @@
+# 官方文档
+# https://github.com/snowdreamtech/frp
+# https://github.com/fatedier/frp
+# https://github.com/stilleshan/frps
+# 镜像地址
+# https://hub.docker.com/r/snowdreamtech/frps
+
+# 最新版使用的是toml的书写格式，服务运行中修改 frps.toml 配置后需重启 frps 服务
+
+# 相关教程
+# https://gofrp.org/zh-cn/docs
+
+# 相关命令
+# sudo systemctl start frps				启动服务 
+# sudo systemctl enable frps			开机自启
+# sudo systemctl status frps			状态查询
+# sudo systemctl restart frps			重启服务
+# sudo systemctl stop frps				停止服务
+
+---
+version: "3"
+# 最后编辑时间：2024-08-11
+services:
+  frps:
+    image: snowdreamtech/frps:latest
+    # 镜像地址
+    container_name: frps
+    # 容器名字
+    hostname: frps
+    # 主机名
+    volumes:
+      - /Volume1/User/docker/frp/frps:/etc/frp
+      # 配置文件目录，把 frps.toml 文件存放到该目录之下，否则容器将无法启动
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: host
+    # 推荐直接使用host网络模式，frps的面板端口默认为7500，具体看 frps.toml 中的设置
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+
+# 以下为 frps.toml 的内容，不懂就保持默认预设的，在执行compose前，先把下面的内容复制到 frps.toml 中
+##############################
+# frps 的基础配置内容
+
+webServer.addr = "127.0.0.1"
+# frps 面板的地址，127.0.0.1替换为nas的IP地址
+webServer.port = 7500
+# frps 面板的端口，默认为7500
+
+webServer.user = "admin"
+webServer.password = "admin"
+# frps 面板的账号密码，预设均为admin，注意修改，防止泄露
+
+auth.method = "token"
+# 服务鉴权方式，保持默认
+auth.token = "12345678"
+# 设置token的密码，注意修改为高强度密码，防止泄露
+
+# vhostHTTPPort = 80
+# vhostHTTPSPort = 443
+# 【可选】http 和 https 协议下代理端口，按照实际情况修改，例如7080，7081，如果是使用http/https，则需要启用该参数，一般推荐使用tcp/udp
+
+##############################
+# frps 服务的IP地址、端口监听相关的配置内容
+
+bindAddr = "0.0.0.0"
+bindPort = 7000
+# frps 服务的IP地址和端口(tcp)，保持默认即可，端口号7000可自定义
+
+# kcpBindPort = 7000
+# 【可选】用于 kcp 协议的 udp 端口，它可以与 bindPort 相同，如果没有设置，则禁用 frps 中的 kcp，端口号7000可自定义
+
+# quicBindPort = 7002
+# 【可选】用于 Quic 协议的 udp 端口，如果没有设置，则在 frps 中禁用 quic，端口号7002可自定义
+
+##############################
+# 允许对 frpc 开放使用的哪些端口，有两种书写格式，见下例子
+# 一种是单独一个个端口单独设置，另一种是设置一个区间范围
+# 注意：需要在 frps 设备上做好公网IP的端口映射
+# 建议端口写高一点，根据实际情况开放，以及避免部分端口与nas自身冲突，可以搭配反代一起使用
+allowPorts = [
+   { single = 22222 },
+   { single = 33333 },
+   { start = 20000, end = 20010},
+   { start = 55550, end = 55555}
+]
+
+##############################
+# 其他相关配置内容
+
+subDomainHost = "frps.com"
+# frps 服务器设置一个域名地址，frps.com 为你的域名，记得做好域名解析
+# 如果设置了，则frpc可以通过 "域名:端口" 进行访问，当然frpc可以自定义使用自己的域名
+# 如果 frps 配置了 subdomainHost，则frpc.toml中的 customDomains 中不能是属于 subdomainHost 的子域名或者泛域名
+
+# custom 404 page for HTTP requests
+# custom404Page = "/path/to/404.html"
+# 【可选】自定义404页面，需要写容器内的路径，并且本地也做好对应的路径映射
+
+# udpPacketSize = 1500
+# 【可选】指定 udp 数据包大小，单位为字节，仅作保留，本身就自动预设是1500
+
+# transport.maxPoolCount = 2000
+# transport.tcpMux = true
+# transport.tcpMuxKeepaliveInterval = 60
+# transport.tcpKeepalive = 7200
+# transport.tls.force = false
+# 【可选】不懂
+
+# maxPortsPerClient = 8
+# 【可选】端口最大同时连接的数量，默认为8个
+# natholeAnalysisDataReserveHours = 168
+# 【可选】nat打洞数据解析保留时间，直译的，保持默认
+
+##############################
+# 日志相关的配置内容，不动，保持默认
+
+log.to = "./frps.log"
+# 日志路径，保持默认，会存放在容器内的文件夹 /frps 之下
+log.level = "info"
+# 记录日志的类别，默认是普通日志
+log.maxDays = 3
+# 记录日志最大天数，默认为3天
+log.disablePrintColor = false
+# 记录日志禁止彩色字符，默认为false
+
+##############################
+
+
+
