@@ -22,7 +22,7 @@ services:
       # 数据目录，用于浏览器访问本地目录，可以自定义多个
     environment:
       - CUSTOM_PORT=3010
-      # 自定义容器http端口，默认为3000
+      # 自定义容器http端口，默认为3000，这里改成3010，因为有一些别的服务或docker会用到3000
       - CUSTOM_HTTPS_PORT=3011
       # 自定义容器https端口，默认为3001
       - CUSTOM_USER=cheems
@@ -44,6 +44,11 @@ services:
       # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
       # 时区
+    # network_mode: bridge
     network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 3010:3010/tcp
+      # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
