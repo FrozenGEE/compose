@@ -1,0 +1,27 @@
+# 官方文档
+# https://hub.docker.com/r/wisdomsky/cloudflared-web
+# https://www.cloudflare.com
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  cloudflared-web:
+    image: wisdomsky/cloudflared-web:latest
+    # 镜像地址
+    container_name: cloudflared-web
+    # 容器名字
+    hostname: cloudflared-web
+    # 主机名
+    volumes:
+      - /share/Container/cloudflared-web/config:/config
+      - /share/Container/cloudflared-web:/root/.cloudflared
+      # 配置文件目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 14333:14333/tcp
+      # WebUI 端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

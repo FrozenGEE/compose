@@ -1,0 +1,26 @@
+# 官方文档
+# https://oaooa.com
+# https://hub.docker.com/r/oaooa/pichome
+# https://www.yuque.com/pichome/install
+
+---
+version: "3"
+# 最后编辑时间：2024-05-05
+services:
+  pichome:
+    image: oaooa/pichome:latest
+    # 镜像地址
+    container_name: pichome
+    # 容器名字
+    hostname: pichome
+    # 主机名
+    volumes:
+      - /share/Container/pichome:/var/www/html
+      # 配置文件目录
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 4280:80/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
