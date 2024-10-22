@@ -48,5 +48,6 @@ services:
       - TZ=Asia/Shanghai
       # 时区
     network_mode: host
+    # 推荐使用host模式，能连接上ipv6，host网络+自定义容器端口不会导致和别的服务的端口产生冲突
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
