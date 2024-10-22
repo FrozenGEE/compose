@@ -33,9 +33,9 @@ services:
       - USERNAME=admin
       - PASSWORD=password
       # 用户名和密码
-      - PUID=1000
-      - PGID=100
-      # 直接给root权限访问
+      - PUID=0
+      - PGID=0
+      # 直接给root权限
       - UMASK=022
       # 默认创建新文件的权限，一般写022
     network_mode: bridge
