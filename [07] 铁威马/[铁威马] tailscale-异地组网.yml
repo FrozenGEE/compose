@@ -1,0 +1,57 @@
+# 官方文档
+# https://tailscale.com
+# linux一键安装命令
+# curl -fsSL https://tailscale.com/install.sh | sh
+
+# 可以在该容器内的ssh终端进行一些命令操作
+# tailscale up	  			    	#启动
+# tailscale login				    	#登录，复制提示的命令，在网页上打开进行登录
+# tailscale logout			    	#登出
+# tailscale check				    	#查看当前设备的组网信息
+# tailscale ip				      	#查看该设备的组网IP
+# tailscale status			     	#查看组网内的所有设备的IP，设备名，在线情况
+# tailscale ping 其他组网的IP	#ping其他组网IP的网络延迟
+# tailscale update		      	#TS程序更新
+# tailscale version	      		#查看TS的版本号
+# taislcale help			      	#帮助，查看其他可以执行的命令，其余命令不一一写出了
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  tailscale:
+    image: tailscale/tailscale:latest
+    # 镜像地址
+    container_name: tailscale
+    # 容器名字
+    hostname: tailscale
+    # 主机名，这里修改为设备的名字，在网页上就会显示对应的名字
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    environment:
+      - TS_STATE_DIR=/var/lib/tailscale
+      # 配置文件目录，默认的
+      # - TS_ROUTES=192.168.1.0/24
+      # 192.168.1.0/24为本机所在的局域网网段，注意修改，允许本机作为流量出站点这个需要用到
+      # - TS_EXTRA_ARGS=--advertise-exit-node
+      # 允许本机作为流量出站点
+      # 需要到TS官网-Machine，点击设备右侧的三个点，点击Edit route settings，在Exit node和Subnet routes下方的选项勾选上
+      # 当其他设置需要使用本机器作为流量出站口，看官方设置，太长了，不教
+      - TS_AUTH_KEY=【TS的密钥】
+      # 需要到TS官网-Setting-keys内生成，可设置多台设备使用同一个key，切勿泄露
+      # 默认90天失效，需要到TS官网-Machine，点击设备右侧的三个点，点击Disable key expiry进行取消失效
+      # 如果使用密钥方式登录，则不需要去容器内的ssh终端内进行tailscale login命令登录
+      # 如果去容器内的ssh终端内使用tailscale login命令登录，则不需要配置该项
+    volumes:
+      - /share/Container/tailscale/tun:/dev/net/tun
+      # 照抄
+      - /share/Container/tailscale/config:/var/lib/tailscale
+      # 配置文件目录
+    network_mode: host
+    # host模式，无WebUI网页
+    # 可以在该容器内的ssh终端进行一些命令操作，见最上方
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
