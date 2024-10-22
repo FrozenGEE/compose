@@ -50,6 +50,8 @@ services:
     # ports:
       # - 3010:3010/tcp
       # WebUI 端口
+      # - 3011:3011/tcp
+      # WebUI https端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
