@@ -26,12 +26,8 @@ services:
     volumes:
       - 【这里替换为你的docker数据存放目录】/ddns-go:/root
       # 配置文件目录，文件是隐藏的，需要通过ssh进行访问，很重要，切勿泄露
-    # network_mode: bridge
     network_mode: host
     # 直接使用host模式，ipv6解析需要使用host网络模式
-    # ports:
-      # - 9876:9876/tcp
-      # WebUI 端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
