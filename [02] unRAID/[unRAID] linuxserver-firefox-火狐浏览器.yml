@@ -33,7 +33,7 @@ services:
       - NO_DECOR=1
       - DOCKER_MODS=linuxserver/mods:universal-package-install
       # 照抄
-      - INSTALL_PACKAGES=font-noto-cjk
+      - INSTALL_PACKAGES=fonts-noto-cjk
       - LC_ALL=zh_CN.UTF-8
       # 照抄，解决中文字符问题
       - PUID=1000
