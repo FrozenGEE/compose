@@ -32,7 +32,7 @@ services:
     volumes:
       - /vol1/1000/docker/clouddrive2:/config
       # 配置文件目录，可在变量中进行配置
-      - /vol1/1000/CloudNAS:/CloudNAS:shared
+      - /vol1/1000/docker/CloudNAS:/CloudNAS:shared
       # - 【这里替换为你的数据存放目录】:/【自定义一个名字】:shared
       # 文件目录，多个目录需要分别映射进来，需要满足配置文件说明中的要求，见下例子
       # - /vol1/1000/video:/网盘媒体库:shared
