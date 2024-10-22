@@ -47,16 +47,8 @@ services:
       # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
       # 时区
-    # network_mode: bridge
     network_mode: host
-    # 推荐自定义端口，然后用host网络模式
-    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    # ports:
-      # - 8888:8888/tcp
-      # WebUI 端口，两边写一样的，该端口可以自定义，见上
-      # - 25800:25800/tcp
-      # - 25800:25800/udp
-      # 传输端口，别用6881
+    # 推荐使用host模式，能连接上ipv6，host网络+自定义容器端口不会导致和别的服务的端口产生冲突
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
