@@ -22,7 +22,7 @@ services:
       # 数据目录，用于浏览器访问本地目录，可以自定义多个
     environment:
       - CUSTOM_PORT=3010
-      # 自定义容器http端口，默认为3000，这里改成3010，因为有一些别的服务或docker会用到30000
+      # 自定义容器http端口，默认为3000，这里改成3010，因为有一些别的服务或docker会用到3000
       - CUSTOM_HTTPS_PORT=3011
       # 自定义容器https端口，默认为3001
       - CUSTOM_USER=cheems
