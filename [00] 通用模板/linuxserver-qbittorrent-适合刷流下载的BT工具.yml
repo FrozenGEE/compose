@@ -34,7 +34,7 @@ services:
       # 如果你不理解映射，不要修改qb设置里的下载目录，保持/downloads，要分类下载就写在/downloads后面！！！如/downloads/电影
       # 如果你不理解映射，不要修改qb设置里的下载目录，保持/downloads，要分类下载就写在/downloads后面！！！如/downloads/电影
     environment:
-      - WEBUI_PORT=8888
+      - WEBUI_PORT=8085
       # 自定义WebUI端口
       - TORRENTING_PORT=25800
       # 自定义传输端口，别写6881
