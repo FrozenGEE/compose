@@ -34,7 +34,7 @@ services:
       # - TZ=Asia/Shanghai
       # 时区
     network_mode: bridge
-    # 8080端口被占用，不能用host
+    # 不能用host，威联通的WebUI端口为8080
     ports:
       - 11808:8080/tcp
       # WebUI 端口
