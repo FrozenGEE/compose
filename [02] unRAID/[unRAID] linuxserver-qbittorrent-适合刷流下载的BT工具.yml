@@ -49,7 +49,7 @@ services:
       # 时区
     # network_mode: bridge
     network_mode: host
-    # 推荐自定义端口，然后用host网络模式
+    # 推荐使用host模式，能连接上ipv6，host网络+自定义容器端口不会导致和别的服务的端口产生冲突
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
       # - 8888:8888/tcp
