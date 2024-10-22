@@ -35,7 +35,7 @@ services:
       # - TZ=Asia/Shanghai
       # 时区
     network_mode: bridge
-    # 8080端口被占用，不能用host
+    # 不推荐用host，除非没有被占用，有别的服务或docker需要用到8080
     ports:
       - 11808:8080/tcp
       # WebUI 端口
