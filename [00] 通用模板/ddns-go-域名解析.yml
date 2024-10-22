@@ -1,5 +1,13 @@
 # 官方文档
 # https://hub.docker.com/r/jeessy/ddns-go
+# https://github.com/jeessy2/ddns-go
+
+# 重置密码，以下内容在ssh中执行
+# docker exec ddns-go ./ddns-go -resetPassword 123456
+# docker restart ddns-go
+
+# 以下内容在ddnsog的终端中新建一个/bin/bash（有的直接点击新建终端访问即可），然后执行
+# ddns-go ./ddns-go -resetPassword 123456
 
 ---
 version: "3"
