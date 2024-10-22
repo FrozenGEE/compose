@@ -24,11 +24,11 @@ services:
       # 如果某些域名无法访问，可以使用参数设置代理，注意替换成你自己代理的 ip 和端口
       # - MYTVSUPER_TOKEN=
       # 如果你需要访问 MytvSuper 直播源，那需要设置 MYTVSUPER_TOKEN 环境变量
-    network_mode: bridge
-    # network_mode: host
+    # network_mode: bridge
+    network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    ports:
-      - 5050:5000/tcp
-      # WebUI 端口，群晖WebUI默认为5000端口，所以预设使用bridge
+    # ports:
+      # - 5050:5000/tcp
+      # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
