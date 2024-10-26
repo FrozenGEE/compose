@@ -155,6 +155,7 @@
 
 第一种写法是根据webui上创建docker后使用portainer查看所得知的，一般推荐这种，只是相对来说查找比较麻烦，所以更推荐另一种写法
 另一种写法中dm-* 中的*代表第几个存储池，从0开始算起，但实际你自己是怎么设置的请视情况修改
+没什么值得保留的就趁早上新系统吧
 ```
 
 ```shell
@@ -208,13 +209,13 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 
 ## 【NAS默认端口说明】
 ```shell
-只列举WebUI和WebDAV
+只列举WebUI，WebDAV，SSH
 💡debian/ubentu/unRAID/CasaOS/fnOS/OMV/TrueNAS等众多linux系统的WebUI http和https端口为80和443，ssh端口为22
-💡群晖和绿联：WbeUI端口为5000，5001，WebDav为5005，5006，ssh端口为22（前者为http，后者为https）
-* 绿联旧系统WebUI为9999，ssh端口为922
-💡威联通：WebUI端口为8080，5443，WebDav为5000，5001，ssh端口为22（前者为http，后者为https）
-💡铁威马：WbeUI端口为8181，WebDav为5005，5006，ssh端口为9222（前者为http，后者为https）
-💡极空间：WbeUI端口为5055，WebDav为5005，官方的ssh端口为10022
+💡群晖和绿联：WbeUI端口为5000，5001；WebDav为5005，5006；ssh端口为22（前者为http，后者为https）
+* 绿联旧系统WebUI为9999；ssh端口为922
+💡威联通：WebUI端口为8080，5443；WebDav为5000，5001，ssh端口为22（前者为http，后者为https）
+💡铁威马：WbeUI端口为8181；WebDav为5005，5006；ssh端口为9222（前者为http，后者为https）
+💡极空间：WbeUI端口为5055，5056；WebDav为5005，5006；官方的ssh端口可自定义，最低10000（前者为http，后者为https）
 💡
 💡
 ```
