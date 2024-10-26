@@ -1,0 +1,48 @@
+# 官方文档，部分功能收费，68块，支持多平台客户端
+# 此版本去除所有用户相关功能，可以不用登录使用同步功能
+# https://b3log.org/siyuan
+# https://github.com/apkdv/siyuan-unlock
+# https://hub.docker.com/r/apkdv/siyuan-unlock
+
+---
+version: "3"
+# 最后编辑时间：2024-10-27
+services:
+  siyuan-note-unlock:
+    image: apkdv/siyuan-unlock:latest
+    # 镜像地址
+    container_name: siyuan-note-unlock
+    # 容器名字
+    hostname: siyuan-note-unlock
+    # 主机名
+    # user: '1000:100'
+    # 用户，用户组权限，如果启动失败，修改成 user: '0:0'，此处与下方的变量都一样的效果
+    command:
+      - --accessAuthCode=cheems
+      - --workspace=/siyuan
+      # 自定义激活代码
+      # 自定义数据存储目录，此为容器路径
+    volumes:
+      - /share/Container/siyuan-note-unlock:/siyuan
+      # 数据存储目录
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      # 个人在部署的时候遇到权限问题，写0给root权限就没事了，可能是因为使用ssh/portainer创建的需要root，可以尝试webui界面直接创建，可能不需要0 0
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+      - LANG=zh_CN.UTF-8
+      - LC_ALL=zh_CN.UTF-8
+      # 设置默认为中文
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 6806:6806/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
