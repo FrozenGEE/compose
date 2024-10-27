@@ -4,7 +4,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-05-01
+# 最后编辑时间：2024-10-27
 services:
   adminer:
     image: adminer:latest
@@ -19,12 +19,12 @@ services:
       # - ADMINER_PLUGINS=
       # 插件，如需使用，见下
       # https://www.adminer.org/en/plugins
-    # network_mode: bridge
-    network_mode: host
+    network_mode: bridge
+    # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    # ports:
-      # - 8080:8080/tcp
-      # WebUI 端口
+    ports:
+      - 8383:8080/tcp
+      # WebUI 端口，威联通的WebUI为8080，所以要bridge改成别的端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
