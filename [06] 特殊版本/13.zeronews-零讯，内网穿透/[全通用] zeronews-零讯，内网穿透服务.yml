@@ -10,7 +10,7 @@ version: "3"
 services:
   zeronews:
     image: zeronews/zeronews:latest
-    # 镜像地址
+    # 镜像地址，备用镜像：docker.zeronews.cc/zeronews:latest
     container_name: zeronews
     # 容器名字
     hostname: zeronews
