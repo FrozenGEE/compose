@@ -1,0 +1,51 @@
+# 官方文档
+# https://doc.linkease.com
+# https://doc.linkease.com/zh/guide/ddnsto
+# https://hub.docker.com/r/linkease/ddnsto
+# https://doc.linkease.com/zh/guide/ddnsto/install/device/docker.html
+
+# 套餐详情（记录于2024-10-31）
+# 可免费使用7天4Mbps宽带5条域名映射数量
+# 4Mbps(500kb/s)：域名映射数量12条，年费26元，季费9元，月费4元
+# 8Mbps(1mb/s)：域名映射数量20条，年费78元，季费27元，月费13元
+# 每个用户限制最大500台设备，如有更高数量的需求请在微信群联系群主
+# 部分情况无法使用DDNSTO穿透（如：部分路由器管理后台限制非IP访问、群晖Drive客户端使用非HTTP协议等），故请在购买前先试用
+
+# 注意：每次访问都需要验证，不适合分享给别人访问
+# 【注意：政策原因无法取消IP验证】
+# 1、如非必要请避免使用“_”、“-”等字符，部分第三方服务不兼容
+# 2、如遇到循环重定向问题，请在目标主机地址填写正确端口
+# 3、编辑域名后请等待1分钟，生效后可正常使用
+# 4、不支持mysql、ftp等非 http(s)协议，不支持 TCP
+# 5、不支持 rdp 客户端、不支持 ssh 客户端, 请使用远程应用的网页版
+
+# 切换服务器后，有几点需要注意的：
+# 域名前缀也会随之改变，如现在除了原有的"ddnsto.com",还多了"kooldns.cn"
+# 切换套餐后ddnsto插件会有1分钟左右的初始化时间，期间绑定的域名会不可用，请稍等再尝试
+# 切换后原有的域名将不可使用，如"aaa.kooldns.cn"切换到了"aaa.ddnsto.com"之后，原有的"aaa.koolddns.cn"将不可使用
+
+---
+version: "3"
+# 最后编辑时间：2024-10-30
+services:
+  ddnsto:
+    image: linkease/ddnsto:latest
+    # 镜像地址
+    container_name: ddnsto
+    # 容器名字
+    hostname: ddnsto
+    # 主机名
+    volumes:
+      - /share/Container/ddnsto:/ddnsto-config
+      # 配置文件目录
+    environment:
+      - TOKEN=1234567890
+      # 123456790替换为自己的ddnsto的令牌，具体看官网
+      - DEVICE_IDX=0
+      # 默认0，如果设备ID重复则为1-100之间
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: host
+    # 直接用host
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
