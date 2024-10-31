@@ -14,7 +14,7 @@ services:
     container_name: zeronews
     # 容器名字
     hostname: zeronews
-    # 主机，这里替换为你的设备名，在官网上就会显示设置的名称
+    # 主机名，这里替换为你的设备名，在官网上就会显示设置的名称
     command: 1234567890 440
     # 1234567890替换为你的密钥，具体看官网，440照抄
     network_mode: host
