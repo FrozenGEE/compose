@@ -14,7 +14,7 @@ version: "3"
 services:
   netbird:
     image: netbirdio/netbird:latest
-    # 镜像地址，仅支持amd64，该镜像无法拉取，并没有发布在dockerhub上，需要到作者123盘上下载，然后导入
+    # 镜像地址
     container_name: netbird
     # 容器名字
     hostname: netbird
