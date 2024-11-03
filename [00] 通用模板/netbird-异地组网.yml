@@ -1,0 +1,47 @@
+# 官方文档
+# https://netbird.io
+# https://docs.netbird.io/how-to/installation#installation
+
+# 对比 twingate 和 netbird
+# https://netbird.io/knowledge-hub/twingate-vs-netbird
+
+# 2024-11-03记录
+# 免费用户可供5个用户（管理员和子账号），100个节点使用
+
+---
+version: "3"
+# 最后编辑时间：2024-11-03
+services:
+  netbird:
+    image: netbirdio/netbird:latest
+    # 镜像地址
+    container_name: netbird
+    # 容器名字
+    hostname: netbird
+    # 主机名
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      # 照抄
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/netbird:/etc/netbird
+    environment:
+      - NB_SETUP_KEY=填写你的密钥
+      # 打开下面的网址，登录账号，然后去生成密钥，密钥最长365天
+      # https://app.netbird.io/setup-keys
+    network_mode: host
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/zeronews_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: https://netbird.io
+      # 适用于unraid界面打开WebUI，无WebUI界面，直接去访问官网
+      net.unraid.docker.icon: /mnt/user/LOGO/netbird.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
