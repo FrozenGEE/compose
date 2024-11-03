@@ -1,0 +1,60 @@
+# 官方文档
+# https://twingate.io
+# https://docs.twingate.io/how-to/installation#installation
+# https://hub.docker.com/r/twingate/connector
+# https://github.com/Twingate-Labs
+
+# 对比 twingate 和 twingate
+# https://twingate.io/knowledge-hub/twingate-vs-twingate
+
+# 2024-11-03记录
+# 免费用户可供5个用户（管理员和子账号）
+
+# 部署教程
+# https://www.bilibili.com/video/BV1hN411r72W
+# https://www.bilibili.com/video/BV1eu4y1Q7Ec
+# https://appscross.com/blog/deploy-twingate-ztna-solution.html
+
+---
+version: "3"
+# 最后编辑时间：2024-11-03
+services:
+  twingate:
+    image: twingate/connector:latest
+    # 镜像地址
+    container_name: twingate
+    # 容器名字
+    hostname: twingate
+    # 主机名
+    sysctls:
+      net.ipv4.ping_group_range: "0 2147483647"
+      # 这部分可选，当客户端可能与连接器在同一个本地网络上时，建议这样做，因为它将允许对等连接
+    environment:
+      - TWINGATE_LABEL_HOSTNAME=twingate
+      # 自定义设备名，和主机名一样，预设为twingate
+      - TWINGATE_NETWORK=<name>.twingate.com
+      # 你的 Twingate 网络名字，假设为abc，则书写格式 abc.twingate.com，注意替换掉
+      # 在注册时会让你设置的，注意起个好名字
+      - TWINGATE_ACCESS_TOKEN=
+      - TWINGATE_REFRESH_TOKEN=
+      # 用于对 Connector 进行身份验证的过期的访问令牌和刷新令牌，通过 Twingate Admin Console 或 API 生成
+      # 官方文档指引：https://www.twingate.com/docs/quick-start#deploy-a-connector
+      - TWINGATE_DNS=198.51.100.42
+      # 连接器要使用的自定义本地解析器 DNS 服务器，官方模板为198.51.100.42
+      # https://frozengee.twingate.com/settings/api
+    network_mode: host
+    # 直接host
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/twingate_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: https://twingate.io
+      # 适用于unraid界面打开WebUI，无WebUI界面，直接去访问官网
+      net.unraid.docker.icon: /mnt/user/LOGO/twingate.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
