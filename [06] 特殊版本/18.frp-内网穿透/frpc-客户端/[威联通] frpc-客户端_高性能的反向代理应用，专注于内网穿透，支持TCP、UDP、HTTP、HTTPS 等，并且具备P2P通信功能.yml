@@ -12,11 +12,11 @@
 # https://freefrp.net/docs
 
 # 相关命令
-# sudo systemctl start frps        启动服务 
-# sudo systemctl enable frps       开机自启
-# sudo systemctl status frps       状态查询
-# sudo systemctl restart frps      重启服务
-# sudo systemctl stop frps         停止服务
+# sudo systemctl start frpc        启动服务 
+# sudo systemctl enable frpc       开机自启
+# sudo systemctl status frpc       状态查询
+# sudo systemctl restart frpc      重启服务
+# sudo systemctl stop frpc         停止服务
 
 ---
 version: "3"
