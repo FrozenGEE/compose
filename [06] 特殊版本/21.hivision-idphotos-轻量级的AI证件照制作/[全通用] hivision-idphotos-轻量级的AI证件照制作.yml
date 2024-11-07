@@ -1,0 +1,51 @@
+# 官方文档
+# https://github.com/Zeyi-Lin/HivisionIDPhotos
+# https://hub.docker.com/r/linzeyi/hivision_idphotos
+# 演示网站
+# https://swanhub.co/ZeYiLin/HivisionIDPhotos/demo
+
+---
+version: "3"
+# 最后编辑时间：2024-11-07
+services:
+  hivision-idphotos:
+    image: linzeyi/hivision_idphotos:latest
+    # 镜像地址
+    container_name: hivision-idphotos
+    # 容器名字
+    hostname: hivision-idphotos
+    # 主机名
+    command: python3 deploy_api.py
+    # 启动 API 后端服务
+    environment:
+      # - FACE_PLUS_API_KEY=xxxxxx
+      # 在 Face++ 控制台申请的 API 密钥
+      # - FACE_PLUS_API_SECRET=yyyyyy
+      # Face++ API密钥对应的Secret
+      # 以上两个变量，需要自己去 https://www.faceplusplus.com.cn 中注册并申请才可以使用
+      # 步骤见此 https://github.com/Zeyi-Lin/HivisionIDPhotos/blob/master/docs/face++_CN.md
+      # - RUN_MODE=beast
+      # 运行模式，可选值为beast(野兽模式)。野兽模式下人脸检测和抠图模型将不释放内存，从而获得更快的二次推理速度，建议内存16GB以上尝试
+      - DEFAULT_LANG=zh
+      # Gradio Demo启动时的默认语言
+    network_mode: bridge
+    # 因为API后端服务的端口为8080，别的服务会使用到，所以使用bridge网络模式
+    ports:
+      - 7860:7860/tcp
+      # WebUI 端口
+      - 7861:8080/tcp
+      # API 后端服务端口，用于调用
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/hivision-idphotos.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:7860]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/hivision-idphotos.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
