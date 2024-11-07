@@ -76,15 +76,15 @@
 # 
 ########################################
 # 各个服务的WebUI
-# plex			ip:32400
-# emby			ip:8096
-# jellyfin		ip:8097
-# qbittorrent	ip:8888
-# transmission	ip:9091
-# moviepilot	ip:3333
-# cookiecloud	ip:8188
-# iyuu			ip:8780
-# v2raya		ip:2017
+# plex            ip:32400
+# emby            ip:8096
+# jellyfin        ip:8097
+# qbittorrent     ip:8085
+# transmission    ip:9091
+# moviepilot      ip:3333
+# cookiecloud     ip:8188
+# iyuu            ip:8780
+# v2raya          ip:2017
 #
 ########################################
 
@@ -237,7 +237,7 @@ services:
       # - 【这里替换为你的数据存放目录】/Torrents监控自动下载目录:/watch
       # 种子监控自动下载目录，非必须，用于把种子放到目录内后，自动添加下载任务
     environment:
-      - WEBUI_PORT=8888
+      - WEBUI_PORT=8085
       # 自定义WebUI端口
       # - TORRENTING_PORT=25800
       # 4.3.9不支持该变量，故注释掉，仅作保留
