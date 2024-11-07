@@ -153,7 +153,7 @@ services:
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
-########################################
+##############################################
 
   emby:
     image: linuxserver/emby:latest
@@ -194,7 +194,7 @@ services:
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
-########################################
+##############################################
 
   jellyfin:
     image: nyanmisaka/jellyfin:latest
