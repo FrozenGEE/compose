@@ -235,7 +235,7 @@ services:
 
   qbittorrent:
     image: linuxserver/qbittorrent:14.3.9
-      # 预设使用qb 4.3.9版本避免PT站因为版本太高ban掉
+    # 镜像地址，预设使用qb 4.3.9版本避免PT站因为版本太高ban掉
     container_name: qbittorrent
     hostname: qbittorrent
     volumes:
@@ -268,7 +268,7 @@ services:
 
   transmission:
     image: linuxserver/transmission:version-3.00-r8
-    # 镜像地址
+    # 镜像地址，预设使用tr 3.0版本避免PT站因为版本太高ban掉
     container_name: transmission
     hostname: transmission
     volumes:
@@ -285,7 +285,7 @@ services:
     environment:
       - TRANSMISSION_WEB_HOME=/config/webui
       # WEBUI主页路径，写容器路径，用于放汉化文件
-      # 4.x版本的汉化文件下载地址：https://github.com/ronggang/transmission-web-control
+      # 汉化文件下载地址：https://github.com/ronggang/transmission-web-control
       # 将 "/src" 这个文件夹里的东西放到 "/config/webui" 内即可
       - USER=cheems
       - PASS=cheems
