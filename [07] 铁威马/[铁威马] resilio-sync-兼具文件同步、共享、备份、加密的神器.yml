@@ -1,0 +1,73 @@
+# 官方文档
+# https://help.resilio.com
+# https://www.resilio.com/sync
+# https://help.resilio.com/hc/en-us/categories/200140177-Get-started-with-Sync
+# https://hub.docker.com/r/linuxserver/resilio-sync
+# https://docs.linuxserver.io/images/resilio-sync
+
+# P2P同步软件Resilio Sync从版本3.0开始，Windows老系统(win7以前/32位系统)不在被支持，个人版可免费申请PRO授权key，https://www.resilio.com/sync
+# https://iui.su/956
+# https://d5.shuge.org/s/WRJiN
+# 旧版在设置中选中激活文件即可，新版初始化后就需要选择，需要把激活文件放在 /config 内，然后在路径栏上输入 /config/Resilio Sync（PRO授权文件）.btskey 即可
+
+# 使用教程
+# https://flowus.cn/share/3940f1ec-fe9a-43de-92b2-fe6fe53ad2ff
+# https://www.bilibili.com/video/BV16r4y1F74C
+# https://www.bilibili.com/video/BV1EJ411t7gF
+# https://www.bilibili.com/video/BV1ed4y1c7ZT
+
+---
+version: "3"
+# 最后编辑时间：2024-11-07
+services:
+  resilio-sync:
+    image: linuxserver/resilio-sync:latest
+    # 镜像地址，旧版为 linuxserver/resilio-sync:2.8.1
+    container_name: resilio-sync
+    # 容器名字
+    hostname: resilio-sync
+    # 主机名
+    volumes:
+      - /Volume1/User/docker/resilio-sync:/config
+      # 配置文件目录
+      - /Volume1/User:/Volume1/User
+      # 数据目录，用于同步和下载，记得修改设置中的路径
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      # 映射本地其他路径使其可以访问，可以自定义多个
+      # 
+      # - 【这里替换为你的数据存放目录】/resilio-sync同步:/sync
+      # 同步文件目录，用于将其他内容同步到本地的默认路径
+      # - 【这里替换为你的数据存放目录】/resilio-sync下载:/downloads
+      # 下载目录，用于将其他内容下载到本地的默认路径
+      # 
+      # 设置中可以修改上述两个路径(注意设置中填写的是容器路径)，但是记得修改，用途看注释
+    environment:
+      - PUID=0
+      - PGID=0
+      # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8888:8888/tcp
+      # WebUI 端口
+      # - 55555:55555/tcp
+      # 数据传输端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/resilio-sync_B.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:8888]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/resilio-sync_A.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
