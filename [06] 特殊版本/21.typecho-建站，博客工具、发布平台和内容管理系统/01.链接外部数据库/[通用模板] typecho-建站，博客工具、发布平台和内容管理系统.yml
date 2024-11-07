@@ -60,8 +60,8 @@ services:
       # - 5580:80/tcp
       # WebUI 端口(apache)
       # - 5590:9000/tcp
-      # WebUI 端口(apache)
-      # 选其一即可
+      # WebUI 端口(fpm)
+      # 根据实际的镜像选择
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
@@ -73,7 +73,7 @@ services:
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:9000]
       # net.unraid.docker.webui: http://[IP]:[PORT:80]
-      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改，根据实际的镜像选择
       net.unraid.docker.icon: /mnt/user/LOGO/typecho.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
