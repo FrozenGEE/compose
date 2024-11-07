@@ -1,0 +1,45 @@
+# 官方文档
+# https://screego.net
+# https://github.com/screego/server
+# https://www.bilibili.com/read/cv36266727/
+# https://www.cnblogs.com/cainiaoyige1/p/13883254.html
+
+---
+version: "3"
+# 最后编辑时间：2024-11-07
+services:
+  screego:
+    image: screego/server:unstable
+    # 镜像地址
+    container_name: screego
+    # 容器名字
+    hostname: screego
+    # 主机名
+    environment:
+      - SCREEGO_EXTERNAL_IP=127.0.0.1
+      # 服务器的IP地址，或者解析公网ip的域名
+      # - SCREEGO_TURN_PORT_RANGE=50000:50200
+      # 自定义screego的数据传输端口范围(udp)，照抄即可
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5050:5050/tcp
+      # WebUI 端口
+      # - 3478:3478/udp
+      # - 50000-50200:50000-50200/udp
+      # 数据传输端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/screego_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:5050]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/screego.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
