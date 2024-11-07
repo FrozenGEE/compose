@@ -17,7 +17,7 @@ services:
     # 主机名
     environment:
       - SCREEGO_EXTERNAL_IP=127.0.0.1
-      # 服务器的IP地址，或者解析公网ip的域名
+      # 服务器的IP地址，默认即可
       - SCREEGO_TURN_PORT_RANGE=50000:50200
       # 自定义screego的数据传输端口范围(udp)，照抄即可
     # network_mode: bridge
