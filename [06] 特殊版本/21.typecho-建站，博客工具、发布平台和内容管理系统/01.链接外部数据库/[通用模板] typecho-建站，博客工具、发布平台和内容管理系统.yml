@@ -22,10 +22,6 @@ services:
     volumes:
       - 【这里替换为你的docker数据存放目录】/typecho:/app/usr
       # 配置文件目录
-      # - 【这里替换为你的数据存放目录】/typecho-plugins:/app/usr/plugins
-      # - 【这里替换为你的数据存放目录】/typecho-themes:/app/usr/themes
-      # - 【这里替换为你的数据存放目录】/typecho-uploads:/app/usr/uploads
-      # 分别对应插件，主题，上传三个目录，如需设置配置文件目录外的路径则自行修改，一般用不上，仅作预设
     environment:
       - TYPECHO_USER_NAME=typecho
       - TYPECHO_USER_PASSWORD=typecho
