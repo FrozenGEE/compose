@@ -15,8 +15,6 @@ services:
     # 容器名字
     hostname: hivision-idphotos
     # 主机名
-    command: python3 deploy_api.py
-    # 启动 API 后端服务
     environment:
       # - FACE_PLUS_API_KEY=xxxxxx
       # 在 Face++ 控制台申请的 API 密钥
@@ -28,13 +26,12 @@ services:
       # 运行模式，可选值为beast(野兽模式)。野兽模式下人脸检测和抠图模型将不释放内存，从而获得更快的二次推理速度，建议内存16GB以上尝试
       - DEFAULT_LANG=zh
       # Gradio Demo启动时的默认语言
-    network_mode: bridge
-    # 因为API后端服务的端口为8080，别的服务会使用到，所以使用bridge网络模式
-    ports:
-      - 7860:7860/tcp
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 7860:7860/tcp
       # WebUI 端口
-      - 7861:8080/tcp
-      # API 后端服务端口，用于调用
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
