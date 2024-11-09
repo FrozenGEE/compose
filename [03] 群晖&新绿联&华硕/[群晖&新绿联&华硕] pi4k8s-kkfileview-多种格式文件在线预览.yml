@@ -1,0 +1,78 @@
+# 注意事项：v4.2.0之前的版本存在高危漏洞：
+# 1、kkFileView存在XSS漏洞，跨站脚本攻击是通过在网页中加入恶意代码，当访问者浏览网页时恶意代码会被执行，攻击者可利用该漏洞窃取或操纵客户会话和 cookie，用来模仿合法用户，从而使攻击者获得管理员权限，控制整个网站
+# 2、kkFileView任意文件读取漏洞，攻击者能够通过Web应用程序未经授权地读取任意文件，这可能会导致敏感信息的泄露或系统的崩溃
+
+# kkFileView任意文件上传导致远程执行漏洞（2024-05-17）
+# https://zhuanlan.zhihu.com/p/694338735
+# https://cloud.tencent.com/developer/article/2414196
+# https://www.bilibili.com/video/BV1iT42117oy 
+########################################
+# 官方demo
+# https://kkfile.51qqt.com/index
+# 官方文档，官方版本只支持X86版本，版本为4.1.0
+# https://hub.docker.com/r/keking/kkfileview
+# https://kkview.cn/zh-cn/docs/production.html
+########################################
+# 需要本地准备好kkfileview.jar文件，不然无法启动
+# 编译打包教程
+# https://pub.gdqhfw.com/archives/kkfileview-on-centos
+# https://zhuanlan.zhihu.com/p/692840649
+# arm镜像编译打包教程
+# https://www.cnblogs.com/wdgde/p/18005982
+# https://blog.51cto.com/u_16213303/9040167
+########################################
+# 现成x86打包文件（2023-07-10）
+# https://www.cnblogs.com/wwwcf1982603555/p/18108765
+# 个人分享，解压缩后，把bin文件夹内的东西放到
+# https://www.123pan.com/s/YuAUVv-UT1nA.html
+
+# 该镜像支持x86和arm，tag分别为4.4.0和4.4.0-arm，推荐
+# https://zhuanlan.zhihu.com/p/675399729
+# https://hub.docker.com/r/pi4k8s/kkfileview
+########################################
+# 仅支持x86，tag为4.4.0-beta，版本最新的镜像
+# https://hub.docker.com/r/nn200433/kkfileview
+# 仅支持arm64，tag为4.4.0
+# https://hub.docker.com/r/lizhien/kkfileview
+
+# 仅支持x86，4.1版本，集成了较为友好的LibreOffice支持在线预览文件
+# https://hub.docker.com/r/wjs1996/kkfileview_libreoffice
+# 仅支持x86，2个版本：tag为4.6.6为修改版本(删除个人信息自用谅解)，非官方的4.6版本；tag为4.1.1为基于官方优化未修改任何信息版本
+# https://hub.docker.com/r/cgsat8/kkfileview
+########################################
+
+---
+version: "3"
+# 最后编辑时间：2024-05-15
+services:
+  kkfileview:
+    image: pi4k8s/kkfileview:4.4.0
+    # 镜像地址，具体需要哪个镜像，tag，见上
+    container_name: kkfileview
+    # 容器名字
+    hostname: kkfileview
+    # 主机名
+    volumes:
+       - /volume1/Docker/kkfileview:/opt/kkFileView-4.4.0
+       # 配置文件目录
+    environment: 
+      - KK_OFFICE_PREVIEW_TYPE=pdf
+      # office类型文档(word ppt)样式，默认为图片(image)，可配置为pdf（预览时也有按钮切换）
+      - KK_OFFICE_PREVIEW_SWITCH_DISABLED=true
+      # 是否关闭office预览切换开关，默认为false，可配置为true关闭
+      - KK_PDF_DOWNLOAD_DISABLE=true
+      # 是否禁止下载转换生成的pdf文件
+      - KK_FILE_UPLOAD_ENABLED=true
+      # 是否禁用首页文件上传
+      - KK_CONTEXT_PATH=/
+      # kkFileView运行时tomcat的ServletContext 默认值：/
+      # - KK_BASE_URL=【http://wwww.xxxx.com/】
+      # 提供预览服务的地址，默认从请求url读，如果使用nginx等反向代理，需要手动设置（参考下方的 “代理配置” ）
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8012:8012/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -1,0 +1,35 @@
+# 官方文档
+# https://hub.docker.com/r/80x86/filebrowser
+# 部署教程
+# https://post.smzdm.com/p/apvp2p2w
+
+---
+version: "3"
+# 最后编辑时间：2024-04-28
+services:
+  filebrowser:
+    image: 80x86/filebrowser:latest
+    # 镜像地址
+    container_name: filebrowser
+    # 容器名字
+    hostname: filebrowser
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    devices:
+      - /dev/dri:/dev/dri
+      # 开启硬件转码
+    volumes:
+      - /volume1/Docker/filebrower:/config
+      # 配置文件目录
+      - /volume1:/volume1
+      # 映射本地其他路径使其可以访问，可以自定义多个
+    environment:
+      - WEB_PORT=8082
+      # 自定义容器端口
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: host
+    # 推荐自定义FB的WebUI端口，然后直接用host模式
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
