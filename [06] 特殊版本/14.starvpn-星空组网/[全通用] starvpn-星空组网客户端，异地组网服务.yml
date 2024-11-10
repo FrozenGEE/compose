@@ -2,6 +2,7 @@
 # https://www.starvpn.cn
 # https://doc.starvpn.cn
 # https://doc.starvpn.cn/#/register
+# https://hub.docker.com/r/xianwei2022/stars.client
 # 免费版：授权数量20，服务器线路1条，点对点传输不限浏览不限速，转发速度最高10Mbps/节点
 # 专业版：授权数量100，高速服务器线路2条，点对点传输不限浏览不限速，转发速度最高20Mbps/节点（一个月9.9，一年99，三年269，五年398）
 
@@ -14,20 +15,20 @@ version: "3"
 # 最后编辑时间：2024-10-31
 services:
   starvpn:
-    image: registry.cn-beijing.aliyuncs.com/ld_beijing/stars.client:5.0.5
-    # 镜像地址
+    image: xianwei2022/stars.client:latest
+    # 镜像地址，备用镜像地址：registry.cn-beijing.aliyuncs.com/ld_beijing/stars.client:5.0.5
     container_name: starvpn
     # 容器名字
     hostname: starvpn
     # 主机名，这里替换为你的设备名，在官网上就会显示设置的名称
     privileged: true
-    # 特权模式，赋予容器几乎与主机相同的权限
+    # 特权模式，赋予容器几乎与主机相同的权限，必须
     environment:
       - STARS_USER=填写成员账号
       - STARS_PASS=填写成员密码
       # 先去官网创建好再回来写
     network_mode: host
-    # 直接用host
+    # 直接用host，必须
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
