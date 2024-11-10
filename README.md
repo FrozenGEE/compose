@@ -174,7 +174,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | NAS<br>tcp端口(http/https) | WebUI| WebDAV | SSH | 其他/备注 |
 | :----: | :----: | :----: | :---- | :---- |
 | unRAID | 80/443 | 无 | 22 |
-| TrueNAS | 80/443 | 原本自带的没了 | 22 |
+| TrueNAS-SCALE | 80/443 | 原本自带的没了 | 22 |
 | OMV | 80/443 | 无 | 22 |
 | CASAOS/ZimaOS | 80/443 | 无 | 22 |
 | 群晖 | 5000/5001 | 5005/5006 | 22 |
@@ -209,7 +209,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | debian | 
 | uBuntu | 
 | unRAID | uid=1000(cheems) gid=100(users) groups=100(users) |
-| TrueNAS | uid=950(truenas_admin) gid=950(truenas_admin) groups=950(truenas_admin),544(builtin_administrators<br><br>uid=3000(cheems) gid=3000(cheems) groups=950(cheems),545(builtin_users) | truenas_admin 为系统自动创建<br>cheems 为自建的第一个账号 |
+| TrueNAS-SCALE | uid=950(truenas_admin) gid=950(truenas_admin) groups=950(truenas_admin),544(builtin_administrators<br><br>uid=3000(cheems) gid=3000(cheems) groups=950(cheems),545(builtin_users) | truenas_admin 为系统自动创建<br>cheems 为自建的第一个账号 |
 | OMV |
 | CASAOS/ZimaOS |
 | 群晖 | uid=1026(cheems) gid=100(users) groups=100(users),101(administrators) |
