@@ -166,7 +166,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 ## 【NAS默认端口说明】
 只列举WebUI，WebDAV，SSH
 
-💡debian/ubentu/unRAID/CasaOS/fnOS/OMV/TrueNAS等众多linux系统的WebUI http和https端口为80和443，ssh端口为22
+💡debian/ubentu/unRAID/CasaOS/OMV/TrueNAS等众多linux系统的WebUI http和https端口为80和443，ssh端口为22
 | NAS/端口 | WebUI| WebDAV | SSH | 其他 |
 | :----: | :----: | :----: | :----: | :----: |
 | unRAID | 80/443 | 无 | 22 |
