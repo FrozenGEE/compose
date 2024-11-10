@@ -34,16 +34,17 @@
 ```shell
 💡unRAID的docker配置文件存放路径
 /mnt/user/appdata/aaa
+
 💡unRAID的数据存放路径开头
 /mnt/user/共享文件夹/bbb
-
-熟悉unRAID的玩家会知道另一个绝对路径写法
+💡熟悉unRAID的玩家会知道另一个绝对路径写法
 /mnt/disk*/共享文件夹/bbb
 ```
 
 ```shell
 💡群晖的docker配置文件存放路径
 /volume*/docker/aaa
+
 💡群晖的数据存放路径开头
 /volume*/共享文件夹/bbb
 ```
@@ -51,17 +52,19 @@
 ```shell
 💡威联通的docker配置文件存放路径
 /share/Container/aaa
+
 💡威联通的数据存放路径开头
 /share/共享文件夹/bbb
-
 💡另一种写法
 /share/CACHEDEV*_DATA/共享文件夹/bbb
+
 对于这两种写法，模板以第一种写法为主，因为创建好第一个存储池，会预设创建好部分文件夹，因此模板将会以这些文件夹作为预设的模板，
 ```
 
 ```shell
 💡TrueNAS的docker配置文件存放路径
 /mnt/共享文件夹/docker/aaa
+
 💡TrueNAS的数据存放路径开头
 /mnt/共享文件夹/bbb
 
@@ -71,6 +74,7 @@
 ```shell
 💡铁威马的docker配置文件存放路径
 /Volume*/User/docker/aaa
+
 💡铁威马的数据存放路径开头
 /Volume*/User/bbb
 ```
@@ -78,6 +82,7 @@
 ```shell
 💡华硕(华芸)的docker配置文件存放路径
 /volume*/docker/aaa
+
 💡华硕(华芸)的数据存放路径开头
 /Volume*/共享文件夹/bbb
 
@@ -86,6 +91,7 @@
 ```shell
 💡CasaOS的docker配置文件存放路径
 /DATA/AppData/aaa
+
 💡CasaOS的数据存放路径开头
 /DATA/共享文件夹/bbb
 ```
@@ -93,16 +99,15 @@
 ```shell
 💡fnOS的docker配置文件存放路径
 /vol*/用户id/docker/aaa
+
 💡fnOS的数据存放路径开头
 /vol*/用户id/bbb
 
 用户id，如其意思，第一个用户为即1000，创建第二个用户则是1001，第三个是1002，如此类推
-
 第一个用户的第一个存储池的共享文件夹路径是/vol1/1000
 第一个用户的第二个存储池的共享文件夹路径是/vol2/1000
 第三个用户的第二个存储池的共享文件夹路径是/vol2/1002
-...
-类推
+类推......
 ```
 
 ```shell
@@ -116,14 +121,13 @@
 ```shell
 💡绿联旧系统(基于op)的docker配置文件存放路径
 /mnt/media_rw/存储池序列号/.ugreen_nas/用户ID/docker/aaa
-另一种写法
-/mnt/dm-*/.ugreen_nas/用户ID/docker/aaa
+💡另一种写法：/mnt/dm-*/.ugreen_nas/用户ID/docker/aaa
+
 💡绿联旧系统(基于op)的数据存放路径开头
 /mnt/media_rw/存储池序列号/.ugreen_nas/用户ID/文件夹名字/bbb
-另一种写法
-/mnt/dm-*/.ugreen_nas/用户ID/data/bbb
+💡另一种写法：/mnt/dm-*/.ugreen_nas/用户ID/data/bbb
 
-第一种写法是根据webui上创建docker后使用portainer查看所得知的，一般推荐这种，只是相对来说查找比较麻烦，所以更推荐另一种写法
+第一种写法是根据webui上创建docker后使用portainer查看所得知的，推荐这种
 另一种写法中dm-* 中的*代表第几个存储池，从0开始算起，但实际你自己是怎么设置的请视情况修改
 
 由于每个人的存储池序列号和用户ID不一样，因为无法写出现成模板，[全通用]的模板可以使用
@@ -135,7 +139,6 @@
 /volume*/docker/aaa
 💡绿联新系统(基于debian)的数据存放路径开头
 /volume*/共享文件夹/bbb
-务必把创建好一个名为docker的共享文件夹
 
 💡绿联新系统（基于debian）的个人文件夹存放路径（系统默认）
 /volume*/@home/xxx/yyy
@@ -156,15 +159,15 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 /tmp/zfsv3/sata$/手机号码+字母/data/bbb
 /tmp/zfsv3/nvmel$/手机号码+字母/data/bbb
 
-"nvme*"和"sata*"根据自己实际情况修改，$为数字；"手机号码"为个人手机号码，到处都是手机号，真他妈恶心
+"nvmel$"和"sata$" 根据自己实际情况修改，$为数字；"手机号码"为个人手机号码，到处都是手机号，真他妈恶心
 如果你有第二台极空间，并且用同一个手机号绑定注册，则为需要在手机号码后添加上a-z的字母
-例如：1688888888，1688888888a，1688888888b，1688888888c，这样类推
+例如：1688888888，1688888888a，1688888888b，1688888888c，这样类推，所以极限是多少？27？
 
 由于每个人的硬盘类别不一样，手机号也是个人隐私，因为无法写出现成模板，[全通用]的模板可以使用
 ```
 
 # 【NAS默认端口说明】
-只列举WebUI，WebDAV，SSH
+只列举WebUI，WebDAV，SSH，欢迎更多不同品牌的NAS来补充
 
 💡debian/ubentu/unRAID/CasaOS/OMV/TrueNAS等众多linux系统的WebUI http和https端口为80和443，ssh端口为22
 | NAS<br>tcp端口(http/https) | WebUI| WebDAV | SSH | 其他/备注 |
