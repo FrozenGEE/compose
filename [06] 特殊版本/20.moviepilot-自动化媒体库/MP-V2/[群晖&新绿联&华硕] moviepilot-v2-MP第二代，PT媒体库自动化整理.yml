@@ -77,11 +77,11 @@ services:
       - SUPERUSER=admin
       # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效，可在MP内修改
-      - API_TOKEN=qwerasdfzxcv
-      # API密钥，V1版本默认为moviepilot，V2版本需要手动配置为大于等于16个字符的复杂字符串，预设为键盘上的每一排的前四个英文
+      - API_TOKEN=qwerasdfzxcv1234
+      # API密钥，V1版本默认为moviepilot，V2版本需要手动配置为大于等于16个字符的复杂字符串，预设为键盘上的每一排的前四位字符
       # 如配置不符合要求将会强制重新生成，可在首次启动的启动日志或env配置文件中查看最新的值
       # 在媒体服务器Webhook、微信回调等地址配置中需要加上 ?token= 该值
-      #  - PROXY_HOST=【IP:PORT】
+      # - PROXY_HOST=【IP:PORT】
       # 网络代理，访问themoviedb或者重启更新需要使用代理访问，如果你没有配置魔法就注释掉
       # 格式为http(s)://ip:port、socks5://user:pass@host:port
       - BIG_MEMORY_MODE=false
