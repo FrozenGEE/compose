@@ -18,8 +18,10 @@ services:
     hostname: verysync
     # 主机名
     volumes:
-      - /mnt/user:/data
+      - /mnt/user/appdata:/data
       # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      # 切勿直接把整个存储池都共享了，例如 /volume1:/volume1m，/mnt/user:/data，/vol1/1000:/vol1 等，其他NAS不列举了
+      # 必须至少写到共享文件夹那一层，即在WebUI上文件管理器看到的那个目录，否则后果自负，这里以docker容器默认的数据存放目录作为例子
       # 映射本地其他路径使其可以访问，可以自定义多个
     # environment:
       # - PORT=8886
