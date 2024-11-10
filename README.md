@@ -164,19 +164,23 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 ```
 
 ## 【NAS默认端口说明】
-```shell
 只列举WebUI，WebDAV，SSH
-💡debian/ubentu/unRAID/CasaOS/fnOS/OMV/TrueNAS等众多linux系统的WebUI http和https端口为80和443，ssh端口为22
-💡群晖和绿联：WbeUI端口为5000，5001；WebDav为5005，5006；ssh端口为22（前者为http，后者为https）
-* 绿联旧系统WebUI为9999；ssh端口为922
-💡威联通：WebUI端口为8080，5443；WebDav为5000，5001，ssh端口为22（前者为http，后者为https）
-💡铁威马：WbeUI端口为8181；WebDav为5005，5006；ssh端口为9222（前者为http，后者为https）
-💡极空间：WbeUI端口为5055，5056；WebDav为5005，5006；官方的ssh端口可自定义，最低10000（前者为http，后者为https）
-💡万由：
-💡华硕(华芸)：WbeUI端口为8000，8001；WebDav为9800，9802；ssh端口为22（前者为http，后者为https）
-💡
-```
 
+💡debian/ubentu/unRAID/CasaOS/fnOS/OMV/TrueNAS等众多linux系统的WebUI http和https端口为80和443，ssh端口为22
+| NAS/端口 | WebUI| WebDAV | SSH | 其他 |
+| :----: | :----: | :----: | :----: | :----: |
+| unRAID | 80/443 | 无 | 22 |
+| TrueNAS | 80/443 | 待补充 | 22 |
+| OMV | 80/443 | 无 | 22 |
+| CASAOS/ZimaOS | 80/443 | 无 | 22 |
+| 群晖 | 5000/5001 | 5005/5006 | 22 |
+| 威联通 | 8080/5443 | 5005/5006 | 22 |
+| 铁威马 | 8181 | 5005/5006 | 9222 |
+| 华硕 | 8000/8001 | 9800/9802 | 22 |
+| 飞牛OS | 8000 | 待补充 | 22 |
+| 新绿联 | 5000/5001 | 5005/5006 | 22 |
+| 旧绿联 | 9999 | 待补充 | 922 |
+| 极空间 | 5055/5056 | 5005/5006 | 可自定义<br>最低10000 | 8050 |
 
 ## 【各nas portainer 部署】
 - 汉化版镜像：6053537/portainer-ce
