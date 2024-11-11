@@ -208,7 +208,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 
 欢迎更多不同品牌的NAS来补充
 
-| NAS | id cheems | 其他/备注 |
+| NAS | ssh中执行 id cheems 获取到的内容 | 其他/备注 |
 | :----: | :---- | :---- |
 | Debian | 
 | Ubuntu | 
