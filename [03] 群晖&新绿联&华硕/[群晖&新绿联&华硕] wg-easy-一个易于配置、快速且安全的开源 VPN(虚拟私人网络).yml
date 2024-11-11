@@ -1,0 +1,98 @@
+########################################
+# 相关资料及教程参考，来自B站UP主
+################ openwrt ###############
+# 1、最初的晨曦；【软路由应用】如何优雅的连接到家里的网络? OpenWrt中使用wireguard教程|一个端口访问局域网内所有设备
+# 		https://www.bilibili.com/video/BV1464y1Q7uE
+# 
+# 2、suckmypeen；在Openwrt上使用wireguard组网
+# 		https://www.bilibili.com/read/cv19245161
+# 【推荐先看“最初的晨曦”这个大佬的，对每一个参数都有讲解，其次是第二个】
+# 
+# 3、潮玩客；【教程】如何实现内网穿透 WireGuard简易教程
+# 		https://www.bilibili.com/video/BV1E1421b7eD
+################ docker ################
+# 4、司波图；【司波图】基于Wireguard组网技术的内网穿透教程
+# 		https://www.bilibili.com/video/BV1uT411w7Tq
+# 		https://gitee.com/spoto/wireguard
+################ 群晖 ###################
+# 5、抓單的灰太狼；群晖NAS内网穿透：Docker结合wg-easy可视化管理WireGuard服务端
+# 		https://www.bilibili.com/video/BV1Vzy5YUEwL
+################ 威联通 #################
+# 6、昵称不让修改吗；WireGuard各主流平台的配置教程
+# 		https://www.bilibili.com/read/cv18546594
+########################################
+
+# 官方文档
+# https://www.wireguard.com
+# https://github.com/WireGuard
+# https://github.com/wg-easy/wg-easy
+
+# 需要把51820/udp该端口开放到公网上，如果映射出去的端口号修改了，变量内对应修改
+# 如果遇到无法创建的问题，改用bridge试试
+# ① 群晖用户先去添加矿神的套件源，安装并按照提示激活wireguard后再来部署，如果其他系统底层或者内核魔改阉割严重的linux可能无法使用
+# ② 这一点没有试验过，在知乎文章上看到的，也是参考资料，https://zhuanlan.zhihu.com/p/694268514
+# ③ 去看“最初的晨曦”视频中的说明
+# ④ host模式部署出问题，没搞成，就用bridge模式，不太会怎么搞，后续再研究一下，有懂行可以指点指点，在下网络这块是个菜鸡
+
+---
+version: "3"
+# 最后编辑时间：2024-11-03
+services:
+  wg-easy:
+    image: ghcr.io/wg-easy/wg-easy:latest
+    # 镜像地址
+    container_name: wg-easy
+    # 容器名字
+    hostname: wg-easy
+    # 主机名
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+      # - net.ipv6.conf.all.forwarding=1
+      # [①] 照抄
+      # [②] 如果还需要使用ipv6连接，则去掉第三行的#号注释并对齐
+    volumes:
+      - /volume1/docker/wg-easy:/etc/wireguard
+      # 配置文件目录
+    environment:
+      ########################################
+      - PORT=51821
+      # 自定义容器的 WebUI端口，默认为51821
+      - WG_PORT=51820
+      # 自定义容器的数据访问端口，需要和下面的端口映射的容器端口保持一直，默认为51820
+      - WG_DEFAULT_ADDRESS=10.8.0.x
+      # WG组网的虚拟IP地址，默认为10.8.0.x，某种设置情况下注意和[允许连接的IP段]保持一直
+      # 	以上为自定义容器的内容，注意区分
+      ########################################
+      - WG_CONFIG_PORT=51820
+      # 设置conf配置文件中的数据传输端口，这是实际端口，按照最终数据出口到公网的实际端口为准，默认为51820
+      - WG_HOST=【这里替换为你的服务器地址！！！！！！！！！！】
+      # 你的服务器地址，IP和域名均可，推荐是域名，需要公网能访问到的
+      - WG_ALLOWED_IPS=0.0.0.0/0, ::/0
+      # [③] 允许连接的IP段，默认为0.0.0.0/0, ::/0，代表当前设备的全部流量都经过虚拟局域网之后再回到设备上
+      # [③] 如果设置为192.168.31.0/24, 10.8.0.0/24，则代表当前设备访问自家内网的设备时，才会走虚拟局域网，而其他情况继续走你当前的网络
+      - WG_DEFAULT_DNS=8.8.8.8, 223.6.6.6
+      # 默认DNS，默认为1.1.1.1
+      - WG_PERSISTENT_KEEPALIVE=25
+      # 重连间隔，如果该值为0，则连接将不会保持活动状态，默认为0
+      # - WG_MTU=1420
+      # 客户端将使用的 MTU，服务器使用默认的 MTU，默认为null，可选设置
+      # 	以上为自定义conf文件的内容，注意区分
+      ########################################
+      - LANG=zh
+      # WebUI的语言，预设为中文
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # network_mode: host
+    # [④] 这里用bridge模式部署
+    ports:
+      - 51820:51820/udp
+      # 数据传输端口，左侧要和 <WG_CONFIG_PORT> 保持一致；右侧需要和上面的 <WG_PORT> 的容器端口保持一致
+      - 51821:51821/tcp
+      # WebUI 端口，左侧随意，右侧需要和上面的 <PORT> 的容器端口保持一致
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
