@@ -216,7 +216,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | TrueNAS-SCALE | uid=950(truenas_admin) gid=950(truenas_admin) groups=950(truenas_admin),544(builtin_administrators<br><br>uid=3000(cheems) gid=3000(cheems) groups=950(cheems),545(builtin_users) | truenas_admin 为系统自动创建<br>cheems 为自建的第一个账号 |
 | OMV |
 | CASAOS/ZimaOS |
-| 群晖 | uid=1026(cheems) gid=100(users) groups=100(users),101(administrators) |
+| 群晖 | uid=1026(cheems) gid=100(users) groups=100(users),101(administrators) | [DSM 服务使用哪些网络端口？ - Synology 知识中心](https://kb.synology.cn/zh-cn/DSM/tutorial/What_network_ports_are_used_by_Synology_services) |
 | 威联通 | uid=1000(cheems) gid=100(everyone) groups=100(everyone),0(administrators) |
 | 铁威马 | uid=0(cheems) gid=0(everyone) groups=0(everyone),3(admin),4(allusers) |
 | 万由 | 
