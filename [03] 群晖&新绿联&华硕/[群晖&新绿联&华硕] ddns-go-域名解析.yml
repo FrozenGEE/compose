@@ -1,0 +1,32 @@
+# 官方文档
+# https://hub.docker.com/r/jeessy/ddns-go
+# https://github.com/jeessy2/ddns-go
+
+# 重置密码，以下内容在ssh中执行
+# docker exec ddns-go ./ddns-go -resetPassword 123456
+# docker restart ddns-go
+
+# 以下内容在ddnsog的终端中新建一个/bin/bash（有的直接点击新建终端访问即可），然后执行
+# ddns-go ./ddns-go -resetPassword 123456
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  ddns-go:
+    image: jeessy/ddns-go:latest
+    # 镜像地址
+    container_name: ddns-go
+    # 容器名字
+    hostname: ddns-go
+    # 主机名
+    command: -l :9876 -f 300
+      # 9876为WebUI端口，可自定义
+      # 300为刷新解析间隔时间，可自定义
+    volumes:
+      - /volume1/docker/ddns-go:/root
+      # 配置文件目录，文件是隐藏的，需要通过ssh进行访问，很重要，切勿泄露
+    network_mode: host
+    # 直接使用host模式，ipv6解析需要使用host网络模式
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
