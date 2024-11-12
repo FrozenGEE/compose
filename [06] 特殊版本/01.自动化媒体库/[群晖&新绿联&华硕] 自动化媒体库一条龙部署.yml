@@ -314,10 +314,10 @@ services:
 #                                            #
 ##############################################
 
-  moviepilot:
-    image: jxxghp/moviepilot:latest
-    container_name: moviepilot
-    hostname: moviepilot
+  moviepilot-v2:
+    image: jxxghp/moviepilot-v2:latest
+    container_name: moviepilot-v2
+    hostname: moviepilot-v2
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     network_mode: host
@@ -326,9 +326,9 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # 使MP支持内建的重启操作，用于自动更新后重启
-      - /volume1/docker/moviepilot/main:/moviepilot 
+      - /volume1/docker/moviepilot-v2/core:/moviepilot 
       ## 程序主目录
-      - /volume1/docker/moviepilot/config:/config
+      - /volume1/docker/moviepilot-v2/config:/config
       ## 配置目录
       - /volume1/media/下载:/downloads
       # 默认下载目录
@@ -337,7 +337,7 @@ services:
       #
 ##############################################
     environment:
-      - NGINX_PORT=3333
+      - NGINX_PORT=6666
       ## WebUI服务端口，预设为3333，默认为3000，可自行修改，不能和API服务端口3001冲突
       - SUPERUSER=cheems
       # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效，预设为cheems
