@@ -99,7 +99,7 @@
 # jellyfin        ip:8097
 # qbittorrent     ip:8085
 # transmission    ip:9091
-# moviepilot      ip:3333
+# moviepilot      ip:6666
 # cookiecloud     ip:8188
 # iyuu            ip:8780
 # v2raya          ip:2017
@@ -331,8 +331,8 @@ services:
       #
 ##############################################
     environment:
-      - NGINX_PORT=3333
-      ## WebUI服务端口，预设为3333，默认为3000，可自行修改，不能和API服务端口3001冲突
+      - NGINX_PORT=6666
+      ## WebUI服务端口，预设为6666，默认为3000，可自行修改，不能和API服务端口3001冲突
       - SUPERUSER=cheems
       # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效，预设为cheems
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效，可在MP内修改
