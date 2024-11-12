@@ -329,6 +329,7 @@ services:
       #
 ##############################################
     environment:
+      - MOVIEPILOT_AUTO_UPDATE=TRUE
       - NGINX_PORT=6666
       ## WebUI服务端口，预设为6666，默认为3000，可自行修改，不能和API服务端口3001冲突
       - SUPERUSER=cheems
