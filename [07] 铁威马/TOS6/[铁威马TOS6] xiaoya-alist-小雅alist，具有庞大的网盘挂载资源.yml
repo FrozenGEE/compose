@@ -1,0 +1,51 @@
+# 官方文档
+# https://alist.xiaoya.pro
+# https://hub.docker.com/r/xiaoyaliu/alist
+######################################
+# 打开以下url，点击获取Token，使用阿里云盘手机app扫码，扫码后再次点击，将页面获取到的refresh token保存到mytoken.txt
+# https://alist.nn.ci/zh/guide/drivers/aliyundrive.html
+# 打开以下url，选择Scan QrCode，使用阿里云盘手机app扫描，扫描完成后点击I have scan，将得到的这一长串token保存到myopentoken.txt
+# https://alist.nn.ci/tool/aliyundrive/request.html
+# 阿里云盘中新建一个任意名字的目录用以转存缓存文件，创建完成后进入目录内，将地址栏上url最后的/之后字符串保存到temp_transfer_folder_id.txt
+# 将以上三个文本文件放到“/data”这个映射出来的目录内
+######################################
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  xiaoya-alist:
+    image: xiaoyaliu/alist:hostmode
+    # 镜像地址
+    container_name: xiaoya-alist
+    # 容器名字
+    hostname: xiaoya-alist
+    # 主机名
+    # privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    command:
+      - /opt/alist/alist
+      - server
+      - --no-prefix
+      # 照抄
+    volumes:
+      - /Volume1/docker/xiaoya/data:/data
+      - /Volume1/docker/xiaoya/opt:/opt/alist/data
+      # 配置文件夹目录
+    # environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5678:5678/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

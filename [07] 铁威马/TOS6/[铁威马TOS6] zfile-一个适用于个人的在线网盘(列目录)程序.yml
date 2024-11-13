@@ -1,0 +1,53 @@
+# 官网
+# https://www.zfile.vip
+# 官方文档
+# https://docs.zfile.vip
+# https://hub.docker.com/r/zhaojun1998/zfile
+# 前端
+# https://github.com/zfile-dev/zfile-vue
+# 后端
+# https://github.com/zfile-dev/zfile
+# 演示站
+# https://demo.zfile.vip
+
+# 用户前台: http://127.0.0.1:3000/
+# 初始安装: http://127.0.0.1:3000/install
+# 管理后台: http://127.0.0.1:3000/admin
+
+# 开源版免费，有捐赠版188块，具体功能差异看官网
+
+---
+version: "3.3"
+# 最后编辑时间：2024-10-18
+services:
+  zfile:
+    image: zhaojun1998/zfile:latest
+    # 镜像地址，如果拉取不快，可使用以下镜像源
+    # 香港：swr.ap-southeast-1.myhuaweicloud.com/zfile-dev/zfile:latest
+    # 北京：swr.cn-north-1.myhuaweicloud.com/zfile-dev/zfile:latest
+    container_name: zfile
+    # 容器名字
+    hostname: zfile
+    # 主机名
+    volumes:
+      # - /Volume1/zfile/application.properties:/root/application.properties
+      # 配置文件映射，这是个文件，不一定需要用到
+      # 如需映射配置文件则需要先在宿主机下载配置文件，然后映射到容器内: 下载 application.properties 文件到 /root 目录下, 此目录可自行更改
+      # 下载命令：curl -k -o /Volume1/zfile/application.properties https://c.jun6.net/ZFILE/application.properties
+      # 把 /Volume1/zfile/application.properties 的 /Volume1/zfile 这个改为实际的路径，这里已经和配置单对应了
+      # 不会ssh命令下载的，其实用后半段下载地址即可，把文件放进对应的路径
+      - /Volume1/zfile/db:/root/.zfile-v4/db
+      # 数据库目录
+      - /Volume1/zfile/logs:/root/.zfile-v4/logs
+      # 日志目录
+      - /Volume1:/Volume1
+      # 数据目录，可以写多个
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      # 映射本地其他路径使其可以访问，可以自定义多个
+    network_mode: bridge
+      # 推荐使用bridge模式，8080有别的服务要用
+    ports:
+      - 8380:8080/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
