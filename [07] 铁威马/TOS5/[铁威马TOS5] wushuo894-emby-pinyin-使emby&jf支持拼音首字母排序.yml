@@ -1,0 +1,35 @@
+# 官方文档
+# https://github.com/wushuo894/emby-pinyin
+# https://hub.docker.com/r/wushuo894/emby-pinyin
+
+# 需要提前申请好EMBY和JF的API
+
+---
+version: "3"
+# 最后编辑时间：2024-10-05
+services:
+  emby-pinyin:
+    image: wushuo894/emby-pinyin:latest
+    # 镜像地址
+    container_name: emby-pinyin
+    # 容器名字
+    hostname: emby-pinyin
+    # 主机名
+    volumes:
+      - /Volume1/User/docker/emby-pinyin:/config
+      # 配置文件目录
+    environment:
+      - PORT=9198
+      # 自定义容器端口
+      - CONFIG=/config
+      # 自定义配置文件目录
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 9198:9198/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

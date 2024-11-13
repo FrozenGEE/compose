@@ -1,0 +1,46 @@
+# 官方文档
+# https://www.verysync.com
+# https://www.verysync.com/manual/users/start.html
+# https://hub.docker.com/r/jonnyan404/verysync
+
+# 飞牛OS通过官方的compose部署后，微力同步的文件管理设置无法选中/data目录下的更深入的目录
+# 但是直接通过WebUI上部署倒是没问题，具体不知道什么原因，因此不提供飞牛OS的模板
+
+---
+version: "3"
+# 最后编辑时间：2024-11-10
+services:
+  verysync:
+    image: jonnyan404/verysync:latest
+    # 镜像地址
+    container_name: verysync
+    # 容器名字
+    hostname: verysync
+    # 主机名
+    volumes:
+      - /Volume1/User/docker:/docker
+      - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      # 切勿直接把整个存储池都共享了，例如 /Volume1/User:/data
+      # 必须至少写到共享文件夹那一层，即在WebUI上文件管理器看到的那个目录，否则后果自负，这里以docker共享文件夹作为模板
+      # 映射本地其他路径使其可以访问，可以自定义多个
+    # environment:
+      # - PORT=8886
+      # WebUI端口，默认8886，可在设置中自定义
+      # - VUID=1000
+      # 从2.16.x版本开始，如需自定义用户请自行定义变量 VUID 的值，此值必须为Linux系统已存在的UID值，作用不大，建议不设置
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # 推荐host网络模式，如果使用bridge，则需要添加一条条 xxx:xxx的端口映射，将其设置内所需要的端口均手动映射一次
+    # ports:
+      # - 8886:8886/tcp
+      # WebUI 端口，容器端口默认为8886，可在设置中自定义
+      # - 22027:22027/udp
+      # - 22037:22037/udp
+      # 22027/22037 为内网udp发现端口，可选
+      # - 22330:22330/udp
+      # 数据传输端口，默认22330，可选，可在 同步设置 中进行修改
+      # - 3000:3000/tcp
+      # 3000 为默认公共中继端口，可选，可在 中继服务-设置选项 中进行修改，建议修改掉
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
