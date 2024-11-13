@@ -153,17 +153,17 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 ```shell
 💡极空间系统的docker容器配置文件目录存放路径
 /tmp/zfsv3/sata$/手机号码/data/docker/aaa
-/tmp/zfsv3/nvmel$/手机号码/data/docker/aaa
+/tmp/zfsv3/nvme$/手机号码/data/docker/aaa
 /tmp/zfsv3/sata$/手机号码+字母/data/docker/aaa
-/tmp/zfsv3/nvmel$/手机号码+字母/data/docker/aaa
+/tmp/zfsv3/nvme$/手机号码+字母/data/docker/aaa
 
 💡极空间系统的数据目录存放路径开头
-/tmp/zfsv3/sata$/手机号码/data/bbb
-/tmp/zfsv3/nvmel$/手机号码/data/bbb
-/tmp/zfsv3/sata$/手机号码+字母/data/bbb
-/tmp/zfsv3/nvmel$/手机号码+字母/data/bbb
+/tmp/zfsv3/sata*/手机号码/data/bbb
+/tmp/zfsv3/nvme*/手机号码/data/bbb
+/tmp/zfsv3/sata*/手机号码+字母/data/bbb
+/tmp/zfsv3/nvme*/手机号码+字母/data/bbb
 
-"nvmel$"和"sata$" 根据自己实际情况修改，$为数字；"手机号码"为个人手机号码，到处都是手机号，真他妈恶心
+"nvme$"和"sata$" 根据自己实际情况修改，$为数字；"手机号码"为个人手机号码，到处都是手机号，真他妈恶心
 如果你有第二台极空间，并且用同一个手机号绑定注册(强制联网激活机器)，则为需要在手机号码后添加上a-z的字母
 例如：1688888888，1688888888a，1688888888b，1688888888c，这样类推，所以同一个手机号极限是多少？27个？
 
@@ -251,7 +251,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | 飞牛OS | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /vol1/1000/docker/portainer-zh:/data 6053537/portainer-ce |
 | 新绿联 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce <br><br>记得把"用户ID"替换掉 |
 | 旧绿联 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/dm-0/.ugreen_nas/用户ID/docker/portainer-zh:/data 6053537/portainer-ce |
-| 极空间 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/zfsv3/nvmel*/手机号码+字母/data/docker/portainer-zh:/data 6053537/portainer-ce <br><br>[2024-09-28更新] 现在arm也不会冲突重启了，命令行修改为自启动，记得把"/nvmel$/手机号码+字母"替换掉 |
+| 极空间 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/zfsv3/nvme*/手机号码+字母/data/docker/portainer-zh:/data 6053537/portainer-ce <br><br>[2024-09-28更新] 现在arm也不会冲突重启了，命令行修改为自启动，记得把"/nvmel$/手机号码+字母"替换掉 |
 
 unRAID有插件支持但是交互体验个人觉得不好用，商店就有portainer现成模板，推荐直接安装部署即可，要用中文版把存储库名字替换一下就可以用汉化版即可
 
