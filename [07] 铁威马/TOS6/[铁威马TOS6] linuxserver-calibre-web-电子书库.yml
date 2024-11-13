@@ -1,0 +1,44 @@
+# 官方文档
+# https://calibre-ebook.com
+# https://hub.docker.com/r/linuxserver/calibre-web
+# https://github.com/linuxserver/docker-calibre-web
+# https://github.com/technosoft2000/calibre-web
+# 注意，需要电脑安装calibre，然后把生成的metadata.db数据库文件，放到/config内，在初始化设置时，选中才可以正常使用，现成提供的文件的下载地址见下
+# https://www.123pan.com/s/YuAUVv-Qp1nA.html 提取码:fgee
+
+---
+version: "3"
+# 最后编辑时间：2024-06-14
+services:
+  calibre-web:
+    image: linuxserver/calibre-web:latest
+    # 镜像地址
+    container_name: calibre-web
+    # 容器名字
+    hostname: calibre-web
+    # 主机名
+    volumes:
+      - /Volume1/docker/calibre-web:/config
+      # 配置文件目录
+      - /Volume1:/books
+      # 电子书库的总目录
+    environment:
+      - DOCKER_MODS=linuxserver/mods:universal-calibre
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1
+      # 设置GoogleOAUTH是否能用
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8083:8083/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

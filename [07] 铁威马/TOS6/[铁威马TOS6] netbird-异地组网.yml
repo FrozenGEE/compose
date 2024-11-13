@@ -1,0 +1,37 @@
+# 官方文档
+# https://netbird.io
+# https://docs.netbird.io/how-to/installation#installation
+# https://hub.docker.com/r/netbirdio/netbird
+# https://github.com/netbirdio
+
+# 对比 twingate 和 netbird
+# https://netbird.io/knowledge-hub/twingate-vs-netbird
+
+# 2024-11-03记录
+# 免费用户可供5个用户（管理员和子账号），100个节点使用
+
+---
+version: "3"
+# 最后编辑时间：2024-11-03
+services:
+  netbird:
+    image: netbirdio/netbird:latest
+    # 镜像地址
+    container_name: netbird
+    # 容器名字
+    hostname: netbird
+    # 主机名
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      # 照抄
+    volumes:
+      - /Volume1/docker/netbird:/etc/netbird
+    environment:
+      - NB_SETUP_KEY=填写你的密钥
+      # 打开下面的网址，登录账号，然后去生成密钥，密钥最长365天
+      # https://app.netbird.io/setup-keys
+    network_mode: host
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
