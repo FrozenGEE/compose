@@ -49,7 +49,7 @@ services:
       - TZ=Asia/Shanghai
       # 时区
     volumes:
-      - /vol1/1000/docker/van-blog/mongo:/data/db
-      # mongo 数据库存储目录
+      - /vol1/1000/docker/van-blog/mongo:/data
+      # mongo 数据存储目录
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
