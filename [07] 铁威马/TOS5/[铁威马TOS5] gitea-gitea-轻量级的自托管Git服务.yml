@@ -1,0 +1,55 @@
+# 官网
+# https://about.gitea.com
+# 官方文档
+# https://docs.gitea.com/zh-cn
+# https://hub.docker.com/r/gitea/gitea
+# https://docs.gitea.com/installation/install-with-docker
+
+---
+version: "3"
+# 最后编辑时间：2024-05-11
+services:
+  gitea:
+    image: gitea/gitea:latest
+    # 镜像地址
+    container_name: gitea
+    # 容器名字
+    hostname: gitea
+    # 主机名
+    volumes:
+      - /Volume1/User/docker/gitea:/data
+      # 数据目录
+    environment:
+      - USER_UID=1000
+      - USER_GID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - HTTP_PORT=3200
+      # HTTP 监听端口，默认为3000
+      - SSH_LISTEN_PORT=4222
+      # 内部的 SSH 服务器的端口，默认为22
+      # - ROOT_URL="http://【IP:PORT】"
+      # 覆盖自动生成的公共 URL。如果内部 URL 和外部 URL 不匹配（例如在 Docker 中），这很有用。
+      # IP:PORT为宿主机的IP和端口
+      ########################################
+      # 数据库信息可以在初始化时设置
+      # - GITEA__database__DB_TYPE=mysql
+      # 数据库类型，可选mysql，postgres，mssql，sqlite3
+      # - GITEA__database__HOST=【IP:PORT】
+      # 数据库的地址，端口，根据实际情况填写
+      # - GITEA__database__NAME=gitea
+      # - GITEA__database__USER=gitea
+      # - GITEA__database__PASSWD=gitea
+      # 子数据库的名字，账号密码，不推荐使用root管理员账号密码，预设为gitea
+      ########################################
+    # network_mode: bridge
+    network_mode: host
+    # 推荐自定义端口，然后用host网络模式
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 3222:22/tcp
+      # SSH 服务端口，此端口可以不向外界公开
+      # - 3000:3000/tcp
+      # WebUI http端口
+    restart: always
+    # 重启策略

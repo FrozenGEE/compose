@@ -1,0 +1,56 @@
+# 官方文档
+# https://hub.docker.com/r/linuxserver/firefox
+# https://docs.linuxserver.io/images/docker-firefox
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  firefox:
+    image: linuxserver/firefox:latest
+    # 镜像地址
+    container_name: firefox
+    # 容器名字
+    hostname: firefox
+    # 主机名
+    volumes:
+      - /Volume1/User/docker/firefox:/config
+      # 配置文件目录
+      - /Volume1/User/downloads:/config/downloads
+      # 下载目录
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      # 数据目录，用于浏览器访问本地目录，可以自定义多个
+    environment:
+      - CUSTOM_PORT=3010
+      # 自定义容器http端口，默认为3000，这里改成3010，因为有一些别的服务或docker会用到3000
+      - CUSTOM_HTTPS_PORT=3011
+      # 自定义容器https端口，默认为3001
+      - CUSTOM_USER=cheems
+      - PASSWORD=cheems
+      # WebUI的访问账号密码，出于安全考虑，建议设置，预设为cheems，如果有特殊原因可以不设置
+      - FIREFOX_CLI=https://mzh.moegirl.org.cn/Cheems
+      # 浏览器默认主页，预设为cheems的萌娘百科
+      - NO_DECOR=1
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      # 照抄
+      - INSTALL_PACKAGES=fonts-noto-cjk
+      - LC_ALL=zh_CN.UTF-8
+      # 照抄，解决中文字符问题
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 3010:3010/tcp
+      # WebUI 端口
+      # - 3011:3011/tcp
+      # WebUI https端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

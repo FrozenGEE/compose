@@ -1,0 +1,23 @@
+# 官方文档
+# https://hub.docker.com/r/corentinth/it-tools
+# 汉化版
+# https://hub.docker.com/r/qingfeng2336/it-tools
+
+---
+version: "3"
+# 最后编辑时间：2024-05-06
+services:
+  it-tools:
+    image: qingfeng2336/it-tools:latest
+    # 镜像地址
+    container_name: it-tools
+    # 容器名字
+    hostname: it-tools
+    # 主机名
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 1580:80/tcp
+      # WebUI 端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
