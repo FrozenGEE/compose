@@ -1,4 +1,4 @@
-#  【更新日志-2024-11-13】
+# 【更新日志-2024-11-13】
 - 铁威马TOS5和TOS6系统路径有所改变，修正这部分内容，新增对应的路径说明
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
@@ -183,11 +183,11 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | OMV | 80/443 | 无 | 22 |
 | CasaOS/ZimaOS | 80/443 | 无 | 22 |
 | 群晖 | 5000/5001 | 5005/5006 | 22 | [DSM 服务使用哪些网络端口？ - Synology 知识中心](https://kb.synology.cn/zh-cn/DSM/tutorial/What_network_ports_are_used_by_Synology_services) |
-| 威联通 | 8080/5443 | 5005/5006 | 22 |
+| 威联通 | 8080/443 | 5005/5006 | 22 | [QTS 5.0.x 服务端口](https://docs.qnap.com/operating-system/qts/5.0.x/zh-cn/qnap-服务端口-C25795F.html)<br>[QuTS-hero 服务端口](https://docs.qnap.com/operating-system/quts-hero/4.5.x/zh-cn/GUID-DC25795F-A720-40C2-9159-66514178E6F6.html) |
 | 铁威马 | 8181 | 5005/5006 | 9222 |
 | 万由 | 80/443 | 192.168.1.10/webdav | 22 | webdav的端口和webui一样，万由是通过 nas的ip地址/webdav 路径的形式就可以访问 |
-| 华硕 | 8000/8001 | 9800/9802 | 22 |
-| 飞牛OS | 8000 | 5005/5006 | 22 |
+| 华硕 | 8000/8001 | 9800/9802 | 22 | [ASUSTOR 的 NAS 的应用程序或服务使用了那些网络端口? - Synology 知识中心](https://www.asustor.com/zh-cn/knowledge/detail/?id=6&group_id=601) |
+| 飞牛OS | 5666/5667 | 5005/5006 | 22 | fnOS 从 V0.8.22 版本之后，默认端口修改为 HTTP 5666 和 HTTPS 5667 端口<br>在公测阶段飞牛仍继续占用 8000 和 8001 端口<br>允许用户通过 8000 和 8001 端口访问到飞牛系统<br>在正式版本之后将不再使用 8000 和 8001 端口<br>[如何修改飞牛系统的端口？](https://help.fnnas.com/articles/fnosV1/settings/port-customization.md) |
 | 新绿联 | 9999 | 5005/5006 | 22 |
 | 旧绿联 | 9999 | 5081 | 922 | ssh密码需要手机号验证码获取并且仅开启3天 |
 | 极空间 | 5055/5056 | 5005/5006 | 可自定义<br>最低10000 | 客户端访问必须正代 5055和8050<br>文档同步 22000；挂载为磁盘 9001<br>自带的下载器 51413 (tcp及udp)|
@@ -248,6 +248,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | 群晖 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce |
 | 威联通 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /share/container-station-data/portainer-zh:/data 6053537/portainer-ce |
 | 铁威马 | TOS5<br>docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Volume1/User/docker/portainer-zh:/data 6053537/portainer-ce<br><br>TOS6<br>docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Volume1/docker/portainer-zh:/data 6053537/portainer-ce |
+| 万由 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/user/data/docker/portainer-zh:/data 6053537/portainer-ce |
 | 华硕 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce |
 | 飞牛OS | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /vol1/1000/docker/portainer-zh:/data 6053537/portainer-ce |
 | 新绿联 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce<br><br>记得把"用户ID"替换掉 |
