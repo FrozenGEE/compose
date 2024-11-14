@@ -20,9 +20,9 @@ services:
     volumes:
       - /mnt/user/appdata/photoprism:/photoprism/storage
       # 配置文件目录
-      - /mnt/user/PhotoPrism/import:/photoprism/import
+      - /mnt/user/photoprism/import:/photoprism/import
       # 上传目录
-      - /mnt/user/PhotoPrism/originals:/photoprism/originals
+      - /mnt/user/photoprism/originals:/photoprism/originals
       # 本地相册目录
       # 可以自定义多个
     environment:
