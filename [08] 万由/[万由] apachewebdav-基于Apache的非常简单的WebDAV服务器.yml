@@ -1,0 +1,47 @@
+# 官方文档
+# https://hub.docker.com/r/apachewebdav/apachewebdav
+# 基于 Apache 的非常简单的 WebDAV 服务器，您需要一个 WebDAV 客户端来传输文件，不能通过浏览器上传文件
+# 也可以选择使用alist/lucky走实现webdav功能
+
+---
+version: "2"
+# 最后编辑时间：2024-07-25
+services:
+  webdav:
+    image: apachewebdav/apachewebdav:latest
+    # 镜像地址
+    container_name: webdav
+    # 容器名字
+    hostname: webdav
+    # 主机名
+    # privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    command: --memory=1G
+    # 限制内存大小，默认值为1G
+    volumes:
+      - /mnt/unas/data/docker/webdav:/var/lib/dav
+      # 配置文件夹
+      - /mnt/unas:/var/lib/dav/unas
+      # WebDAV共享文件夹
+      # - 【这里替换为你的数据存放目录】:/var/lib/dav/【这里替换为你的数据存放目录的名字】
+      # 映射本地其他路径使其可以访问，可以自定义多个
+    environment:
+      - LOCATION=/
+      # WebUI的根目录，保持默认即可
+      - AUTH_TYPE=Basic
+      # 要使用的 Apache 身份验证类型。这可以是 Basic (HTTPS 的最佳选择)或 Digest (HTTP 的最佳选择)，默认值为 Basic
+      - USERNAME=admin
+      - PASSWORD=password
+      # 用户名和密码
+      - PUID=0
+      - PGID=0
+      # 直接给root权限
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 10101:80/tcp
+      # 访问端口，可在Web上打开
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

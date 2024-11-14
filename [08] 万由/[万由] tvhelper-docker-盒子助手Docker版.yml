@@ -1,0 +1,44 @@
+# 官方文档
+# https://github.com/wukongdaily/tvhelper-docker
+# https://hub.docker.com/r/wukongdaily/box
+# https://didiboy0702.gitbook.io/wukongdaily/new-shou-ye/he-zi-zhu-shou-docker-ban-new
+
+# 盒子助手OpenWrt 命令行版
+# https://github.com/wukongdaily/tvhelper
+
+# ADB多功能一键脚本
+# wget -O tv.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wukongdaily/tvhelper/master/shells/tv.sh && chmod +x tv.sh && ./tv.sh proxy
+
+#不带Bash环境的
+# wget -O env.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wukongdaily/tvhelper/master/shells/env.sh && chmod +x env.sh && ./env.sh proxy
+
+# SSH常见错误举例和新手指南详见
+# https://github.com/wukongdaily/HowToUseSSH
+
+---
+version: "3"
+# 最后编辑时间：2024-05-05
+services:
+  tvhelper:
+    image: wukongdaily/box:latest
+    # 镜像地址
+    container_name: tvhelper
+    # 容器名字
+    hostname: tvhelper
+    # 主机名
+    volumes:
+      - /mnt/unas/data/docker/tvhelper:/tvhelper/shells/data
+      # 配置文件目录
+    environment:
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/android-sdk/platform-tools
+      # PATH环境变量，照抄
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 2288:80/tcp
+      # WebUI 端口
+      # 如果部署成功，直接在这个容器的SSH终端上输入 ./tv.sh 即可使用
+      - 2299:22/tcp
+      # tvhelper的SSH 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

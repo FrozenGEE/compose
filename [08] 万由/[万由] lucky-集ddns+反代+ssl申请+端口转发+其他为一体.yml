@@ -15,9 +15,9 @@ services:
     hostname: lucky
     # 主机名
     volumes:
-      - /mnt/user/data/docker/lucky:/goodluck
+      - /mnt/unas/data/docker/lucky:/goodluck
       # 配置文件目录
-      # - /mnt:/mnt
+      # - /mnt/unas/data:/data
       # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
       # 映射本地其他路径使其可以访问，可以自定义多个
       # 如需文件管理，FTP，WebDAV功能，去掉#注释
