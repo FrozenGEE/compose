@@ -204,9 +204,13 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 
 一般第二用户的 UID 是第一个用户的 UID+1，但也有特殊的，具体情况请实际查询，但其实只需要第一个用户即可（即管理员账号）
 
-而 root 则是最高管理员账号，拥有最高权限，可以读写nas中一切东西，uid=1000(frozengee) gid=100(users) groups=100(users)
+而 root 则是最高管理员账号，拥有最高权限，可以读写nas中一切东西
 
-还有 nobody，是一个特殊的用户账户，它通常用于运行那些不需要特权的服务进程，uid=99(nobody) gid=100(users) groups=100(users),98(nobody)
+`uid=1000(frozengee) gid=100(users) groups=100(users)`
+
+还有 nobody，是一个特殊的用户账户，它通常用于运行那些不需要特权的服务进程
+
+`uid=99(nobody) gid=100(users) groups=100(users),98(nobody)`
 
 欢迎更多不同品牌的NAS来补充
 
@@ -221,7 +225,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | 群晖 | uid=1026(cheems) gid=100(users) groups=100(users),101(administrators) |
 | 威联通 | uid=1000(cheems) gid=100(everyone) groups=100(everyone),0(administrators) |
 | 铁威马 | uid=0(cheems) gid=0(everyone) groups=0(everyone),3(admin),4(allusers) |
-| 万由 | 
+| 万由 | uid=1001(admin) gid=100(Administrators) groups=1001(Administrators),1002(everyone) |
 | 华硕 | uid=1000(cheems) gid=100(users) groups=100(users),999(administrators) |
 | 飞牛OS | uid=1000(cheems) gid=1001(Users) groups=1001(Users),1000(Administrators) |
 | 新绿联 | uid=1001(cheems) gid=10(admin) groups=10(admin),100(users),1000(user),133(ughomeusers) |
