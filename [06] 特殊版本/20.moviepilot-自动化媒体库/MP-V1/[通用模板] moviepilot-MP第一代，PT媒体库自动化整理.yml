@@ -42,7 +42,7 @@
 version: "3"
 # 最后编辑时间：2024-11-06
 # 更新日志：更新并精简配置单文本内容；新增文件夹目录结构图；站点删除ptlsp，支持rousi
-# V2和V1的配置单是一毛一样的，但是互不兼容，可以共存，本模板采用的还是和V1一样的配置单，只有自定义容器端口由3333改成了6666
+# V2和V1的配置单是一毛一样的，但是互不兼容，可以共存，本模板采用的还是和V1一样的配置单，只有自定义容器端口由33033改成了55055
 services:
   moviepilot:
     image: jxxghp/moviepilot:latest
@@ -56,7 +56,7 @@ services:
     # privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     network_mode: host
-    # 推荐自定义MP的WebUI端口，然后直接用host模式，webui为"nas的ip:3333"
+    # 推荐自定义MP的WebUI端口，然后直接用host模式，webui为"nas的ip:33033"
     labels:
       icon: http://IP:PORT/i/user_01/moviepilot_A.png
       # 适用于CasaOS导入时自动写上图标地址
@@ -64,7 +64,7 @@ services:
       # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
       ########################################
       net.unraid.docker.managed: dockerman
-      net.unraid.docker.webui: http://[IP]:[PORT:3333]
+      net.unraid.docker.webui: http://[IP]:[PORT:33033]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
       net.unraid.docker.icon: /mnt/user/LOGO/moviepilot.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
@@ -84,8 +84,8 @@ services:
       
 ########################################
     environment:
-      - NGINX_PORT=3333
-      # WebUI服务端口，默认为3000，预设为3333，可自行修改，不能和API服务端口3001冲突
+      - NGINX_PORT=33033
+      # WebUI服务端口，默认为3000，预设为33033，可自行修改，不能和API服务端口3001冲突
       - SUPERUSER=admin
       # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效，可在MP内修改
