@@ -20,9 +20,9 @@ services:
     volumes:
       - /share/Container/photoprism:/photoprism/storage
       # 配置文件目录
-      - /share/Multimeeida/PhotoPrism/import:/photoprism/import
+      - /share/Multimeeida/photoprism/import:/photoprism/import
       # 上传目录
-      - /share/Multimeeida/PhotoPrism/originals:/photoprism/originals
+      - /share/Multimeeida/photoprism/originals:/photoprism/originals
       # 本地相册目录
       # 可以自定义多个
     environment:
