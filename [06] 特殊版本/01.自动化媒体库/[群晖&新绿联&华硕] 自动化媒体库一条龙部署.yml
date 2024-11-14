@@ -99,7 +99,7 @@
 # jellyfin        ip:8097
 # qbittorrent     ip:8085
 # transmission    ip:9091
-# moviepilot      ip:6666
+# moviepilot      ip:55055
 # cookiecloud     ip:8188
 # iyuu            ip:8780
 # v2raya          ip:2017
@@ -338,8 +338,9 @@ services:
 ##############################################
     environment:
       - MOVIEPILOT_AUTO_UPDATE=TRUE
-      - NGINX_PORT=6666
-      ## WebUI服务端口，预设为6666，默认为3000，可自行修改，不能和API服务端口3001冲突
+      # 设置容器启动时自动更新，默认为 RELESARE
+      - NGINX_PORT=55055
+      ## WebUI服务端口，预设为55055，默认为3000，可自行修改，不能和API服务端口3001冲突
       - SUPERUSER=cheems
       # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效，预设为cheems
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效，可在MP内修改
@@ -349,6 +350,7 @@ services:
       # 是否使用大内存模式，true/false，默认不使用，开启后会增加缓存数量，占用更多的内存，但响应速度会更快
       - UMASK=022
       - TZ=Asia/Shanghai
+      #
 ##############################################
 #### 认证站点 ####
       - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt
