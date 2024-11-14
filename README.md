@@ -225,7 +225,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | 群晖 | uid=1026(cheems) gid=100(users) groups=100(users),101(administrators) |
 | 威联通 | uid=1000(cheems) gid=100(everyone) groups=100(everyone),0(administrators) |
 | 铁威马 | uid=0(cheems) gid=0(everyone) groups=0(everyone),3(admin),4(allusers) |
-| 万由 | uid=1001(admin) gid=100(Administrators) groups=1001(Administrators),1002(everyone) |
+| 万由 | uid=1001(cheems) gid=100(Administrators) groups=1001(Administrators),1002(everyone) | 初始化设置时，账号默认设置为admin，可自定义 |
 | 华硕 | uid=1000(cheems) gid=100(users) groups=100(users),999(administrators) |
 | 飞牛OS | uid=1000(cheems) gid=1001(Users) groups=1001(Users),1000(Administrators) |
 | 新绿联 | uid=1001(cheems) gid=10(admin) groups=10(admin),100(users),1000(user),133(ughomeusers) |
