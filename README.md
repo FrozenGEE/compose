@@ -232,7 +232,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | 万由 | uid=1001(admin) gid=100(Administrators) groups=1001(Administrators),1002(everyone) | 初始化设置时，账号默认设置为admin，不可自定义 |
 | 华硕 | uid=1000(cheems) gid=100(users) groups=100(users),999(administrators) |
 | 飞牛OS | uid=1000(cheems) gid=1001(Users) groups=1001(Users),1000(Administrators) |
-| 新绿联 | uid=1001(cheems) gid=10(admin) groups=10(admin),100(users),1000(user),133(ughomeusers) |
+| 新绿联 | uid=1000(cheems) gid=10(admin) groups=10(admin),100(users),1000(user),133(ughomeusers) |
 | 旧绿联 | 激活机器的账号仅仅只是一个拥有较高权限的普通账号<br><br>通过官方途径得到的ssh使用的账号是root账号 |
 | 极空间 | uid=1004(手机号) gid=1005(手机号) groups=1005(手机号),27(sudo) | 真他妈恶心 |
 
