@@ -210,7 +210,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 
 而 root 则是最高管理员账号，拥有最高权限，可以读写nas中一切东西
 
-`uid=1000(frozengee) gid=100(users) groups=100(users)`
+`uid=0(root) gid=0(root) groups=0(root)`
 
 还有 nobody，是一个特殊的用户账户，它通常用于运行那些不需要特权的服务进程
 
