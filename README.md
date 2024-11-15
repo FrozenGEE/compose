@@ -220,7 +220,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 
 | NAS | ssh中执行 id cheems 获取到的内容 | 其他/备注 |
 | :----: | :---- | :---- |
-| Debian | 
+| Debian | uid=1000(cheems) gid=1000(cheems) 组=1000(cheems),24(cdrom),25(floppy),<br>27(sudo),29(audio),30(dip),44(video),46(plugdev),100(users),106(netdev) |
 | Ubuntu | 
 | unRAID | uid=1000(cheems) gid=100(users) groups=100(users) |
 | TrueNAS-SCALE | uid=950(truenas_admin) gid=950(truenas_admin) groups=950(truenas_admin),544(builtin_administrators<br><br>uid=3000(cheems) gid=3000(cheems) groups=950(cheems),545(builtin_users) | truenas_admin 为系统自动创建<br>cheems 为自建的第一个账号 |
@@ -250,7 +250,8 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 - 以下命令，请按照实际修改，均为以第一个存储池/volume1的共享文件夹/docker，作为docker的数据存放路径
 
 | NAS | portainer-zh部署命令 |
-| :----: | :---- |
+| :----: | :---- | 
+| Debian/Ubuntu | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/docker/portainer-zh:/data 6053537/portainer-ce<br><br>路径仅供参考，按自己实际操作 |
 | unRAID | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/user/appdata/portainer-zh:/data 6053537/portainer-ce |
 | TrueNAS | 待补充 |
 | CASAOS/ZimaOS | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /DATA/AppData/portainer-zh:/data 6053537/portainer-ce |
@@ -262,7 +263,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | 飞牛OS | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /vol1/1000/docker/portainer-zh:/data 6053537/portainer-ce |
 | 新绿联 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce |
 | 旧绿联 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/dm-0/.ugreen_nas/用户ID/docker/portainer-zh:/data 6053537/portainer-ce<br><br>记得把"用户ID"替换掉 |
-| 极空间 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/zfsv3/nvme*/手机号码+字母/data/docker/portainer-zh:/data 6053537/portainer-ce<br><br>[2024-09-28更新] 现在arm也不会冲突重启了，命令行修改为自启动，记得把"/nvme$/手机号码+字母"替换掉 |
+| 极空间 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/zfsv3/nvme$/手机号码+字母/data/docker/portainer-zh:/data 6053537/portainer-ce<br><br>[2024-09-28更新] 现在arm也不会冲突重启了，命令行修改为自启动，记得把"/nvme$/手机号码+字母"替换掉 |
 
 unRAID有插件支持但是交互体验个人觉得不好用，商店就有portainer现成模板，推荐直接安装部署即可，要用中文版把存储库名字替换一下就可以用汉化版即可
 
