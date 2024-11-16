@@ -5,6 +5,14 @@
 # https://blog.hesuisui.top/archives/Docker-Bili-Sync
 # 部署前，请先把配置文件弄好再启动启动
 
+# 配置文件步骤简要说明
+# 步骤1：打开，浏览器，按F12，点击上方的"控制台"，打开b站，退出登录，然后重新登录，一定要重新登录
+# 步骤2：在最下方文本空白处输入“允许粘贴”，回车键，然后复制粘贴"window.localStorage.ac_time_value"改内容进去，回车键，即可获取到"ac_time_value"的值，这个值只有刚登录才能获取到
+# 步骤3：点击最上方的"应用程序"，如果没有，点一下加号，点击左侧的"Cookie","https://www.bilibili.com/"
+# 步骤4：在右侧表格中分别获取到"sessdata","bili_jct","buvid3","dedeuserid"的值
+# 步骤5：将"sessdata","bili_jct","buvid3","dedeuserid","ac_time_value"这5个值写进 config.toml 中
+# 步骤6：剩余的步骤就不说了，看教程吧，收藏夹的id可以打开自己的收藏夹，在地址栏上的数字就是收藏夹id号码
+
 ---
 version: "3"
 # 最后编辑时间：2024-04-23
