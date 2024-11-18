@@ -1,5 +1,10 @@
 # 官方文档
+# https://v2raya.org
 # https://v2raya.org/docs/prologue/introduction
+# https://v2raya.org/docs/prologue/installation/docker
+# https://hub.docker.com/r/mzz2017/v2raya
+
+# 建议看看官方文档，如果你使用 macOS 或其他不支持 host 模式的环境，在该情况下无法使用全局透明代理，或者你不希望使用全局透明代理，docker 命令会略有不同
 
 ---
 version: "3"
