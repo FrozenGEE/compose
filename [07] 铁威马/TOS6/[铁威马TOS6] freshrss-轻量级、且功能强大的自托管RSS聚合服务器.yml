@@ -17,9 +17,9 @@ services:
     hostname: freshrss
     # 主机名
     volumes:
-      - /Volume1/User/docker/freshrss/data:/var/www/FreshRSS/data
+      - /Volume1/docker/freshrss/data:/var/www/FreshRSS/data
       # 配置文件目录
-      - /Volume1/User/docker/freshrss/extensions:/var/www/FreshRSS/extensions
+      - /Volume1/docker/freshrss/extensions:/var/www/FreshRSS/extensions
       # 插件文件目录
     environment:
       - CRON_MIN=*/20
