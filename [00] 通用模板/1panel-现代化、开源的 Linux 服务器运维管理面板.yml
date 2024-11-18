@@ -6,6 +6,9 @@
 # https://github.com/bilibili-koryking/1panel-docker
 # https://hub.docker.com/r/koryking/1panel
 
+# 如果只是为了用来管理docker的话，更多的还是偏向于作为一个运维管理来使用
+# 其实本身nas自带的docker管理器就可以了，再弄多一个有点多余，除非自带不好用，或者有别的需求
+
 ---
 version: "3"
 # 最后编辑时间：2024-11-17
@@ -20,10 +23,10 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # docker核心
-      - /volume1/docker/1panel:/opt/1panel
+      - 【这里替换为你的docker数据存放目录】/docker/1panel:/opt/1panel
       # 配置文件夹
-      - /volume1:/volume1
-      # 本地存储池
+      - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      # 映射本地其他路径使其可以访问，可以自定义多个
     environment:
       - TZ=Asia/Shanghai
       # 时区
