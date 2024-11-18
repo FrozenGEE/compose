@@ -1,0 +1,51 @@
+# 官方文档
+# https://nicolargo.github.io/glances
+# https://github.com/nicolargo/glances
+# https://hub.docker.com/r/nicolargo/glances
+
+---
+version: "3"
+# 最后编辑时间：2024-11-18
+services:
+  glances:
+    image: nicolargo/glances:latest-full
+    # 镜像地址，可选tag如下
+    # latest-full，用于包含所有依赖项的完整 Alpine Glances 映像(最新版本)
+    # latest 适用于具有最少依赖项(Bottle 和 Docker)的基本 Alpine Glances(最新版本)
+    # dev 获取具有所有依赖项的基本 Alpine Glances 映像(基于开发分支)(警告：可能不稳定)
+    # ubuntu-latest-full，用于包含所有依赖项的完整 Ubuntu Glances 映像(最新版本)
+    # ubuntu-latest 用于具有最少依赖项(Bottle 和 Docker)的基本 Ubuntu Glances(最新版本)
+    # ubuntu-dev 用于具有所有依赖项的基本 Ubuntu Glances 映像(基于开发分支)(警告：可能不稳定)
+    container_name: glances
+    # 容器名字
+    hostname: glances
+    # 主机名
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # docker核心
+      - /mnt/user:/mnt/user
+      # 映射本地其他路径使其可以访问，可以自定义多个
+      # 用于监控每一个存储池的总容量，已用容量，可选
+      # 注意：unRAID用户记得把缓存盘的路径写上，也可以写成每一个硬盘的路径，见本项目的路径说明
+    environment:
+      - GLANCES_OPT=-w
+      # 以 Web UI 模式运行容器
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 61208:61208/tcp
+      # WebUI http端口
+      # - 61209:61209/tcp
+      # WebUI https端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:61208]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/glances.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
