@@ -1,5 +1,10 @@
 # 官方文档
+# https://v2raya.org
 # https://v2raya.org/docs/prologue/introduction
+# https://v2raya.org/docs/prologue/installation/docker
+# https://hub.docker.com/r/mzz2017/v2raya
+
+# 建议看看官方文档，如果你使用 macOS 或其他不支持 host 模式的环境，在该情况下无法使用全局透明代理，或者你不希望使用全局透明代理，docker 命令会略有不同
 
 ---
 version: "3"
@@ -24,7 +29,7 @@ services:
       # 需要预先创建好一个文件，不然会创建成文件夹；上面这条如果/etc内没有或不会进去新建resolv.conf，可以写下面这条
       # - 【这里替换为你的docker数据存放目录】/v2raya/etc/resolv.conf:/etc/resolv.conf
       - 【这里替换为你的docker数据存放目录】/v2raya:/etc/v2raya
-      # 配置文件
+      # 配置文件目录
     # network_mode: bridge
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
