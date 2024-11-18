@@ -13,7 +13,7 @@ version: "3"
 # 最后编辑时间：2024-10-25
 services:
   hlink:
-    image: hllikun7981/link:latest
+    image: hllikun7981/hlink:latest
     # 镜像地址
     container_name: hlink
     # 容器名字
