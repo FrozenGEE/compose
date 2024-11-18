@@ -1,0 +1,43 @@
+# 官方文档
+# https://hub.docker.com/r/freshrss/freshrss
+
+# 教程
+# https://www.huluohu.com/posts/871/
+# https://blog.laoda.de/archives/docker-compose-install-freshrss
+
+---
+version: "3"
+# 最后编辑时间：2024-11-18
+services:
+  freshrss:
+    image: freshrss/freshrss:latest
+    # 镜像地址
+    container_name: freshrss
+    # 容器名字
+    hostname: freshrss
+    # 主机名
+    volumes:
+      -/mnt/user/appdata/freshrss/data:/var/www/FreshRSS/data
+      # 配置文件目录
+      -/mnt/user/appdata/freshrss/extensions:/var/www/FreshRSS/extensions
+      # 插件文件目录
+    environment:
+      - CRON_MIN=*/20
+      # Cron 表达式，可在下方链接生成。默认为：每20分钟刷新一次
+      # https://cron.ciding.cc
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 2780:80/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:80]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/freshrss.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
