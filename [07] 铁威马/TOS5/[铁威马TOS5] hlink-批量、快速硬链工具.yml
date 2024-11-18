@@ -2,7 +2,7 @@
 # https://hlink.likun.me
 # https://hlink.likun.me/other/HlinkDockerWebUI.html
 # https://github.com/likun7981/hlink
-# https://hub.docker.com/r/hllikun7981/link
+# https://hub.docker.com/r/likun7981/hlink
 # 教程
 # https://post.smzdm.com/p/allgxvz8
 # 硬链接只在同一个存储池中生效
@@ -13,7 +13,7 @@ version: "3"
 # 最后编辑时间：2024-10-25
 services:
   hlink:
-    image: hllikun7981/hlink:latest
+    image: likun7981/hlink:latest
     # 镜像地址
     container_name: hlink
     # 容器名字
