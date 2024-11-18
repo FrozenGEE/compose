@@ -23,7 +23,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # docker核心
-      # - /Volume1:/Volume1
+      # - /mnt:/mnt
       # 映射本地其他路径使其可以访问，可以自定义多个
       # 用于监控每一个存储池的总容量，已用容量，可选
     environment:
