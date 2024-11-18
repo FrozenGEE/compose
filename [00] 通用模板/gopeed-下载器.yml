@@ -20,7 +20,6 @@ services:
       # 配置文件目录
       - 【这里替换为你的文件下载目录目录】:/root/Downloads
       # 下载目录
-      # 可自定义多个
     environment:
       - PUID=1000
       - PGID=100
