@@ -122,10 +122,10 @@ TrueNAS以SCALE为准，基于debian的
 
 ```shell
 💡万由的docker容器配置文件目录存放路径
-/mnt/user/data/docker/emby
+/mnt/unas/data/docker/emby
 
 💡万由的数据目录存放路径
-/mnt/user/data/共享文件夹
+/mnt/unas/data/共享文件夹
 ```
 
 ```shell
@@ -260,7 +260,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | 群晖 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce |
 | 威联通 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /share/container-station-data/portainer-zh:/data 6053537/portainer-ce |
 | 铁威马 | TOS5<br>docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Volume1/User/docker/portainer-zh:/data 6053537/portainer-ce<br><br>TOS6<br>docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Volume1/docker/portainer-zh:/data 6053537/portainer-ce |
-| 万由 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/user/data/docker/portainer-zh:/data 6053537/portainer-ce |
+| 万由 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/unas/data/docker/portainer-zh:/data 6053537/portainer-ce |
 | 华硕 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce |
 | 飞牛OS | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /vol1/1000/docker/portainer-zh:/data 6053537/portainer-ce |
 | 新绿联 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce |
