@@ -19,8 +19,8 @@ services:
       - /mnt/unas/data/docker/gopeed:/app/storage
       # 配置文件目录
       - /mnt/unas/data/downloads:/root/Downloads
-      # 下载目录
-      # 可自定义多个
+      # 下载目录，可自定义多个
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
     environment:
       - PUID=1000
       - PGID=100
