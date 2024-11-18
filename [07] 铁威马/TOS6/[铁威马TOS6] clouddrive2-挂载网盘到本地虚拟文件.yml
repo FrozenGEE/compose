@@ -37,7 +37,6 @@ services:
       # 文件目录，多个目录需要分别映射进来，需要满足配置文件说明中的要求，见下例子
       # - /Volume1/video:/网盘媒体库:shared
       # :shared是读写-共享的意思
-      # CasaOS建议直接使用商店的，注意看商店内的说明
       # 如果遇到无法挂载到本地的问题，请自行上网查找对应的nas的解决办法
     environment:
       - TZ=Asia/Shanghai
