@@ -25,8 +25,9 @@ services:
       # docker核心
       - /mnt/user/appdata/1panel:/opt/1panel
       # 配置文件夹
-     - /mnt/user:/mnt/user
-      # 本地存储池
+      - /mnt/user:/mnt/user
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      # 映射本地其他路径使其可以访问，可以自定义多个
     environment:
       - TZ=Asia/Shanghai
       # 时区
