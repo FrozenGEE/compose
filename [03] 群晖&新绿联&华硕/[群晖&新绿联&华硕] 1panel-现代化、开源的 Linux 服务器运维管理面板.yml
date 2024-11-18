@@ -6,7 +6,8 @@
 # https://github.com/bilibili-koryking/1panel-docker
 # https://hub.docker.com/r/koryking/1panel
 
-# 如果只是为了用来管理docker的话，其实本身nas自带的docker管理器就可以了，再弄多一个有点多余，除非自带不好用，或者有别的需求
+# 如果只是为了用来管理docker的话，更多的还是偏向于作为一个运维管理来使用
+# 其实本身nas自带的docker管理器就可以了，再弄多一个有点多余，除非自带不好用，或者有别的需求
 
 ---
 version: "3"
