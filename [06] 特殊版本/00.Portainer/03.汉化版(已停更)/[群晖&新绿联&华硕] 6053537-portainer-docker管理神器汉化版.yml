@@ -28,7 +28,7 @@ services:
     # 特权
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      # docker访问
+      # docker核心
       - /volume1/docker/portainer-zh:/data
       # 配置目录
     network_mode: bridge
