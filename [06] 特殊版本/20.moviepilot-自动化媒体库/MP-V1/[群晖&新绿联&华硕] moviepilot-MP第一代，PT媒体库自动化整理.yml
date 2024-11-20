@@ -40,9 +40,9 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-11-06
+# 最后编辑时间：2024-11-19
 # 更新日志：更新并精简配置单文本内容；新增文件夹目录结构图；站点删除ptlsp，支持rousi
-# V2和V1的配置单是一毛一样的，但是互不兼容，可以共存，本模板采用的还是和V1一样的配置单，只有自定义容器端口由3333改成了55055
+# V2和V1的配置单是一毛一样的，但是互不兼容，可以共存，本模板采用的还是和V1一样的配置单，只有自定义容器端口由33033改成了55055
 services:
   moviepilot:
     image: jxxghp/moviepilot:latest
@@ -56,14 +56,14 @@ services:
     # privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     network_mode: host
-    # 推荐自定义MP的WebUI端口，然后直接用host模式，webui为"nas的ip:3333"
+    # 推荐自定义MP的WebUI端口，然后直接用host模式，webui为"nas的ip:33033"
       
 ########################################
 ## 第一次运行时，moviepilot 会下载大量文件到本地，请在留意日志中的进度，如果有什么问题，可以寻找网友求助
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # 使MP支持内建的重启操作，用于自动更新后重启
-      - /volume1/docker/moviepilot/core:/moviepilot
+      - /volume1/docker/moviepilot/moviepilot:/moviepilot
       # 程序主目录
       - /volume1/docker/moviepilot/config:/config
       # 配置目录
@@ -72,8 +72,10 @@ services:
       
 ########################################
     environment:
-      - NGINX_PORT=3333
-      # WebUI服务端口，默认为3000，预设为3333，可自行修改，不能和API服务端口3001冲突
+      - MOVIEPILOT_AUTO_UPDATE=TRUE
+      # 设置容器启动时自动更新，默认为 RELESARE
+      - NGINX_PORT=33033
+      # WebUI服务端口，默认为3000，预设为33033，可自行修改，不能和API服务端口3001冲突
       - SUPERUSER=admin
       # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效，可在MP内修改
@@ -81,7 +83,7 @@ services:
       # API密钥，V1版本默认为moviepilot，V2版本需要手动配置为大于等于16个字符的复杂字符串，预设为键盘上的每一排的前四个英文
       # 如配置不符合要求将会强制重新生成，可在首次启动的启动日志或env配置文件中查看最新的值
       # 在媒体服务器Webhook、微信回调等地址配置中需要加上 ?token= 该值
-      #  - PROXY_HOST=【IP:PORT】
+      # - PROXY_HOST=【IP:PORT】
       # 网络代理，访问themoviedb或者重启更新需要使用代理访问，如果你没有配置魔法就注释掉
       # 格式为http(s)://ip:port、socks5://user:pass@host:port
       - BIG_MEMORY_MODE=false
