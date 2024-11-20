@@ -26,9 +26,9 @@ services:
         max-size: 50m
     # 日志文件设置
     volumes:
-      - 【这里替换为你的docker数据存放目录】/wg-ui:/etc/wireguard
+      - /volume1/docker/wg-ui:/etc/wireguard
       # 配置文件目录
-      - 【这里替换为你的docker数据存放目录】/wg-ui/db:/app/db
+      - /volume1/docker/wg-ui/db:/app/db
       # 数据库目录
     environment:
       - BIND_ADDRESS=0.0.0.0:5550
