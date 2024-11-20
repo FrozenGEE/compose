@@ -1,0 +1,39 @@
+# 官方文档
+# portainer原版镜像
+# https://hub.docker.com/r/portainer/portainer-ce
+# https://hub.docker.com/r/portainer/portainer-ee
+# portainer汉化版镜像
+# https://hub.docker.com/r/6053537/portainer-ce
+# https://post.smzdm.com/p/a4x7lgpk
+# https://post.smzdm.com/p/a8x2wdq6
+
+# 汉化版镜像已经不更新，版本为2.19.5，该版本不支持docker最新引擎，无法对镜像的tag进行管理
+# 官方没有中文，可以选择浏览器机翻，基本上没问题
+# 可选择搞官方BE版本(portainer/portainer-ee)，该版本需要到官网申请一个免费的许可证，每一年都需要重复申请
+# 许可证允许你集群3个portainer使用
+# 如果本身NAS自带compose管理，其实也不一定要装个portainer
+
+---
+version: "3"
+# 最后编辑时间：2024-11-20
+services:
+  portainer-zh:
+    image: portainer/portainer-ce:latest
+    # 镜像地址
+    container_name: portainer-zh
+    # 容器名字
+    hostname: portainer-zh
+    # 主机名
+    privileged: true
+    # 特权
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # docker核心
+      - /vol1/1000/docker/portainer-zh:/data
+      # 配置目录
+    network_mode: bridge
+    ports:
+      - 9000:9000/tcp
+      # WebUI 端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
