@@ -79,6 +79,8 @@ services:
       
 ########################################
     environment:
+      - MOVIEPILOT_AUTO_UPDATE=TRUE
+      # 设置容器启动时自动更新，默认为 RELESARE
       - NGINX_PORT=33033
       # WebUI服务端口，默认为3000，预设为33033，可自行修改，不能和API服务端口3001冲突
       - SUPERUSER=admin
