@@ -63,7 +63,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # 使MP支持内建的重启操作，用于自动更新后重启
-      - /vol1/1000/docker/moviepilot/core:/moviepilot
+      - /vol1/1000/docker/moviepilot/moviepilot:/moviepilot
       # 程序主目录
       - /vol1/1000/docker/moviepilot/config:/config
       # 配置目录
@@ -72,6 +72,8 @@ services:
       
 ########################################
     environment:
+      - MOVIEPILOT_AUTO_UPDATE=TRUE
+      # 设置容器启动时自动更新，默认为 RELESARE
       - NGINX_PORT=33033
       # WebUI服务端口，默认为3000，预设为33033，可自行修改，不能和API服务端口3001冲突
       - SUPERUSER=admin
