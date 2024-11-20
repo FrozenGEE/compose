@@ -44,7 +44,7 @@ services:
       # 接口MTU配置，默认为1450，可在设置中自定义
       - WGUI_USERNAME=cheems
       - WGUI_PASSWORD=cheems
-      # WGUI的管理员账号密码
+      # WGUI的管理员账号密码，预设为cheems，记得修改
       - TZ=Asia/Shanghai
       # 时区
     # network_mode: bridge
