@@ -3,6 +3,7 @@
 # 官方文档
 # https://pixman.io/topics/17
 # https://hub.docker.com/r/pixman/pixman
+# https://github.com/chinggirltube/M3U-Proxy
 
 ---
 version: '3'
