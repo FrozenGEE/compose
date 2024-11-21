@@ -1,6 +1,15 @@
 # 官方文档
+# https://icret.github.io/EasyImages2.0
+# https://github.com/icret/EasyImages2.0
+
+# 由热心TG网友Derek DDS制作的Docker版本 
+# https://github.com/DDS-Derek/EasyImage-Docker
 # https://hub.docker.com/r/ddsderek/easyimage
-# https://github.com/ddsderek/easyimage
+
+# 由热心网友咕咕 制作的使用教程
+# 宝塔版使用教程 https://blog.laoda.de/archives/aapanel-install-easyimage
+# docker 版使用教程 https://blog.laoda.de/archives/docker-compose-install-easyimage
+# 视频安装教程 视频地址 https://www.bilibili.com/video/BV1Ya411e7ES?zw
 
 ---
 version: "3"
