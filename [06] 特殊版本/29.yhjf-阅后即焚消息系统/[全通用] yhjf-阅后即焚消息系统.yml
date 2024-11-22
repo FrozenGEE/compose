@@ -14,9 +14,6 @@ services:
     # 容器名字
     hostname: yhjf
     # 主机名
-    depends_on:
-      - redis
-      # 关联redis
     environment:
       - SERVER_URL=http://your-domain.com
       # 服务器地址
