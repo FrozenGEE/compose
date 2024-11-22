@@ -32,7 +32,7 @@ services:
     # 主机名
     environment:
       - ACCESS_CODE=123456
-      # 密码设置
+      # 访问密码
       - OPENAI_PROXY_URL=https://api.chatanywhere.tech
       # 代理地址，见上说明
       - OPENAI_API_KEY=【这里替换为申请的api密钥】
