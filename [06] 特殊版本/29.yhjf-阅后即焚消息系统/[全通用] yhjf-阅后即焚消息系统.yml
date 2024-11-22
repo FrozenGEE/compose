@@ -21,11 +21,15 @@ services:
     hostname: yhjf
     # 主机名
     environment:
-      - SERVER_URL=http://your-domain.com
-      # 服务器地址
+      - SERVER_URL=http://127.0.0.1:5000
+      # 服务器地址，默认为 http://127.0.0.1:5000
+      - USE_ZWS=false
+      # 是否使用零宽字符（true/false），默认为 false
+      # true: 生成短链接，如 domain.com/‌hash
+      # false: 生成普通链接，如 domain.com/view/hash（默认）
     network_mode: bridge
     ports:
-      - 5270:5000/tcp
+      - 5270:5270/tcp
       # WebUI 端口，与群晖的WebUI端口冲突，因此使用bridg
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
