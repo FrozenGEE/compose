@@ -26,7 +26,7 @@ services:
      # 限制预处理大小，内存大小，线程数量
     network_mode: host
     # 不具备端口，一般都是调用即可，这玩意要配合用
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       icon: http://IP:PORT/i/user_01/it-tools-light.png
