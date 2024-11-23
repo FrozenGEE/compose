@@ -31,7 +31,7 @@ services:
     ports:
       - 5270:5270/tcp
       # WebUI 端口，与群晖的WebUI端口冲突，因此使用bridg
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       icon: http://IP:PORT/i/user_01/yhjf_A.png
