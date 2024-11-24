@@ -29,6 +29,8 @@ services:
       # 2024-11-24：已经不需要了，仅作记录保留
       - /mnt/unas/data/docker/surveyking/files:/app/files
       # 数据目录
+      - /mnt/unas/data/docker/surveyking/db:/app/db
+      # 数据库目录
       - /mnt/unas/data/docker/surveyking/logs:/app/logs
       # 日志目录
     environment:
