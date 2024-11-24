@@ -13,7 +13,6 @@
 
 ---
 version: "3"
-version: "3"
 # 最后编辑时间：2024-11-24
 # 更新日志：官方版本已经支持arm64版本，可直接部署
 services:
@@ -30,6 +29,8 @@ services:
       # 2024-11-24：已经不需要了，仅作记录保留
       - /volume1/docker/surveyking/files:/app/files
       # 数据目录
+      - /volume1/docker/surveyking/db:/app/db
+      # 数据库目录
       - /volume1/docker/surveyking/logs:/app/logs
       # 日志目录
     environment:
