@@ -27,14 +27,14 @@ services:
       # 视频目录
       - 【这里替换为你的数据存放目录】/metube/audio:/music
       # 音频目录
-      # - 【这里替换为你的数据存放目录】/metube/temp:/temp
-      # 临时缓存目录，一般不设置，如果有需要先下载到ssd上再转移到hdd上可以设置
+      - 【这里替换为你的数据存放目录】/metube/temp:/temp
+      # 临时缓存目录，可以设置在ssd上，让它下载到ssd上再转移到hdd上
       # - 【这里替换为你的数据存放目录】/metube/cookies:/cookies
       # cookie文件目录，默认不启用
     environment:
       - DOWNLOAD_DIR=/downloads
       - AUDIO_DOWNLOAD_DIR=/music
-      # - TEMP_DIR=/temp
+      - TEMP_DIR=/temp
       # 自定义容器的下载目录，音频目录，临时缓存目录
       # 
       # - YTDL_OPTIONS={"cookiefile":"/cookies/cookies.txt"}
