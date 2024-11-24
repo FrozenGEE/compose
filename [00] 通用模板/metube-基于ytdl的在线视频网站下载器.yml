@@ -4,7 +4,7 @@
 # https://www.bilibili.com/opus/996751842307211269
 # https://www.bilibili.com/opus/869332669814538249
 
-# 第30，36行的说明
+# 第32，40行的说明
 # cookies需要使用浏览器插件获取后放入 /cookies 内，并设置一条 YTDL_OPTIONS={"cookiefile":"/cookies/cookies.txt"} 变量
 # cookies插件项目地址 https://github.com/kairi003/Get-cookies.txt-LOCALLY/releases
 # 下载，解压缩，然后微软/谷歌浏览器中加载解压缩的扩展
