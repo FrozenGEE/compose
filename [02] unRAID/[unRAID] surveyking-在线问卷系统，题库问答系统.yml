@@ -24,14 +24,14 @@ services:
     hostname: surveyking
     # 主机名
     volumes:
-      # - 【这里替换为你的docker数据存放目录】/surveyking/surveyking-v1.7.2.jar:/app/surveyking.jar
+      # - /mnt/user/appdata/surveyking/surveyking-v1.7.2.jar:/app/surveyking.jar
       # jar文件映射，可不映射，截至至2024-05-17，镜像内的版本为1.6.0版本，自行获取新版jar文件并映射就可以更新到官方最新版本
       # 2024-11-24：已经不需要了，仅作记录保留
-      - /volume1/docker/surveyking/files:/app/files
+      - /mnt/user/appdata/surveyking/files:/app/files
       # 数据目录
-      - /volume1/docker/surveyking/db:/app/db
+      - /mnt/user/appdata/surveyking/db:/app/db
       # 数据库目录
-      - /volume1/docker/surveyking/logs:/app/logs
+      - /mnt/user/appdata/surveyking/logs:/app/logs
       # 日志目录
     environment:
       - SERVER_PORT=1991
