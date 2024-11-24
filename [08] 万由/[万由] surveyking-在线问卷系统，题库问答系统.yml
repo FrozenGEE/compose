@@ -30,8 +30,8 @@ services:
       - /mnt/unas/data/docker/surveyking/files:/app/files
       # 数据目录
       - /mnt/unas/data/docker/surveyking/logs:/app/logs
-      # 日志目录    
-      environment:
+      # 日志目录
+    environment:
       - SERVER_PORT=1991
       # 自定义容器的WebUI端口
       - DB_URL=jdbc:mysql://【IP:PORT】/surveyking
