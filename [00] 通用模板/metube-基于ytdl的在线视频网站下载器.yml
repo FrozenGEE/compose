@@ -1,0 +1,73 @@
+# 官方文档
+# https://github.com/alexta69/metube
+# https://github.com/kairi003/Get-cookies.txt-Locally
+# https://www.bilibili.com/opus/996751842307211269
+# https://www.bilibili.com/opus/869332669814538249
+
+# 第30，36行的说明
+# cookies需要使用浏览器插件获取后放入 /cookies 内，并设置一条 YTDL_OPTIONS={"cookiefile":"/cookies/cookies.txt"} 变量
+# cookies插件项目地址 https://github.com/kairi003/Get-cookies.txt-LOCALLY/releases
+# 下载，解压缩，然后微软/谷歌浏览器中加载解压缩的扩展
+# 打开视频网站，如B站，点开扩展，点导出即可获取到
+# 将下载的文件，改名为cookies.txt，上传到 /cookies 内
+
+---
+version: "3"
+# 最后编辑时间：2024-11-24
+services:
+  metube:
+    image: ghcr.io/alexta69/metube:latest
+    # 镜像地址
+    container_name: metube
+    # 容器名字
+    hostname: metube
+    # 主机名
+    volumes:
+      - 【这里替换为你的数据存放目录】/metube/video:/downloads
+      # 视频目录
+      - 【这里替换为你的数据存放目录】/metube/audio:/music
+      # 音乐目录
+      # 【这里替换为你的数据存放目录】/metube/cookies:/temp
+      # 缓存目录
+      # - 【这里替换为你的数据存放目录】/metube/cookies:/cookies
+      # cookie文件，默认不启用
+    environment:
+      - DOWNLOAD_DIR=/downloads
+      - AUDIO_DOWNLOAD_DIR=/music
+      # - TEMP_DIR=/temp
+      # 自定义容器的下载目录，音乐目录，缓存目录(一般不设置，如果有需要先下载到ssd上再转移到hdd上可以设置)
+      # - YTDL_OPTIONS={"cookiefile":"/cookies/cookies.txt"}
+      # 使用cookies以便于下载受限的内容，例如B站4K视频，默认不启用
+      # 要传递给 youtube-dl 的其他选项，采用 JSON 格式，详见 https://github.com/yt-dlp/yt-dlp/blob/master/yt_dlp/YoutubeDL.py#L183
+      # - YTDL_OPTIONS_FILE=/ytdl.json
+      # 两种书写格式，一种是直接写变量，另一个是将参数内容写在json文件里面然后映射进来，参数量少推荐第一种，参数量多推荐第二种
+      - OUTPUT_TEMPLATE=%(ext)s
+      # 输出文件的命名格式，默认为 %(title)s.%(ext)s
+      # 详细书写格式见 https://github.com/yt-dlp/yt-dlp/blob/master/README.md#output-template
+      - UID=0
+      - PID=0
+      # 在群晖上部署不写0会报错提示权限错误，所以直接都写0
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=sia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8081:8081/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/metube_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:8081]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/siyuan_B.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
