@@ -17,9 +17,9 @@ services:
       - /share/Container/channeltube/config:/channeltube/config
       # 配置文件目录
       # 如需使用cookies登录以便于下载受限的内容，请将获取到的cookie内容保存到名为cookies.txt中，并放入/config文件夹中
-      - /share/Multimeida/channeltube/video:/channeltube/downloads
+      - /share/Pulic/channeltube/video:/channeltube/downloads
       # 视频下载目录
-      - /share/Multimeida/channeltube/audio:/channeltube/audio_downloads
+      - /share/Pulic/channeltube/audio:/channeltube/audio_downloads
       # 音频下载目录
     environment:
       - thread_limit=1
