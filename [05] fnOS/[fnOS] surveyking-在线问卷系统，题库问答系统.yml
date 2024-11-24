@@ -31,7 +31,7 @@ services:
       # 数据目录
       - /vol1/1000/docker/surveyking/logs:/app/logs
       # 日志目录
-      environment:
+    environment:
       - SERVER_PORT=1991
       # 自定义容器的WebUI端口
       - DB_URL=jdbc:mysql://【IP:PORT】/surveyking
