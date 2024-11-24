@@ -27,7 +27,7 @@ services:
       # 视频目录
       - 【这里替换为你的数据存放目录】/metube/audio:/music
       # 音频目录
-      # 【这里替换为你的数据存放目录】/metube/temp:/temp
+      # - 【这里替换为你的数据存放目录】/metube/temp:/temp
       # 临时缓存目录，一般不设置，如果有需要先下载到ssd上再转移到hdd上可以设置
       # - 【这里替换为你的数据存放目录】/metube/cookies:/cookies
       # cookie文件目录，默认不启用
