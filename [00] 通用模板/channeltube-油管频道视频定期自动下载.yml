@@ -25,7 +25,7 @@ services:
       - thread_limit=1
       # 设置要使用的最大线程数，默认值为1
       - defer_hours=0
-      # 定义要推迟的时间，以小时为单位，默认值为0
+      # 设置延迟下载的时间，以小时为单位，默认值为0
       - PUID=1000
       - PGID=100
       # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
@@ -34,10 +34,11 @@ services:
       # 默认创建新文件的权限，一般写022
       - TZ=sia/Shanghai
       # 时区
-    network_mode: bridge
-    ports:
-      - 5400:5000/tcp
-      # WebUI 端口，群晖的WebUI端口默认为5000，所以统一改用bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5400:5000/tcp
+      # WebUI 端口，群晖的WebUI端口默认为5000，注意修改用bridge
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
