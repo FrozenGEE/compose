@@ -30,20 +30,23 @@ services:
       # 【这里替换为你的数据存放目录】/metube/cookies:/temp
       # 缓存目录
       # - 【这里替换为你的数据存放目录】/metube/cookies:/cookies
-      # cookie文件，默认不启用
+      # cookie文件目录，默认不启用
     environment:
       - DOWNLOAD_DIR=/downloads
       - AUDIO_DOWNLOAD_DIR=/music
       # - TEMP_DIR=/temp
       # 自定义容器的下载目录，音乐目录，缓存目录(一般不设置，如果有需要先下载到ssd上再转移到hdd上可以设置)
+      # 
       # - YTDL_OPTIONS={"cookiefile":"/cookies/cookies.txt"}
-      # 使用cookies以便于下载受限的内容，例如B站4K视频，默认不启用
+      # 使用cookies以便于下载受限的内容，例如B站4K视频，默认不启用，具体见上方说明
       # 要传递给 youtube-dl 的其他选项，采用 JSON 格式，详见 https://github.com/yt-dlp/yt-dlp/blob/master/yt_dlp/YoutubeDL.py#L183
       # - YTDL_OPTIONS_FILE=/ytdl.json
       # 两种书写格式，一种是直接写变量，另一个是将参数内容写在json文件里面然后映射进来，参数量少推荐第一种，参数量多推荐第二种
-      - OUTPUT_TEMPLATE=%(ext)s
+      # 
+      - OUTPUT_TEMPLATE=%(title)s.%(ext)s
       # 输出文件的命名格式，默认为 %(title)s.%(ext)s
       # 详细书写格式见 https://github.com/yt-dlp/yt-dlp/blob/master/README.md#output-template
+      # 
       - UID=0
       - PID=0
       # 在群晖上部署不写0会报错提示权限错误，所以直接都写0
