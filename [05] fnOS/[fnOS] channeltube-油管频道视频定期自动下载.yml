@@ -1,0 +1,43 @@
+# 官方文档
+# https://github.com/thewicklowwolf/channeltube
+# https://hub.docker.com/r/thewicklowwolf/channeltube
+
+---
+version: "3"
+# 最后编辑时间：2024-11-24
+services:
+  channeltube:
+    image: thewicklowwolf/channeltube:latest
+    # 镜像地址
+    container_name: channeltube
+    # 容器名字
+    hostname: channeltube
+    # 主机名
+    volumes:
+      - /vol/1000/docker/channeltube/config:/channeltube/config
+      # 配置文件目录
+      # 如需使用cookies登录以便于下载受限的内容，请将获取到的cookie内容保存到名为cookies.txt中，并放入/config文件夹中
+      - 【这里替换为你的数据存放目录】/channeltube/video:/channeltube/downloads
+      # 视频下载目录
+      - 【这里替换为你的数据存放目录】/channeltube/audio:/channeltube/audio_downloads
+      # 音频下载目录
+    environment:
+      - thread_limit=1
+      # 设置要使用的最大线程数，默认值为1
+      - defer_hours=0
+      # 设置延迟下载的时间，以小时为单位，默认值为0
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=sia/Shanghai
+      # 时区
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5400:5000/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
