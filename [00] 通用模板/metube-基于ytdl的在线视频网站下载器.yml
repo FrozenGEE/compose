@@ -26,16 +26,16 @@ services:
       - 【这里替换为你的数据存放目录】/metube/video:/downloads
       # 视频目录
       - 【这里替换为你的数据存放目录】/metube/audio:/music
-      # 音乐目录
-      # 【这里替换为你的数据存放目录】/metube/cookies:/temp
-      # 缓存目录
+      # 音频目录
+      # 【这里替换为你的数据存放目录】/metube/temp:/temp
+      # 临时缓存目录，一般不设置，如果有需要先下载到ssd上再转移到hdd上可以设置
       # - 【这里替换为你的数据存放目录】/metube/cookies:/cookies
       # cookie文件目录，默认不启用
     environment:
       - DOWNLOAD_DIR=/downloads
       - AUDIO_DOWNLOAD_DIR=/music
       # - TEMP_DIR=/temp
-      # 自定义容器的下载目录，音乐目录，缓存目录(一般不设置，如果有需要先下载到ssd上再转移到hdd上可以设置)
+      # 自定义容器的下载目录，音频目录，临时缓存目录
       # 
       # - YTDL_OPTIONS={"cookiefile":"/cookies/cookies.txt"}
       # 使用cookies以便于下载受限的内容，例如B站4K视频，默认不启用，具体见上方说明
