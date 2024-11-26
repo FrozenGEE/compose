@@ -1,9 +1,7 @@
-# 【更新日志-2024-11-14】
-- 铁威马TOS5和TOS6系统的路径有所改变，修正这部分内容，新增对应的路径说明
-- 新增 万由UNAS6.0 的路径，端口，第一用户权限等说明，端口注意如果模板有冲突，自行修改
-- 上传万由UNAS的compose模板，味精测试，应该没问题，系统永久版单卖499rmb
-- 修正MP-v2使用6666端口无法访问WebUI的问题，这个6666端口居然是特殊端口，涨知识了
-- MP-v1的3333端口改为33033，v2的6666端口为55055
+# 【更新日志-2024-11-27】
+- 特殊版本中新增jellyfin的rockchip版compose，没有深入实测，但是看着是生效了，如下图
+- [RK3568测试图](https://github.com/FrozenGEE/compose/blob/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/31.jellyfin-%E7%A7%81%E4%BA%BA%E5%AA%92%E4%BD%93%E5%BA%93_RK%E7%89%B9%E4%BE%9B%E7%89%88)
+![image](https://github.com/FrozenGEE/compose/blob/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/31.jellyfin-%E7%A7%81%E4%BA%BA%E5%AA%92%E4%BD%93%E5%BA%93_RK%E7%89%B9%E4%BE%9B%E7%89%88/JF-RK3568-01.png)
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
