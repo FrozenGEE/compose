@@ -53,7 +53,7 @@ services:
      # - 8096:8096/tcp
      # WebUI http端口
      # - 8920:8920/tcp
-     # WebUI https端口
+     # WebUI https端口，非必要
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
