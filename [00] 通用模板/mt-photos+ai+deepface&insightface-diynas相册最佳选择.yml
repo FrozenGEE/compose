@@ -263,7 +263,7 @@ services:
 
 #  mt-photos-pgsql:
 #    image: mtphotos/mt-photos-pg:latest
-    # 镜像地址，支持arm64v8
+    # 镜像地址，arm64v8使用 mtphotos/mt-photos-pg:arm-latest
 #    container_name: mt-photos-pgsql
     # 容器名字
 #    hostname: mt-photos-pgsql
