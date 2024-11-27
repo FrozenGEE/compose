@@ -49,6 +49,11 @@ services:
     # 容器名字
     hostname: mt-photos
     # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    devices:
+      - /dev/dri:/dev/dri
+      # 开启硬件加速支持，注意：arm设备不支持硬件加速
     volumes:
       - /volume1/docker/mt-photos/config:/config
       # 配置文件目录
@@ -61,12 +66,6 @@ services:
     environment:
       - MT_SERVER_PORT=8063
       # 指定MT Photos服务端的端口，默认为8063，可自定义端口后直接使用host网络模式
-      - PUID=1000
-      - PGID=100
-      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
-      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
-      - UMASK=022
-      # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
       # 时区
       ######################################
