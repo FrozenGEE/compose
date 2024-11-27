@@ -229,7 +229,7 @@ services:
 #      - PGDATA=/var/lib/postgresql/data/pgdata
       # 自定义容器数据库文件目录
 #    volumes:
-#      - 【这里替换为你的docker数据存放目录】/mt-photos/pgsql:/var/lib/postgresql/data
+#      - /Volume1/docker/mt-photos/pgsql:/var/lib/postgresql/data
       # 数据库文件目录
 #    network_mode: bridge
     # network_mode: host
