@@ -22,6 +22,10 @@ services:
       - 【这里替换为你的docker数据存放目录】/dockercopilot:/data
       # 配置文件目录
     environment:
+      # - account=1688888888
+      # 输入你的极空间账号(具体看"NAS的路径说明"中极空间那部分)
+      # 仅极空间才需要写，其余NAS不需要写hhhhh
+      # 难怪我部署后一直都出错，不愧是极空间，真的恶心
       - secretKey=dokcer123
       # 密码，需要大于八位且非纯数字，预设为docker123，请自行修改
       - DOCKER_HOST=unix:///var/run/docker.sock
