@@ -88,7 +88,6 @@ services:
       # CACHE_DIR_PATH=/config/cache
       # 自定义保存缩略图的位置，默认为/config/cache
       ######################################
-      # 以下设置均可在设置内进行设置
       # - PROXY_HOST_AMAP=http://xxx.com/
       # 指定代理地址-高德api，默认为空
       # - PROXY_HOST_MAPBOX=http://xxx.com/
