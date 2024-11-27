@@ -18,7 +18,7 @@
 
 # Rockchip 上的 HEVC 支持很复杂
 # 解码 HEVC 8 位 - 几乎所有 RK33xx 及更高版本的 Rockchip SoC
-# 编码 HEVC 8 位 - 几乎所有 RK35xx 及以上的瑞芯微 SoC
+# 编码 HEVC 8 位 - 几乎所有 RK35xx 及以上的 Rockchip SoC
 # 解码 HEVC 10 位 - 几乎所有 RK33xx 及以上的 Rockchip SoC
 
 # Rockchip 在其最新的 SoC 中增加了对 AV1 加速的支持
