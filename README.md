@@ -256,19 +256,19 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 
 | NAS | portainer-zh部署命令 |
 | :----: | :---- | 
-| Debian/Ubuntu | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/docker/portainer-zh:/data 6053537/portainer-ce<br><br>路径仅供参考，按自己实际操作 |
-| unRAID | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/user/appdata/portainer-zh:/data 6053537/portainer-ce |
+| Debian/Ubuntu | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/docker/portainer-zh:/data 6053537/portainer-ce:latest<br><br>路径仅供参考，按自己实际操作 |
+| unRAID | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/user/appdata/portainer-zh:/data 6053537/portainer-ce:latest |
 | TrueNAS | 待补充 |
-| CASAOS/ZimaOS | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /DATA/AppData/portainer-zh:/data 6053537/portainer-ce |
-| 群晖 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce |
-| 威联通 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /share/container-station-data/portainer-zh:/data 6053537/portainer-ce |
-| 铁威马 | TOS5<br>docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Volume1/User/docker/portainer-zh:/data 6053537/portainer-ce<br><br>TOS6<br>docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Volume1/docker/portainer-zh:/data 6053537/portainer-ce |
-| 万由 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/unas/data/docker/portainer-zh:/data 6053537/portainer-ce |
-| 华硕 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce |
-| 飞牛OS | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /vol1/1000/docker/portainer-zh:/data 6053537/portainer-ce |
-| 新绿联 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce |
-| 旧绿联 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/dm-0/.ugreen_nas/用户ID/docker/portainer-zh:/data 6053537/portainer-ce<br><br>记得把"用户ID"替换掉 |
-| 极空间 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/zfsv3/nvme$/手机号码+字母/data/docker/portainer-zh:/data 6053537/portainer-ce<br><br>[2024-09-28更新] 现在arm也不会冲突重启了，命令行修改为自启动，记得把"/nvme$/手机号码+字母"替换掉 |
+| CASAOS/ZimaOS | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /DATA/AppData/portainer-zh:/data 6053537/portainer-ce:latest |
+| 群晖 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce:latest |
+| 威联通 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /share/container-station-data/portainer-zh:/data 6053537/portainer-ce:latest |
+| 铁威马 | TOS5<br>docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Volume1/User/docker/portainer-zh:/data 6053537/portainer-ce:latest<br><br>TOS6<br>docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Volume1/docker/portainer-zh:/data 6053537/portainer-ce:latest |
+| 万由 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/unas/data/docker/portainer-zh:/data 6053537/portainer-ce:latest |
+| 华硕 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce:latest |
+| 飞牛OS | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /vol1/1000/docker/portainer-zh:/data 6053537/portainer-ce:latest |
+| 新绿联 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-zh:/data 6053537/portainer-ce:latest |
+| 旧绿联 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/dm-0/.ugreen_nas/用户ID/docker/portainer-zh:/data 6053537/portainer-ce:latest<br><br>记得把"用户ID"替换掉 |
+| 极空间 | docker run -d -p 9000:9000 --name=portainer-zh --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/zfsv3/nvme$/手机号码+字母/data/docker/portainer-zh:/data 6053537/portainer-ce:latest<br><br>[2024-09-28更新] 现在arm也不会冲突重启了，命令行修改为自启动，记得把"/nvme$/手机号码+字母"替换掉 |
 
 unRAID有插件支持但是交互体验个人觉得不好用，商店就有portainer现成模板，推荐直接安装部署即可，要用中文版把存储库名字替换一下就可以用汉化版即可
 
