@@ -90,9 +90,9 @@ services:
       ######################################
       # 以下设置均可在设置内进行设置
       # - PROXY_HOST_AMAP=http://xxx.com/
-      # 指定代理地址-高德api，默认为空，可在设置中设置
+      # 指定代理地址-高德api，默认为空
       # - PROXY_HOST_MAPBOX=http://xxx.com/
-      # 指定代理地址-mapbox api，默认为空，可在设置中设置
+      # 指定代理地址-mapbox api，默认为空
       ######################################
       # - PROXY_HOST_AUTH=http://xxx.com/
       # 指定代理地址-授权服务器，默认为空，仅作预留，不写
@@ -137,7 +137,7 @@ services:
       - 8060:8000/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
@@ -180,7 +180,7 @@ services:
       - 8066:8066/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
@@ -220,7 +220,7 @@ services:
       - 8065:8066/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
