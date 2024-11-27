@@ -180,7 +180,7 @@ services:
       # 人脸识别API，可以随便写，在mt-photos内设置要对应该项
       ######################################
     # volumes:
-      # - 【这里替换为你的数据存放目录】/mt-photos/deepface/models:/models
+      # - 【这里替换为你的docker数据存放目录】/mt-photos/deepface/models:/models
       ## 镜像已内置 retinaface.h5 和 facenet512_weights.h5，如果不修改识别模型，不需要添加目录映射
       ## 当指定了别的模型，容器内下载模型很慢，可以增加 /models 目录映射
       ## 预训练模型下载地址：https://github.com/serengil/deepface_models/releases/tag/v1.0
@@ -224,7 +224,7 @@ services:
       # 人脸识别API，可以随便写，在mt-photos内设置要对应该项
       ######################################
     # volumes:
-      # - 【这里替换为你的数据存放目录】/mt-photos/insightface/models:/root/.insightface/models
+      # - 【这里替换为你的docker数据存放目录】/mt-photos/insightface/models:/root/.insightface/models
       # CUDA版本镜像，未内置buffalo_l相关的模型文件；如果容器启动后，下载模型文件失败；请查看下载模型后目录映射给容器
       ## 模型文件下载地址：https://github.com/kqstone/mt-photos-insightface-unofficial/releases/tag/models 或者百度网盘：https://pan.baidu.com/s/1SsY7_2t7aORh2jCvGWtD1A?pwd=1234
       ## 下载模型文件 buffalo_l.zip 或者 antelopev2.zip 并解压到映射的目录中，以 buffalo_l.zip 为例
