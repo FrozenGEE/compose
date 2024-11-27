@@ -49,6 +49,9 @@ services:
     # 容器名字
     hostname: mt-photos
     # 主机名
+    devices:
+      - /dev/dri:/dev/dri
+      # 开启硬件加速支持，注意：arm设备不支持硬件加速
     volumes:
       - 【这里替换为你的docker数据存放目录】/mt-photos/config:/config
       # 配置文件目录
