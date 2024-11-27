@@ -225,7 +225,7 @@ services:
 #    hostname: mt-photos-pgsql
     # 主机名
 #    environment:
-#      - POSTGRES_PASSWORD=mtphotos
+#      - POSTGRES_PASSWORD=postgres
       # 数据库默认密码，账号为postgres
 #      - PGDATA=/var/lib/postgresql/data/pgdata
       # 自定义容器数据库文件目录
