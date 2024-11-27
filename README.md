@@ -1,4 +1,5 @@
 # 【更新日志-2024-11-27】
+- 加料更新MT相册的compose，注释量巨大，强烈建议去官方文档，写的极度详细，一部到胃
 - 特殊版本中新增jellyfin的rockchip版compose，没有深入实测，但是看着是生效了，如下图
 - [RK3568测试图](https://github.com/FrozenGEE/compose/blob/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/31.jellyfin-%E7%A7%81%E4%BA%BA%E5%AA%92%E4%BD%93%E5%BA%93_RK%E7%89%B9%E4%BE%9B%E7%89%88)
 ![image](https://github.com/FrozenGEE/compose/blob/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/31.jellyfin-%E7%A7%81%E4%BA%BA%E5%AA%92%E4%BD%93%E5%BA%93_RK%E7%89%B9%E4%BE%9B%E7%89%88/JF-RK3568-03.png)
