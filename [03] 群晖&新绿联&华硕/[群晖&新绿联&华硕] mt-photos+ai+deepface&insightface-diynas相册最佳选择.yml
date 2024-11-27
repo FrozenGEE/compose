@@ -40,7 +40,7 @@ version: "3"
 services:
   mt-photos:
     image: mtphotos/mt-photos:latest
-    # 镜像地址
+    # 镜像地址，支持arm64v8
     container_name: mt-photos
     # 容器名字
     hostname: mt-photos
@@ -106,13 +106,6 @@ services:
       # WebUI http端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
-    # depends_on:
-       # - mt-photos-ai
-       # 关联mt-photos-ai，可以分开部署，部署后在mt-photos内可以设置，unRAID玩家建议分开部署
-       # - mt-photos-deepface
-       # 关联mt-photos-deepface，可以分开部署，部署后在mt-photos内可以设置，unRAID玩家建议分开部署
-       # - mt-photos-insightface
-       # 关联mt-photos-deepface，可以分开部署，部署后在mt-photos内可以设置，unRAID玩家建议分开部署
 
 ############################################################################
 
@@ -146,7 +139,7 @@ services:
 
   mt-photos-deepface:
     image: mtphotos/mt-photos-deepface:latest
-    # 镜像地址
+    # 镜像地址，不支持arm架构
     # noavx-latest: 如果改容器无法启动，尝试使用这支持cpu无avx指令的tag
     # cuda-latest: CUDA版本镜像，N卡用户可以选择这个tag
     container_name: mt-photos-deepface
@@ -180,9 +173,9 @@ services:
 
   mt-photos-insightface:
     image: devfox101/mt-photos-insightface-unofficial:latest
-    # 镜像地址，其他可选tag如下
-    # cuda-latest：CUDA版本镜像，需要CUDA 版本 12.3.0 以上，显卡驱动版本 >=545.23.06
-    # arm-latest：armV8版本镜像
+    # 镜像地址，支持arm64v8
+    # CUDA版本镜像，需要CUDA 版本 12.3.0 以上，显卡驱动版本 >=545.23.06
+    # crpi-gcuyquw9co62xzjn.cn-guangzhou.personal.cr.aliyuncs.com/devfox101/mt-photos-insightface-unofficial:cuda-latest
     container_name: mt-photos-insightface
     # 容器名字
     hostname: mt-photos-insightface
