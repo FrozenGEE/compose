@@ -1,0 +1,114 @@
+# 官方文档
+# https://cobalt.tools
+# https://github.com/imputnet/cobalt
+
+# cookies.json模板
+# https://github.com/imputnet/cobalt/tree/main/docs/examples
+
+version: '3'
+services:
+  cobalt-web:
+    image: ghcr.io/imputnet/cobalt:latest
+    # 镜像地址
+    container_name: cobalt-web
+    # 容器名字
+    hostname: cobalt-web
+    # 主机名
+    environment:
+      - WEB_URL=http://ip_or_domainname:9001
+      # web主机IP或域名，将 ip_or_domainname 按照实际的修改，可填写局域网，公网IP，域名
+      - API_URL=http://public_ip_or_domainname:9000
+      # api主机ip或域名，将 public_ip_or_domainname 按照实际的修改，可填写局域网，公网IP，域名
+      # 这两条的端口，要注意写的是实际端口而不是容器端口，请根据实际情况填写
+    network_mode: bridge
+    # network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    ports:
+      - 9001:9001/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/cobalt.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:9001]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/cobalt.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+
+  cobalt-api:
+    image: ghcr.io/imputnet/cobalt:latest
+    # 镜像地址
+    container_name: cobalt-api
+    # 容器名字
+    hostname: cobalt-api
+    # 主机名
+    environment:
+      - API_URL=http://public_ip_or_domainname:9000
+      # 私有化部署的主机IP或域名
+      # 要注意写的是实际端口而不是容器端口，请根据实际情况填写，可填写局域网，公网IP，域名
+      - API_NAME=cobalt-api
+      # 如需开启cookie，则打开下一行，并删除volumes注释
+      # - COOKIE_PATH=/cookies.json
+      # cookies的文件容器路径，非必须，启用后要将下面的文件映射也做好对应设置
+    # volumes:
+      # - 【这里替换为docker的数据目录】/cobalt/cookies.json:/cookies.json
+      # cookies的文件映射，非必须，如需启用，需要将上面的变量也启用
+      # 部署前记得先写好并放入对应目录，具体内容模板最后有写
+      # 以下预设各个nas预设的路径模板，请根据本项目的路径说明来使用
+      # - /mnt/user/appdata/cobalt/cookies.json:/cookies.json
+      # - /volume1/docker/cobalt/cookies.json:/cookies.json
+      # - /share/Container/cobalt/cookies.json:/cookies.json
+      # - /vol1/1000/docker/cobalt/cookies.json:/cookies.json
+      # - /Volume1/User/docker/cobalt/cookies.json:/cookies.json
+      # - /Volume1/docker/cobalt/cookies.json:/cookies.json
+      # - /mnt/unas/data/docker/cobalt/cookies.json:/cookies.json
+    network_mode: bridge
+    # network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    ports:
+      - 9000:9000/tcp
+      # API调用端口，不存在WebUI
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/wechat_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: https://cobalt.tools
+      # 不存在WebUI，跳转至官网
+      net.unraid.docker.icon: /mnt/user/LOGO/wechat.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+
+# 以下为cookies.json内容的书写格式，部署前记得删掉
+########################################
+
+{
+    "instagram": [
+        "mid=<replace>; ig_did=<with>; csrftoken=<your>; ds_user_id=<own>; sessionid=<cookies>"
+    ],
+    "instagram_bearer": [
+        "token=<token_with_no_bearer_in_front>", "token=IGT:2:<looks_like_this>"
+    ],
+    "reddit": [
+        "client_id=<replace_this>; client_secret=<replace_this>; refresh_token=<replace_this>"
+    ],
+    "twitter": [
+        "auth_token=<replace_this>; ct0=<replace_this>"
+    ],
+    "youtube_oauth": [
+        "<output from running `pnpm run token:youtube` in `api` folder goes here>"
+    ]
+}
+
+########################################
