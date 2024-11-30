@@ -21,22 +21,22 @@
 # 接口服务使用文件存储书源及目录等信息，存储位置为 storage 目录(可通过运行时添加 -Dreader.app.storagePath=/path/to/storage 修改
 # 数据存储目录结构如下：
 # storage
-# # ├── assets										# 静态资源
-# │   ├── background								# 自定义阅读背景图片保存目录
+# # ├── assets                                          # 静态资源
+# │   ├── background                                    # 自定义阅读背景图片保存目录
 # │   │   └── 6.jpg
-# │   └── reader.css								# 自定义CSS样式文件
-# ├── cache											# 缓存目录
-# │   ├── 6190ac40068e74c2c82624e91a5f8a0c.jpg		# 书籍封面缓存
+# │   └── reader.css                                    # 自定义CSS样式文件
+# ├── cache                                             # 缓存目录
+# │   ├── 6190ac40068e74c2c82624e91a5f8a0c.jpg          # 书籍封面缓存
 # │   └── ea11967236129bdae6133c3c9ff8c2dd.jpg
-# ├── data											# 数据目录
-# │   ├── bookInfoCache.json						# 搜索缓存Map
-# │   ├── bookSource.json							# 书源列表
-# │   ├── bookshelf.json							# 书架书籍列表
-# │   └── 斗罗大陆									# 书籍缓存目录
-# │       ├── 04abb3842aabc03d08a14186be005e89.json	# A书源目录列表
-# │       ├── 5576c3b5fc70453d5b40f437cf88cdb5.json	# B书源目录列表
-# │       └── bookSource.json						# 书籍书源列表
-# └── windowConfig.json								# 窗口配置文件
+# ├── data                                              # 数据目录
+# │   ├── bookInfoCache.json                            # 搜索缓存Map
+# │   ├── bookSource.json                               # 书源列表
+# │   ├── bookshelf.json                                # 书架书籍列表
+# │   └── 斗罗大陆                                       # 书籍缓存目录
+# │       ├── 04abb3842aabc03d08a14186be005e89.json     # A书源目录列表
+# │       ├── 5576c3b5fc70453d5b40f437cf88cdb5.json     # B书源目录列表
+# │       └── bookSource.json                           # 书籍书源列表
+# └── windowConfig.json                                 # 窗口配置文件
 
 
 version: '3'
@@ -54,8 +54,6 @@ services:
       # 日志文件目录
       - /mnt/user/appdata/reader:/storage
       # 数据存储目录
-      # - 【这里替换为书库的目录】:/storage/data
-      # 如需自定义书库的目录，可以使用该条路径映射，具体的数据存储目录结构见上
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       # 不知道，照抄
