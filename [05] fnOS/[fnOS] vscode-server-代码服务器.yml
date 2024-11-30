@@ -1,0 +1,36 @@
+# 官方文档
+# https://coder.com
+# https://github.com/coder/code-server
+# https://hub.docker.com/r/codercom/code-server
+# https://coder.com/docs/code-server/requirements
+
+# 部署教程(含设置中文语言教程)
+# https://www.cnblogs.com/wuhanjiayou/p/18186362/VS-Code
+# 部署后打开WebUI，按 Shift+Ctrl+X，搜索 Chinese (Simplified) (简体中文) Language Pack for Visual Studio Code，最后顶部搜索栏输入 > configure display language，切换至中文即可
+
+# 硬件需求：机器至少1G内存，2个CPU内核
+
+---
+version: "3"
+# 最后编辑时间：2024-11-30
+services:
+  vscode-server:
+    image: codercom/code-server:latest
+    # 镜像地址
+    container_name: vscode-server
+    # 容器名字
+    hostname: vscode-server
+    # 主机名
+    volumes:
+      - /vol/1000/docker/vscode-server:/root/.vscode-server
+      # 数据文件目录
+    environment:
+      - PASSWORD=123456
+      # 访问密码，预设为123456
+    network_mode: bridge
+    # 8080端口有别的服务使用，所以不推荐host
+    ports:
+      - 10240:8080/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
