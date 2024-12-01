@@ -1,0 +1,84 @@
+# 官方文档
+# https://jellyfin.org
+# https://github.com/jellyfin
+# https://hub.docker.com/r/jellyfin/jellyfin
+# https://jellyfin.org/docs/general/installation/container
+
+# 硬件编码，解码相关知识
+# https://jellyfin.org/docs/general/administration/hardware-acceleration
+
+# 无脑推荐使用ny大佬的JF，做好了全部修正优化，无脑推荐使用ny大佬的JF，做好了全部修正优化
+# 官方镜像需要自己修改字体缺失问题，见48，49行
+
+---
+version: "3"
+# 最后编辑时间：2024-12-01
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    # 镜像地址，支持X86和arm
+    # 默认tag为latest，测试版tag为unstable
+    container_name: jellyfin
+    # 容器名字
+    hostname: jellyfin
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    devices:
+      - /dev/dri:/dev/dri
+      # 开启硬件转码
+    # runtime: nvidia
+    # 使用N卡的需要装好N卡驱动，并且设置这个参数
+########################################
+    # 这部分内容仅适用于Rockchip，具体可去看特殊版本中的JF-RK特供版的注释
+#    command: 
+#      '`for dev in dri dma_heap mali0 rga mpp_service iep mpp-service
+#      vpu_service vpu-service hevc_service hevc-service rkvdec rkvenc vepu
+#      h265e ; do [ -e "/dev/$dev" ] && echo " --device /dev/$dev"; done`'
+    # Rockchip 照抄，必须
+########################################
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/jellyfin/config:/config
+      # 配置文件目录
+      - 【这里替换为你的媒体库总目录】:/media
+      # 可以自定义，可以写多个
+      # - 【这里替换为你的媒体库的目录】:/【这里替换为你的媒体库的目录的名字】
+      - 【这里替换为你的docker数据存放目录】/jellyfin/cache:/cache
+      # 缓存目录
+      - 【这里替换为你的字体文件存放目录】:/fonts
+      # 字体目录，记得在设置中设置字幕字体使用/fonts
+    environment:
+      # - NVIDIA_DRIVER_CAPABILITIES=all
+      # - NVIDIA_VISIBLE_DEVICES=N卡的ID
+      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
+      - TZ=Asia/Shanghai
+      # 时区
+      # 以下是为JF添加网络代理，自行准备好魔法
+      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      # 保持默认
+      # - ALL_PROXY=http://【IP:PORT】
+      # 更换为自己的http代理
+      # - HTTP_PROXY=http://【IP:PORT】
+      # 更换为自己的http代理
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+     # - 8096:8096/tcp
+     # WebUI http端口
+     # - 8920:8920/tcp
+     # WebUI https端口，非必要
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/jellyfin_D.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:8096]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/jellyfin.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
