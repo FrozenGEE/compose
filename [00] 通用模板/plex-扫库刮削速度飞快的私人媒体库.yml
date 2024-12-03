@@ -7,7 +7,6 @@
 # 如果无法跳转到初始化页面上，则打开以下网址，记得修改IP:PORT
 # http://IP:PORT/web/index.html#!/setup
 
-
 ---
 version: "3"
 # 最后编辑时间：2024-12-03
