@@ -3,6 +3,9 @@
 # https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip
 # https://www.chiphell.com/thread-2570717-1-1.html
 # https://akemirei.site/archives/article/software/653
+
+# 在 Orange Pi 5 上设置具有硬件加速功能的 Jellyfin （Rockchip RK3558）
+# https://akashrajpurohit.com/blog/setup-jellyfin-with-hardware-acceleration-on-orange-pi-5-rockchip-rk3558
 ##################################################
 # 建议使用64位Linux发行版，需要Rockchip BSP内核(6.1 或 5.10 LTS)
 # 查看内核的命令(三条均可)
@@ -42,6 +45,21 @@
 
 ##################################################
 
+# 要验证 OpenCL 运行时在 docker 容器内是否正常工作，您可以运行此命令
+# docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_device rkmpp=rk -init_hw_device opencl=ocl@rk
+
+# 如果您看到这样的输出，则 OpenCL 运行时工作正常
+# arm_release_ver: g13p0-01eac0, rk_so_ver: 10
+# [AVHWDeviceContext @ 0x55b1c52f00] 1 OpenCL platforms found.
+# [AVHWDeviceContext @ 0x55b1c52f00] 1 OpenCL devices found on platform "ARM Platform".
+# [AVHWDeviceContext @ 0x55b1c52f00] 0.0: ARM Platform / Mali-G610 r0p0
+# [AVHWDeviceContext @ 0x55b1c52f00] cl_arm_import_memory found as platform extension.
+# [AVHWDeviceContext @ 0x55b1c52f00] cl_khr_image2d_from_buffer found as platform extension.
+# [AVHWDeviceContext @ 0x55b1c52f00] DRM to OpenCL mapping on ARM function found (clImportMemoryARM).
+# Successfully parsed a group of options.
+
+##################################################
+
 version: "3"
 # 最后编辑时间：2024-11-27
 services:
@@ -56,6 +74,13 @@ services:
     # 主机名
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限，必须
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/dma_heap:/dev/dma_heap
+      - /dev/mali0:/dev/mali0
+      - /dev/rga:/dev/rga
+      - /dev/mpp_service:/dev/mpp_service
+    # 核显，照抄，必须
     command: 
       '`for dev in dri dma_heap mali0 rga mpp_service iep mpp-service
       vpu_service vpu-service hevc_service hevc-service rkvdec rkvenc vepu
