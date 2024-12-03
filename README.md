@@ -223,11 +223,11 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 
 | NAS | ssh中执行 id cheems 获取到的内容 | 其他/备注 |
 | :----: | :---- | :---- |
-| Debian | uid=1000(cheems) gid=1000(cheems) 组=1000(cheems),24(cdrom),25(floppy),<br>27(sudo),29(audio),30(dip),44(video),46(plugdev),100(users),106(netdev) |
+| Debian | uid=1000(cheems) gid=1000(cheems) groups=1000(cheems),24(cdrom),25(floppy),<br>27(sudo),29(audio),30(dip),44(video),46(plugdev),100(users),106(netdev) |
 | Ubuntu | 
 | unRAID | uid=1000(cheems) gid=100(users) groups=100(users) |
 | TrueNAS-SCALE | uid=950(truenas_admin) gid=950(truenas_admin) groups=950(truenas_admin),544(builtin_administrators<br><br>uid=3000(cheems) gid=3000(cheems) groups=950(cheems),545(builtin_users) | truenas_admin 为系统自动创建<br>cheems 为自建的第一个账号 |
-| OMV | uid=1001(cheems) gid=100(users) groups=100(users),0(root),27(sudo),108(_ssh),114(ssl-cert)<br><br>uid=995(admin) gid=100(users) groups=100(users),992(openmediavault-admin) | admin 为系统自动创建<br>cheems 为自建的第一个账号 |
+| OMV | uid=998(admin) gid=100(users) groups=100(users),997(openmediavault-admin)<br><br>uid=1000(cheems) gid=1000(cheems) groups=1000(cheems),24(cdrom),<br>25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),109(netdev)| admin 为系统自动创建<br>cheems 为自建的第一个账号，可在WebUI上修改 |
 | CASAOS/ZimaOS |
 | 群晖 | uid=1026(cheems) gid=100(users) groups=100(users),101(administrators) |
 | 威联通 | uid=1000(cheems) gid=100(everyone) groups=100(everyone),0(administrators) |
