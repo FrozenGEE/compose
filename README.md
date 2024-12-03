@@ -227,7 +227,7 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 | Ubuntu | 
 | unRAID | uid=1000(cheems) gid=100(users) groups=100(users) |
 | TrueNAS-SCALE | uid=950(truenas_admin) gid=950(truenas_admin) groups=950(truenas_admin),544(builtin_administrators<br><br>uid=3000(cheems) gid=3000(cheems) groups=950(cheems),545(builtin_users) | truenas_admin 为系统自动创建<br>cheems 为自建的第一个账号 |
-| OMV |
+| OMV | uid=1001(cheems) gid=100(users) groups=100(users),0(root),27(sudo),108(_ssh),114(ssl-cert)<br><br>uid=995(admin) gid=100(users) groups=100(users),992(openmediavault-admin) | admin 为系统自动创建<br>cheems 为自建的第一个账号 |
 | CASAOS/ZimaOS |
 | 群晖 | uid=1026(cheems) gid=100(users) groups=100(users),101(administrators) |
 | 威联通 | uid=1000(cheems) gid=100(everyone) groups=100(everyone),0(administrators) |
