@@ -2,7 +2,6 @@
 # 官方文档
 # https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip
 # https://www.chiphell.com/thread-2570717-1-1.html
-# https://akemirei.site/archives/article/software/653
 
 # 在 Orange Pi 5 上设置具有硬件加速功能的 Jellyfin （Rockchip RK3558）
 # https://akashrajpurohit.com/blog/setup-jellyfin-with-hardware-acceleration-on-orange-pi-5-rockchip-rk3558
