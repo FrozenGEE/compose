@@ -2,13 +2,17 @@
 # https://hub.docker.com/r/linuxserver/plex
 # https://docs.linuxserver.io/images/docker-plex
 
+# 如果提示无法打开plex.tv，开魔法吧
+# 如果无法跳转到初始化页面上，则打开以下网址，记得修改IP:PORT
+# http://IP:PORT/web/index.html#!/setup
+
 ---
 version: "3"
-# 最后编辑时间：2024-03-11
+# 最后编辑时间：2024-12-03
 services:
   plex:
     image: linuxserver/plex:latest
-    # 镜像地址
+    # 镜像地址，支持arm64v8，但不能硬件转码
     container_name: plex
     # 容器名字
     hostname: plex
