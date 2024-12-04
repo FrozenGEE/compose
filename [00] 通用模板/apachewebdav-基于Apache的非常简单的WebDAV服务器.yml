@@ -1,5 +1,6 @@
 # 官方文档
 # https://hub.docker.com/r/apachewebdav/apachewebdav
+# https://hub.docker.com/r/derkades/webdav
 # 基于 Apache 的非常简单的 WebDAV 服务器，您需要一个 WebDAV 客户端来传输文件，不能通过浏览器上传文件
 # 也可以选择使用alist/lucky走实现webdav功能
 
@@ -9,7 +10,7 @@ version: "2"
 services:
   webdav:
     image: apachewebdav/apachewebdav:latest
-    # 镜像地址
+    # 镜像地址，仅支持amd64，arm可选derkades/webdav
     container_name: webdav
     # 容器名字
     hostname: webdav
