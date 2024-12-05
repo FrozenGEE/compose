@@ -23,11 +23,16 @@ services:
       # 配置文件目录
       - /mnt/user/data/docker/auto_symlink/backup:/app/backup
       # 备份目录
-      - /mnt/user/data/CloudNAS:/CloudNAS:rslave
-      # clouddrive2的网盘挂载，如果用到cd2配合使用，请启用，左侧实际路径必须和clouddrive2的一毛一样，建议先去看看官方文档
       - /mnt/user:/mnt/user
       # 映射本地其他路径使其可以访问，可以自定义多个
       # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      ########################################
+      # - /mnt/user/data/CloudNA:/mnt/user/data/CloudNA:rslave
+      # clouddrive2的网盘挂载，如果用到cd2配合使用，请启用，clouddrive2和auto_symlink两者均必须映射这一条相同的路径
+      # 请确保左右路径保持一致，否则生成的软链接不是指向真实路径，导入emby中的时候会导致无法观看
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录】:rslave
+      # rslave 表示使用相对于宿主机的从属挂载模式，建议先去看看官方文档
+      ########################################
     environment:
       - TZ=Asia/Shanghai
       # 时区
