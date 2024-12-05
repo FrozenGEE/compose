@@ -3,6 +3,8 @@
 # https://github.com/shenxianmq/Auto_Symlink/wiki
 # https://hub.docker.com/r/shenxianmq/auto_symlink
 
+# 默认账号/密码：admin/password
+
 ---
 version: "3"
 # 最后编辑时间：2024-11-18
