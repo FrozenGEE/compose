@@ -8,7 +8,7 @@
 # https://post.smzdm.com/p/arrqep7x
 # https://bbs.hassbian.com/thread-22228-1-1.html
 
-# 注意：WebUI无中文，也没有APP提供支持，小白用户可使用带监控摄像头的NAS系统，更好上手
+# 注意：WebUI无中文，有官方APP提供支持，小白用户可使用带监控摄像头的NAS系统，更好上手，另外，可接入home-assistant中使用
 # 对于compose末的配置文件内容，欢迎网友提供相关的摄像头的ONVIF默认端口的相关资料补充
 # 资料仅供参考，可能会因年份久远而不适用，但厂商对此应该不会有特别大的内容变化
 # TP-LINK 摄像头相关资料(官方文档)
