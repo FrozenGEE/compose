@@ -67,7 +67,7 @@ services:
       # - /dev/shm:/tmp/cache
     environment:
       - FRIGATE_RTSP_PASSWORD=password
-      # WebUI的密码，默认为password，记得修改，WebUI上可修改
+      # 访问密码，默认为password，记得修改，WebUI上可修改
       - TZ=Asia/Shanghai
       # 时区
     # network_mode: bridge
