@@ -1,0 +1,170 @@
+# 官方文档
+# https://frigate.video
+# https://docs.frigate.video
+# https://docs.frigate.video/frigate/installation
+# https://github.com/blakeblackshear/frigate
+
+# 教程
+# https://post.smzdm.com/p/arrqep7x
+# https://bbs.hassbian.com/thread-22228-1-1.html
+
+# 注意：WebUI无中文，也没有APP提供支持，小白用户可使用带监控摄像头的NAS系统，更好上手
+# 对于compose末的配置文件内容，欢迎网友提供相关的摄像头的ONVIF默认端口的相关资料补充
+# 资料仅供参考，可能会因年份久远而不适用，但厂商对此应该不会有特别大的内容变化
+# TP-LINK 摄像头相关资料(官方文档)
+# https://security.tp-link.com.cn/service/detail_article_4432.html
+# 海康摄像机、NVR、流媒体服务器、回放取流RTSP地址规则说明(2022年)
+# https://cloud.tencent.com/developer/article/2036458
+# 海康、大华的RTSP地址规则说明(2021)
+# https://www.cnblogs.com/liushui-sky/p/14241317.html
+
+---
+services:
+# 最后编辑时间：2024-12-08
+  frigate:
+    image: ghcr.io/blakeblackshear/frigate:stable
+    # 镜像地址，更多tag如下
+    # 适用于adm64和arm64：stable
+    # 适用于arm64：stable-standard-arm64
+    # 适用于rockchip cpu：stable-rk
+    # 适用于带有AMD和intel显卡amd64：stable-rocm 
+    # 适用于带有Nvidia显卡的amd64：stable-tensorrt
+    # 适用于带有Nvidia显卡的amd64(Jetpack 5)：stable-tensorrt-jp5
+    # 适用于带有Nvidia显卡的amd64(Jetpack 4)：stable-tensorrt-jp4 
+    container_name: frigate
+    # 容器名字
+    hostname: frigate
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限，必须
+    devices:
+      - /dev/dri:/dev/dri
+      # - /dev/video11:/dev/video11
+      # - /dev/apex_0:/dev/apex_0
+      # - /dev/bus/usb:/dev/bus/usb
+      # 第一条，如有使用intel cpu硬件解码的则需要使用
+      # 第二条，同上效果，只是仅供树莓派4B使用
+      # 第三条，看不太懂，貌似是如果有PCIe控制的则使用，具体看 https://coral.ai/docs/m2/get-started/#2a-on-linux
+      # 第四条，如有使用USB连接的摄像头则需要用
+      # 注意：去掉注释后的参数，需要把排在非注释后面
+      # 对于第一第二条，可以尝试使用本机的硬件转码所需要用到的设备链接，例如在RK3588 JF的模板中 devices 就写上了一堆参数，仅供参考，不一定有用
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+          cpus: '0.50'
+          # 例如N100处理器4核4线程，0.5代表最高占用2核心，0.25代表1核
+    # 限制容器CPU和内存的最高占用率，避免占用过多资源，默认一半核心和1G
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # 用于WebUI上配置后重启容器自己
+      - 【这里替换为你的docker数据存放目录】/frigate:/config
+      # 配置文件目录
+      - 【这里替换为你的数据存放目录】/frigate:/media/frigate
+      # 监控视频存储目录
+      - 【这里替换为你的数据存放目录】/frigate/cache:/tmp/cache
+      # 监控视频临时缓存目录，可写为内存的路径，以此降低硬盘的频繁读写，如下，照抄即可，全通用的，记得把上面这条注释掉，但切记，如果重启容器/机器，内存中的数据会丢失
+      # - /dev/shm:/tmp/cache
+    environment:
+      - FRIGATE_RTSP_PASSWORD=password
+      # WebUI的密码，默认为password，记得修改，WebUI上可修改
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # 群晖的WebUI端口默认为5000，群晖用户注意修改
+    # ports:
+      # - 5000:5000/tcp
+      # WebUI 端口
+      # - 8971:8971/tcp
+      # 不知道，照抄
+      # - 8554:8554/tcp
+      # RTSP feeds流的端口
+      # - 8555:8555/tcp
+      # - 8555:8555/udp
+      # WebRTC TCP和UDP端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/frigate_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:5000]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/frigate.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+
+# 以下内容为 /config/config.yaml中的内容，可在WebUI中修改
+# 注意需要配置正确才可以正常连接获取摄像头的监控内容
+# 不属于配置单的内容，在启动compose前删掉
+################################################################################
+
+mqtt:
+  enabled: false
+  # 是否启用mqtt 
+
+# 录制配置
+record:
+  enabled: true
+  retain:
+    days: 30
+    mode: all
+    # 所有录像保留时长，默认30天
+
+  events:
+    pre_capture: 3 
+    # 录像前提前时间，默认3秒
+    post_capture: 3 
+    # 录像后延长时间，默认3秒
+    retain:
+      default: 10
+      # 检测的录像保留天数，默认10天
+
+# 检测快照保留时长，单位为天数，默认30天
+snapshots:
+  enabled: true
+  retain:
+    default: 30
+
+# 默认检测物体：人，车
+objects:
+  track:
+    - person
+    - car
+
+# 摄像头配置，onvif部分不是必须，使用rtsp亦可，仅供参考
+cameras:
+  camera_01: 
+  # 摄像头名称
+    onvif:
+      host: 192.168.1.60
+      port: 554
+      # 摄像头IP地址和ONVIF端口号(一般都是554)，不同品牌的不同，请查找后修改，有ONVIF可使用PTZ，如摄像头不支持，此部分可不要
+      user: admin 
+      password: password
+      # 摄像头账号和密码，请根据实际情况修改
+
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:password@192.168.1.60:554/stream1
+        # admin和password修改为摄像头账号、密码
+        # 192.168.1.60:554修改为摄像头的IP地址和ONVIF端口号(一般都是554)，具体上网查询，如未购买摄像头，购买前请做好功课
+          roles:
+            - detect
+            - record 
+            # 人形检测，不要可注释掉
+    detect:
+      width: 1280
+      height: 720
+      fps: 15
+      # 分辨率大小，帧数
+
+version: 0.14
+
+################################################################################
