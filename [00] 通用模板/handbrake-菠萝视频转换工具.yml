@@ -1,0 +1,157 @@
+# 官方文档
+# https://handbrake.fr
+# https://hub.docker.com/r/jlesage/handbrake
+# https://github.com/jlesage/docker-handbrake
+
+# 教程
+# https://onebox.site/archives/512.html
+# https://post.smzdm.com/p/amxko6np
+# https://zhuanlan.zhihu.com/p/680751555
+
+# 预设自动转码的视频规格书写格式：<CATEGORY>/<PRESET NAME>
+# 具体可在启动后的预设中挑选，其实就是个选项，如下图
+# Offical>
+#        >General
+#                >HQ 216060 4K HEVC Surround
+#                >Very Fast 1080p30
+#                >Fast 720p30
+#        >Web
+#            >Creator 1440p60 2.5k
+#        >Devices
+#                >Apple 1080p30 Surround
+#                >Chromecast 2160p60 4K HEVC Surround
+#        >Hardware
+#                 >H.265 NVENC 1080p
+#                 >H.265 QSV 1080p
+
+---
+services:
+# 最后编辑时间：2024-12-09
+  handbrake:
+    image: jlesage/handbrake:latest
+    # 镜像地址，仅支持amd64
+    container_name: handbrake
+    # 容器名字
+    hostname: handbrake
+    # 主机名
+    # privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    devices:
+      - /dev/dri:/dev/dri
+      # 调用核显，必须
+    # runtime: nvidia
+    # 使用N卡的需要装好N卡驱动，并且设置这个参数
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+          cpus: '0.50'
+          # 例如N100处理器4核4线程，0.5代表最高占用2核心，0.25代表1核
+    # 限制容器CPU和内存的最高占用率，避免占用过多资源，默认一半核心和2G
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # 用于重启自己
+      - 【这里替换为你的docker数据存放目录】/handbrake:/config
+      # 配置文件目录
+      - 【这里替换为你的数据存放目录】:/storage
+      # 数据目录，可自定义多个
+      - 【这里替换为你的数据存放目录】/handbrake视频自动转码监控文件夹:/watch
+      # 监控目录，用于自动将该目录下的视频按照预设的任务自动转码
+      - 【这里替换为你的数据存放目录】/handbrake视频自动转码输出文件夹:/output
+      # 输出目录，用于视频自动转码后保存到本地的目录
+      # /storage和/watch可以自定义多个，格式如下
+      # - 【这里替换为你的数据存放目录1】:/storage1
+      # - 【这里替换为你的数据存放目录2】:/data
+      # - 【这里替换为你的数据存放目录1】:/watch1
+      # - 【这里替换为你的数据存放目录2】/handbrake视频自动转码监控文件夹:/watch2
+    environment:
+      - USER_ID=1000
+      - GROUP_ID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      # 默认为1000 1000，如果无法正常访问文件，可修改为0 100或者0 0或者删掉这部分内容，直接去掉37行的注释改为启用
+      - UMASK=0022
+      # 默认创建新文件的权限，默认为0022
+      - LANG=zh_CN.UTF-8
+      # 区域设置，预设为中国区域
+      - TZ=Asia/Shanghai
+      # 时区
+      - ENABLE_CJK_FONT=1
+      # 安装字符，该字体包含大量中文/日文/韩文字符，第一次下载会非常久，不下载，中文字符会显示乱码
+      - KEEP_APP_RUNNING=1
+      # 当崩溃时自动重启，1为启用，0为不启用
+      - APP_NICENESS=0
+      # 应用程序运行的优先级，优先级最高的优先级为-20，最低的优先级为19，默认为0，没必要设置为负值
+      #注意: 设置负值需要额外的权限。因此 cap-add=SYS_NICE 必须添加到额外参数中
+      #
+      ########################################
+      # WebUI部分
+      - DISPLAY_WIDTH=1920
+      - DISPLAY_HEIGHT=1080
+      # 应用程序窗口的宽度和高度，预设为1920x1080
+      - WEB_AUDIO=0
+      # 音频可通过浏览器播放，1为启用，0为不启用，预设为0，除非你要在线预览视频听声音才改为1
+      - WEB_LISTENING_PORT=7803
+      # VNC默认的容器端口(http)，建议修改以免和别的VNC冲突，预设为7803
+      - VNC_LISTENING_PORT=7903
+      # VNC默认的容器端口(https)，建议修改以免和别的VNC冲突，预设为5910
+      # - VNC_PASSWORD=cheems
+      # VNC的密码，默认为passwd，预设为cheems，如果在外使用，记得设置高强度密码，局域网内使用可不写
+      #
+      ########################################
+      # 自动转码-转码部分(可选择修改该项)
+      - AUTOMATED_CONVERSION=1
+      # 开启自动转码，默认为1，启用
+      - AUTOMATED_CONVERSION_FORMAT=mkv
+      # 预设自动转码后保存的视频格式，一般为mp4，预设为mkv
+      - AUTOMATED_CONVERSION_PRESET=General/Very Fast 1080p30
+      # 预设自动转码的视频规格，默认为 常规预设中的非常快 1080P 30fps
+      # 见上简要说明
+      - AUTOMATED_CONVERSION_SOURCE_MIN_DURATION=10
+      # 仅对监控文件夹中，时长多少秒以上的视频文件进行视频转码，默认为10秒
+      # 这仅适用于视频光盘源(ISO文件或BDMV文件夹)
+      #
+      - AUTOMATED_CONVERSION_CHECK_INTERVAL=5
+      # 自动视频转换器检查新文件的间隔(以秒为单位)，默认为5秒
+      - AUTOMATED_CONVERSION_MAX_WATCH_FOLDERS=5
+      # 自动视频转换器处理的最大监视文件夹数，默认为5
+      #
+      ########################################
+      # 自动转码-额外文件处理部分(可选择修改该项)
+      - AUTOMATED_CONVERSION_NON_VIDEO_FILE_ACTION=ignore
+      # 设置为ignore，将忽略在监视文件夹中非视频文件。如果设置为copy，则非视频文件将按原样复制到输出文件夹
+      # 可用于将刮削文件nfo,jpg,png，字幕文件srt/ass等一同复制，默认为ignore，忽略
+      #
+      # - AUTOMATED_CONVERSION_NON_VIDEO_FILE_EXTENSIONS=jpg jpeg bmp png gif txt nfo srt ass zip rar 7z
+      # 如果上一条参数为copy，则把这一条参数启用，将会把符合要求的后缀名的文件一同复制，每一个后缀名空格间隔开，欢迎补充
+      ########################################
+      # 自动转码-目录部分(不推荐修改)
+      - AUTOMATED_CONVERSION_KEEP_SOURCE=1
+      # 设置为0时，当视频转码完成后，将自动删除监控目录里面的源视频。默认为1，不启用，不推荐修改该项，除非有需求
+      # - AUTOMATED_CONVERSION_OUTPUT_SUBDIR=SAME_AS_SRC
+      # 将转换后的视频写入的输出文件夹的子目录下，默认为SAME_AS_SRC，将输出视频保持原来的文件结构，不推荐修改该项，除非有需求
+      # - AUTOMATED_CONVERSION_OUTPUT_DIR=/output
+      # 自定义容器中，视频输出的目录的名字，默认为/output，不推荐修改该项，否则确保在创建容器时定义此目录的卷映射
+      #
+      ########################################
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # 很多VNC都是用5800端口，如果有多个，建议使用bridge或者修改容器端口默认的变量
+    # ports:
+      # - 7803:7803/tcp
+      # WebUI 端口，这里按照变量预设的7803，容器端口默认为5800
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/handbrake_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:7803]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/handbrake.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
