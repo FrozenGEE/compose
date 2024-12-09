@@ -5,9 +5,10 @@
 # 教程
 # https://blog.zeruns.tech/archives/598.html
 # https://www.bilibili.com/opus/759899273897705489
+# https://blog.mingqin.wang/docker搭建一款专为家庭网络打造的网络工具箱
 
 # 本软件需要一个服务端进行部署，然后通过客户端访问网页进行测试
-# 当需要对万兆以上网络测试的时候，需要保证客户端的性能（主要为 CPU 单核）足够强劲，否则可能会成为瓶颈。 具体的要求可以看后文的性能测试(https://github.com/XGHeaven/homebox?tab=readme-ov-file#Performance)
+# 当需要对万兆以上网络测试的时候，需要保证客户端的性能(主要为 CPU 单核)足够强劲，否则可能会成为瓶颈。 具体的要求可以看后文的性能测试(https://github.com/XGHeaven/homebox?tab=readme-ov-file#Performance)
 
 ---
 services:
