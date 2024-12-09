@@ -3,6 +3,7 @@
 # https://hub.docker.com/r/yuexuangu/allinone_format
 # https://hub.docker.com/r/youshandefeiyang/allinone
 # https://blog.mingqin.wang/免维护iptv聚合工具肥羊allinone
+# https://blog.mingqin.wang/docker一个allinone，iptv随便看
 
 # 默认情况下，allinone 的接口是 m3u 格式，如果你的播放器只支持 txt 格式 ，可以使用镜像 yuexuangu/allinone_format 对镜像 youshandefeiyang/allinone 的 m3u 进行重新分组格式化
 # 请求参数，格式 http://IP地址:35456/tv.php?h=feiyang-aio的IP地址&p=allinonePort&m=1&t=0
