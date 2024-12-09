@@ -1,0 +1,94 @@
+# 官方文档
+# https://iperf.fr
+# https://iperf.fr/iperf-doc.php
+# https://github.com/nerdalert/iperf3
+# hub.docker.com/r/networkstatic/iperf3
+
+# 教程
+# https://blog.51cto.com/u_16213329/7817835
+# https://post.smzdm.com/p/ag89wxk7
+# https://support.huawei.com/enterprise/zh/doc/EKB1000008889
+# https://zhuanlan.zhihu.com/p/390420078
+
+# 需要两端都安装好iperf3
+# docker cli一键部署，作为服务端被其他设备测试
+# docker run  -it --rm --name=iperf3-server -p 5201:5201 networkstatic/iperf3 -s
+
+# docker cli一键部署，作为客户端去测试别的设备
+# docker run  -it --rm --name=iperf3-client networkstatic/iperf3 -c <server_ip>
+
+########################################
+# 用法
+# 配置本机为iperf3服务器，使用5201数据传输端口
+# docker run  -it --rm --name=iperf3-server -p 5201:5201 networkstatic/iperf3 -s
+# 配置本机为iperf3服务器，使用5252数据传输端口
+# docker run  -it --rm --name=iperf3-server networkstatic/iperf3 -s -p 5252
+#
+# 配置本机为iperf3客户端，iperf3服务端为 192.168.1.10:5201
+# docker run  -it --rm --name=iperf3-server networkstatic/iperf3 -c 192.168.1.10
+# 配置本机为iperf3客户端，iperf3服务端为 192.168.1.10:5252
+# docker run  -it --rm --name=iperf3-server networkstatic/iperf3 -c 192.168.1.10 -p 5252
+# 配置本机为iperf3客户端，iperf3服务端为 192.168.1.10:5201，测试的持续时间为1分钟
+# docker run  -it --rm --name=iperf3-server networkstatic/iperf3 -c 192.168.1.10 -t 60
+
+# 其他参数说明
+# -i 1 -t 10 -b 2M -P 5
+# -u 测试UDP协议，不写默认为TCP协议
+# -i 设定输出间隔时间，单位为秒，比如-i 1 就是每隔1秒打一次包
+# -t 设定测试时间，空格后加数字，单位为秒，比如-t 10 就是打包10秒
+# -b 设定一个传输速度，这里默认单位是Mbit/s
+# -P 指定进程数(或者说线程数)，如果设置为5，相当于建立5个并发连接同时打包
+# -R 以反向模式运行(服务器发送，客户端接收)
+# -4 仅使用 IPv4，仅对服务端以双栈域名形式部署的生效，一般都是在家庭局域网中使用，用不着
+# -6 仅使用 IPv6，仅对服务端以双栈域名形式部署的生效，一般都是在家庭局域网中使用，用不着
+
+# 注意：以上参数要区分大小写，比如-p是代表端口(小写)，-P是代表进程数(大写)
+########################################
+# iperf3到底是什么？
+# iperf3就一个功能，测速
+# 支持单线程，多线程，支持TCP或UDP协议测速
+# 可以测试下行速率或上行速率或者双向测试
+# 支持IPv4，IPv6
+
+# 不推荐使用compose，直接一条命令执行就完事了，要个屁的compose
+
+---
+services:
+# 最后编辑时间：2024-12-09
+  iperf3:
+    image: networkstatic/iperf3:latest
+    # 镜像地址
+    container_name: iperf3
+    # 容器名字
+    hostname: iperf3
+    # 主机名
+    ########################################
+    # command是作为服务端还是客户端，仅能使用其中一条
+    #
+    command: -s
+    # 作为服务端被其他设备测试
+    # command: -c <server_ip>
+    # 作为客户端去测试别的设备，记得把<server_ip>改为其他设备的IP地址或者域名
+    # 如果iperf3服务端端口不为5201，则添加" -p <server_port>"(注意有空格)，<server_port>改为iperf3服务端的端口，具体见上用法
+    # 添加" -t <duration>"作为测试持续时间(注意有空格，单位为秒)，将<duration>替换为数字
+    # 更多参数见上说明
+    #
+    ########################################
+    network_mode: host
+    # 推荐直接host网络模式
+    # ports:
+      # - 5201:5201/tcp
+      # 数据传输端口，不存在WebUI，默认为5201
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/iperf3_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: https://iperf.fr
+      # 不存在WebUI，这里设置为打开官网
+      net.unraid.docker.icon: /mnt/user/LOGO/iperf3.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
