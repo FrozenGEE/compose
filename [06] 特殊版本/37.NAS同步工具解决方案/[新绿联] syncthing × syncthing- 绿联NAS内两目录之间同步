@@ -10,6 +10,7 @@
 # IOS客户端：https://apps.apple.com/us/app/m%C3%B6bius-sync/id1539203216
 
 # 该模板针对于绿联新系统官方功能缺少NAS内两目录之间互相同步而定制，其余的可以稍微修改一下路径也可以使用
+# 适用于不想RAID，但又想要重要数据能在多个存储池(basic)中互相备份
 # syncthing1用于仅发送，syncthing2用于仅接受，此时为单向同步
 # syncthing1和2都接受和发送，此时为双向同步
 # syncthing1 访问地址：nas的ip:18384
