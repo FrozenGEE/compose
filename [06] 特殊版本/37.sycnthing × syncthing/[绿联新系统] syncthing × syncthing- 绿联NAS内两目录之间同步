@@ -1,0 +1,118 @@
+# 官方文档
+# 开源免费的全平台数据同步神器 Syncthing
+# https://hub.docker.com/r/linuxserver/syncthing
+# https://github.com/syncthing/syncthing
+# 安卓客户端：https://github.com/syncthing/syncthing-android
+# MacOS客户端：https://github.com/syncthing/syncthing-macos
+# Win客户端1（推荐）：https://github.com/Martchus/syncthingtray
+# Win客户端2：https://github.com/canton7/SyncTrayzor
+# Win客户端3：https://github.com/kozec/syncthing-gtk
+# IOS客户端：https://apps.apple.com/us/app/m%C3%B6bius-sync/id1539203216
+
+# 该模板针对于绿联新系统官方功能缺少NAS内两目录之间互相同步而定制
+# syncthing1用于仅发送，syncthing2用于仅接受，此时为单向同步
+# syncthing1和2都接受和发送，此时为双向同步
+# syncthing1 访问地址：nas的ip:18384
+# syncthing2 访问地址：nas的ip:38384
+# syncthing1和2均使相同的路径映射(除了配置文件夹目录)
+# 提示gui添加密码红色告警信息，可以忽略，也可以选择添加
+# 提示黄色告警信息均可忽略不管
+
+# 使用步骤(记得看配图)
+# 01.需要先互相添加sycnthing的远程设备id，在 syncthing1 中新建一个同步的文件夹任务，同时会生成一个同步文件夹id，然后稍微设置一下
+# 02.在 syncthing2 中添加同步文件夹任务，将 syncthing1 的同步文件夹id 输入进去，选择路径(注意，容器只认识容器路径，即路径映射中冒号右侧的路径)，然后稍微设置一下
+# 03.完成，如果有更多文件夹目录要同步，可以在以下配置单中添加更多的路径映射
+# 04.预设的/volume1和/volume2为两个存储池的总目录，写总目录可以直接囊括后续全部目录，root权限确保具有绝对的权限允许读写任何文件
+
+---
+version: "3"
+# 最后编辑时间：2024-12-24
+services:
+  syncthing1:
+    image: lscr.io/linuxserver/syncthing:latest
+    # 镜像地址，使用linuxserver的官方镜像源，默认情况下没有添加dockerhub加速源可以直接拉取
+    container_name: syncthing1
+    # 容器名字
+    hostname: syncthing1
+    # 主机名
+    volumes:
+      - /volume1/docker/syncthing/syncthing1:/config
+      # 挂载宿主机上的指定目录到容器内部特定路径，这里是配置文件所在目录
+      #
+      - /home:/个人文件夹
+      # 绿联的个人文件夹，照抄
+      - /volume1:/volume1
+      - /volume2:/volume2
+      # 以上两个为存储池1和2的实际路径映射，左右两侧是可以一样的，容器只认识容器路径
+      # - /实际路径:/容器路径
+      # - 【这里替换为你想要同步的数据的存放目录】:/【这里替换为你想要同步的数据的存放目录的名字】
+      # 可以指定多个，比如data2，data3等，也可以直接将宿主机上原有的需要同步的目录直接映射过来，以下为例子
+      # - /volume1/photos:/相册
+      # - /volume1/data/重要数据:/重要数据
+      #
+    environment:
+      - PUID=0
+      - PGID=10
+      # 都写0直接root权限
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 开两个，为了不冲突，方便记忆端口号，使用bridge，以下除了18384，其余不懂的就保持不变
+    ports:
+      - 18384:8384/tcp
+      # 管理gui的端口，请根据自己实际环境情况指定，设置内可自定义容器端口
+      - 12000:22000/tcp 
+      # 指定宿主机上tcp的监听端口，请根据自己实际情况修改，最好不变
+      - 12000:22000/udp
+      # 指定宿主机上udp的监听端口，请根据自己实际环境修改，最好不变
+      - 11027:21027/udp
+      # 发现协议使用的端口，请根据自己实际环境修改，最好不变
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+
+  syncthing2:
+    image: lscr.io/linuxserver/syncthing:latest
+    # 镜像地址，使用linuxserver的官方镜像源，默认情况下没有添加dockerhub加速源可以直接拉取
+    container_name: syncthing2
+    # 容器名字
+    hostname: syncthing2
+    # 主机名
+    volumes:
+      - /volume1/docker/syncthing/syncthing2:/config
+      # 挂载宿主机上的指定目录到容器内部特定路径，这里是配置文件所在目录
+      #
+      - /home:/个人文件夹
+      # 绿联的个人文件夹，照抄
+      - /volume1:/volume1
+      - /volume2:/volume2
+      # 以上两个为存储池1和2的实际路径映射，左右两侧是可以一样的，容器只认识容器路径
+      # - /实际路径:/容器路径
+      # - 【这里替换为你想要同步的数据的存放目录】:/【这里替换为你想要同步的数据的存放目录的名字】
+      # 可以指定多个，比如data2，data3等，也可以直接将宿主机上原有的需要同步的目录直接映射过来，以下为例子
+      # - /volume1/photos:/相册
+      # - /volume1/data/重要数据:/重要数据
+      #
+    environment:
+      - PUID=0
+      - PGID=10
+      # 都写0直接root权限
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 开两个，为了不冲突，方便记忆端口号，使用bridge，以下除了38384，其余不懂的就保持不变
+    ports:
+      - 38384:8384/tcp
+      # 管理gui的端口，请根据自己实际环境情况指定，设置内可自定义容器端口
+      - 32000:22000/tcp 
+      # 指定宿主机上tcp的监听端口，请根据自己实际情况修改，最好不变
+      - 32000:22000/udp
+      # 指定宿主机上udp的监听端口，请根据自己实际环境修改，最好不变
+      - 31027:21027/udp
+      # 发现协议使用的端口，请根据自己实际环境修改，最好不变
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
