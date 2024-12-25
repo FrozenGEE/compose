@@ -1,12 +1,19 @@
-# 【更新日志-2024-11-27】
-- 加料更新MT相册的compose，注释量巨大，强烈建议去官方文档，写的极度详细，一步到胃
-- 特殊版本中新增jellyfin的rockchip版compose，简单测评了一下
-- RK3588/3568播放 “UHD.BluRay.2160p.x265.10bit.DV.HDR.TrueHD7.1”，RK3588色彩映射正常，RK3568打开色彩映射会无法播放，不开则可以，但色彩不正常
-![image](https://github.com/FrozenGEE/compose/blob/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/31.jellyfin-%E7%A7%81%E4%BA%BA%E5%AA%92%E4%BD%93%E5%BA%93_RK%E7%89%B9%E4%BE%9B%E7%89%88/JF-RK3588-01.png)
-![image](https://github.com/FrozenGEE/compose/blob/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/31.jellyfin-%E7%A7%81%E4%BA%BA%E5%AA%92%E4%BD%93%E5%BA%93_RK%E7%89%B9%E4%BE%9B%E7%89%88/JF-RK3568-01.png)
-- RK3568播放 “BluRay.1080p.x265.10bit.3Audio” 这不带DV HDR规格的视频则正常
-![image](https://github.com/FrozenGEE/compose/blob/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/31.jellyfin-%E7%A7%81%E4%BA%BA%E5%AA%92%E4%BD%93%E5%BA%93_RK%E7%89%B9%E4%BE%9B%E7%89%88/JF-RK3568-03.png)
-- 依此类推，如果需要arm硬件转码且视频规格高的，选用RK3588，规格不高可以选择RK3588之下的其他RK CPU
+# 【更新日志-2024-12-25】
+- 飞牛OS docker容器如果使用unless-stopped无法在docker启动时自启动，由于时间关系，还没将其修改为always，先公告一声，找个时间再把这些模板一次性替换了
+- 如果需要限制容器的cpu和内存大小，均可添加以下代码内容进行限制
+ ```shell
+    deploy:
+      resources:
+        limits:
+          memory: 2046M
+          cpus: 2 
+          # 限制容器最多可以使用主机上2个CPU，物理内存最高占用为2g
+```
+- 详细可见以下参考资料
+- https://zhuanlan.zhihu.com/p/417472115
+- https://developer.aliyun.com/article/1064221
+- https://segmentfault.com/a/1190000045656750
+- https://www.oryoy.com/news/docker-rong-qi-nei-cun-xian-zhi-xiang-jie-ru-he-she-zhi-zui-da-nei-cun-da-xiao-yi-you-hua-python-yin.html
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
