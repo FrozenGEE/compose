@@ -1,0 +1,50 @@
+# 官方文档
+# https://github.com/foamzou/melody
+# https://hub.docker.com/r/foamzou/melody
+
+# 教程
+# https://www.cheshirex.com/7241.html
+# https://tech.18miaoxing.cn/archives/67408
+# https://kelao.de/2023/07/melody
+# https://linuxword.com/?p=37663
+# https://post.smzdm.com/p/a4pgz3wl
+# https://zhuanlan.zhihu.com/p/10508114019
+
+---
+version: "3"
+# 最后编辑时间：2024-12-25
+services:
+  melody:
+    image: foamzou/melody:latest
+    # 镜像地址
+    container_name: melody
+    # 容器名字
+    hostname: melody
+    # 主机名
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/melody:/app/backend/.profile
+      # 配置文件目录
+      # 若需要修改或添加新账号，则编辑 backend/.profile/accounts.json
+      # 该 JSON 中的 key 是 Melody Key，是你在网页访问该服务的唯一凭证
+      # 网易云账号信息： account 和 password 可以后续在网页修改
+      # 该 JSON 是个数组，支持配置多个账号
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5566:5566/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/melody.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:5566]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/melody.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
