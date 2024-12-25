@@ -9,7 +9,7 @@
           cpus: 2 
           # 限制容器最多可以使用主机上2个CPU，物理内存最高占用为2g
 ```
-- 详细可见以下参考资料
+- 书写限制的方式有很多，此处仅列举其一，更多的详细内容可见以下参考资料
 - https://zhuanlan.zhihu.com/p/417472115
 - https://developer.aliyun.com/article/1064221
 - https://segmentfault.com/a/1190000045656750
