@@ -1,7 +1,10 @@
 # 官方文档
 # https://serverbee.app
-# https://serverbee.app/zh/usage/docker
+# https://serverbee.app/zh/starter/getting-started
 # https://hub.docker.com/r/zingerbee/serverbee-web
+
+# 控制端：ServerBee APP (目前仅有iOS客户端)
+# 服务端（被控端）：server_bee-backend 或 ServerMilk
 
 ---
 version: "3"
