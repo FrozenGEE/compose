@@ -5,6 +5,7 @@
 
 # 控制端：ServerBee APP (目前仅有iOS客户端)
 # 服务端（被控端）：server_bee-backend 或 ServerMilk
+# 密钥需要在客户端中生成
 
 # 部署教程
 # https://tyooe.com/serverbee
