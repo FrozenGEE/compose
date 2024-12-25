@@ -22,7 +22,7 @@ services:
     container_name: serverbee-web
     # 容器名字
     hostname: serverbee-web
-    # 主机名
+    # 主机名，此处修改为设备名称
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     command: -p 9527
