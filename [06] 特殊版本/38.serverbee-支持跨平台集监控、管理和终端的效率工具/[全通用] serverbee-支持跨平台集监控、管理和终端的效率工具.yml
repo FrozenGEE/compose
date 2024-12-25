@@ -6,6 +6,11 @@
 # 控制端：ServerBee APP (目前仅有iOS客户端)
 # 服务端（被控端）：server_bee-backend 或 ServerMilk
 
+# 部署教程
+# https://tyooe.com/serverbee
+# https://post.smzdm.com/p/azovo6z0
+# https://zhuanlan.zhihu.com/p/10125273070
+
 ---
 version: "3"
 # 最后编辑时间：2024-12-25
@@ -23,6 +28,11 @@ services:
     # 自定义容器端口
     volumes:
       - /proc:/proc
+      - /dev:/dev
+      - /sys:/sys
+      - /etc:/etc
+      - /run/media:/run/media
+      - /sys/class/net:/sys/class/net
       # 照抄
     # network_mode: bridge
     network_mode: host
