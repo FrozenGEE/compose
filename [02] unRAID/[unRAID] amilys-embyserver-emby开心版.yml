@@ -7,11 +7,11 @@
 version: "3"
 # 最后编辑时间：2024-03-11
 services:
-  amliys-emby:
+  amilys-emby:
     image: amilys/embyserver:latest
     # 镜像地址，如需测试版追新，latest更改为beta
     # arm64v8设备使用amilys/embyserver_arm64v8
-    container_name: amliys-emby
+    container_name: amilys-emby
     # 容器名字
     hostname: unRAID
     # 主机名
