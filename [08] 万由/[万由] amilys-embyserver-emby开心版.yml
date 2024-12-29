@@ -1,5 +1,5 @@
 # 官方文档
-# https://hub.docker.com/r/amilys/embyerver
+# https://hub.docker.com/r/amliys/embyerver
 # 媒体库规范化命名手册
 # https://emby.media/support/articles/Home.html
 
@@ -8,9 +8,9 @@ version: "3"
 # 最后编辑时间：2024-03-11
 services:
   amliys-emby:
-    image: amilys/embyserver:latest
+    image: amliys/embyserver:latest
     # 镜像地址，如需测试版追新，latest更改为beta
-    # arm64v8设备使用amilys/embyserver_arm64v8
+    # arm64v8设备使用amliys/embyserver_arm64v8
     container_name: amliys-emby
     # 容器名字
     hostname: amliys-emby
@@ -23,7 +23,7 @@ services:
     # runtime: nvidia
     # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
-      - /mnt/unas/data/docker/amilys-emby:/config
+      - /mnt/unas/data/docker/amliys-emby:/config
       # 配置文件目录
       - /mnt/unas/data:/data
       # 可以自定义，可以写多个
