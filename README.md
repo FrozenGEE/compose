@@ -55,14 +55,11 @@ services:
 networks:
   br0:
     external: true
-    name: br0
 # 仅供参考，请按实际情况修改
 #  host:
 #    external: true
-#    name: host
 #  bridge:
 #    external: true
-#    name: bridge
 ##############################
 ```
 lucky正确获取到ipv4和ipv6地址
