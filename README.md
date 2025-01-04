@@ -18,6 +18,7 @@
 
 #### Docker macvlan设置，使容器拥有独立ip(以局域网为192.168.1.*，父路由器为192.168.1.1为例子)
 - 如果需要让docker使用独立IP进行访问，需要先执行以下命令创建一个基于macvlan的docker网段，或者手动创建一个
+- 适用于让 QB/TR/其他docker容器 具有一个独立IP地址，添加其IP至魔法网络的黑名单中，不让其走魔法网络，从而避免标记为盒子
 ```shell
 docker network create -d macvlan --gateway 192.168.1.1 --subnet 192.168.1.0/24 --ipv6 -o parent=eth0 br0
 ```
