@@ -38,7 +38,7 @@ docker run -d --name lucky-test --net=br0 --ip=192.168.1.233 docker.1panel.live/
 - docker compose创建使用br0示例，选用lucky来测试获取ipv4和ipv6地址是否为公网ip
 ```shell
 services:
-  luckylucky-test:
+  lucky-test:
     image: docker.1panel.live/gdy666/lucky:latest
     container_name: lucky-test
     hostname: lucky-test
