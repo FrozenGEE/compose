@@ -1,0 +1,55 @@
+# 官方文档
+# https://www.photoprism.app
+# https://hub.docker.com/r/photoprism/photoprism
+# 前排提醒，没有官方客户端，有第三方APP但不好用，建议不要玩这个，去用MT-Photos或者Immich
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  photoprism:
+    image: photoprism/photoprism:latest
+    # 镜像地址
+    container_name: photoprism
+    # 容器名字
+    hostname: photoprism
+    # 主机名
+    devices:
+      - /dev/dri:/dev/dri
+      # 开启硬件转码
+    volumes:
+      - /vol1/1000/docker/photoprism:/photoprism/storage
+      # 配置文件目录
+      - 【这里替换为你的数据存放目录】/photoprism/import:/photoprism/import
+      # 上传目录
+      - 【这里替换为你的数据存放目录】/photoprism/originals:/photoprism/originals
+      # 本地相册目录
+      # 可以自定义多个
+    environment:
+      - PHOTOPRISM_ADMIN_USER=admin
+      - PHOTOPRISM_ADMIN_PASSWORD=password
+      - PHOTOPRISM_AUTH_MODE=password
+      # PHOTOPRISM的管理者账号密码和使用密码的模式进行管理，账号密码预设为admin/passwrod
+      - PHOTOPRISM_UID=1000
+      - PHOTOPRISM_GID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - PHOTOPRISM_UMASK=0022
+      # 默认创建新文件的权限
+      - TZ=Asia/Shanghai
+      # 时区
+      - PHOTOPRISM_DATABASE_DRIVER=mysql
+      - PHOTOPRISM_DATABASE_SERVER=【IP:PORT】
+      - PHOTOPRISM_DATABASE_NAME=photoprism
+      - PHOTOPRISM_DATABASE_USER=photoprism
+      - PHOTOPRISM_DATABASE_PASSWORD=photoprism
+      # PHOTOPRISM的数据库类型，数据库的访问地址，子数据库的名字账号密码
+    # network_mode: bridge
+    network_mode: host
+    # 推荐直接使用host模式
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 2342:2342/tcp
+      # WebUI 端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
