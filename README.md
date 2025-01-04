@@ -1,7 +1,9 @@
-# 【更新日志-2024-12-25】
-- 飞牛OS docker容器如果使用unless-stopped无法在docker启动时自启动，由于时间关系，还没将其修改为always，先公告一声，找个时间再把这些模板一次性替换了
-- 如果需要限制容器的cpu和物理内存大小，均可添加以下代码内容进行限制
- ```shell
+# 【更新日志-2025-01-04】
+- 待办：找个时间，把portainer换成dpanel，dpanel上手很不错
+- 待办：飞牛OS docker容器如果使用unless-stopped无法在docker启动时自启动，由于时间关系，还没将其修改为always
+
+#### 限制容器的cpu和物理内存大小，均可添加以下代码内容进行限制
+```shell
     deploy:
       resources:
         limits:
@@ -10,10 +12,81 @@
           # 限制容器最多可以使用主机上2个CPU，物理内存最高占用为2g
 ```
 - 书写限制的方式有很多，此处仅列举其一，更多的详细内容可见以下参考资料
-- https://zhuanlan.zhihu.com/p/417472115
-- https://developer.aliyun.com/article/1064221
-- https://segmentfault.com/a/1190000045656750
-- https://www.oryoy.com/news/docker-rong-qi-nei-cun-xian-zhi-xiang-jie-ru-he-she-zhi-zui-da-nei-cun-da-xiao-yi-you-hua-python-yin.html
+- [Docker资源（CPU/内存/磁盘IO/GPU）限制与分配指南](https://developer.aliyun.com/article/1064221)
+- [如何在 Docker 中限制CPU和内存的使用 ？](https://segmentfault.com/a/1190000045656750)
+- [Docker容器内存限制详解：如何设置最大内存大小以优化Python应用性能](https://www.oryoy.com/news/docker-rong-qi-nei-cun-xian-zhi-xiang-jie-ru-he-she-zhi-zui-da-nei-cun-da-xiao-yi-you-hua-python-yin.html)
+
+#### Docker macvlan设置，使容器拥有独立ip(以局域网为192.168.1.*，路由器为192.168.1.1为例子)
+- 如果需要让docker使用独立IP进行访问，需要先执行以下命令创建一个基于macvlan的docker网段，或者手动创建一个
+```shell
+docker network create -d macvlan --gateway 192.168.1.1 --subnet 192.168.1.0/24 --ipv6 -o parent=eth0 br0
+```
+| 命令 | 含义 |
+| :---- | :---- |
+| -d macvlan | 指定网络驱动为macvlan |
+| --gateway 192.168.1.1 | 指定你的二层设备网关，也就是你的路由器管理页面的地址，建议是不走科学环境的网关 |
+| --subnet 192.168.1.0/24 | 指定子网范围，/24代表掩码255.255.255.0，可自定义的ip地址在192.168.1.*内 |
+| --ipv6 | 照抄即可，用于启用ipv6，会自动创建 |
+| -o parent=eth0 | 指定物理网卡，使用ifconfig查看，一般为eth0，eth1，eth2等 |
+| br0 | 网络名称，可以自定义，创建容器时需要使用 |
+- docker cli命令创建使用br0模板
+```shell
+docker run -d --name lucky-test --net=br0 --ip=192.168.1.233 gdy666/lucky:latest
+```
+- docker compose创建使用br0示例，选用lucky来测试获取ipv4和ipv6地址是否为公网ip
+```shell
+services:
+  luckylucky-test:
+    image: docker.1panel.live/gdy666/lucky:latest
+    container_name: lucky-test
+    hostname: lucky-test
+    # volume: 仅用于测试，省略映射卷
+### 重点内容，删除原本的网络设置，替换为以下为网络设置内容
+##############################
+# 下方的 br0 为自定义网络的名字，请根据实际情况修改
+    networks:
+      br0:
+      ipv4_address: 192.168.1.233
+      # 使用br0网络，设置一个没有占用的局域网ip地址
+
+# 以下照抄，如果一张compose有多个容器部署，则需要放到compose内容最后面
+networks:
+  br0:
+    external: true
+    name: br0
+##############################
+```
+- [如何将容器运行到Docker Macvlan网络上](https://blog.laoyutang.cn/linux/docker-macvlan.html)
+- [docker使用macvlan配置网络，使容器与宿主机在同一局域网，广播域内](https://zhuanlan.zhihu.com/p/669471518)
+
+#### compose模板中自定义 DNS 服务器，可以是单个值或列表的多个值，添加以下代码其一内容即可
+```shell
+dns: 8.8.8.8
+```
+```shell
+dns:
+  - 8.8.8.8
+  - 223.6.6.6
+```
+
+#### compose模板中使用 depends_on 设置依赖关系
+- docker-compose up ：以依赖性顺序启动服务。在以下示例中，先启动 db 和 redis ，才会启动 web
+- docker-compose up SERVICE ：自动包含 SERVICE 的依赖项。在以下示例中，docker-compose up web 还将创建并启动 db 和 redis
+- docker-compose stop ：按依赖关系顺序停止服务。在以下示例中，web 在 db 和 redis 之前停止
+```shell
+version: "3.7"
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
+  db:
+    image: postgres
+```
+- 来自于[docker compose 菜鸟教程](https://www.runoob.com/docker/docker-compose.html)
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
