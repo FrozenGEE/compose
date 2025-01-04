@@ -16,7 +16,7 @@
 - [如何在 Docker 中限制CPU和内存的使用 ？](https://segmentfault.com/a/1190000045656750)
 - [Docker容器内存限制详解：如何设置最大内存大小以优化Python应用性能](https://www.oryoy.com/news/docker-rong-qi-nei-cun-xian-zhi-xiang-jie-ru-he-she-zhi-zui-da-nei-cun-da-xiao-yi-you-hua-python-yin.html)
 
-#### Docker macvlan设置，使容器拥有独立ip(以局域网为192.168.1.*，路由器为192.168.1.1为例子)
+#### Docker macvlan设置，使容器拥有独立ip(以局域网为192.168.1.*，父路由器为192.168.1.1为例子)
 - 如果需要让docker使用独立IP进行访问，需要先执行以下命令创建一个基于macvlan的docker网段，或者手动创建一个
 ```shell
 docker network create -d macvlan --gateway 192.168.1.1 --subnet 192.168.1.0/24 --ipv6 -o parent=eth0 br0
@@ -29,9 +29,11 @@ docker network create -d macvlan --gateway 192.168.1.1 --subnet 192.168.1.0/24 -
 | --ipv6 | 照抄即可，用于启用ipv6，会自动创建 |
 | -o parent=eth0 | 指定物理网卡，使用ifconfig查看，一般为eth0，eth1，eth2等 |
 | br0 | 网络名称，可以自定义，创建容器时需要使用 |
+
+##### 以lucky为例子，以下内容省略路径映射，仅作测试
 - docker cli命令创建使用br0模板
 ```shell
-docker run -d --name lucky-test --net=br0 --ip=192.168.1.233 gdy666/lucky:latest
+docker run -d --name lucky-test --net=br0 --ip=192.168.1.233 docker.1panel.live/gdy666/lucky:latest
 ```
 - docker compose创建使用br0示例，选用lucky来测试获取ipv4和ipv6地址是否为公网ip
 ```shell
@@ -40,7 +42,6 @@ services:
     image: docker.1panel.live/gdy666/lucky:latest
     container_name: lucky-test
     hostname: lucky-test
-    # volume: 仅用于测试，省略映射卷
 ### 重点内容，删除原本的网络设置，替换为以下为网络设置内容
 ##############################
 # 下方的 br0 为自定义网络的名字，请根据实际情况修改
