@@ -51,11 +51,18 @@ services:
       ipv4_address: 192.168.1.233
       # 设置一个没有占用的局域网ip地址
 
-# 以下照抄，如果一张compose有多个容器部署，则需要放到compose内容最后面
+# 以下照抄，如果一张compose有多个容器部署，则需要放到compose内容最后面，并且写上其他网络信息
 networks:
   br0:
     external: true
     name: br0
+# 仅供参考，请按实际情况修改
+#  host:
+#    external: true
+#    name: host
+#  bridge:
+#    external: true
+#    name: bridge
 ##############################
 ```
 lucky正确获取到ipv4和ipv6地址
