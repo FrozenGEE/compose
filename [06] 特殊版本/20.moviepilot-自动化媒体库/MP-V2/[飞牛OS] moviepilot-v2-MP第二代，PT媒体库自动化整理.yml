@@ -51,7 +51,7 @@ services:
     # 容器名字
     hostname: moviepilot-v2
     # 主机名
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     # privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
