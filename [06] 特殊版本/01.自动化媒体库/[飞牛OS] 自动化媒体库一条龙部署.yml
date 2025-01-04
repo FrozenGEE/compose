@@ -148,7 +148,7 @@ services:
     network_mode: bridge
     ports:
       - 32400:32400
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ##############################################
@@ -187,7 +187,7 @@ services:
     network_mode: bridge
     ports:
       - 8096:8096
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ##############################################
@@ -224,7 +224,7 @@ services:
     network_mode: bridge
     ports:
       - 8097:8096
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ##############################################
@@ -261,7 +261,7 @@ services:
       - UMASK=022
       - TZ=Asia/Shanghai
     network_mode: host
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ########################################
@@ -299,7 +299,7 @@ services:
       - TZ=Asia/Shanghai
     network_mode: host
     # 如需修改WebUI的端口，到/config/setting.json中第54行的"rpc-port": 9091的端口改为自定义端口
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ##############################################
@@ -312,7 +312,7 @@ services:
     image: jxxghp/moviepilot-v2:latest
     container_name: moviepilot-v2
     hostname: moviepilot-v2
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     network_mode: host
 ##############################################
@@ -459,7 +459,7 @@ services:
     ports:
       - 8780:8780
       # 注：8780是容器内nginx的监听端口，反向代理了 8787、3131
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ##############################################
@@ -478,7 +478,7 @@ services:
       # 需要预先创建好一个文件，不然会创建成文件夹；上面这条如果/etc内没有或不会进去新建resolv.conf，可以写下面这条
       # - /vol1/1000/docker/v2raya/resolv.conf:/etc/resolv.conf
     network_mode: host
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ##############################################
