@@ -1,0 +1,31 @@
+# 官方文档
+# https://hub.docker.com/r/joinsunsoft/docker.ui
+# https://hub.docker.com/r/smanx/docker.ui
+# https://hub.docker.com/r/jiajiangtao122/docker.ui
+# 默认账号：ginghan，密码：123456
+# 不推荐使用，某些nas可能需要
+
+---
+version: "2"
+# 最后编辑时间：2024-03-11
+services:
+  dockerui:
+    image: smanx/docker.ui:latest
+    # 镜像地址，官方仅支持x86
+    # arm64用户使用smanx/docker.ui
+    # jiajiangtao122/docker.ui，该镜像支持x86和arm64
+    container_name: dockerui
+    # 容器名字
+    hostname: dockerui
+    # 主机名
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # docker核心
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8999:8999/tcp
+      # WebUI 端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
