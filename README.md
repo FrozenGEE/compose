@@ -57,6 +57,13 @@ networks:
     name: br0
 ##############################
 ```
+lucky正确获取到ipv4和ipv6地址
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/06.MAVLAN/macvlan-lucky.png)
+使用[ipw.cn](https://ipw.cn) ping ipv6地址测试
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/06.MAVLAN/macvlan-ipw.png)
+
+
+参考资料：
 - [如何将容器运行到Docker Macvlan网络上](https://blog.laoyutang.cn/linux/docker-macvlan.html)
 - [docker使用macvlan配置网络，使容器与宿主机在同一局域网，广播域内](https://zhuanlan.zhihu.com/p/669471518)
 
