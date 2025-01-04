@@ -15,7 +15,7 @@ services:
     hostname: snapdrop
     # 主机名
     volumes:
-      - /mnt/user/data/docekr/snapdrop:/config
+      - /mnt/user/data/docker/snapdrop:/config
       # 配置文件目录
     environment:
       - PUID=1000
