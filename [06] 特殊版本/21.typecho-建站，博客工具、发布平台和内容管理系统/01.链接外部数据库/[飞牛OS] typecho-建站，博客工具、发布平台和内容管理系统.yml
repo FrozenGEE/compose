@@ -58,5 +58,5 @@ services:
       # - 5590:9000/tcp
       # WebUI 端口(fpm)
       # 根据实际的镜像选择
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
