@@ -45,21 +45,24 @@ services:
 ### 重点内容，删除原本的网络设置，替换为以下为网络设置内容
 ##############################
 # 下方的 br0 为自定义网络的名字，请根据实际情况修改
-# 注意：将会直接使用容器的端口进行访问，比如原本的80，443，3306，5244，8063，16601
+# 注意：将会直接使用容器的端口进行访问，比如原本的80，443，3306，5244，8063，16601，某些容器可能需要在变量中自定义容器端口
     networks:
       br0:
-      ipv4_address: 192.168.1.233
+        ipv4_address: 192.168.1.233
       # 设置一个没有占用的局域网ip地址
 
-# 以下照抄，如果一张compose有多个容器部署，则需要放到compose内容最后面，并且写上其他网络信息
+# 以下照抄，如果一张compose有多个容器部署，则需要放到compose内容最后面，并且写上其他容器的网络信息
 networks:
-  br0:
-    external: true
-# 仅供参考，请按实际情况修改
-#  host:
-#    external: true
+    br0:
+      external: true
+      name: br0
+# 仅供参考，请按实际情况添加
+#    host:
+#      external: true
+#      name: br0
 #  bridge:
-#    external: true
+#      external: true
+#      name: br0
 ##############################
 ```
 lucky正确获取到ipv4和ipv6地址
@@ -69,6 +72,7 @@ lucky正确获取到ipv4和ipv6地址
 
 
 参考资料：
+- ﻿[docker的macvlan网络不会搞？它其实很简单](https://post.smzdm.com/p/agq9mw53)
 - [如何将容器运行到Docker Macvlan网络上](https://blog.laoyutang.cn/linux/docker-macvlan.html)
 - [docker使用macvlan配置网络，使容器与宿主机在同一局域网，广播域内](https://zhuanlan.zhihu.com/p/669471518)
 
