@@ -36,7 +36,7 @@ services:
       # 时区
     network_mode: host
     # 推荐直接使用host网络模式，frps的面板端口默认为7500，具体看 frps.toml 中的设置
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 
