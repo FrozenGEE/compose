@@ -1,6 +1,6 @@
 # 【更新日志-2025-01-04】
 - 待办：找个时间，把portainer换成dpanel，dpanel上手很不错
-- 待办：飞牛OS docker容器如果使用unless-stopped无法在docker启动时自启动，由于时间关系，还没将其修改为always
+- 飞牛OS docker容器使用unless-stopped无法在docker启动时自启动，修改为always即可
 
 #### 限制容器的cpu和物理内存大小，均可添加以下代码内容进行限制
 ```shell
