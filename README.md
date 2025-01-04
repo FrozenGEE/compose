@@ -76,6 +76,7 @@ lucky正确获取到ipv4和ipv6地址
 - ﻿[docker的macvlan网络不会搞？它其实很简单](https://post.smzdm.com/p/agq9mw53)
 - [如何将容器运行到Docker Macvlan网络上](https://blog.laoyutang.cn/linux/docker-macvlan.html)
 - [docker使用macvlan配置网络，使容器与宿主机在同一局域网，广播域内](https://zhuanlan.zhihu.com/p/669471518)
+- [揭开Macvlan神秘面纱：Docker容器网络新选择，轻松实现跨主机通信原理解析](https://www.oryoy.com/news/jie-kai-macvlan-shen-mi-mian-sha-docker-rong-qi-wang-luo-xin-xuan-ze-qing-song-shi-xian-kua-zhu-ji-t.html)
 
 #### compose模板中自定义 DNS 服务器，可以是单个值或列表的多个值，添加以下代码其一内容即可
 ```shell
