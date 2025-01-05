@@ -27,6 +27,8 @@
 # https://doc.mrdoc.pro/doc/3312
 
 # MrDoc 的完整运行环境镜像，以 uwsgi 方式部署，集成Chromium、LibreOffice，必须挂载本地MrDoc目录使用，支持开源版、专业版
+# 注意1：请确保已经安装了 Git 工具，如果没有安装，请自行参考 https://www.runoob.com/git/git-install-setup.html 进行安装
+# 注意2：内网环境请前往仓库 Web 页面下载代码，然后将代码复制到内网机器相应目录
 
 ---
 version: "3"
