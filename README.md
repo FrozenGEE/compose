@@ -19,6 +19,7 @@
 #### Docker macvlan设置，使容器拥有独立ip(以局域网为192.168.1.*，父路由器为192.168.1.1为例子)
 - 如果需要让docker使用独立IP进行访问，需要先执行以下命令创建一个基于macvlan的docker网段，或者手动创建一个
 - 适用于让 QB/TR/其他docker容器 具有一个独立IP地址，添加其IP至魔法网络的黑名单中，不让其走魔法网络，从而避免标记为盒子
+- 暂未学会 macvlan与其他网络模式的容器通信
 ```shell
 docker network create -d macvlan --gateway 192.168.1.1 --subnet 192.168.1.0/24 --ipv6 -o parent=eth0 br0
 ```
@@ -77,6 +78,7 @@ lucky正确获取到ipv4和ipv6地址
 - [如何将容器运行到Docker Macvlan网络上](https://blog.laoyutang.cn/linux/docker-macvlan.html)
 - [docker使用macvlan配置网络，使容器与宿主机在同一局域网，广播域内](https://zhuanlan.zhihu.com/p/669471518)
 - [深入了解Macvlan技术：实现容器网络隔离与通信](https://fish-pro.github.io/2024/01/23/深入了解Macvlan技术-实现容器网络隔离与通信)
+- [Docker 网络模型之 macvlan 详解，图解，实验完整](https://cloud.tencent.com/developer/article/1432601)
 
 #### compose模板中自定义 DNS 服务器，可以是单个值或列表的多个值，添加以下代码其一内容即可
 ```shell
