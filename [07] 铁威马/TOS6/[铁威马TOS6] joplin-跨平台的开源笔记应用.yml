@@ -57,8 +57,9 @@ services:
     hostname: joplin-pgsql
     # 主机名
     volumes:
-      - /Volume1/docker/joplin:/opt/postgresql/data
-      # 数据库文件存放目录
+      - /Volume1/docker/joplin/pgsql:/var/lib/postgresql/data
+      - /Volume1/docker/joplin/data:/opt/postgresql/data
+      # 数据文件存放目录
     environment:
       - TZ=Asia/Shanghai
       # 时区
