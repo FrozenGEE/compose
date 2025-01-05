@@ -57,8 +57,9 @@ services:
     hostname: joplin-pgsql
     # 主机名
     volumes:
-      - /share/Container/joplin:/opt/postgresql/data
-      # 数据库文件存放目录
+      - /share/Containe/joplin/pgsql:/var/lib/postgresql/data
+      - /share/Containe/joplin/data:/opt/postgresql/data
+      # 数据文件存放目录
     environment:
       - TZ=Asia/Shanghai
       # 时区
