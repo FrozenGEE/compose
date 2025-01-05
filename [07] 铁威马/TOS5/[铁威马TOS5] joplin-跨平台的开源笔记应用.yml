@@ -1,0 +1,75 @@
+# 官方文档
+# https://joplinapp.org
+# https://github.com/laurent22/joplin
+# https://hub.docker.com/r/joplin/server
+# https://hub.docker.com/r/netvpc/joplin
+# https://github.com/netvpc/joplin
+# https://post.smzdm.com/p/an94p6n0
+
+# 默认的用户名密码为 admin@localhost / admin
+
+version: '3'
+# 最后编辑时间：2025-01-05
+services:
+  joplin:
+    image: joplin/server:latest
+    # 镜像地址，官方镜像仅适用于amd64
+    # arm64用户使用 netvpc/joplin:latest，也可就用这个，全平台架构支持
+    container_name: joplin
+    # 容器名字
+    hostname: joplin
+    # 主机名
+    environment:
+      - NTP_SERVER=pool.ntp.org:123
+      # NTP服务器，netvpc/joplin 默认使用谷歌的NTP服务器地址，因为超时会导致无法启动，因此修改掉
+      - TZ=Asia/Shanghai
+      # 时区
+      - APP_PORT=22300
+      # 自定义容器端口，默认为22300
+      - APP_BASE_URL=https://反代地址:反代端口
+      # 此处修改为https的反代地址
+      - DB_CLIENT=pg
+      # 数据库类型，照抄，使用pgsql
+      - POSTGRES_HOST=【这里修改为pgsql数据库的ip地址】
+      - POSTGRES_PORT=25432
+      # 数据库的IP地址和端口，预设为25432
+      - POSTGRES_PASSWORD=joplin
+      - POSTGRES_USER=joplin
+      - POSTGRES_DATABASE=joplin
+      # 数据库账号密码，子数据库，默认为joplin
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 22300:22300/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    depends_on:
+      - joplin-pgsql
+      # 关联 joplin-pgsql
+
+  joplin-pgsql:
+    image: postgres:16
+    # 镜像地址
+    container_name: joplin-pgsql
+    # 容器名字
+    hostname: joplin-pgsql
+    # 主机名
+    volumes:
+      - /Volume1/User/docker/joplin:/opt/postgresql/data
+      # 数据库文件存放目录
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+      - POSTGRES_DB=joplin
+      - POSTGRES_PASSWORD=joplin
+      - POSTGRES_USER=joplin
+      # 预设默认的数据库账号密码，子数据库，默认为joplin
+    network_mode: bridge
+    # 为了避免和其他pgsql冲突因此修改为25432
+    ports:
+      - 25432:5432/tcp
+      # 数据库访问端口，不具有WebUI，调用即可
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
