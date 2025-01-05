@@ -40,6 +40,13 @@ docker exec -it mrdoc python manage.py createsuperuser
 # 注意1：请确保已经安装了 Git 工具，如果没有安装，请自行参考 https://www.runoob.com/git/git-install-setup.html 进行安装
 # 注意2：内网环境请前往仓库 Web 页面下载代码，然后将代码复制到内网机器相应目录
 
+# 开源版命令：git clone https://gitee.com/zmister/MrDoc.git
+# 专业版命令：git clone https://{用户名}:{密码}@git.mrdoc.pro/MrDoc/MrDocPro.git
+# 不要在用户名密码外面加花括号！
+# 例子：git clone https://mrdoc:123456@git.mrdoc.pro/MrDoc/MrDocPro.git
+
+# 下载到本地的/MrDoc目录内的全部文件移动到 /app/MrDoc 该容器路径的实际目录内
+
 ---
 version: "3"
 # 最后编辑时间：2025-01-05
