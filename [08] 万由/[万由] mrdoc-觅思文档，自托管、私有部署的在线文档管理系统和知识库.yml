@@ -1,0 +1,53 @@
+# 官方文档
+# https://mrdoc.pro
+# https://doc.mrdoc.pro/p/deploy
+# https://doc.mrdoc.pro/doc/3958
+# https://hub.docker.com/r/zmister/mrdoc
+
+# 开源版和专业版对比
+# https://doc.mrdoc.pro/doc/3441
+# 如何对站点数据进行备份？
+# https://doc.mrdoc.pro/doc/44614
+# 开源版与专业版 数据导出与导入
+# https://doc.mrdoc.pro/doc/3467
+# https://doc.mrdoc.pro/doc/3468
+# 开源版>专业版数据迁移步骤
+# https://doc.mrdoc.pro/doc/3383
+
+# 配置指南
+# https://doc.mrdoc.pro/doc/1363
+# Docker 下使用 MySQL 数据库，省流，去修改
+# https://doc.mrdoc.pro/doc/44846
+# MySQL 数据库支持 emoji 的配置，省流：数据库字符集使用 utf8mb4_unicode_ci 即可
+# https://doc.mrdoc.pro/doc/44847
+
+# 管理员忘记密码怎么办？
+# https://doc.mrdoc.pro/doc/3068
+# 如何进行站点数据备份/站点迁移？
+# https://doc.mrdoc.pro/doc/3312
+
+# MrDoc 的完整运行环境镜像，以 uwsgi 方式部署，集成Chromium、LibreOffice，必须挂载本地MrDoc目录使用，支持开源版、专业版
+
+---
+version: "3"
+# 最后编辑时间：2025-01-05
+services:
+  mrdoc:
+    image: zmister/mrdoc:v9.0
+    # 镜像地址，支持amd64和arm64
+    # armv7使用该镜像：jonnyan404/mrdoc:latest
+    container_name: mrdoc
+    # 容器名字
+    hostname: mrdoc
+    # 主机名
+    volumes:
+      - /mnt/unas/data/docker/mrdoc:/app/MrDoc
+      # 数据目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 10086:10086/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
