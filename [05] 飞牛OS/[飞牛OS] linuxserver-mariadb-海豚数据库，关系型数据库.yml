@@ -7,7 +7,7 @@ version: "3"
 # 最后编辑时间：2024-03-11
 services:
   mariadb:
-    image: linuxserver/mariadb
+    image: linuxserver/mariadb:latest
     # 镜像地址
     container_name: mariadb
     # 容器名字
@@ -31,6 +31,7 @@ services:
       # - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql
       # 远程连接别的服务器上的数据库，需要就写
     network_mode: bridge
+    # 不能用host部署
     ports:
       - 3306:3306/tcp
       # 非WebUI网页界面，直接调用即可
