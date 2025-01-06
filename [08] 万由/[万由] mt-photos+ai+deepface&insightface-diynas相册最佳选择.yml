@@ -58,9 +58,9 @@ services:
     volumes:
       - /mnt/unas/data/docker/mt-photos/config:/config
       # 配置文件目录
-      - 【这里替换为你的数据存放目录】/mt-photos/相册上传:/uploads
+      - /mnt/unas/data:/uploads
       # 上传目录
-      - 【这里替换为你的数据存放目录】/mt-photos/本地相册:/photos
+      - /mnt/unas/data/Homes:/UNAS本地相册
       - 【这里替换为你的数据存放目录】:/【自定义目录名字】
       # 本地相册目录，可自定义目录，可以写多个
       # - /mnt/unas/data/docker/mt-photos/视频转码:/视频转码
@@ -178,7 +178,7 @@ services:
     # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     ports:
-      - 8066:8066/tcp
+      - 8065:8066/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
     restart: unless-stopped
@@ -211,7 +211,7 @@ services:
     # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     ports:
-      - 8065:8066/tcp
+      - 8066:8066/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
     restart: unless-stopped
@@ -235,11 +235,10 @@ services:
 #      - /mnt/unas/data/docker/mt-photos/pgsql:/var/lib/postgresql/data
       # 数据库文件目录
 #    network_mode: bridge
-    # network_mode: host
-    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+     # 为了和pgsql避免冲突，因此使用bridge
 #    ports:
 #      - 8062:5432/tcp
-      # API 端口，为了和pgsql避免冲突，因此使用bridge
+      # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
 #    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
