@@ -119,7 +119,7 @@ services:
     # ports:
       # - 8063:8063/tcp
       # WebUI http端口
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
@@ -152,7 +152,7 @@ services:
       # - 8060:8060/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
@@ -195,7 +195,7 @@ services:
       - 8065:8066/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
@@ -235,7 +235,7 @@ services:
       - 8066:8066/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
@@ -268,7 +268,7 @@ services:
 #      - 8062:5432/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
-#    restart: unless-stopped
+#    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 #    labels:
 #      icon: http://IP:8089/i/user_1/mt-photos-insightface.png
