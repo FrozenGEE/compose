@@ -1,6 +1,8 @@
-# 【更新日志-2025-01-04】
+# 【更新日志-2025-01-07】
 - 待办：找个时间，把portainer换成dpanel，dpanel上手很不错
 - 飞牛OS docker容器使用unless-stopped无法在docker启动时自启动，修改为always即可
+- 翻新了MT相册的compose，新绿联由于现在官方相册只能使用个人文件夹，所以compose模板将其单独分割出来
+- 群晖&新绿联&华硕的compose模板中，绿联有一个个人文件夹，模板都没写，请自行添加，具体见下方的[NAS的路径说明](https://github.com/FrozenGEE/compose#nas%E7%9A%84%E8%B7%AF%E5%BE%84%E8%AF%B4%E6%98%8E)
 
 #### 限制容器的cpu和物理内存大小，均可添加以下代码内容进行限制
 ```shell
