@@ -38,9 +38,9 @@
 ---
 version: "3"
 # 最后编辑时间：2025-01-07
+# 2025-01-07 更新日志：mtphotos/mt-photos-ai 容器端口很早之前就修改为8060，补漏；某些arm设备如果mt-photos的日志提示数据库相关日志问题，那就把mt-photos-pgsql跑起来，关联上
 # 2024-11-27 更新日志：增加mt-photos-insightface的compose，insightface和deepface两者选其一即可，新增各种类型的镜像及说明
 # 2024-04-28 更新日志：新增mt-photos-deepface，修正部分错误内容，删减不需要的内容，新增人脸识别API使用支持cpu无avx指令的镜像，新增N卡驱动AI识别镜像编译教程
-# 2025-01-07 更新日志：mtphotos/mt-photos-ai 容器端口很早之前就修改为8060，补漏；某些arm设备如果mt-photos的日志提示数据库相关日志问题，那就把mt-photos-pgsql跑起来，关联上
 services:
   mt-photos:
     image: mtphotos/mt-photos:latest
