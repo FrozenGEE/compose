@@ -56,7 +56,7 @@ services:
       - /dev/dri:/dev/dri
       # 开启硬件加速支持，注意：arm设备不支持硬件加速
     volumes:
-      - /mnt/user/appdata/mt-photos:/config
+      - /mnt/user/appdata/mt-photos/config:/config
       # 配置文件目录
       - /mnt/user/mt-photos/相册上传:/upload
       # 上传目录
