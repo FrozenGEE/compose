@@ -63,9 +63,9 @@ services:
       - 【这里替换为你的数据存放目录】/mt-photos/本地相册:/photos
       - 【这里替换为你的数据存放目录】:/【自定义目录名字】
       # 本地相册目录，可自定义目录，可以写多个
-      # - 【这里替换为你的数据存放目录】/mt-photos/视频转码:/视频转码
+      # - /mnt/unas/data/docker/mt-photos/视频转码:/视频转码
       # 视频转码存放目录，非必要
-      # - 【这里替换为你的数据存放目录】/mt-photos/高清缩略图:/高清缩略图
+      # - /mnt/unas/data/docker/mt-photos/高清缩略图:/高清缩略图
       # 高清缩略图存放目录，非必要
     environment:
       - MT_SERVER_PORT=8063
