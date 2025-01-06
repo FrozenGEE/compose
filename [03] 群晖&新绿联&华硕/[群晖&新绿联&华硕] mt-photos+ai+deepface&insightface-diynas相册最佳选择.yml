@@ -37,9 +37,10 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-11-27
+# 最后编辑时间：2025-01-07
 # 2024-11-27 更新日志：增加mt-photos-insightface的compose，insightface和deepface两者选其一即可，新增各种类型的镜像及说明
 # 2024-04-28 更新日志：新增mt-photos-deepface，修正部分错误内容，删减不需要的内容，新增人脸识别API使用支持cpu无avx指令的镜像，新增N卡驱动AI识别镜像编译教程
+# 2025-01-07 更新日志：mtphotos/mt-photos-ai 容器端口很早之前就修改为8060，补漏；某些arm设备如果mt-photos的日志提示数据库相关日志问题，那就把mt-photos-pgsql跑起来，关联上
 services:
   mt-photos:
     image: mtphotos/mt-photos:latest
@@ -57,12 +58,15 @@ services:
     volumes:
       - /volume1/docker/mt-photos/config:/config
       # 配置文件目录
-      - /volume1/MT-Photos/upload:/upload
+      - /volume1/MT-Photos/相册上传:/upload
       # 上传目录
       - /volume1/homes:/homes
+      - 【这里替换为你的数据存放目录】:/【自定义目录名字】
       # 本地相册目录，可自定义目录，可以写多个，默认为存储池1
       # - /volume1/docker/mt-photos/视频转码:/视频转码
       # 视频转码存放目录，非必要
+      # - /volume1/docker/mt-photos/高清缩略图:/高清缩略图
+      # 高清缩略图存放目录，非必要
     environment:
       - MT_SERVER_PORT=8063
       # 指定MT Photos服务端的端口，默认为8063，可自定义端口后直接使用host网络模式
@@ -134,11 +138,11 @@ services:
     environment:
       - API_AUTH_KEY=1234567890
       # 智能识别API，可以随便写，在mt-photos内设置要对应该项
-    network_mode: bridge
-    # network_mode: host
+    # network_mode: bridge
+    network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    ports:
-      - 8060:8000/tcp
+    # ports:
+      # - 8060:8060/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
     restart: unless-stopped
@@ -174,7 +178,7 @@ services:
     # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     ports:
-      - 8066:8066/tcp
+      - 8065:8066/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
     restart: unless-stopped
@@ -207,7 +211,7 @@ services:
     # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     ports:
-      - 8065:8066/tcp
+      - 8066:8066/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
     restart: unless-stopped
@@ -231,11 +235,10 @@ services:
 #      - /volume1/docker/mt-photos/pgsql:/var/lib/postgresql/data
       # 数据库文件目录
 #    network_mode: bridge
-    # network_mode: host
-    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # 为了和pgsql避免冲突，因此使用bridge
 #    ports:
 #      - 8062:5432/tcp
-      # API 端口，为了和pgsql避免冲突，因此使用bridge
+      # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
 #    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
