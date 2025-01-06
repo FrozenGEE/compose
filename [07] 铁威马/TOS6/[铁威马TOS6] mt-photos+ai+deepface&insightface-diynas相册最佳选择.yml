@@ -38,9 +38,8 @@
 ---
 version: "3"
 # 最后编辑时间：2025-01-07
-# 2024-11-27 更新日志：增加mt-photos-insightface的compose，insightface和deepface两者选其一即可，新增各种类型的镜像及说明
-# 2024-04-28 更新日志：新增mt-photos-deepface，修正部分错误内容，删减不需要的内容，新增人脸识别API使用支持cpu无avx指令的镜像，新增N卡驱动AI识别镜像编译教程
 # 2025-01-07 更新日志：mtphotos/mt-photos-ai 容器端口很早之前就修改为8060，补漏；某些arm设备如果mt-photos的日志提示数据库相关日志问题，那就把mt-photos-pgsql跑起来，关联上
+# 2024-04-28 更新日志：新增mt-photos-deepface，修正部分错误内容，删减不需要的内容，新增人脸识别API使用支持cpu无avx指令的镜像，新增N卡驱动AI识别镜像编译教程
 services:
   mt-photos:
     image: mtphotos/mt-photos:latest
@@ -69,6 +68,12 @@ services:
     environment:
       - MT_SERVER_PORT=8063
       # 指定MT Photos服务端的端口，默认为8063，可自定义端口后直接使用host网络模式
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
       # 时区
       ######################################
