@@ -137,7 +137,7 @@ services:
     image: mtphotos/mt-photos-ai:latest
     # 镜像地址，具体tag如下
     # latest：基于openvino文件夹打包，推荐Intel Xeon、Core系列 CPU机型安装这个镜像
-    # onnx-latest:基于onnx文件夹打包，推荐其他CPU机型安装这个镜像
+    # onnx-latest:基于onnx文件夹打包，如果您的CPU不在OpenVINO的支持列表中或者是AMD CPU，请使用该镜像，例如N5105
     # cuda-latest:基于cuda文件夹打包，nvidia显卡机型可以安装这个镜像
     # arm-latest:基于onnx文件夹打包，armv8架构机型可以安装这个镜像
     container_name: mt-photos-ai
