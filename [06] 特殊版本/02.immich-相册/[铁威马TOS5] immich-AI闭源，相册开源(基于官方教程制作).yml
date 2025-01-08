@@ -21,18 +21,26 @@
 # AI模型，国内源分流
 # https://www.123pan.com/s/WXqA-EGL6d.html
 # https://www.123pan.com/s/YuAUVv-Qp1nA.html 提取码:fgee
+# immich相册反向地理编码设置为中文资源包，见下教程说明
+# https://www.123pan.com/s/mYvMTd-SJhY3
 
-# 指定数据库，注意tag，截至2024-05-13前，官方支持版本tag为 pg16-v0.2.0
+# 指定数据库，注意tag，截至2025-01-08前，官方支持 pg14/15/16，pg17名义上是兼容的
+# 为确保安装的pgvecto.rs版本兼容，tag范围是 >= 0.2.0, < 0.4.0，本模板使用的是 pg16-v0.3.0
 # https://hub.docker.com/r/tensorchord/pgvecto-rs
 
 # 如果官方的镜像不好拉取，可以选择拉取以下两个镜像
 # https://hub.docker.com/r/altran1502/immich-server
 # https://hub.docker.com/r/altran1502/immich-machine-learning
 
+# 将immich相册反向地理编码设置为中文 (教程日期：2024-08-16)
+# https://post.smzdm.com/p/an9k0w57
+# 将immich相册地图模块设置为中文地图 (教程日期：2024-04-28)
+# https://post.smzdm.com/p/akl59689
+
 ---
 version: "3.8"
-# 最后编辑时间：2024-08-10
-# 官方新的模板删除了immich-microservices该容器的部署
+# 最后编辑时间：2025-01-08
+# 2025-01-08：更新模板，添加immich相册反向地理编码设置为中文的路径映射
 services:
   immich-server:
     image: ghcr.io/immich-app/immich-server:release
@@ -46,10 +54,13 @@ services:
     volumes:
       - 【这里替换为你的照片上传存放目录】:/usr/src/app/upload
       # 上传目录
-      - /Volume1/User:/Volume1/User
+      - /Volume1/User:/Volume1/User:ro
       # 外部库目录，此文件夹将定期扫描，内容将自动导入immich，需要在immich上进行设置，容器路径可以自定义多个，理解映射就会明白了，默认为/usr/src/app/external
       # - 【这里替换为你的本地相册存放目录】:/【这里替换为你的本地相册存放目录的名字】
       # 自定义外部库目录，可以写多个，容器路径可随便自定义
+      - /Volume1/User/docker/immich/immich-machine-learning/i18n-iso-countries:/usr/src/app/node_modules/i18n-iso-countries
+      - /Volume1/User/docker/immich/immich-machine-learning/geodata:/build/geodata
+      # immich相册反向地理编码设置为中文所需的路径
     environment:
       - IMMICH_PORT=2283
       # 自定义容器端口，默认为3001，这里预设为2283
@@ -134,7 +145,7 @@ services:
 ############################################################################
 
   immich-pgsql:
-    image: tensorchord/pgvecto-rs:pg16-v0.2.1
+    image: tensorchord/pgvecto-rs:pg16-v0.3.0
     # 镜像地址
     container_name: immich-pgsql
     # 容器名字
