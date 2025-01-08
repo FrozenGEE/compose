@@ -39,8 +39,8 @@
 
 ---
 version: "3.8"
-# 最后编辑时间：2024-08-10
-# 官方新的模板删除了immich-microservices该容器的部署
+# 最后编辑时间：2025-01-08
+# 2025-01-08：更新模板，添加immich相册反向地理编码设置为中文的路径映射
 services:
   immich-server:
     image: ghcr.io/immich-app/immich-server:release
@@ -55,7 +55,7 @@ services:
       - 【这里替换为你的照片上传存放目录】:/usr/src/app/upload
       # 上传目录
       - /share:/share
-      - /share/Photo:/威联通相册
+      - /share/Photo:/威联通相册:ro
       # 外部库目录，此文件夹将定期扫描，内容将自动导入immich，需要在immich上进行设置，容器路径可以自定义多个，理解映射就会明白了，默认为/usr/src/app/external
       # - 【这里替换为你的本地相册存放目录】:/【这里替换为你的本地相册存放目录的名字】
       # 自定义外部库目录，可以写多个，容器路径可随便自定义
