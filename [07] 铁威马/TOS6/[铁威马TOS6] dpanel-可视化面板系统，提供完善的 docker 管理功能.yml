@@ -20,10 +20,6 @@ services:
       # docker核心
       - /Volume1/docker/dpanel:/dpanel
       # 数据库文件目录
-    environment:
-      - INSTALL_USERNAME=admin
-      - INSTALL_PASSWORD=admin
-      # 自定义预设的管理员账号和密码，lite版不需要
     network_mode: bridge
     # 推荐使用bridge模式，8080有别的要用
     ports:
