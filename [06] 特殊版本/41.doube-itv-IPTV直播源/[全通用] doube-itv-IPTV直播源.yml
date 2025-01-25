@@ -1,0 +1,47 @@
+# 官方文档
+# https://hub.docker.com/r/doubely/duobe-itv
+# 原作者镜像无了，amd镜像可在此处下载：https://www.123684.com/s/YuAUVv-G7xnA，也可以选择dockerhub上备胎的镜像
+# https://hub.docker.com/r/doubely/duobe-itv
+# https://www.xuxlc.cn/article/details-57.html
+# https://club.fnnas.com/forum.php?mod=viewthread&tid=10447
+
+# 部署完成后，访问 http://ip:port/help (示例：http://127.0.0.1:50101/help)，更多具体内容都有说明
+
+---
+version: "3"
+# 最后编辑时间：2025-01-25
+services:
+  duobe-itv:
+    # image: doubebly/doube-itv:latest
+    # 原作者镜像，需要手动导入镜像，下载地址在上方链接
+    image: yydsxll/doube-itv:amd
+    # 备胎镜像，适用于amd架构用户
+    # image: yydsxll/doube-itv:arm
+    # 备胎镜像，适用于arm架构用户
+    # 镜像地址，根据实际情况选择，默认使用备胎的镜像
+    container_name: duobe-itv
+    # 容器名字
+    hostname: duobe-itv
+    # 主机名
+    command: gunicorn -w 3 -b 0.0.0.0:50101 --log-level error --timeout 60 app:app
+    # 50101为容器的WebUI端口，默认为5000，由于和群晖WebUI默认端口冲突，因此修改为50101
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 50101:50101/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/duobe-itv_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:5077]/help
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/duobe-itv.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
