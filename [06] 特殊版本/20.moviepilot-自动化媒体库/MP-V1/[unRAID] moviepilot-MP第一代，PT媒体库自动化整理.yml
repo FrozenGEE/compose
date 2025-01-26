@@ -40,9 +40,9 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-11-06
-# 更新日志：更新并精简配置单文本内容；新增文件夹目录结构图；站点删除ptlsp，支持rousi
-# V2和V1的配置单是一毛一样的，但是互不兼容，可以共存，本模板采用的还是和V1一样的配置单，只有自定义容器端口由33033改成了55055
+# 最后编辑时间：2025-01-26
+# 更新日志：不定期翻新配置文件，增加认证站点：sunny,ptcafe,ptzone,kufei,yemapt
+# V2和V1的配置单几乎是一毛一样的，但是互不兼容，可以共存，本模板采用的还是和V1一样的配置单，只有自定义容器端口由33033改成了55055
 services:
   moviepilot:
     image: jxxghp/moviepilot:latest
@@ -81,6 +81,7 @@ services:
     environment:
       - MOVIEPILOT_AUTO_UPDATE=true
       # 设置容器重启时自动更新，true/release/dev/false，默认release，插件的自动更新要设置为true
+      - 需要能正常连接Github 注意：如果出现网络问题可以配置PROXY_HOST
       - API_TOKEN=moviepilot
       # API密钥，V1版本默认为moviepilot，V2版本需要手动配置为大于等于16个字符的复杂字符串，预设为键盘上的每一排的前四个英文
       # 如配置不符合要求将会强制重新生成，可在首次启动的启动日志或env配置文件中查看最新的值
@@ -102,7 +103,7 @@ services:
       
 ########################################
 #### 认证站点 ####
-      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt
+      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔，会依次执行认证操作，直到有一个站点认证成功
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
       ## 密钥在控制面板中查看，切勿泄露
@@ -183,4 +184,24 @@ services:
       # - ROUSI_UID=
       # - ROUSI_PASSKEY=
       # rousi的用户UID和密钥
+########################################
+      # - SUNNY_UID=
+      # - SUNNY_PASSKEY=
+      # sunny的用户UID和密钥
+########################################
+      # - PTCAFE_UID=
+      # - PTCAFE_PASSKEY=
+      # ptcafe的用户UID和密钥
+########################################
+      # - PTZONE_UID=
+      # - PTZONE_PASSKEY=
+      # ptzone的用户UID和密钥
+########################################
+      # - KUFEI_UID=
+      # - KUFEI_PASSKEY=
+      # kufei的用户UID和密钥
+########################################
+      # - YEMAPT_UID=
+      # - YEMAPT_PASSKEY=
+      # yemapt的用户UID和密钥
 ########################################
