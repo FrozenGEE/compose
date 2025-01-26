@@ -41,7 +41,7 @@
 ---
 version: "3"
 # 最后编辑时间：2025-01-26
-# 更新日志：不定期翻新配置文件，增加认证站点：sunny,ptcafe,ptzone,kufei,yemapt
+# 更新日志：不定期翻新配置文件，增加认证站点：sunny,ptcafe,ptzone,kufei
 # V2和V1的配置单几乎是一毛一样的，但是互不兼容，可以共存，本模板采用的还是和V1一样的配置单，只有自定义容器端口由33033改成了55055
 services:
   moviepilot:
@@ -96,7 +96,7 @@ services:
       
 ########################################
 #### 认证站点 ####
-      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt
+      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔，会依次执行认证操作，直到有一个站点认证成功
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
       ## 密钥在控制面板中查看，切勿泄露
@@ -193,8 +193,4 @@ services:
       # - KUFEI_UID=
       # - KUFEI_PASSKEY=
       # kufei的用户UID和密钥
-########################################
-      # - YEMAPT_UID=
-      # - YEMAPT_PASSKEY=
-      # yemapt的用户UID和密钥
 ########################################
