@@ -332,6 +332,7 @@ services:
     environment:
       - MOVIEPILOT_AUTO_UPDATE=true
       # 设置容器重启时自动更新，true/release/dev/false，默认release，插件的自动更新要设置为true
+      # 需要能正常连接Github 注意：如果出现网络问题可以配置PROXY_HOST
       - NGINX_PORT=55055
       ## WebUI服务端口，预设为55055，默认为3000，可自行修改，不能和API服务端口3001冲突
       - SUPERUSER=cheems
@@ -451,15 +452,11 @@ services:
 
   cookiecloud:
     image: easychen/cookiecloud:latest
-    # 镜像地址
     container_name: cookiecloud
-    # 容器名字
     hostname: cookiecloud
-    # 主机名
     network_mode: bridge
     ports:
       - 8188:8088/tcp
-      # WebUI 端口，可能会有别的服务使用8088，所以改用bridge
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
