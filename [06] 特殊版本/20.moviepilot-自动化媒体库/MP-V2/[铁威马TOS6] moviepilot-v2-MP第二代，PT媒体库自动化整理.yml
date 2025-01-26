@@ -70,7 +70,11 @@ services:
       # 配置目录
       - /Volume1:/media
       # 设置一个总目录，以便于后续目录配置的统一修改，也可以自定义，但一定要确认参数无误，见上目录结构说明的④⑤
-      
+
+      # - /Volume1/docker/qbittorrent/qBittorrent/BT_backup:/QB-BT
+      # - /Volume1/docker/docker/transmission/torrents:/TR-BT
+      # 用于自动转种所使用的路径，分别QB配置目录里面的BT_backup路径地址，TR配置目录里面的torrents路径地址，请根据实际情况修改，模板仅供参考
+
 ########################################
     environment:
       - MOVIEPILOT_AUTO_UPDATE=true
