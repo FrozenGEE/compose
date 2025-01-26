@@ -65,6 +65,7 @@
 # v2raya设置中激活【开启端口分享】
 #
 # MP如果遇到cookiecloud设置正确但是无法同步成功的，试试重启几次再去同步，实在不是，手动添加吧
+# MP v2.0.7及以上版本，已支持通过UI进行用户认证：点击用户头像 -> 用户认证，无需配置环境变量，模板继续保留原有的认证变量
 #
 ##############################################
 # 镜像地址
@@ -108,7 +109,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-11-07
+# 最后编辑时间：2025-01-26
 services:
 ##############################################
 #                                            #
@@ -126,9 +127,9 @@ services:
     # runtime: nvidia
     # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
-      - /Volume1/User/docker/plex:/config
+      - /Volume1/docker/plex:/config
       # 配置文件目录
-      - /Volume1/User:/data
+      - /Volume1:/data
       # 媒体库目录，可以自定义，可以写多个
       # - /home/绿联用户名:/绿联用户名
       # 绿联的个人文件夹路径，把绿联用户名替换掉即可，可以写多个
@@ -167,9 +168,9 @@ services:
     # runtime: nvidia
     # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
-      - /Volume1/User/docker/emby:/config
+      - /Volume1/docker/emby:/config
       # 配置文件目录
-      - /Volume1/User:/data
+      - /Volume1:/data
       # 媒体库目录，可以自定义，可以写多个
       # - /home/绿联用户名:/绿联用户名
       # 绿联的个人文件夹路径，把绿联用户名替换掉即可，可以写多个
@@ -208,13 +209,13 @@ services:
     # runtime: nvidia
     # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
-      - /Volume1/User/docker/jellyfin/config:/config
+      - /Volume1/docker/jellyfin/config:/config
       # 配置文件目录
-      - /Volume1/User:/media
+      - /Volume1:/media
       # 媒体库目录，可以自定义，可以写多个
       # - /home/绿联用户名:/绿联用户名
       # 绿联的个人文件夹路径，把绿联用户名替换掉即可，可以写多个
-      - /Volume1/User/docker/jellyfin/cache:/cache
+      - /Volume1/docker/jellyfin/cache:/cache
       # 缓存目录
     environment:
       # - NVIDIA_DRIVER_CAPABILITIES=all
@@ -240,16 +241,15 @@ services:
 ##############################################
 
   qbittorrent:
-    image: linuxserver/qbittorrent:14.3.9
-    # 镜像地址，预设使用qb 4.3.9版本避免PT站因为版本太高ban掉
+    image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
     hostname: qbittorrent
     volumes:
-      - /Volume1/User/docker/qbittorrent:/config
+      - /Volume1/docker/qbittorrent:/config
       # 配置文件目录
-      - /Volume1/User/media/下载:/downloads
+      - /Volume1/media/下载:/downloads
       # 默认下载目录
-      - /Volume1/User/media:/media
+      - /Volume1/media:/media
       # MP,QB,TR统一的下载目录
       # - 【这里替换为你想映射到QB内的路径】:/【这里替换为你想映射到QB内的路径】
       # 下载目录，可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
@@ -258,8 +258,7 @@ services:
     environment:
       - WEBUI_PORT=8085
       # 自定义WebUI端口
-      # - TORRENTING_PORT=25800
-      # 4.3.9不支持该变量，故注释掉，仅作保留
+      - TORRENTING_PORT=25800
       # 自定义传输端口，别写6881，看站规！！！
       - PUID=0
       - PGID=0
@@ -273,16 +272,15 @@ services:
 ##############################################
 
   transmission:
-    image: linuxserver/transmission:version-3.00-r8
-    # 镜像地址，如需改用3.x版本，把latest改为version-3.00-r8
+    image: linuxserver/transmission:latest
     container_name: transmission
     hostname: transmission
     volumes:
-      - /Volume1/User/docker/transmission:/config
+      - /Volume1/docker/transmission:/config
       # 配置文件目录
-      - /Volume1/User/media/下载:/downloads
+      - /Volume1/media/下载:/downloads
       # 默认下载目录
-      - /Volume1/User/media:/media
+      - /Volume1/media:/media
       # MP,QB,TR统一的下载目录
       # - 【这里替换为你想映射到TR内的路径】:/【这里替换为你想映射到TR内的路径】
       # 下载目录，可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
@@ -326,13 +324,13 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # 使MP支持内建的重启操作，用于自动更新后重启
-      - /Volume1/User/docker/moviepilot-v2/core:/moviepilot 
+      - /Volume1/docker/moviepilot-v2/core:/moviepilot 
       ## 程序主目录
-      - /Volume1/User/docker/moviepilot-v2/config:/config
+      - /Volume1/docker/moviepilot-v2/config:/config
       ## 配置目录
-      - /Volume1/User/media/下载:/downloads
+      - /Volume1/media/下载:/downloads
       # 默认下载目录
-      - /Volume1/User/media:/media
+      - /Volume1/media:/media
       # 设置一个总目录，以便于后续目录配置的统一修改，也可以自定义，但一定要确认参数无误，见上目录结构说明的④⑤
       #
 ##############################################
@@ -353,7 +351,7 @@ services:
       #
 ##############################################
 #### 认证站点 ####
-      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt
+      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔，会依次执行认证操作，直到有一个站点认证成功
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
       ## 密钥在控制面板中查看，切勿泄露
@@ -435,6 +433,26 @@ services:
       # - ROUSI_PASSKEY=
       # rousi的用户UID和密钥
 ##############################################
+      # - SUNNY_UID=
+      # - SUNNY_PASSKEY=
+      # sunny的用户UID和密钥
+##############################################
+      # - PTCAFE_UID=
+      # - PTCAFE_PASSKEY=
+      # ptcafe的用户UID和密钥
+##############################################
+      # - PTZONE_UID=
+      # - PTZONE_PASSKEY=
+      # ptzone的用户UID和密钥
+##############################################
+      # - KUFEI_UID=
+      # - KUFEI_PASSKEY=
+      # kufei的用户UID和密钥
+##############################################
+      # - YEMAPT_UID=
+      # - YEMAPT_PASSKEY=
+      # yemapt的用户UID和密钥
+##############################################
 
   cookiecloud:
     image: easychen/cookiecloud:latest
@@ -457,9 +475,9 @@ services:
     container_name: iyuuplus
     hostname: iyuuplus
     volumes:
-      - /Volume1/User/docker/iyuuplus/iyuu:/iyuu
+      - /Volume1/docker/iyuuplus/iyuu:/iyuu
       # 配置文件目录，存放源码
-      - /Volume1/User/docker/iyuuplus/data:/data
+      - /Volume1/docker/iyuuplus/data:/data
       # 数据库目录，存放mysql数据库
     network_mode: bridge
     ports:
@@ -478,11 +496,11 @@ services:
     volumes:
       - /lib/modules:/lib/modules:ro
       # 内核，如果不支持或者不想使用全局透明代理，则注释掉
-      - /Volume1/User/docker/v2raya:/etc/v2raya
+      - /Volume1/docker/v2raya:/etc/v2raya
       # 配置文件
       - /etc/resolv.conf:/etc/resolv.conf
       # 需要预先创建好一个文件，不然会创建成文件夹；上面这条如果/etc内没有或不会进去新建resolv.conf，可以写下面这条
-      # - /Volume1/User/docker/v2raya/resolv.conf:/etc/resolv.conf
+      # - /Volume1/docker/v2raya/resolv.conf:/etc/resolv.conf
     network_mode: host
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
