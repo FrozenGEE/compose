@@ -65,6 +65,7 @@
 # v2raya设置中激活【开启端口分享】
 #
 # MP如果遇到cookiecloud设置正确但是无法同步成功的，试试重启几次再去同步，实在不是，手动添加吧
+# MP v2.0.7及以上版本，已支持通过UI进行用户认证：点击用户头像 -> 用户认证，无需配置环境变量，模板继续保留原有的认证变量
 #
 ##############################################
 # 镜像地址
@@ -108,7 +109,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-11-07
+# 最后编辑时间：2025-01-26
 services:
 ##############################################
 #                                            #
@@ -234,8 +235,7 @@ services:
 ##############################################
 
   qbittorrent:
-    image: linuxserver/qbittorrent:14.3.9
-    # 镜像地址，预设使用qb 4.3.9版本避免PT站因为版本太高ban掉
+    image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
     hostname: qbittorrent
     volumes:
@@ -252,8 +252,7 @@ services:
     environment:
       - WEBUI_PORT=8085
       # 自定义WebUI端口
-      # - TORRENTING_PORT=25800
-      # 4.3.9不支持该变量，故注释掉，仅作保留
+      - TORRENTING_PORT=25800
       # 自定义传输端口，别写6881，看站规！！！
       - PUID=0
       - PGID=0
@@ -267,8 +266,7 @@ services:
 ########################################
 
   transmission:
-    image: linuxserver/transmission:version-3.00-r8
-    # 镜像地址，预设使用tr 3.0版本避免PT站因为版本太高ban掉
+    image: linuxserver/transmission:latest
     container_name: transmission
     hostname: transmission
     volumes:
@@ -347,7 +345,7 @@ services:
       #
 ##############################################
 #### 认证站点 ####
-      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt
+      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔，会依次执行认证操作，直到有一个站点认证成功
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
       ## 密钥在控制面板中查看，切勿泄露
@@ -429,14 +427,31 @@ services:
       # - ROUSI_PASSKEY=
       # rousi的用户UID和密钥
 ##############################################
+      # - SUNNY_UID=
+      # - SUNNY_PASSKEY=
+      # sunny的用户UID和密钥
+##############################################
+      # - PTCAFE_UID=
+      # - PTCAFE_PASSKEY=
+      # ptcafe的用户UID和密钥
+##############################################
+      # - PTZONE_UID=
+      # - PTZONE_PASSKEY=
+      # ptzone的用户UID和密钥
+##############################################
+      # - KUFEI_UID=
+      # - KUFEI_PASSKEY=
+      # kufei的用户UID和密钥
+##############################################
+      # - YEMAPT_UID=
+      # - YEMAPT_PASSKEY=
+      # yemapt的用户UID和密钥
+##############################################
 
   cookiecloud:
     image: easychen/cookiecloud:latest
-    # 镜像地址
     container_name: cookiecloud
-    # 容器名字
     hostname: cookiecloud
-    # 主机名
     network_mode: bridge
     ports:
       - 8188:8088/tcp
