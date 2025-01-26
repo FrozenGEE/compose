@@ -463,7 +463,7 @@ services:
     ports:
       - 8188:8088/tcp
       # WebUI 端口，可能会有别的服务使用8088，所以改用bridge
-    restart: always
+    restart:unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ##############################################
