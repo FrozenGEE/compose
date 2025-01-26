@@ -235,8 +235,7 @@ services:
 ##############################################
 
   qbittorrent:
-    image: linuxserver/qbittorrent:14.3.9
-    # 镜像地址，预设使用qb 4.3.9版本避免PT站因为版本太高ban掉
+    image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
     hostname: qbittorrent
     volumes:
@@ -253,8 +252,7 @@ services:
     environment:
       - WEBUI_PORT=8085
       # 自定义WebUI端口
-      # - TORRENTING_PORT=25800
-      # 4.3.9不支持该变量，故注释掉，仅作保留
+      - TORRENTING_PORT=25800
       # 自定义传输端口，别写6881，看站规！！！
       - PUID=0
       - PGID=0
@@ -268,8 +266,7 @@ services:
 ##############################################
 
   transmission:
-    image: linuxserver/transmission:version-3.00-r8
-    # 镜像地址，预设使用tr 3.0版本避免PT站因为版本太高ban掉
+    image: linuxserver/transmission:latest
     container_name: transmission
     hostname: transmission
     volumes:
@@ -457,7 +454,7 @@ services:
     network_mode: bridge
     ports:
       - 8188:8088/tcp
-    restart: always
+    restart:unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ##############################################
