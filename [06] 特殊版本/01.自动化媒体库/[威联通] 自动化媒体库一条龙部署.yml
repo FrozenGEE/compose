@@ -235,8 +235,7 @@ services:
 ##############################################
 
   qbittorrent:
-    image: linuxserver/qbittorrent:14.3.9
-    # 镜像地址，预设使用qb 4.3.9版本避免PT站因为版本太高ban掉
+    image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
     hostname: qbittorrent
     volumes:
@@ -253,8 +252,7 @@ services:
     environment:
       - WEBUI_PORT=8085
       # 自定义WebUI端口
-      # - TORRENTING_PORT=25800
-      # 4.3.9不支持该变量，故注释掉，仅作保留
+      - TORRENTING_PORT=25800
       # 自定义传输端口，别写6881，看站规！！！
       - PUID=0
       - PGID=0
@@ -268,8 +266,7 @@ services:
 ##############################################
 
   transmission:
-    image: linuxserver/transmission:version-3.00-r8
-    # 镜像地址，预设使用tr 3.0版本避免PT站因为版本太高ban掉
+    image: linuxserver/transmission:latest
     container_name: transmission
     hostname: transmission
     volumes:
@@ -332,6 +329,7 @@ services:
     environment:
       - MOVIEPILOT_AUTO_UPDATE=true
       # 设置容器重启时自动更新，true/release/dev/false，默认release，插件的自动更新要设置为true
+      # 需要能正常连接Github 注意：如果出现网络问题可以配置PROXY_HOST
       - NGINX_PORT=55055
       ## WebUI服务端口，预设为55055，默认为3000，可自行修改，不能和API服务端口3001冲突
       - SUPERUSER=cheems
@@ -451,11 +449,8 @@ services:
 
   cookiecloud:
     image: easychen/cookiecloud:latest
-    # 镜像地址
     container_name: cookiecloud
-    # 容器名字
     hostname: cookiecloud
-    # 主机名
     network_mode: bridge
     ports:
       - 8188:8088/tcp
