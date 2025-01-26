@@ -10,6 +10,7 @@
 # https://github.com/InfinityPacer/MoviePilot-Plugins
 
 # 大部分配置可启动后通过WEB管理界面进行配置，但仍有部分配置需要通过环境变量/配置文件进行配置。
+# MP v2.0.7及以上版本，已支持通过UI进行用户认证：点击用户头像 -> 用户认证，无需配置环境变量，模板继续保留原有的认证变量
 # 配置文件映射路径：/config，配置项生效优先级：环境变量 > env文件（或通过WEB界面配置） > 默认值。
 # 该模板将部分参数都简化掉，留下一些个人认为必要的参数以便于修改，剩下的参数设置可以在MP内设置
 
@@ -40,9 +41,9 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-11-06
-# 更新日志：更新并精简配置单文本内容；新增文件夹目录结构图；站点删除ptlsp，支持rousi
-# V2和V1的配置单是一毛一样的，但是互不兼容，可以共存，本模板采用的还是和V1一样的配置单，只有自定义容器端口由33033改成了55055
+# 最后编辑时间：2025-01-26
+# 更新日志：不定期翻新配置文件，增加认证站点：sunny,ptcafe,ptzone,kufei,yemapt
+# V2和V1的配置单几乎是一毛一样的，但是互不兼容，可以共存，本模板采用的还是和V1一样的配置单，只有自定义容器端口由33033改成了55055
 services:
   moviepilot-v2:
     image: jxxghp/moviepilot-v2:latest
@@ -86,6 +87,7 @@ services:
     environment:
       - MOVIEPILOT_AUTO_UPDATE=true
       # 设置容器重启时自动更新，true/release/dev/false，默认release，插件的自动更新要设置为true
+      # 需要能正常连接Github 注意：如果出现网络问题可以配置PROXY_HOST
       - API_TOKEN=1234567890123456
       # API密钥，V1版本默认为moviepilot，V2版本需要手动配置为大于等于16个字符的复杂字符串
       # 如配置不符合要求将会强制重新生成，可在首次启动的启动日志或env配置文件中查看最新的值
@@ -96,7 +98,6 @@ services:
       - SUPERUSER=admin
       # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效，可在MP内修改
-      # 2024-11-20，MP-v2的user.db貌似包含一些配置内容，删了除了密码会重置，一些配置要重新设置，MP-v1不会
 
       # - PROXY_HOST=【IP:PORT】
       # 网络代理，访问themoviedb或者重启更新需要使用代理访问，如果你没有配置魔法就注释掉
@@ -108,7 +109,7 @@ services:
       
 ########################################
 #### 认证站点 ####
-      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt
+      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔，会依次执行认证操作，直到有一个站点认证成功
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
       ## 密钥在控制面板中查看，切勿泄露
@@ -189,4 +190,24 @@ services:
       # - ROUSI_UID=
       # - ROUSI_PASSKEY=
       # rousi的用户UID和密钥
+########################################
+      # - SUNNY_UID=
+      # - SUNNY_PASSKEY=
+      # sunny的用户UID和密钥
+########################################
+      # - PTCAFE_UID=
+      # - PTCAFE_PASSKEY=
+      # ptcafe的用户UID和密钥
+########################################
+      # - PTZONE_UID=
+      # - PTZONE_PASSKEY=
+      # ptzone的用户UID和密钥
+########################################
+      # - KUFEI_UID=
+      # - KUFEI_PASSKEY=
+      # kufei的用户UID和密钥
+########################################
+      # - YEMAPT_UID=
+      # - YEMAPT_PASSKEY=
+      # yemapt的用户UID和密钥
 ########################################
