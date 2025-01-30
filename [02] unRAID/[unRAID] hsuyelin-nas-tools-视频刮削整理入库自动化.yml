@@ -1,13 +1,15 @@
 # https://hub.docker.com/r/hsuyelin/nas-tools
+# https://hub.docker.com/r/linyuan0213/nas-tools
 # 原作者不再维护nas-tools，因为被派派助手（也叫群晖助手）的作者破解了，这是接盘后的镜像，也是破解了的，支持BT，不需要认证
 
 ---
 version: "3"
-# 最后编辑时间：2024-03-11
+# 最后编辑时间：2025-01-30
+# 更新日志：翻新，建议使用MP-v2，更多说明看MP的模板
 services:
   nas-tools:
     image: hsuyelin/nas-tools:latest
-    # 镜像地址
+    # 镜像地址，该镜像版本为3.4.1，可选：linyuan0213/nas-tools:latest，版本为3.6.5 (截止2025-01)
     container_name: nas-tools
     # 容器名字
     hostname: nas-tools
@@ -20,7 +22,7 @@ services:
       - /mnt/user/downloads:/downloads
       # 下载目录，多个目录需要分别映射进来，需要满足配置文件说明中的要求
       # 新手不懂就和qb一样的/downloads映射路径，也不要乱改qb设置里面的/downloads，tr同理
-      - /mnt/user:/Media
+      - /mnt/user:/media
       # 媒体库目录
       # - 【这里替换为你想映射到NST内的路径】:/【NST内显示的目录的名字】
       # 可以自定义多个，容器和路径均可一样，建议映射一个较为最上级的路径作为总目录
