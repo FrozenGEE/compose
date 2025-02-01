@@ -1,0 +1,88 @@
+# 官方文档
+# http://hub.docker.com/ollama/ollama
+# https://www.ollama.com
+# https://hub.docker.com/r/dyrnq/open-webui
+# https://github.com/open-webui/open-webui
+# https://docs.openwebui.com
+
+# Llama2中文预训练模型(7b）
+# ollama pull llamafamily/atom-7b-chat
+# Llama2中文预训练模型(8b）
+# ollama pull llamafamily/llama3-chinese-8b-instruct
+
+# 模型中心：https://ollama.com/search
+# 列出模型：ollama list
+# 下载模型：ollama pull 【模型名字】
+# 运行模型：ollama run 【模型名字】
+# 删除模型：ollama rm 【模型名字】
+
+# 7b大小的模型至少需要8G RAM
+# 8b大小的模型至少需要16G RAM
+# 13b大小的模型至少需要32G RAM
+# 70b大小的模型至少需要64G RAM
+
+# 2025-02-02：推荐国产deepseek模型，开源免费，性能要求相对低
+# https://wp.gxnas.com/15499.html
+# 【DeepSeek-R1各版本的使用说明和硬件要求】
+# ❤1.5B — 针对边缘设备上的快速推理进行优化的轻量级版本。
+# ❤7B — 适用于通用推理任务的平衡模型。
+# ❤8B — 更高的准确性和更好的上下文理解。
+# ❤14B — 推理和解决问题的能力得到提高。
+# ❤32B — 更强的逻辑分析和更精细的逐步输出。
+# ❤70B — 适用于高级人工智能驱动应用程序的高端版本。
+# ❤671B — 专家混合 (MoE) 模型，每个令牌激活 370 亿个参数，以实现最先进的数，以实现最先进的推理性能。
+
+---
+version: "3.8"
+# 最后编辑时间：2025-02-02
+services:
+  ollama:
+    image: ollama/ollama:latest
+    # 镜像地址
+    container_name: ollama
+    # 容器名字
+    hostname: ollama
+    # 主机名
+    # environment:
+    volumes:
+      - /vol1/1000/docker/ollama:/root/.ollama
+      # 配置文件目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 11434:11434/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    # 镜像地址，模板默认为使用cpu进行推理运算
+    # 如果拉取缓慢，可选 dyrnq/open-webui 作为替代
+    container_name: open-webui
+    # 容器名字
+    hostname: open-webui
+    # 主机名
+#    deploy:
+#        resources:
+#            reservations:
+#              devices:
+#                - driver: nvidia
+#                  count: all
+#                  capabilities:
+#                    - gpu
+# 如果有N卡才用到，并且镜像替换为 ghcr.io/open-webui/open-webui:cuda
+    environment:
+      - OLLAMA_BASE_URL=127.0.0.1:11434
+      # 修改为你本地ollama的访问地址和端口，默认端口为11434
+    volumes:
+      - /vol1/1000/docker/open-webui:/app/backend/data
+      # 配置文件目录
+    network_mode: bridge
+    # 8080端口有别的服务要用，推荐用brige
+    ports:
+      - 11435:8080/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
