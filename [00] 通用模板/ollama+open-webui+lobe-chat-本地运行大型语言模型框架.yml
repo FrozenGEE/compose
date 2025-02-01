@@ -1,0 +1,192 @@
+# ollama
+# http://hub.docker.com/ollama/ollama
+# https://www.ollama.com
+
+# Llama2中文预训练模型(7b）：ollama pull llamafamily/atom-7b-chat
+# Llama2中文预训练模型(8b）：ollama pull llamafamily/llama3-chinese-8b-instruct
+
+# 模型中心：https://ollama.com/search
+# 列出模型：ollama list
+# 下载模型：ollama pull 【模型名字】
+# 运行模型：ollama run 【模型名字】
+# 删除模型：ollama rm 【模型名字】
+
+# 7b大小的模型至少需要8G RAM，8b大小的模型至少需要16G RAM
+# 13b大小的模型至少需要32G RAM，70b大小的模型至少需要64G RAM
+
+# 部署教程：https://www.cnblogs.com/obullxl/p/18295202/NTopic2024071001
+# 2025-02-02：推荐国产deepseek模型，开源免费，性能要求相对低
+# 在ollama的终端中执行以下命令拉取模型，tag默认为1.5b，根据实际需要修改
+# ollama run deepseek-r1:1.5b
+
+# 来自 GXNAS大佬的博客
+# https://wp.gxnas.com/15499.html
+# 【DeepSeek-R1各版本的使用说明和硬件要求】
+# ❤1.5B — 针对边缘设备上的快速推理进行优化的轻量级版本。
+# ❤7B — 适用于通用推理任务的平衡模型。
+# ❤8B — 更高的准确性和更好的上下文理解。
+# ❤14B — 推理和解决问题的能力得到提高。
+# ❤32B — 更强的逻辑分析和更精细的逐步输出。
+# ❤70B — 适用于高级人工智能驱动应用程序的高端版本。
+# ❤671B — 专家混合 (MoE) 模型，每个令牌激活 370 亿个参数，以实现最先进的数，以实现最先进的推理性能。
+
+# | Model Version  |  VRAM (GPU)           |  RAM (CPU)  | Storage  |
+# | 1.5B           |  4GB+                 |  8GB+       | 5GB      |
+# | 7B             |  12GB+                |  16GB+      | 10GB     |
+# | 8B             |  16GB+                |  32GB+      | 15GB     |
+# | 14B            |  24GB+                |  64GB+      | 30GB     |
+# | 32B            |  48GB+                |  128GB+     | 60GB     |
+# | 70B            |  80GB+                |  256GB+     | 120GB    |
+# | 671B (MoE)     |  4x A100 GPUs(320GB)  |  512GB+     | 500GB+   |
+
+# lobe-chat
+# https://lobehub.com
+# https://lobehub.com/zh/blog/5-lobe-chat-web-ui-recommendation
+# http://hub.docker.com/lobehub/lobe-chat
+
+# 免费API，需要自己有github账号并用账号登录才可以获取到免费API
+# 1、打开链接：https://github.com/chatanywhere/GPT_API_free
+# 2、注册登录github账号
+# 3、点击“ 申请内测免费Key”，下一步下一步即可
+
+# 来自 有云转晴 的教程 (2024-06-12)
+# https://www.bilibili.com/video/BV1M32KYXEDN
+# https://www.ywsj365.com/archives/docker-da-jian-yi-ge-mian-fei-shi-yong-chatgpt-de-lobe-chat-ying-yong
+
+# 免费版支持gpt-3.5-turbo, embedding, gpt-4。其中gpt-4由于价格过高，每天限制3次调用（0点刷新）。需要更稳定快速的gpt-4请使用付费版
+# 免费版gpt-4由gpt-4o提供服务，支持识图等付费版API全部功能
+# 转发Host1: https://api.chatanywhere.tech (国内中转，延时更低，host1和host2二选一)
+# 转发Host2: https://api.chatanywhere.com.cn (国内中转，延时更低，host1和host2二选一)
+# 转发Host3: https://api.chatanywhere.cn (国外使用,国内需要全局代理)
+# 免费API Key限制100请求/天/IP&Key调用频率（gpt和embedding分开计算，各100次）
+
+# open-webui
+# https://hub.docker.com/r/dyrnq/open-webui
+# https://github.com/open-webui/open-webui
+# https://docs.openwebui.com
+
+---
+version: "3.8"
+# 最后编辑时间：2025-02-02
+services:
+  ollama:
+    image: ollama/ollama:latest
+    # 镜像地址
+    container_name: ollama
+    # 容器名字
+    hostname: ollama
+    # 主机名
+    environment:
+      - OLLAMA_PORT=11434
+      # Ollama 服务监听的默认端口，默认为11434
+      - OLLAMA_KEEP_ALIVE=5m
+      # 大模型加载到内存中后的存活时间，默认为5m，即5分钟，可设置成24h，即模型在内存中保持 24 小时，提高访问速度
+      - OLLAMA_NUM_PARALLEL=1
+      # 请求处理并发数量，默认为1，即单并发串行处理请求，可根据实际情况进行调整
+      - OLLAMA_MAX_LOADED_MODELS=1
+      # 最多同时加载到内存中模型的数量，默认为1，即只能有 1 个模型在内存中
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/ollama:/root/.ollama
+      # 配置文件目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 11434:11434/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/ollama.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:11434]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/ollama.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    # 镜像地址，模板默认为使用cpu进行推理运算
+    # 如果拉取缓慢，可选 dyrnq/open-webui 作为替代
+    container_name: open-webui
+    # 容器名字
+    hostname: open-webui
+    # 主机名
+#    deploy:
+#        resources:
+#            reservations:
+#              devices:
+#                - driver: nvidia
+#                  count: all
+#                  capabilities:
+#                    - gpu
+# 如果有N卡才用到，并且镜像替换为 ghcr.io/open-webui/open-webui:cuda
+    environment:
+      - PORT=11435
+      # 自定义容器端口，默认为8080，这里修改为11435
+      - OLLAMA_BASE_URL=0.0.0.0:11434
+      # 修改为你本地ollama的访问地址和端口，默认端口为11434
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/open-webui:/app/backend/data
+      # 配置文件目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # 默认的8080端口有别的服务要用，推荐自定义容器端口然后使用host网络模式
+    # ports:
+      # - 11435:11435/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/open-webui_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:8080]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/open-webui.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+  lobe-chat:
+    image: lobehub/lobe-chat:latest
+    # 镜像地址
+    container_name: lobe-chat
+    # 容器名字
+    hostname: lobe-chat
+    # 主机名
+    environment:
+      - ACCESS_CODE=123456
+      # 访问密码
+      - OPENAI_PROXY_URL=https://api.chatanywhere.tech
+      # 代理地址，见上说明，也可以写上自己的代理地址
+      - OPENAI_API_KEY=【这里替换为申请的api密钥】
+      # api密钥，见上说明，切勿泄露
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 3210:3210/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/lobe-chat_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:3210]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/lobe-chat.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
