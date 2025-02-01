@@ -22,6 +22,7 @@
 ---
 version: '3.9'
 # 最后编辑时间：2024-11-22
+# 该模板使用的为不具备数据库的版本
 services:
   lobe-chat:
     image: lobehub/lobe-chat:latest
