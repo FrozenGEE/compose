@@ -1,0 +1,64 @@
+# 官方文档
+# https://github.com/idootop/mi-gpt
+# https://hub.docker.com/r/idootop/mi-gpt
+
+# 教程
+# https://blog.laoda.de/archives/docker-install-mi-gpt
+# 效果演示
+# https://www.bilibili.com/video/BV1N1421y7qn
+# https://www.bilibili.com/video/BV1zb421H7cS
+
+# 完美支持的型号：小爱音箱 Pro/小爱音箱 mini/小爱音箱 Play(2019款)/小爱音箱 万能遥控版/小米 AI 音箱/小米 AI 音箱(第二代)/小爱智能家庭屏 10/Xiaomi Sound Pro
+# 具体型号支持列表：https://github.com/idootop/mi-gpt/blob/main/docs/compatibility.md
+# 支持大部分的小爱音箱型号，推荐使用小爱音箱 Pro（完美运行）
+# 本项目暂不支持小度音箱、天猫精灵、HomePod 等智能音箱设备，亦无相关适配计划
+
+# 在启动项目之前，需要先配置好.migpt.js和.env文件，具体步骤见官方文档
+# https://github.com/idootop/mi-gpt/blob/main/docs/settings.md
+# 注意：使用本compose可以不需要配置.env文件，因为已经整合进来
+
+---
+version: "3"
+# 最后编辑时间：2025-02-11
+services:
+  mi-gpt:
+    image: idootop/mi-gpt:latest
+    # 镜像地址
+    container_name: mi-gpt
+    # 容器名字
+    hostname: mi-gpt
+    # 主机名
+    volumes:
+      - /mnt/user/appdata/mi-gpt/.migpt.js:/app/.migpt.js
+      # .migpt.js文件映射，需要先配置文件并且放到本地目录中再启动容器
+    environment:
+      - OPENAI_API_KEY=abc123
+      # OpenAI API 密钥
+      - OPENAI_MODEL=gpt-4o
+      # 使用的 OpenAI 模型
+      # - OPENAI_BASE_URL=https://api.openai.com/v1
+      # OpenAI API BaseURL(可选)
+      # - AZURE_OPENAI_API_KEY=abc123
+      # 微软Azure的OpenAI(可选)，https://www.npmjs.com/package/openai#microsoft-azure-openai
+      ########################################
+      # 提示音效（可选）
+      # - AUDIO_SILENT=https://example.com/slient.wav
+      # 静音音频链接
+      # AUDIO_BEEP=https://example.com/beep.wav
+      # 默认提示音链接
+      # - AUDIO_ACTIVE=https://example.com/active.wav
+      # 静音音频链接
+      # AUDIO_ERROR=https://example.com/error.wav
+      # 出错提示音链接
+      # - TTS_BASE_URL=http://[你的局域网或公网地址]:[端口号]/api
+      # 第三方 TTS 服务接口
+      ########################################
+    network_mode: host
+    # 不存在webui，这一条网络模式仅用于不让它创建一个私有网段，强迫症而已
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.icon: /mnt/user/LOGO/mi-gpt.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
