@@ -1,4 +1,4 @@
-# 【更新日志-2025-01-08】
+# 【更新日志-2025-02-10】
 - 整理一下README内容，将大部分内容收纳到[NAS模板文档须知](https://github.com/FrozenGEE/compose#nas的路径说明)
 - 新增[rockchip 折腾日记](https://github.com/FrozenGEE/compose/tree/main/%5B10%5D%20Rockchip)
 - [电视盒子(armbain)](https://github.com/ophub/amlogic-s9xxx-armbian)可以参考[黑豹PatherX2(RK3566)](https://github.com/FrozenGEE/compose/tree/main/%5B10%5D%20Rockchip/03.%E9%BB%91%E8%B1%B9PatherX2)的模板，建议
