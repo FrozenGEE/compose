@@ -55,5 +55,5 @@ services:
       ########################################
     network_mode: host
     # 不存在webui，这一条网络模式仅用于不让它创建一个私有网段，强迫症而已
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
