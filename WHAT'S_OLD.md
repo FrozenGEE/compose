@@ -1,4 +1,5 @@
-# 【更新日志-2025-01-08】
+# 历史更新内容
+#### 【更新日志-2025-01-08】
 - 待办：找个时间，把portainer换成dpanel，dpanel上手很不错
 - 飞牛OS docker容器使用unless-stopped无法在docker启动时自启动，修改为always即可
 - 翻新了MT相册、IMMICH相册的compose，新绿联由于现在官方相册只能使用个人文件夹，所以compose模板将其单独分割出来
