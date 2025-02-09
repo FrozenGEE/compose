@@ -1,3 +1,10 @@
+# 【更新日志-2025-01-08】
+- 待办：找个时间，把portainer换成dpanel，dpanel上手很不错
+- 飞牛OS docker容器使用unless-stopped无法在docker启动时自启动，修改为always即可
+- 翻新了MT相册、IMMICH相册的compose，新绿联由于现在官方相册只能使用个人文件夹，所以compose模板将其单独分割出来
+- IMMICH相册数据库由 tensorchord/pgvecto-rs:pg16-v0.2.1 修改为 tensorchord/pgvecto-rs:pg16-v0.3.0，并且添加了[immich相册反向地理编码设置为中文](https://post.smzdm.com/p/an9k0w57)所需的路径映射
+- 群晖&新绿联&华硕的compose模板中，绿联有一个个人文件夹，模板都没写，请自行添加，具体见[NAS的路径说明](https://github.com/FrozenGEE/compose/blob/main/volumes.md)
+
 #### 【更新日志-2024-11-27】
 - 加料更新MT相册的compose，注释量巨大，强烈建议去官方文档，写的极度详细，一步到胃
 - 特殊版本中新增jellyfin的rockchip版compose，简单测评了一下
