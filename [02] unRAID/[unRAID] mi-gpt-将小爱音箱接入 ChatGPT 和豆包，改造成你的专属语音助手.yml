@@ -19,7 +19,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2025-02-11
+# 最后编辑时间：2025-02-09
 services:
   mi-gpt:
     image: idootop/mi-gpt:latest
@@ -33,13 +33,13 @@ services:
       # .migpt.js文件映射，需要先配置文件并且放到本地目录中再启动容器
     environment:
       - OPENAI_API_KEY=abc123
-      # OpenAI API 密钥
+      # OpenAI API 密钥，根据实际情况修改
       - OPENAI_MODEL=gpt-4o
       # 使用的 OpenAI 模型
       # - OPENAI_BASE_URL=https://api.openai.com/v1
       # OpenAI API BaseURL(可选)
       # - AZURE_OPENAI_API_KEY=abc123
-      # 微软Azure的OpenAI(可选)，https://www.npmjs.com/package/openai#microsoft-azure-openai
+      # 微软Azure的OpenAI密钥(可选)，根据实际情况修改，https://www.npmjs.com/package/openai#microsoft-azure-openai
       ########################################
       # 提示音效（可选）
       # - AUDIO_SILENT=https://example.com/slient.wav
