@@ -1,0 +1,128 @@
+##################################################
+# 官方文档
+# https://jellyfin.org
+# https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip
+# https://github.com/jellyfin/jellyfin
+# https://hub.docker.com/r/jellyfin/jellyfin
+
+# https://github.com/nyanmisaka/jellyfin
+# https://hub.docker.com/r/nyanmisaka/jellyfin
+# https://www.chiphell.com/thread-2570717-1-1.html
+
+# 在 Orange Pi 5 上设置具有硬件加速功能的 Jellyfin （Rockchip RK3558）
+# https://akashrajpurohit.com/blog/setup-jellyfin-with-hardware-acceleration-on-orange-pi-5-rockchip-rk3558
+##################################################
+# 建议使用64位Linux发行版，需要Rockchip BSP内核(6.1 或 5.10 LTS)
+# 查看内核的命令(三条均可)
+# uname -srm
+# hostnamectl | grep -i kernel
+# cat /proc/version
+##################################################
+# 解码和编码 https://github.com/rockchip-linux/mpp
+
+# AVC / H.264 8 位由于其出色的兼容性而仍然被广泛使用。所有支持 RKMPP 的 Rockchip SoC 都可以对其进行解码和编码
+# 解码和编码H.264 8位 - 任何支持RKMPP的Rockchip SoC
+# 解码 H.264 10 位 - 几乎所有 RK33xx 及更高版本的 Rockchip SoC
+
+# Rockchip 上的 HEVC 支持很复杂
+# 解码 HEVC 8 位 - 几乎所有 RK33xx 及更高版本的 Rockchip SoC
+# 编码 HEVC 8 位 - 几乎所有 RK35xx 及以上的 Rockchip SoC
+# 解码 HEVC 10 位 - 几乎所有 RK33xx 及以上的 Rockchip SoC
+
+# Rockchip 在其最新的 SoC 中增加了对 AV1 加速的支持
+# 解码 AV1 8/10 位 - 瑞芯微 RK3588/3588S SoC
+# 编码 AV1 8/10 位 - 截至 RK3588 系列，没有支持 AV1 编码器的 Rockchip SoC
+
+# Rk3588/3588S 最高支持 1080p@480fps 或 4k@120fps 转码
+# RK356x 具有编码器的分辨率限制，即 1080p@100fps。它无法满足实时 4k 编码的需求
+# 不推荐使用 RK33xx 及更早版本，它们的编码器只有 H.264 1080p@30fps
+# 由于缺乏测试设备，无法比较不同 Rockchip SoC 代之间的质量差异
+# 一般来说，SoC越新，编码质量越好。从第一印象来看，RK3588 系列上的VPU可以很好地满足实时流媒体的质量要求
+
+# jellyfin官方docker镜像附带所有必要的用户模式 Rockchip MPP & RGA & OpenCL 驱动程序
+# 您需要做的是将 VPU 的设备文件从主机传递给 Docker，并启用特权模式
+# 没有可靠的方法可以读取 Rockchip SoC 上 VPU 的占用情况，但仍然可以通过读取其他引擎来验证这一点，例如 RGA (2D hwaccel blitter)
+# 1、在 Jellyfin Web 客户端播放视频，通过设置较低的分辨率或比特率触发视频转码
+# 2、使用命令检查RGA引擎的占用情况(需要root权限)：sudo watch -n 1 cat /sys/kernel/debug/rkrga/load
+
+# RK3588/3588S是目前（2024年）最推荐的Soc，较旧的芯片可能受支持
+# 例如RK356×和RK33xx，它们对编码分辨率的支持相当有限，并且缺乏硬件HDR色调映射支持
+
+##################################################
+
+# 要验证 OpenCL 运行时在 docker 容器内是否正常工作，您可以运行此命令
+# docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_device rkmpp=rk -init_hw_device opencl=ocl@rk
+
+# 如果您看到这样的输出，则 OpenCL 运行时工作正常
+# arm_release_ver: g13p0-01eac0, rk_so_ver: 10
+# [AVHWDeviceContext @ 0x55b1c52f00] 1 OpenCL platforms found.
+# [AVHWDeviceContext @ 0x55b1c52f00] 1 OpenCL devices found on platform "ARM Platform".
+# [AVHWDeviceContext @ 0x55b1c52f00] 0.0: ARM Platform / Mali-G610 r0p0
+# [AVHWDeviceContext @ 0x55b1c52f00] cl_arm_import_memory found as platform extension.
+# [AVHWDeviceContext @ 0x55b1c52f00] cl_khr_image2d_from_buffer found as platform extension.
+# [AVHWDeviceContext @ 0x55b1c52f00] DRM to OpenCL mapping on ARM function found (clImportMemoryARM).
+# Successfully parsed a group of options.
+
+##################################################
+
+version: "3"
+# 最后编辑时间：2025-02-09
+services:
+  jellyfin:
+    image: nyanmisaka/jellyfin:latest-rockchip
+    # 镜像地址，也可选官方镜像，但要自己解决一些问题，例如文字显示▢▢▢▢▢的问题
+    # 官方镜像：jellyfin/jellyifn:latest
+    # nyanmisaka大佬镜像：nyanmisaka/jellyfin:latest-rockchip
+    container_name: jellyfin
+    # 容器名字
+    hostname: jellyfin
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限，必须
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/dma_heap:/dev/dma_heap
+      - /dev/mali0:/dev/mali0
+      - /dev/rga:/dev/rga
+      - /dev/mpp_service:/dev/mpp_service
+    # 核显，照抄，必须
+    command: 
+      '`for dev in dri dma_heap mali0 rga mpp_service iep mpp-service
+      vpu_service vpu-service hevc_service hevc-service rkvdec rkvenc vepu
+      h265e ; do [ -e "/dev/$dev" ] && echo " --device /dev/$dev"; done`'
+    # 照抄，必须
+    volumes:
+      - /home/link/jellyfin/config:/config
+      # 配置文件目录
+      - /home/link:/media
+      # 可以自定义，可以写多个
+      # - 【这里替换为你的媒体库的目录】:/【这里替换为你的媒体库的目录的名字】
+      - /home/link/docker/jellyfin/cache:/cache
+      # 缓存目录
+      - /home/link/fonts:/fonts
+      # 字体目录，非必须，记得在设置中设置字幕字体使用/fonts
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+      # 以下是为JF添加网络代理，自行准备好魔法
+      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      # 保持默认
+      # - ALL_PROXY=http://【IP:PORT】
+      # 更换为自己的http代理
+      # - HTTP_PROXY=http://【IP:PORT】
+      # 更换为自己的http代理
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+     # - 8096:8096/tcp
+     # WebUI http端口
+     # - 8920:8920/tcp
+     # WebUI https端口，非必要
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/jellyfin_D.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
