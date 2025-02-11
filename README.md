@@ -1,4 +1,4 @@
-# 【更新日志-2025-02-10】
+# 【更新日志-2025-02-11】
 - 整理一下README内容，将大部分内容收纳到[NAS模板文档须知](https://github.com/FrozenGEE/compose?tab=readme-ov-file#nas%E6%A8%A1%E6%9D%BF%E6%96%87%E6%A1%A3%E9%A1%BB%E7%9F%A5)
 - 新增[rockchip 折腾日记](https://github.com/FrozenGEE/compose/tree/main/%5B10%5D%20Rockchip)
 - [电视盒子(armbain)](https://github.com/ophub/amlogic-s9xxx-armbian)可以参考[黑豹PatherX2(RK3566)](https://github.com/FrozenGEE/compose/tree/main/%5B10%5D%20Rockchip/03.%E9%BB%91%E8%B1%B9PatherX2)的模板，建议
@@ -6,6 +6,7 @@
 - 直接armbian手搓NAS？很好，[香橙派5Plus(RK3588)](https://github.com/FrozenGEE/compose/tree/main/%5B10%5D%20Rockchip/01.%E5%8F%8B%E5%96%84cm3588)拿去参考
 - 单盘nas?oec?tn3568?荐片tv?这些内置单sata的当NAS?真不巧了，没有，说个笑话，oect我tm刷机一直boot失败，hhhhhhhh，其实可以参考上一条
 - 继续挖坑不填的dpanel
+- 自动化媒体库一条龙部署新增ani-rss，并添加修改不少内容
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
