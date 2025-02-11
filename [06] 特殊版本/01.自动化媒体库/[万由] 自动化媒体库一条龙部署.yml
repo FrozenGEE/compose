@@ -12,6 +12,7 @@
 # 重要内容，硬链接只能够存在于同一个存储池上
 #
 # /存储池/.../media
+#             |---/动漫
 #             |---/下载
 #             |
 #             |---/电影
@@ -30,22 +31,24 @@
 # ④：请在MP设置中，把下载目录设置为“/meida/下载”；把 电影/电视剧 等分类的目录设置从“/meida”开始选择【这是容器路径】
 # ⑤：MP和QB,TR都使用同一条路径映射“/meida/下载”【必须完全一样】
 # 不懂可以看看MP-01和MP-03这两张图，MP-02是效果图
+# ⑥：/存储池1/meida/动漫——————用于ani-rss动漫bt下载，自身带重命名整理功能，刮削功能可以由PEJ负责
 #
 ##############################################
 # 注意事项
-# 本模板包含PLEX,EMBY,JF,QB,TR,MP,IYUU,V2RAYA,COOKIECLOUD，如果修改并重启部署，整张compose内的容器也会跟着重启部署
+# 本模板包含PLEX,EMBY,JF,QB,TR,MP,ANI-RSS,COOKIECLOUD,IYUU,V2RAYA,WATCHTOWER
 # 如果设置了使用网络代理(不一定是v2raya，可以是软路由)，请提前启用并激活好魔法，否则EMBY,JF,MP无法正常连接TMDB，MP可能无法正常下载核心文件
 # 模板预设使用的网络代理为v2raya的http端口20171，如果使用了别的，请根据实际情况修改，总不会有人连魔法都不会用不？不会吧？不会吧？
 # 部分参数不说明，如果想知道有什么用，可以参考其他的模板
 # 权限均设置为root以保证访问不会出错，注释内容多多阅读
-# 媒体库路径预设使用第一个存储池/mnt/user
-# 媒体库和iyuu统一使用bridge；其余使用host，需要改变端口就去修改变量，看注释说明
+# 媒体库路径预设使用第一个存储池/mnt/unas/data，请根据实际情况修改
+# 媒体库，iyuu，cookiecloud使用bridge；其余统一使用host，需要改变端口就去修改变量，看注释说明
 # iyuu使用host模式会占用mariadb/mysql的3306端口，所以使用bridge
+# QB和TR使用host，只要宿主机拥有IPV6，即可连上IPV6传输数据，如果宿主机没有，请检查网络环境
 # 
 # EMBY和JF在【控制台-高级】中生成【API密钥】，MP需要用
 # PLEX需要注册登录生成登录密钥，用于登录使用，设置好后，浏览器F12->网络，从Plex请求URL中获取的X-Plex-Token，MP需要用
 #
-# QB 4.3.9 初始化账号密码：admin/adminadmin
+# QB 初始化账号为 admin，密码在日志中查看
 # QB修改：用于传入连接的端口，随机生成一个，记得看站规
 # QB关闭：启用 DHT (去中心化网络) 以找到更多用户
 # QB关闭：启用用户交换 (PeX) 以找到更多用户
@@ -67,6 +70,10 @@
 # MP如果遇到cookiecloud设置正确但是无法同步成功的，试试重启几次再去同步，实在不是，手动添加吧
 # MP v2.0.7及以上版本，已支持通过UI进行用户认证：点击用户头像 -> 用户认证，无需配置环境变量，模板继续保留原有的认证变量
 #
+# ANI-RSS的用户名和密码均为 admin
+#
+# cookiecloud使用教程：https://post.smzdm.com/p/a905kd5p
+#
 ##############################################
 # 镜像地址
 # https://hub.docker.com/r/linuxserver/plex
@@ -78,6 +85,8 @@
 # https://hub.docker.com/r/easychen/cookiecloud
 # https://hub.docker.com/r/iyuucn/iyuuplus-dev
 # https://hub.docker.com/r/mzz2017/v2raya
+# https://hub.docker.com/r/wushuo894/ani-rss
+# https://hub.docker.com/r/containrrr/watchtower
 #
 ##############################################
 # MP 文档
@@ -86,6 +95,9 @@
 # MP 插件
 # https://wiki.movie-pilot.org/zh/plugin
 # PT玩家看站规！！！PT玩家看站规！！！PT玩家看站规！！！
+#
+# ani-rss 文档
+# https://docs.wushuo.top
 #
 # iyuu 文档
 # https://doc.iyuu.cn/guide/getting-started
@@ -101,19 +113,21 @@
 # qbittorrent     ip:8085
 # transmission    ip:9091
 # moviepilot      ip:55055
+# ani-rss         ip:7789
 # cookiecloud     ip:8188
 # iyuu            ip:8780
 # v2raya          ip:2017
+# watchtower      不存在，后台自动更新容器镜像
 #
 ##############################################
 
 ---
 version: "3"
-# 最后编辑时间：2025-01-26
+# 最后编辑时间：2025-02-11
 services:
 ##############################################
 #                                            #
-#  媒体库部分，可以都部署，也可以只部署其中一个  #
+#         媒体库部分，全选/不选/选其一        #
 #                                            #
 ##############################################
 
@@ -149,8 +163,7 @@ services:
     network_mode: bridge
     ports:
       - 32400:32400
-    restart: unless-stopped
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    restart: always
 
 ##############################################
 
@@ -188,8 +201,7 @@ services:
     network_mode: bridge
     ports:
       - 8096:8096
-    restart: unless-stopped
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    restart: always
 
 ##############################################
 
@@ -225,12 +237,11 @@ services:
     network_mode: bridge
     ports:
       - 8097:8096
-    restart: unless-stopped
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    restart: always
 
 ##############################################
 #                                            #
-#  下载器部分，可以都部署，也可以只部署其中一个  #
+#         下载器部分，全选/不选/选其一        #
 #                                            #
 ##############################################
 
@@ -244,7 +255,7 @@ services:
       - /mnt/unas/data/media/下载:/downloads
       # 默认下载目录
       - /mnt/unas/data/media:/media
-      # MP,QB,TR统一的下载目录
+      # MP，ANI，QB，TR统一的下载目录，见上目录结构说明的④⑤
       # - 【这里替换为你想映射到QB内的路径】:/【这里替换为你想映射到QB内的路径】
       # 下载目录，可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
       # - 【这里替换为你的数据存放目录】/Torrents监控自动下载目录:/watch
@@ -260,8 +271,7 @@ services:
       - UMASK=022
       - TZ=Asia/Shanghai
     network_mode: host
-    restart: unless-stopped
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    restart: always
 
 ##############################################
 
@@ -275,7 +285,7 @@ services:
       - /mnt/unas/data/media/下载:/downloads
       # 默认下载目录
       - /mnt/unas/data/media:/media
-      # MP,QB,TR统一的下载目录
+      # MP，ANI，QB，TR统一的下载目录，见上目录结构说明的④⑤
       # - 【这里替换为你想映射到TR内的路径】:/【这里替换为你想映射到TR内的路径】
       # 下载目录，可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
       # - 【这里替换为你的数据存放目录】/Torrents监控自动下载目录:/watch
@@ -297,12 +307,11 @@ services:
       - TZ=Asia/Shanghai
     network_mode: host
     # 如需修改WebUI的端口，到/config/setting.json中第54行的"rpc-port": 9091的端口改为自定义端口
-    restart: unless-stopped
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    restart: always
 
 ##############################################
 #                                            #
-#      其他，movie-pilot以外的可以不部署       #
+#       自动化刮削整理工具，根据需要部署      #
 #                                            #
 ##############################################
 
@@ -310,8 +319,7 @@ services:
     image: jxxghp/moviepilot-v2:latest
     container_name: moviepilot-v2
     hostname: moviepilot-v2
-    restart: unless-stopped
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    restart: always
     network_mode: host
 ##############################################
 ## 第一次运行时，MoviePilot 会下载大量文件到本地，请在留意日志中的进度，如果有什么问题，可以寻找网友求助
@@ -325,11 +333,11 @@ services:
       - /mnt/unas/data/media/下载:/downloads
       # 默认下载目录
       - /mnt/unas/data/media:/media
-      # 设置一个总目录，以便于后续目录配置的统一修改，也可以自定义，但一定要确认参数无误，见上目录结构说明的④⑤
+      # MP，ANI，QB，TR统一的下载目录，见上目录结构说明的④⑤
       #
       - /mnt/unas/data/docker/qbittorrent/qBittorrent/BT_backup:/QB-BT
       - /mnt/unas/data/docker/transmission/torrents:/TR-BT
-      # 用于自动转种所使用的路径，请根据实际情况修改，模板仅供参考
+      # 用于自动转种所使用的路径，请根据实际情况修改，模板仅供参考，如不需要，则删除掉
       #
 ##############################################
     environment:
@@ -354,8 +362,9 @@ services:
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔，会依次执行认证操作，直到有一个站点认证成功
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
       ## 密钥在控制面板中查看，切勿泄露
-      ## 以下认证只需要写一个即可，记得把#注释去掉
+      ## 以下认证写好后记得把#注释去掉
       ## 推荐红豆饭，因为支持iyuu和mp的认证（2024年5月注释）
+      ## 这部分可以选择不写，MP已经支持在WebUI上进行认证
 ##############################################
       # - IYUU_SIGN=
       # iyuu的认证，输入IYUU的登录令牌即可，IYUU本身也是需要认证的
@@ -451,6 +460,49 @@ services:
       # - YEMAPT_UID=
       # - YEMAPT_PASSKEY=
       # yemapt的用户UID和密钥
+
+##############################################
+
+  ani-rss:
+    image: wushuo894/ani-rss:latest
+    container_name: ani-rss
+    hostname: ani-rss
+    volumes:
+      - /mnt/unas/data/docker/ani-rss:/config
+      # 配置文件目录
+      - /mnt/unas/data/media:/downloads
+      # 默认下载目录
+      - /mnt/unas/data/media:/media
+      # MP，ANI，QB，TR统一的下载目录，见上目录结构说明的④⑤
+      # 下载的存储路径，可以自定义多个，下载器的容器路径需要和ani-rss保持一致
+    environment:
+      - PORT=7789
+      # 自定义容器端口
+      - TZ=Asia/Shanghai
+    network_mode: host
+    restart: always
+
+##############################################
+#                                            #
+#          其他辅助工具，根据需要部署         #
+#                                            #
+##############################################
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    hostname: watchtower
+    network_mode: host
+    # 并不存在端口，只是减少新增网络
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # docker核心
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      # 更新后移除旧的镜像
+      - TZ=Asia/Shanghai
+    restart: always
+
 ##############################################
 
   cookiecloud:
@@ -460,8 +512,8 @@ services:
     network_mode: bridge
     ports:
       - 8188:8088/tcp
-    restart: unless-stopped
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+      # WebUI 端口，可能会有别的服务使用8088，所以改用bridge
+    restart: always
 
 ##############################################
 
@@ -478,8 +530,7 @@ services:
     ports:
       - 8780:8780
       # 注：8780是容器内nginx的监听端口，反向代理了 8787、3131
-    restart: unless-stopped
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    restart: always
 
 ##############################################
 
@@ -497,7 +548,6 @@ services:
       # 需要预先创建好一个文件，不然会创建成文件夹；上面这条如果/etc内没有或不会进去新建resolv.conf，可以写下面这条
       # - /mnt/unas/data/docker/v2raya/resolv.conf:/etc/resolv.conf
     network_mode: host
-    restart: unless-stopped
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    restart: always
 
 ##############################################
