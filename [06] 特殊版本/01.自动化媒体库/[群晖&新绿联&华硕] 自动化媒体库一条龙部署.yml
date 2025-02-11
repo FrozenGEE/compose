@@ -32,6 +32,7 @@
 # ⑤：MP和QB,TR都使用同一条路径映射“/meida/下载”【必须完全一样】
 # 不懂可以看看MP-01和MP-03这两张图，MP-02是效果图
 # ⑥：/存储池1/meida/动漫——————用于ani-rss动漫bt下载，自身带重命名整理功能，刮削功能可以由PEJ负责
+# ⑦：注意，需要在ani-rss的设置中，将下载地址修改为/ani-rss
 #
 ##############################################
 # 注意事项
@@ -255,7 +256,9 @@ services:
       - /volume1/media/下载:/downloads
       # 默认下载目录
       - /volume1/media:/media
-      # MP，ANI，QB，TR统一的下载目录，见上目录结构说明的④⑤
+      # MP，QB，TR统一的下载目录，见上目录结构说明的④⑤
+      - /volume1/media/动漫:/ani-rss
+      # ANI-RSS，QB，TR统一的下载目录，见上目录结构说明的⑥⑦
       # - 【这里替换为你想映射到QB内的路径】:/【这里替换为你想映射到QB内的路径】
       # 下载目录，可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
       # - 【这里替换为你的数据存放目录】/Torrents监控自动下载目录:/watch
@@ -285,7 +288,9 @@ services:
       - /volume1/media/下载:/downloads
       # 默认下载目录
       - /volume1/media:/media
-      # MP，ANI，QB，TR统一的下载目录，见上目录结构说明的④⑤
+      # MP，QB，TR统一的下载目录，见上目录结构说明的④⑤
+      - /volume1/media/动漫:/ani-rss
+      # ANI-RSS，QB，TR统一的下载目录，见上目录结构说明的⑥⑦
       # - 【这里替换为你想映射到TR内的路径】:/【这里替换为你想映射到TR内的路径】
       # 下载目录，可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
       # - 【这里替换为你的数据存放目录】/Torrents监控自动下载目录:/watch
@@ -333,7 +338,7 @@ services:
       - /volume1/media/下载:/downloads
       # 默认下载目录
       - /volume1/media:/media
-      # MP，ANI，QB，TR统一的下载目录，见上目录结构说明的④⑤
+      # MP，QB，TR统一的下载目录，见上目录结构说明的④⑤
       #
       - /volume1/docker/qbittorrent/qBittorrent/BT_backup:/QB-BT
       - /volume1/docker/transmission/torrents:/TR-BT
@@ -470,11 +475,8 @@ services:
     volumes:
       - /volume1/docker/ani-rss:/config
       # 配置文件目录
-      - /volume1/media:/downloads
-      # 默认下载目录
-      - /volume1/media:/media
-      # MP，ANI，QB，TR统一的下载目录，见上目录结构说明的④⑤
-      # 下载的存储路径，可以自定义多个，下载器的容器路径需要和ani-rss保持一致
+      - /volume1/media/动漫:/ani-rss
+      # ANI-RSS，QB，TR统一的下载目录，见上目录结构说明的⑥⑦
     environment:
       - PORT=7789
       # 自定义容器端口
