@@ -72,3 +72,76 @@ source ~/.zshrc   # 如果使用 Zsh
 ```
 
 
+### ⭐docker 相关
+1、docker 安装
+Docker官方一键安装脚本，使用官方源安装（国内直接访问较慢）
+```
+curl -fsSL https://get.docker.com | bash
+```
+使用阿里源安装
+```
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+```
+使用中国区Azure源安装
+```
+curl -fsSL https://get.docker.com | bash -s docker --mirror AzureChinaCloud
+```
+一键安装最新版Docker Compose
+```
+COMPOSE_VERSION=`git ls-remote https://github.com/docker/compose | grep refs/tags | grep -oP "[0-9]+\.[0-9][0-9]+\.[0-9]+$" | sort --version-sort | tail -n 1`
+sh -c "curl -L https://github.com/docker/compose/releases/download/v${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+chmod +x /usr/local/bin/docker-compose
+```
+2、设置自启动Docker
+```
+systemctl enable --now docker
+```
+3、配置国内镜像源
+[国内 Docker 服务状态 & 镜像加速监控](http://status.kggzs.cn/status/docker)
+```
+#- 终端命令添加 Docker 镜像加速
+#- 以部分镜像加速为例
+#- 以下是一整条命令，一起复制到终端运行
+
+# 清空 /etc/docker/daemon.json 文件，准备写入新内容
+echo >/etc/docker/daemon.json
+
+# 使用 cat 命令将以下内容写入 /etc/docker/daemon.json 文件
+# 配置 Docker 镜像加速器，使用多个镜像源来提高镜像下载速度
+cat >/etc/docker/daemon.json <<EOF
+{
+"registry-mirrors": [
+"https://docker.1panel.live",
+"https://k-docker.asia",
+"https://docker.1ms.run"
+]
+}
+EOF
+
+# 重启 Docker 服务以使配置生效
+systemctl restart docker
+```
+4、查看docker和compose版本
+```
+docker verion && docker compose version
+```
+5、docker 拉取镜像
+格式：docker pull 镜像源/作者名/镜像名:标签
+- lscr.io，docker.1ms.run 为镜像源，也可以叫镜像仓库，可以自建
+- hslr/sun-panel 为作者名和镜像名，可以去[dockerhub](https://hub.docker.com/)上搜索，有的不在dockerhub仓库上，特别是ghcr.io开头的
+- latest，beta 为镜像的标签，一般情况不写则会自动拉取latest，某些镜像的tag不存在latest，或者某些架构的tag不一样，具体去看镜像详细页面上的tag
+```
+docker pull lscr.io/linuxserver/qbittorrent:latest
+docker pull docker.1ms.run/hslr/sun-panel:beta
+```
+6、docker 命令
+| 命令 | 含义 |
+| :---- | :---- |
+| docker ps | 查看部署的docker容器 |
+| docker start 容器ID或容器名 | 启动某个容器 |
+| docker restart 容器ID或容器名 | 重启某个容器 |
+| docker stop 容器ID或容器名 | 停止某个容器 |
+| docker kill 容器ID或容器名 | 直接关闭容器 |
+| docker rm 容器ID或容器名 | 删除某个容器 |
+| docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
+* stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
