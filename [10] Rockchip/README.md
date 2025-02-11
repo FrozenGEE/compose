@@ -5,7 +5,7 @@ ubuntu/debian/armbian均通用
 ```
 sudo -i
 ```
-### ⭐查看用户权限(link)
+### ⭐查看用户权限
 ```
 id 用户名
 ```
