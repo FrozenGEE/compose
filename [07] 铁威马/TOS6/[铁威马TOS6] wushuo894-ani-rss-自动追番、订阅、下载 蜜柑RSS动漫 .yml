@@ -25,6 +25,7 @@ services:
       - /Volume1/docker/ani-rss:/config
       # 配置文件目录
       - 【这里替换为你的下载目录】:/downloads
+      # - 【这里替换为你的下载目录】:【这里替换为你的下载目录的名字】
       # 下载的存储路径，可以自定义多个，下载器的容器路径需要和ani-rss保持一致
     environment:
       - PORT=7789
