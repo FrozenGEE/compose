@@ -74,6 +74,7 @@ source ~/.zshrc   # 如果使用 Zsh
 
 ### ⭐docker 相关
 1、docker 安装
+
 Docker官方一键安装脚本，使用官方源安装（国内直接访问较慢）
 ```
 curl -fsSL https://get.docker.com | bash
@@ -97,6 +98,7 @@ chmod +x /usr/local/bin/docker-compose
 systemctl enable --now docker
 ```
 3、配置国内镜像源
+
 [国内 Docker 服务状态 & 镜像加速监控](http://status.kggzs.cn/status/docker)
 ```
 #- 终端命令添加 Docker 镜像加速
