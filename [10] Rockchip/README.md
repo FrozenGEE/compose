@@ -1,4 +1,5 @@
 # RK3588 折腾笔记
+[armbian系统入门](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/Armbian.md)
 ## 一、常用命令
 ubuntu/debian/armbian均通用
 ### ⭐切换root用户
