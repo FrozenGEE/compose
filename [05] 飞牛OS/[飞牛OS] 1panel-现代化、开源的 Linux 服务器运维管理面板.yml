@@ -23,7 +23,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # docker核心
-      - /vo了/1000/docker/1panel:/opt/1panel
+      - /vol1/1000/docker/1panel:/opt/1panel
       # 配置文件夹
       - /vo1/1000:/vol1/1000
       # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
