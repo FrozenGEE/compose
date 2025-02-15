@@ -197,14 +197,14 @@ docker pull docker.1ms.run/hslr/sun-panel:beta
 | docker rm 容器ID或容器名 | 删除某个容器 |
 | docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
 * stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
-### ⭐硬盘挂载到本地/mnt中
-以 emmc 为例，其余同理
+### ⭐EMMC或TF卡挂载到本地/mnt中
+单盘NAS挂载存储介质到本地，docker容器的配置文件夹目录均存储在此处，统一路径 (以EMMC为例)
 
 1、识别设备
 ```
 fdisk -l
 ```
-2、确认emmc分区情况
+2、确认分区情况
 ```
 lsblk | grep mmcblk1
 ```
