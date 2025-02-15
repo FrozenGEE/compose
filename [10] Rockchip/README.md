@@ -253,10 +253,10 @@ mount -a
 # 测试自动挂载，若无报错即配置成功
 df -h | grep emmc
 # 验证挂载状态
+```
 ### ⭐RAID阵列挂载到本地/mnt中
 此处以友善CM3588安装OMV系统创建RAID阵列，将共享文件夹挂载到指定目录，因为OMV的共享文件夹路径是序列号，很长，使用docker compose不方便写绝对路径
 
-```
 ### ⭐VPU
 ```
 lsmod | grep -E "vpu|npu"
