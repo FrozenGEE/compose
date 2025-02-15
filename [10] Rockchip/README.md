@@ -1,14 +1,59 @@
 # RK3588 折腾笔记
 [armbian系统入门](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/Armbian.md)
+[香橙派 5 Plus 折腾笔记 | 空桑](https://www.hqshi.cn/info/ops/orange-pi-5-plus)
 ## 一、常用命令
 ubuntu/debian/armbian均通用
 ### ⭐切换root用户
 ```
 sudo -i
+# 后续命令默认root执行
 ```
-### ⭐查看用户权限
+### ⭐用户管理
+1、修改用户密码
+```
+passwd 用户名
+2、查看用户权限
 ```
 id 用户名
+```
+3、终止用户进程
+```
+pkill -KILL -u 用户名
+```
+4、 删除用户及关联文件，添加 -r 选项会同时删除主目录及相关文件(/home/用户名)
+```
+userdel 用户名
+```
+5、搜索属于该用户的文件，检查残留文件 (可选)
+```
+find / -user 用户名
+```
+6、创建用户并自动生成主目录
+```
+useradd -m 用户名
+```
+7、指定用户的登录Shell
+```
+useradd -m -s /bin/bash 用户名
+```
+8、自定义用户UID或家目录
+```
+useradd -m -u 1000 -d /自定义路径/用户名 用户名
+```
+9、将用户添加到附加组，如 sudo：usermod -aG sudo 用户名
+```
+usermod -aG 组名 用户名
+```
+10、重新指定用户的附加组列表 (需列出保留的所有组，移除目标组)
+```
+```
+usermod -G "保留组列表" 用户名
+```
+### ⭐查看内核的命令
+```
+uname -srm
+hostnamectl | grep -i kernel
+cat /proc/version
 ```
 ### ⭐armbian 配置
 ```
@@ -34,11 +79,14 @@ apt upgrade -y
 apt update && apt upgrade -y
 ```
 ### ⭐安装常用软件(按需选择)
+1、安装单个
 ```
-# 安装单个
-apt install samba -y
-# 批量安装
-apt install -y vim nano samba nfs-kernel-server rclone git pip
+apt install -y 软件名
+```
+2、批量安装
+```
+apt install -y 软件名1 软件名2 软件名3 软件名4 软件名5
+# apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo
 ```
 ### ⭐查看命令
 ```
@@ -71,8 +119,6 @@ alias ll='ls -l'
 source ~/.bashrc  # 如果使用 Bash
 source ~/.zshrc   # 如果使用 Zsh
 ```
-
-
 ### ⭐docker 相关
 1、docker 安装
 
@@ -148,3 +194,24 @@ docker pull docker.1ms.run/hslr/sun-panel:beta
 | docker rm 容器ID或容器名 | 删除某个容器 |
 | docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
 * stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
+### ⭐VPU
+```
+lsmod | grep -E "vpu|npu"
+# 检查已加载的内核模块
+dmesg | grep -iE "vpu|rkvdec|rkvenc"
+# 通过内核日志查看与VPU相关的驱动加载信息，驱动名称如 rkvdec(解码)或 rkvenc(编码)会显示在日志中
+cat /sys/class/vpu/vpu/version
+
+apt update && sudo apt install -y clinfo && clinfo
+# 用 clinfo 检查主机上的 OpenCL (GPU 固件)
+docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_device rkmpp=rk -init_hw_device opencl=ocl@rk
+# 要验证 OpenCL 运行时在 docker 容器内是否正常工作，您可以运行此命令，第一个 jellyfin 为容器名字
+# watch -n 1 cat /sys/kernel/debug/rkrga/load
+# 视频转码时，使用命令检查RGA引擎的占用情况
+```
+- 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
+### ⭐NPU
+```
+insmod /usr/lib/modules/5.10.160-rockchip-rk3588/kernel/drivers/rknpu
+# 加载 rknpu.ko 内核，仅适用于香橙派5Plus及使用[kaylorchen 镜像文件](https://www.bilibili.com/video/BV1otFXeeEw8)，[内核源码](https://github.com/kaylorchen/linux-orangepi/tree/rknpu-0.9.8)，克隆的时候记得切分支
+```
