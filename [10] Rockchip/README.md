@@ -1,5 +1,6 @@
 # RK3588 折腾笔记
 [armbian系统入门](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/Armbian.md)
+
 [香橙派 5 Plus 折腾笔记 | 空桑](https://www.hqshi.cn/info/ops/orange-pi-5-plus)
 ## 一、常用命令
 ubuntu/debian/armbian均通用
@@ -211,7 +212,7 @@ docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_devic
 ```
 - 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
 ### ⭐NPU
+加载 rknpu.ko 内核，仅适用于香橙派5Plus及使用[kaylorchen 镜像文件](https://www.bilibili.com/video/BV1otFXeeEw8)，[内核源码](https://github.com/kaylorchen/linux-orangepi/tree/rknpu-0.9.8)，克隆的时候记得切分支
 ```
-insmod /usr/lib/modules/5.10.160-rockchip-rk3588/kernel/drivers/rknpu
-# 加载 rknpu.ko 内核，仅适用于香橙派5Plus及使用[kaylorchen 镜像文件](https://www.bilibili.com/video/BV1otFXeeEw8)，[内核源码](https://github.com/kaylorchen/linux-orangepi/tree/rknpu-0.9.8)，克隆的时候记得切分支
+insmod /usr/lib/modules/5.10.160-rockchip-rk3588/kernel/drivers/rknpu 
 ```
