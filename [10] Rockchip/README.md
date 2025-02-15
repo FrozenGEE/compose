@@ -13,6 +13,7 @@ sudo -i
 1、修改用户密码
 ```
 passwd 用户名
+```
 2、查看用户权限
 ```
 id 用户名
@@ -46,7 +47,6 @@ useradd -m -u 1000 -d /自定义路径/用户名 用户名
 usermod -aG 组名 用户名
 ```
 10、重新指定用户的附加组列表 (需列出保留的所有组，移除目标组)
-```
 ```
 usermod -G "保留组列表" 用户名
 ```
@@ -92,11 +92,11 @@ apt install -y 软件名1 软件名2 软件名3 软件名4 软件名5
 ### ⭐查看命令
 ```
 ls：列出当前目录下的文件和目录
-ls -l：以长格式列出文件和目录，显示详细信息（权限、所有者、大小、修改时间等）
+ls -l：以长格式列出文件和目录，显示详细信息(权限、所有者、大小、修改时间等)
 # ll 命令是 ls -l 的别名，如果 ll 不能使用，见下操作
-ls -a：列出所有文件和目录，包括隐藏文件（以 . 开头的文件）
+ls -a：列出所有文件和目录，包括隐藏文件(以 . 开头的文件)
 ls -la 或 ls -al：以长格式列出所有文件和目录，包括隐藏文件
-ls -h：与 -l 一起使用，以人类可读的格式显示文件大小（如 KB、MB）
+ls -h：与 -l 一起使用，以人类可读的格式显示文件大小(如 KB、MB)
 ls -R：递归列出子目录中的内容
 ```
 ### ⭐为 ll 设置别名
@@ -123,7 +123,7 @@ source ~/.zshrc   # 如果使用 Zsh
 ### ⭐docker 相关
 1、docker 安装
 
-Docker官方一键安装脚本，使用官方源安装（国内直接访问较慢）
+Docker官方一键安装脚本，使用官方源安装(国内直接访问较慢)
 ```
 curl -fsSL https://get.docker.com | bash
 ```
@@ -195,6 +195,63 @@ docker pull docker.1ms.run/hslr/sun-panel:beta
 | docker rm 容器ID或容器名 | 删除某个容器 |
 | docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
 * stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
+### ⭐硬盘挂载到本地/mnt中
+以 emmc 为例，其余同理
+
+1、识别设备
+```
+fdisk -l
+```
+2、确认emmc分区情况
+```
+lsblk | grep mmcblk1
+```
+3、新建分区
+```
+fdisk -l /dev/mmcblk1
+# Command (m for help): d  # 删除分区(多次执行删除所有分区)
+# Partition type: p        # 主分区(primary)
+# Partition number: 1      # 分区号为1
+# First sector: 2048       # 起始扇区(默认回车)
+# Last sector: 回车        # 结束扇区默认最大值(占用全部空间)
+```
+4、格式化分区为ext4
+```
+mkfs.ext4 /dev/mmcblk1p1
+```
+5、检查分区大小
+```
+parted /dev/mmcblk1 print
+```
+6、创建挂载点 (假设挂载到/mnt/emmc)
+```
+mkdir -p /mnt/emmc
+```
+7、临时挂载
+```
+mount /dev/mmcblk1p1 /mnt/emmc
+```
+8、验证挂载状态
+```
+df -h | grep emmc
+```
+9、获取文件系统UUID (假设UUID为1234-ABCD)
+```
+blkid /dev/mmcblk1p1 | awk -F'UUID="' '{print $2}' | awk -F'"' '{print $1}'
+# 香橙派5Plus的emmc为 /dev/mmcblk1
+```
+10、修改 /etc/fstab 设置开机自动挂载
+```
+nano /etc/fstab
+# 添加行：UUID=1234-ABCD /mnt/emmc ext4 defaults 0 0
+```
+11、挂载并验证
+```
+mount -a
+# 测试自动挂载，若无报错即配置成功
+df -h | grep emmc
+# 验证挂载状态
+```
 ### ⭐VPU
 ```
 lsmod | grep -E "vpu|npu"
