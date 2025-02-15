@@ -1,4 +1,6 @@
 # RK3588 折腾笔记
+[遇事不决问deepseek](https://chat.deepseek.com)
+
 [armbian系统入门](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/Armbian.md)
 
 [香橙派 5 Plus 折腾笔记 | 空桑](https://www.hqshi.cn/info/ops/orange-pi-5-plus)
