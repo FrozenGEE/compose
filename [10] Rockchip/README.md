@@ -197,8 +197,8 @@ docker pull docker.1ms.run/hslr/sun-panel:beta
 | docker rm 容器ID或容器名 | 删除某个容器 |
 | docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
 * stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
-### ⭐EMMC或TF卡挂载到本地/mnt中
-单盘NAS挂载存储介质到本地，docker容器的配置文件夹目录均存储在此处，统一路径 (以EMMC为例)
+### ⭐EMMC/TF/SATA/M2挂载到本地/mnt中
+用于单盘NAS挂载存储介质到本地，docker容器的配置文件夹目录均存储在此处，统一路径，此处以香橙派5plus+加装EMMC为例，以后添加上M2 SSD
 
 1、识别设备
 ```
@@ -253,6 +253,9 @@ mount -a
 # 测试自动挂载，若无报错即配置成功
 df -h | grep emmc
 # 验证挂载状态
+### ⭐RAID阵列挂载到本地/mnt中
+此处以友善CM3588安装OMV系统创建RAID阵列，将共享文件夹挂载到指定目录，因为OMV的共享文件夹路径是序列号，很长，使用docker compose不方便写绝对路径
+
 ```
 ### ⭐VPU
 ```
