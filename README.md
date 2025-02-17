@@ -41,3 +41,6 @@
 6、[compose模板一些其他配置参数](https://github.com/FrozenGEE/compose/blob/main/compose.md)
 
 7、[各nas dpanel 部署教程及食用方法](https://github.com/FrozenGEE/compose/blob/main/dpanel.md)(还没写...挖坑)
+
+
+[![Star History Chart](https://api.star-history.com/svg?repos=FrozenGEE/compose&type=Date)](https://star-history.com/#FrozenGEE/compose&Date)
