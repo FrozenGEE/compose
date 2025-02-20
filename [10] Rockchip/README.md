@@ -1,4 +1,4 @@
-# RK3588 折腾笔记
+# 香橙派5Plus/友善CM3588 折腾笔记
 [遇事不决问deepseek](https://chat.deepseek.com)
 
 [armbian系统入门](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/Armbian.md)
@@ -6,10 +6,71 @@
 [香橙派 5 Plus 折腾笔记 | 空桑](https://www.hqshi.cn/info/ops/orange-pi-5-plus)
 ## 一、常用命令
 ubuntu/debian/armbian均通用
+### ⭐确认身份
+```
+whoami
+```
 ### ⭐切换root用户
 ```
 sudo -i
 # 后续命令默认root执行
+```
+### ⭐更新软件列表和软件源
+```
+apt update && apt upgrade -y
+```
+### ⭐安装常用软件(按需选择)
+1、安装单个
+```
+apt install -y vim
+# apt install -y 软件名
+```
+2、批量安装
+```
+apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo
+# apt install -y 软件名1 软件名2 软件名3 软件名4 软件名5
+```
+### ⭐查看命令
+```
+ls：列出当前目录下的文件和目录
+ls -l：以长格式列出文件和目录，显示详细信息(权限、所有者、大小、修改时间等)
+# ll 命令是 ls -l 的别名，如果 ll 不能使用，见下操作
+ls -a：列出所有文件和目录，包括隐藏文件(以 . 开头的文件)
+ls -la 或 ls -al：以长格式列出所有文件和目录，包括隐藏文件
+ls -h：与 -l 一起使用，以人类可读的格式显示文件大小(如 KB、MB)
+ls -R：递归列出子目录中的内容
+```
+### ⭐为 ll 设置别名
+1. 编辑 Shell 配置文件
+
+根据你使用的 Shell，编辑对应的配置文件
+```
+nano ~/.bashrc  # 如果使用 Bash
+nano ~/.zshrc   # 如果使用 Zsh
+```
+2. 添加别名
+
+在文件末尾添加以下内容
+```
+alias ll='ls -l'
+```
+3. 使配置生效
+
+保存并退出编辑器(按ctrl+X，Y，回车键)，然后运行以下命令使配置生效
+```
+source ~/.bashrc  # 如果使用 Bash
+source ~/.zshrc   # 如果使用 Zsh
+```
+### ⭐清屏
+```
+clear
+```
+### ⭐查看内核的命令
+```
+uname -srm
+hostnamectl | grep -i kernel
+cat /proc/version
+# 以上三条均可
 ```
 ### ⭐用户管理
 1、修改用户密码
@@ -42,7 +103,7 @@ useradd -m -s /bin/bash 用户名
 ```
 8、自定义用户UID或家目录
 ```
-useradd -m -u 1000 -d /自定义路径/用户名 用户名
+useradd -m -u 1000 -d /home/用户名 用户名
 ```
 9、将用户添加到附加组，如 sudo：usermod -aG sudo 用户名
 ```
@@ -51,16 +112,6 @@ usermod -aG 组名 用户名
 10、重新指定用户的附加组列表 (需列出保留的所有组，移除目标组)
 ```
 usermod -G "保留组列表" 用户名
-```
-### ⭐查看内核的命令
-```
-uname -srm
-hostnamectl | grep -i kernel
-cat /proc/version
-```
-### ⭐armbian 配置
-```
-armbian-config
 ```
 ### ⭐替换apt源为清华apt源
 来源：https://www.cnblogs.com/lcxhk/p/14951334.html
@@ -76,51 +127,6 @@ echo "[Info] 正在更新源..."
 apt update
 echo "[Info] 正在更新软件..."
 apt upgrade -y
-```
-### ⭐更新软件列表和软件源
-```
-apt update && apt upgrade -y
-```
-### ⭐安装常用软件(按需选择)
-1、安装单个
-```
-apt install -y 软件名
-```
-2、批量安装
-```
-apt install -y 软件名1 软件名2 软件名3 软件名4 软件名5
-# apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo
-```
-### ⭐查看命令
-```
-ls：列出当前目录下的文件和目录
-ls -l：以长格式列出文件和目录，显示详细信息(权限、所有者、大小、修改时间等)
-# ll 命令是 ls -l 的别名，如果 ll 不能使用，见下操作
-ls -a：列出所有文件和目录，包括隐藏文件(以 . 开头的文件)
-ls -la 或 ls -al：以长格式列出所有文件和目录，包括隐藏文件
-ls -h：与 -l 一起使用，以人类可读的格式显示文件大小(如 KB、MB)
-ls -R：递归列出子目录中的内容
-```
-### ⭐为 ll 设置别名
-1. 编辑 Shell 配置文件
-
-根据你使用的 Shell，编辑对应的配置文件
-```
-nano ~/.bashrc  # 如果使用 Bash
-nano ~/.zshrc   # 如果使用 Zsh
-```
-2. 添加别名
-
-在文件末尾添加以下内容
-```
-alias ll='ls -l'
-```
-3. 使配置生效
-
-保存并退出编辑器，然后运行以下命令使配置生效
-```
-source ~/.bashrc  # 如果使用 Bash
-source ~/.zshrc   # 如果使用 Zsh
 ```
 ### ⭐docker 相关
 1、docker 安装
@@ -198,61 +204,100 @@ docker pull docker.1ms.run/hslr/sun-panel:beta
 | docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
 * stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
 ### ⭐EMMC/TF/SATA/M2挂载到本地/mnt中
-用于单盘NAS挂载存储介质到本地，docker容器的配置文件夹目录均存储在此处，统一路径，此处以香橙派5plus+加装EMMC为例，以后添加上M2 SSD
+用于单盘NAS挂载存储介质到本地，docker容器的配置文件夹目录均存储在此处，统一路径，此处以香橙派5plus+官方debian系统+加装EMMC和M2 SSD为例
 
 1、识别设备
 ```
+lsblk
 fdisk -l
+# 得知 EMMC为/dev/mmcblk0，SSD为/dev/nvme0n1
 ```
 2、确认分区情况
 ```
-lsblk | grep mmcblk1
+lsblk | grep mmcblk0
+lsblk | grep nvme0n1
+# 得知EMMC和SSD分区情况
 ```
-3、新建分区
+3、删除现有分区 (如果有的话)
 ```
-fdisk -l /dev/mmcblk1
-# Command (m for help): d  # 删除分区(多次执行删除所有分区)
-# Partition type: p        # 主分区(primary)
-# Partition number: 1      # 分区号为1
-# First sector: 2048       # 起始扇区(默认回车)
-# Last sector: 回车        # 结束扇区默认最大值(占用全部空间)
+fdisk /dev/mmcblk0
+fdisk /dev/nvme0n1
+# 在fdisk命令行界面中，执行以下操作：
+# 输入 p 查看现有分区
+# 输入 d 删除分区，根据提示选择要删除的分区编号
+# 重复删除所有分区
+# 输入 w 保存更改并退出
 ```
-4、格式化分区为ext4
+4、新建分区
 ```
-mkfs.ext4 /dev/mmcblk1p1
+fdisk /dev/mmcblk0
+fdisk /dev/nvme0n1
+# 在fdisk命令行界面中，执行以下操作：
+# 输入 n 创建新分区
+# 选择 p 创建主分区
+# 按回车键，接受默认的起始扇区
+# 按回车键，接受默认的结束扇区(使用全部存储空间)
+# 输入 w 保存更改并退出
 ```
-5、检查分区大小
+5、格式化分区
 ```
-parted /dev/mmcblk1 print
+mkfs.ext4 /dev/mmcblk0p1
+mkfs.ext4 /dev/nvme0n1
+# 以上为格式化分区为ext4
+
+mkfs.btrfs /dev/mmcblk0p1
+mkfs.btrfs /dev/nvme0n1
+# 以上为格式化分区为Btrfs
 ```
-6、创建挂载点 (假设挂载到/mnt/emmc)
+6、检查分区大小
 ```
-mkdir -p /mnt/emmc
+parted /dev/mmcblk0 print
+parted /dev/nvme0n1 print
 ```
-7、临时挂载
+7、创建挂载点
 ```
-mount /dev/mmcblk1p1 /mnt/emmc
+mkdir /mnt/emmc
+mkdir /mnt/ssd
+# 将分别挂载到 /mnt 下的 /emmc 和 /ssd 路径
 ```
-8、验证挂载状态
+8、临时挂载
+```
+mount /dev/mmcblk0p1 /mnt/emmc
+mount /dev/nvme0n1 /mnt/ssd
+```
+9、验证挂载状态
 ```
 df -h | grep emmc
+df -h | grep ssd
 ```
-9、获取文件系统UUID (假设UUID为1234-ABCD)
+10、获取文件系统UUID
 ```
-blkid /dev/mmcblk1p1 | awk -F'UUID="' '{print $2}' | awk -F'"' '{print $1}'
-# 香橙派5Plus的emmc为 /dev/mmcblk1
+blkid /dev/mmcblk0p1 | awk -F'UUID="' '{print $2}' | awk -F'"' '{print $1}'
+blkid /dev/nvme0n1 | awk -F'UUID="' '{print $2}' | awk -F'"' '{print $1}'
+# EMMC 为 32e6dc02-4e27-4ad0-99c5-b4c0b97cf263
+# SSD  为 e1e08765-8e5b-4a2d-957e-96a34855b674
 ```
-10、修改 /etc/fstab 设置开机自动挂载
+11、修改 /etc/fstab 设置开机自动挂载
 ```
 nano /etc/fstab
-# 添加行：UUID=1234-ABCD /mnt/emmc ext4 defaults 0 0
+# 文本末端添加以下内容，然后推出并保存(按ctrl+X，Y，回车键)
+UUID=32e6dc02-4e27-4ad0-99c5-b4c0b97cf263 /mnt/emmc ext4 defaults 0 0
+# 开机自动挂载EMMC
+UUID=e1e08765-8e5b-4a2d-957e-96a34855b674 /mnt/ssd ext4 defaults 0 0
+# 开机自动挂载SSD
 ```
 11、挂载并验证
 ```
 mount -a
 # 测试自动挂载，若无报错即配置成功
 df -h | grep emmc
+df -h | grep ssd
 # 验证挂载状态
+```
+12、如果遇到以下报错内容，则执行 systemctl daemon-reload 一次
+```
+mount: (hint) your fstab has been modified, but systemd still uses
+       the old version; use 'systemctl daemon-reload' to reload.
 ```
 ### ⭐RAID阵列挂载到本地/mnt中
 此处以友善CM3588安装OMV系统创建RAID阵列，将共享文件夹挂载到指定目录，因为OMV的共享文件夹路径是序列号，很长，使用docker compose不方便写绝对路径
@@ -274,7 +319,11 @@ docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_devic
 ```
 - 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
 ### ⭐NPU
-加载 rknpu.ko 内核，仅适用于香橙派5Plus及使用[kaylorchen 镜像文件](https://www.bilibili.com/video/BV1otFXeeEw8)，[内核源码](https://github.com/kaylorchen/linux-orangepi/tree/rknpu-0.9.8)，克隆的时候记得切分支
+# 查看NPU版本
+```
+cat /sys/kernel/debug/rknpu/version
+```
+加载 rknpu.ko 内核，仅适用于香橙派5Plus使用[kaylorchen 镜像文件](https://www.bilibili.com/video/BV1otFXeeEw8)，[内核源码](https://github.com/kaylorchen/linux-orangepi/tree/rknpu-0.9.8)，克隆的时候记得切分支
 ```
 insmod /usr/lib/modules/5.10.160-rockchip-rk3588/kernel/drivers/rknpu/rknpu.ko
 ```
