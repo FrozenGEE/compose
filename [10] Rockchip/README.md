@@ -319,7 +319,7 @@ docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_devic
 ```
 - 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
 ### ⭐NPU
-# 查看NPU版本
+查看NPU版本
 ```
 cat /sys/kernel/debug/rknpu/version
 ```
