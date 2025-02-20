@@ -276,5 +276,5 @@ docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_devic
 ### ⭐NPU
 加载 rknpu.ko 内核，仅适用于香橙派5Plus及使用[kaylorchen 镜像文件](https://www.bilibili.com/video/BV1otFXeeEw8)，[内核源码](https://github.com/kaylorchen/linux-orangepi/tree/rknpu-0.9.8)，克隆的时候记得切分支
 ```
-insmod /usr/lib/modules/5.10.160-rockchip-rk3588/kernel/drivers/rknpu 
+insmod /usr/lib/modules/5.10.160-rockchip-rk3588/kernel/drivers/rknpu/rknpu.ko
 ```
