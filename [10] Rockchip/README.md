@@ -30,6 +30,22 @@ apt install -y vim
 apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo
 # apt install -y 软件名1 软件名2 软件名3 软件名4 软件名5
 ```
+3、安装deb软件包，使用 apt 会自动处理依赖问题，无需额外操作
+```
+apt install ./包名.deb
+```
+4、检查是否安装成功
+```
+5、dpkg -l | grep 包名.deb
+```
+6、卸载 .deb 包
+```
+apt remove 包名.deb
+```
+7、完全移除软件包及其配置文件
+```
+apt purge 包名.deb
+```
 ### ⭐查看命令
 ```
 ls：列出当前目录下的文件和目录
