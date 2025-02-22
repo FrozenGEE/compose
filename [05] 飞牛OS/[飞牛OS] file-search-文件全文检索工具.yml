@@ -1,0 +1,39 @@
+# 官方文档
+# https://github.com/ayoundzw/file-search
+# https://hub.docker.com/r/ayound/file-search
+# 教程
+# https://post.smzdm.com/p/a2xm65o7
+
+# 部署后网页上打开 http://[ip]:[port]/fsearch，如 http://localhost:8012/fsearch
+
+---
+version: "3"
+# 最后编辑时间：2025-02-22
+services:
+  file-search:
+    image: ayound/file-search:latest
+    # 镜像地址，仅支持amd64
+    container_name: file-search
+    # 容器名字
+    hostname: file-search
+    # 主机名
+    volumes:
+      - /vol1/1000/docker/fsearch/data:/fsearch/data
+      # 容器保存的数据路径
+      - /vol1/1000/docker/fsearch/cache:/fsearch/cache
+      # 预览文件时转换的PDF和图片
+      - 【这里替换为需要扫描的目录】:/fsearch/files/【这里替换为需要扫描的目录的名字】
+      # 需要扫描的文件夹，不推荐把整个NAS全部目录都全放进来，可以自定义多个，可以如下，必须在容器路径 /fsearch/files/ 之下添加
+      # - 【这里替换为需要扫描的目录】:/fsearch/files/【这里替换为需要扫描的目录的名字】
+    environment:
+      - USER_NAME=cheems
+      - PASSWORD=cheems
+      # 自定义账号密码，预设为cheems/cheems，注意修改
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+     # - 8012:8012/tcp
+     # WebUI http端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
