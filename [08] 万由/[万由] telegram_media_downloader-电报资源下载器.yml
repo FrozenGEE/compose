@@ -15,7 +15,7 @@ services:
     hostname: telegram_media_downloader
     # 主机名
     volumes:
-      - /mnt/unas/data/media/telegram下载目录:/app/downloads
+      - /mnt/unas/data/docker/telegram下载目录:/app/downloads
       # 下载目录
       - /mnt/unas/data/docker/telegram下载器:/app/temp
       # 临时缓存目录
