@@ -12,7 +12,7 @@
 
 ---
 version: "3.3"
-# 最后编辑时间：2025-202-23
+# 最后编辑时间：2025-02-23
 services:
   next-terminal:
     image: dushixiang/next-terminal:latest
