@@ -148,13 +148,21 @@ xxx为用户名，包括管理员和普通用户，yyy为在此之下所创建�
 /tmp/zfsv3/sata$/手机号码+字母/data/docker/aaa
 /tmp/zfsv3/nvme$/手机号码+字母/data/docker/aaa
 
+另一种书写格式，其中开头的data_n001为第一个存储池，如此类推
+/data_n001/data/udata/real/手机号码/docker/aaa
+/data_n001/data/udata/real/手机号码+字母/docker/aaa
+
 💡极空间系统的数据目录存放路径开头
 /tmp/zfsv3/sata$/手机号码/data/bbb
 /tmp/zfsv3/nvme$/手机号码/data/bbb
 /tmp/zfsv3/sata$/手机号码+字母/data/bbb
 /tmp/zfsv3/nvme$/手机号码+字母/data/bbb
 
-"nvme$"和"sata$" 根据自己实际情况修改，$为数字；"手机号码"为个人手机号码，到处都是手机号，真他妈恶心
+另一种书写格式，其中开头的data_n001为第一个存储池，如此类推
+/data_n001/data/udata/real/手机号码/bbb
+/data_n001/data/udata/real/手机号码+字母/bbb
+
+"nvme$"和"sata$" 根据自己实际情况修改，$为数字；"手机号码"为个人手机号码，也可以选择使用另一种书写格式，但绕不开路径用手机号，真他妈恶心
 如果你有第二台极空间，并且用同一个手机号绑定注册(强制联网激活机器)，则为需要在手机号码后添加上a-z的字母
 例如：1688888888，1688888888a，1688888888b，1688888888c，这样类推，所以同一个手机号极限是多少？27个？
 
