@@ -20,7 +20,7 @@ services:
     # command: flare --nologin=0
     # 启用账号登陆模式，默认不启用，启用后需要额外的变量，见下说明
     volumes:
-      - /mn/user/appdata/flare:/app
+      - /mnt/user/appdata/flare:/app
     # environment:
       # - FLARE_USER=flare
       # - FLARE_PASS=flare
