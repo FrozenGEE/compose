@@ -28,7 +28,7 @@ services:
       # - ENABLE_MCP=true
       # MCP功能，不知道是什么
     network_mode: bridge
-    # 不推荐用host，除非没有被占用，有别的服务或docker需要用到8080
+    # 不推荐用host，除非没有被占用，有别的服务或docker需要用到3000
     ports:
       - 3880:3000/tcp
       # WebUI 端口
