@@ -22,7 +22,7 @@ services:
     hostname: next-terminal
     # 主机名
     volumes:
-      - /Volume1/Usr/docker/next-terminal:/usr/local/next-terminal/data
+      - /Volume1/User/docker/next-terminal:/usr/local/next-terminal/data
       # 配置文件目录
     environment:
       - TZ=Asia/Shanghai
