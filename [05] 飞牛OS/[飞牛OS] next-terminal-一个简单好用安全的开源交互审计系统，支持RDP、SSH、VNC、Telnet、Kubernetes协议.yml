@@ -24,6 +24,8 @@ services:
     volumes:
       - /vol1/1000/docker/next-terminal:/usr/local/next-terminal/data
       # 配置文件目录
+      # - /vol1/1000/docker/next-terminal/sshd:/root/.ssh/id_rsa
+      # 使用sshd服务，默认不启用，如需启用，需要映射开放8089端口
     environment:
       - TZ=Asia/Shanghai
       # 时区
@@ -50,6 +52,8 @@ services:
     # ports:
       # - 8088:8088/tcp
       # WebUI 端口
+      # - 8089:8089/tcp
+      # sshd服务端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
