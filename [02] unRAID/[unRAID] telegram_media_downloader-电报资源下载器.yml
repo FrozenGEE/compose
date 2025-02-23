@@ -21,7 +21,7 @@ services:
       # 临时缓存目录
       - /mnt/user/appdata/telegram下载器:/app/sessions
       # 会话目录
-      - 【这里替换为你的数据存放目录】/telegram下载器:/app/log
+      - /mnt/user/appdata/telegram下载器:/app/log
       # 日志目录
       - /mnt/user/appdata/telegram下载器/config.yaml:/app/config.yaml
       - /mnt/user/appdata/telegram下载器/data.yaml:/app/data.yaml
