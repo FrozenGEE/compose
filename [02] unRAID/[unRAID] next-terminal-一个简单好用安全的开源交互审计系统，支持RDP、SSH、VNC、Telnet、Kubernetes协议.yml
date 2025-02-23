@@ -1,0 +1,88 @@
+# 官方文档
+# https://next-terminal.typesafe.cn
+# https://github.com/dushixiang/next-terminal
+# https://hub.docker.com/r/dushixiang/next-terminal
+# https://hub.docker.com/r/dushixiang/guacd
+
+# 教程
+# https://docs.next-terminal.typesafe.cn/install/docker-install.html
+# https://tech.yemengstar.com/docker-web-ssh-next-terminal
+
+#  初始账号密码均为：admin
+
+---
+version: "3.3"
+# 最后编辑时间：2025-202-23
+services:
+  next-terminal:
+    image: dushixiang/next-terminal:latest
+    # 镜像地址
+    container_name: next-terminal
+    # 容器名字
+    hostname: next-terminal
+    # 主机名
+    volumes:
+      - /mnt/user/appdata/next-terminal:/usr/local/next-terminal/data
+      # 配置文件目录
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+      - GUACD_HOSTNAME=next-terminal-guacd
+      - GUACD_PORT=4822
+      # 连接 next-terminal-guacd，填写主机名/IP地址，及其对应的端口
+      ##########
+      - DB=sqlite
+      # 默认使用自带的sqlite数据库部署，如需使用外部数据库，则使用如下配置内容，需自行创建数据库和用户
+      ##########
+      # - DB=mysql
+      # 使用外部数据库，和上面那条变量只能二选一
+      # - MYSQL_HOSTNAME=mysql
+      # 外部数据库的主机名/IP地址，根据实际情况修改
+      # - MYSQL_PORT=3306
+      # 外部数据库的端口，根据实际情况修改
+      # - MYSQL_DATABASE=next-terminal
+      # - MYSQL_USERNAME=next-terminal
+      # - MYSQL_PASSWORD=next-terminal
+      # 外部数据库中的子数据库、账号、密码，需要自行创建，模板预设为 next-terminal
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8088:8088/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:8088]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/next-terminal.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+
+  next-terminal-guacd:
+    image: dushixiang/guacd:latest
+    # 镜像地址
+    container_name: next-terminal-guacd
+    # 容器名字
+    hostname: next-terminal-guacd
+    # 主机名
+    volumes:
+      - /mnt/user/appdata/next-terminal:/usr/local/next-terminal/data
+      # 配置文件目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 4822:4822/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:4822]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/next-terminal-guacd.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
