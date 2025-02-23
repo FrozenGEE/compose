@@ -10,7 +10,7 @@
 version: "3.6"
 # 最后编辑时间：2025-02-23
 services:
-  chatgpt-next-web:
+  flare:
     image: soulteary/flare:latest
     # 镜像地址
     container_name: flare
