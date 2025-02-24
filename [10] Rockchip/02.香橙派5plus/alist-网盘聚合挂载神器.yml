@@ -28,7 +28,7 @@ services:
       # - /dev/dri:/dev/dri
       # 开启硬件转码
     volumes:
-      - /mnt/emmc/dokcer/alist:/opt/alist/data
+      - /mnt/emmc/docker/alist:/opt/alist/data
       # 配置目录
       - /mnt:/mnt
       - /home:/home
