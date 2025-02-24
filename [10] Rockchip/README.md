@@ -197,7 +197,7 @@ systemctl restart docker
 ```
 4、查看docker和compose版本
 ```
-docker verion && docker compose version
+docker version && docker compose version
 ```
 5、docker 拉取镜像
 格式：docker pull 镜像源/作者名/镜像名:标签
