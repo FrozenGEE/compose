@@ -419,9 +419,6 @@ services:
       # 自定义容器端口
       - TZ=Asia/Shanghai
     network_mode: host
-    # network_mode: bridge
-    # ports:
-      # - 7789:7789/tcp
     restart: always
 
 ##############################################
