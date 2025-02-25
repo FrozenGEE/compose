@@ -30,7 +30,7 @@ services:
       - /share/Container/netbird:/etc/netbird
     environment:
       - NB_SETUP_KEY=填写你的密钥
-      # 打开下面的网址，登录账号，然后去生成密钥，密钥最长365天
+      # 打开下面的网址，登录账号，然后去生成密钥，将默认的7天改为0即可为无限期
       # https://app.netbird.io/setup-keys
     network_mode: host
     restart: unless-stopped
