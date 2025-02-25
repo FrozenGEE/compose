@@ -8,7 +8,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-05-20
+# 最后编辑时间：2025-02-25
 services:
   sun-panel:
     image: hslr/sun-panel:latest
