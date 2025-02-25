@@ -20,7 +20,7 @@ services:
     container_name: netbird
     # 容器名字
     hostname: netbird
-    # 主机名
+    # 主机名，此处修改为设备名字
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN
