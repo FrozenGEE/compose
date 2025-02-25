@@ -224,8 +224,8 @@ services:
       # WEBUI主页路径，写容器路径，用于放汉化文件
       # 汉化文件下载地址：https://github.com/ronggang/transmission-web-control
       # 将 "/src" 这个文件夹里的东西放到 "/config/webui" 内即可
-      - USER=link
-      - PASS=link@RK3588
+      - USER=orangepi5plus
+      - PASS=orangepi5plus
       # TR账号密码
       - PEERPORT=14569
       # 自定义peer传输端口
