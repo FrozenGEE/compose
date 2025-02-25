@@ -1,7 +1,6 @@
 ##################################################
 # 官方文档
 # https://jellyfin.org
-# 
 # https://github.com/jellyfin/jellyfin
 # https://hub.docker.com/r/jellyfin/jellyfin
 
@@ -14,11 +13,11 @@
 
 # 务必查看官方文档：https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip
 ##################################################
-# 建议使用64位Linux发行版，需要Rockchip BSP内核(6.1 或 5.10 LTS)
-# 查看内核的命令(三条均可)
+# 建议使用64位Linux发行版，需要Rockchip BSP内核(6.1 或 5.10 LTS)，命令如下，三条均可
 # uname -srm
 # hostnamectl | grep -i kernel
 # cat /proc/version
+
 ##################################################
 # 解码和编码 https://github.com/rockchip-linux/mpp
 
@@ -51,7 +50,6 @@
 # 例如RK356×和RK33xx，它们对编码分辨率的支持相当有限，并且缺乏硬件HDR色调映射支持
 
 ##################################################
-
 # 确保设备中存在 mpp、rga、dri、dma_heap，否则请将 BSP 内核升级到 5.10 LTS 及更高版本，运行此命令
 # ls -l /dev | grep -E "mpp|rga|dri|dma_heap"
 # 输出结果如下
@@ -61,7 +59,6 @@
 # crw-rw----  1 root       video    10, 122 Jan 18 18:50 rga
 
 ##################################################
-
 # 在主机上安装 ARM Mali OpenCL 
 # 对于Ubuntu-Rockchip和Armbian上的6.1 LTS内核以及旧版5.10 LTS内核，请安装v1.9-1-2d267b0
 # https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-2d267b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
@@ -74,7 +71,6 @@
 # sudo dpkg -i ./libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
 
 ##################################################
-
 # 要验证 OpenCL 运行时在 docker 容器内是否正常工作，运行此命令
 # docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_device rkmpp=rk -init_hw_device opencl=ocl@rk
 
