@@ -25,7 +25,7 @@ services:
     container_name: twingate
     # 容器名字
     hostname: twingate
-    # 主机名
+    # 主机名，此处修改为设备名字
     sysctls:
       net.ipv4.ping_group_range: "0 2147483647"
       # 这部分可选，当客户端可能与连接器在同一个本地网络上时，建议这样做，因为它将允许对等连接
