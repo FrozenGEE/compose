@@ -27,7 +27,7 @@ services:
       - SYS_RESOURCE
       # 照抄
     volumes:
-      - /mtn/user/appdata/netbird:/etc/netbird
+      - /mnt/user/appdata/netbird:/etc/netbird
     environment:
       - NB_SETUP_KEY=填写你的密钥
       # 打开下面的网址，登录账号，然后去生成密钥，将默认的7天改为0即可为无限期
