@@ -41,7 +41,7 @@ services:
 
 # 以下不需要部署，个人感觉没用，打开webui一会儿会自动回退到选择后端的界面
 
-#   clash-web:
+#  clash-web:
 #    image: haishanh/yacd:latest
     # 镜像地址
 #    container_name: clash-web
@@ -49,9 +49,9 @@ services:
 #    hostname: clash-web
     # 主机名
 #    environment:
-      # - YACD_DEFAULT_BACKEND=http://127.0.0.1:9090
+#      - YACD_DEFAULT_BACKEND=http://127.0.0.1:9090
       # yacd默认连接clash的后端地址，默认为127.0.0.1:9090，一般yaml内后端的默认端口就是9090
-      # - TZ=Asia/Shanghai
+#      - TZ=Asia/Shanghai
       # 时区
 #    network_mode: bridge
     # 80端口被占用，不能用host
