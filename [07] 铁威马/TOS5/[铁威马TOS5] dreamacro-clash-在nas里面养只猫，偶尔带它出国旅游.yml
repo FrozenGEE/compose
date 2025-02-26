@@ -21,6 +21,9 @@ services:
     volumes:
       - /Volume1/User/clash/config.yaml:/root/.config/clash/config.yaml
       # 配置文件目录，部署启动前先把config.yaml存到本地内
+    environment:
+        - TZ=Asia/Shanghai
+        # 时区
     # network_mode: bridge
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
@@ -48,6 +51,8 @@ services:
 #    environment:
       # - YACD_DEFAULT_BACKEND=http://127.0.0.1:9090
       # yacd默认连接clash的后端地址，默认为127.0.0.1:9090，一般yaml内后端的默认端口就是9090
+      # - TZ=Asia/Shanghai
+      # 时区
 #    network_mode: bridge
     # 80端口被占用，不能用host
 #    ports:
