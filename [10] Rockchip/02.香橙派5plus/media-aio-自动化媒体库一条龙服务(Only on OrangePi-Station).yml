@@ -158,8 +158,8 @@ services:
       # 以下是为EMBY添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      - ALL_PROXY=http://192.168.1.223:20171
-      - HTTP_PROXY=http://192.168.1.223:20171
+      - ALL_PROXY=http://127.0.0.1:20171
+      - HTTP_PROXY=http://127.0.0.1:20171
       # 更换为自己的http代理
     network_mode: host
     restart: always
@@ -281,8 +281,8 @@ services:
       - SUPERUSER=admin
       # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效，预设为cheems
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效，可在MP内修改
-      # - PROXY_HOST=
-      # 网络代理，访问themoviedb或者重启更新需要使用代理访问，默认不使用，如需使用，去掉#号注释
+      - PROXY_HOST=127.0.0.1:20171
+      # 网络代理，访问themoviedb或者重启更新需要使用代理访问，默认使用本模板中的v2raya
       # 格式为http(s)://ip:port、socks5://user:pass@host:port、socks5h://user:pass@host:port
       # - BIG_MEMORY_MODE=true
       # 是否使用大内存模式，true/false，默认不使用，开启后会增加缓存数量，占用更多的内存，但响应速度会更快
@@ -291,7 +291,7 @@ services:
       #
       - GITHUB_TOKEN=
       - GITHUB_PROXY=https://mirror.ghproxy.com/
-      #  Github token，提高自动更新、插件安装等请求Github Api的限流阈值，格式：ghp_**** 或 github_pat_****，切勿泄露
+      # Github token，提高自动更新、插件安装等请求Github Api的限流阈值，格式：ghp_**** 或 github_pat_****，切勿泄露
       # Github代理地址，用于加速版本及插件升级安装
       #
       - MOVIE_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/{{title}}.{{original_name}}
@@ -459,13 +459,11 @@ services:
     hostname: v2raya
     # privileged: true
     volumes:
-      # - /lib/modules:/lib/modules:ro
-      # 内核，如果不支持或者不想使用全局透明代理，则注释掉
       - /mnt/emmc/docker/v2raya/etc/v2raya:/etc/v2raya
       # 配置文件
-      # - /etc/resolv.conf:/etc/resolv.conf
+      - /etc/resolv.conf:/etc/resolv.conf
       # 需要预先创建好一个文件，不然会创建成文件夹；上面这条如果/etc内没有或不会进去新建resolv.conf，可以写下面这条
-      - /mnt/emmc/docker/v2raya/resolv.conf:/etc/resolv.conf
+      # - /mnt/emmc/docker/v2raya/resolv.conf:/etc/resolv.conf
     environment:
       - TZ=Asia/Shanghai
     network_mode: host
