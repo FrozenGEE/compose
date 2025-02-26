@@ -459,7 +459,7 @@ services:
     hostname: v2raya
     # privileged: true
     volumes:
-      - /lib/modules:/lib/modules:ro
+      # - /lib/modules:/lib/modules:ro
       # 内核，如果不支持或者不想使用全局透明代理，则注释掉
       - /mnt/emmc/docker/v2raya/etc/v2raya:/etc/v2raya
       # 配置文件
