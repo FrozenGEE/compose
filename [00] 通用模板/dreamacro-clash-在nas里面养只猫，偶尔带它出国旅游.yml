@@ -50,7 +50,7 @@ services:
 
 # 以下不需要部署，个人感觉没用，打开webui一会儿会自动回退到选择后端的界面
 
-#   clash-web:
+#  clash-web:
 #    image: haishanh/yacd:latest
     # 镜像地址
 #    container_name: clash-web
