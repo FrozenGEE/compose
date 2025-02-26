@@ -90,15 +90,24 @@ services:
       # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效，可在MP内修改
 
-      # - PROXY_HOST=
+      # - PROXY_HOST=127.0.0.1:7890
       # 网络代理，访问themoviedb或者重启更新需要使用代理访问，如果你没有配置魔法就注释掉
       # 格式为http(s)://ip:port、socks5://user:pass@host:port
-      - BIG_MEMORY_MODE=false
-      # 是否使用大内存模式，true/false，默认false不使用，开启后会增加缓存数量，占用更多的内存，但响应速度会更快
+      # - BIG_MEMORY_MOD=true
+      # 是否使用大内存模式，true/false，默认不使用，开启后会增加缓存数量，占用更多的内存，但响应速度会更快
       - UMASK=022
       # 默认创建新文件的权限，一般写022，MP默认为000，可以不写，也可以考虑设置为022
       - TZ=Asia/Shanghai
       # 时区
+
+      - GITHUB_TOKEN=
+      - GITHUB_PROXY=https://mirror.ghproxy.com/
+      # Github token，提高自动更新、插件安装等请求Github Api的限流阈值，格式：ghp_**** 或 github_pat_****，切勿泄露
+      # Github代理地址，用于加速版本及插件升级安装
+
+      # - MOVIE_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/{{title}}.{{original_name}}
+      # - TV_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/S0{{season}}/{{original_name}}
+      # 电影和电视剧重命名格式，个人自用，默认不使用
 
 ############################################
 #### 认证站点 ####
