@@ -27,7 +27,7 @@ apt install -y vim
 ```
 2、批量安装
 ```
-apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo
+apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo neofetch
 # apt install -y 软件名1 软件名2 软件名3 软件名4 软件名5
 ```
 3、安装deb软件包，使用 apt 会自动处理依赖问题，无需额外操作
