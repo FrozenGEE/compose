@@ -196,10 +196,10 @@ services:
       - TZ=Asia/Shanghai
       # 以下是为EMBY添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       # emby推荐不写，而是安装神医插件：https://github.com/sjtuross/StrmAssistant
-      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      # - ALL_PROXY=http://127.0.0.1:20171
-      # - HTTP_PROXY=http://127.0.0.1:20171
+      - ALL_PROXY=http://127.0.0.1:20171
+      - HTTP_PROXY=http://127.0.0.1:20171
       # 更换为自己的http代理
     network_mode: bridge
     ports:
