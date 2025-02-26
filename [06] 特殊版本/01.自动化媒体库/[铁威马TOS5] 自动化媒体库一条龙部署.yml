@@ -157,10 +157,11 @@ services:
       - PGID=0
       - TZ=Asia/Shanghai
       # 以下是为PLEX添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
-      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      # - ALL_PROXY=http://IP:20171
-      # - HTTP_PROXY=http://IP:20171
+      - ALL_PROXY=http://127.0.0.1:20171
+      - HTTP_PROXY=http://127.0.0.1:20171
+      # 更换为自己的http代理
     network_mode: bridge
     ports:
       - 32400:32400
@@ -194,10 +195,11 @@ services:
       - UMASK=022
       - TZ=Asia/Shanghai
       # 以下是为EMBY添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
-      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      # emby推荐不写，而是安装神医插件：https://github.com/sjtuross/StrmAssistant
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      # - ALL_PROXY=http://IP:20171
-      # - HTTP_PROXY=http://IP:20171
+      - ALL_PROXY=http://127.0.0.1:20171
+      - HTTP_PROXY=http://127.0.0.1:20171
       # 更换为自己的http代理
     network_mode: bridge
     ports:
@@ -230,10 +232,10 @@ services:
       # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       - TZ=Asia/Shanghai
       # 以下是为JF添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
-      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      # - ALL_PROXY=http://IP:20171
-      # - HTTP_PROXY=http://IP:20171
+      - ALL_PROXY=http://127.0.0.1:20171
+      - HTTP_PROXY=http://127.0.0.1:20171
       # 更换为自己的http代理
     network_mode: bridge
     ports:
@@ -351,16 +353,29 @@ services:
       # 需要能正常连接Github 注意：如果出现网络问题可以配置PROXY_HOST
       - NGINX_PORT=55055
       ## WebUI服务端口，预设为55055，默认为3000，可自行修改，不能和API服务端口3001冲突
-      - SUPERUSER=cheems
-      # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效，预设为cheems
-      # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效，可在MP内修改
-      # - PROXY_HOST=IP:20171
-      # 网络代理，以便于访问一些网站，如果你没有配置魔法就注释掉，也支持sock5，具体看作者github项目的地址，默认不使用，如需使用，去掉#号注释
-      - BIG_MEMORY_MODE=false
+      - SUPERUSER=admin
+      # 超级管理者用户名，默认为admin，初次安装后失效
+      # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效
+      
+      # - PROXY_HOST=127.0.0.1:20171
+      # 网络代理，访问themoviedb或者重启更新需要使用代理访问，如果你没有配置魔法就注释掉
+      # 格式为http(s)://ip:port、socks5://user:pass@host:port
+      # - BIG_MEMORY_MOD=true
       # 是否使用大内存模式，true/false，默认不使用，开启后会增加缓存数量，占用更多的内存，但响应速度会更快
       - UMASK=022
+      # 默认创建新文件的权限，一般写022，MP默认为000，可以不写，也可以考虑设置为022
       - TZ=Asia/Shanghai
-      #
+      # 时区
+
+      - GITHUB_TOKEN=
+      - GITHUB_PROXY=https://mirror.ghproxy.com/
+      # Github token，提高自动更新、插件安装等请求Github Api的限流阈值，格式：ghp_**** 或 github_pat_****，切勿泄露
+      # Github代理地址，用于加速版本及插件升级安装
+
+      # - MOVIE_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/{{title}}.{{original_name}}
+      # - TV_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/S0{{season}}/{{original_name}}
+      # 电影和电视剧重命名格式，个人自用，默认不使用
+
 ##############################################
 #### 认证站点 ####
       - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt
@@ -382,9 +397,9 @@ services:
       # - AUDIENCES_PASSKEY=
       # audiences的用户UID和密钥
 ##############################################
-      # - HDDOLBY_UID=
+      # - HDDOLBY_ID=
       # - HDDOLBY_PASSKEY=
-      # hddolby的用户UID和密钥
+      # hddolby的用户ID和密钥，注意这里是用户ID
 ##############################################
       # - ZMPT_UID=
       # - ZMPT_PASSKEY=
@@ -438,9 +453,9 @@ services:
       # - DISCFAN_PASSKEY=
       # discfan的用户UID和密钥
 ##############################################
-      # - HAIDAN_UID=
+      # - HAIDAN_ID=
       # - HAIDAN_PASSKEY=
-      # haidan的用户UID和密钥
+      # haidan的用户ID和密钥，注意这里是用户ID
 ##############################################
       # - ROUSI_UID=
       # - ROUSI_PASSKEY=
@@ -463,7 +478,7 @@ services:
       # kufei的用户UID和密钥
 ##############################################
       # - YEMAPT_UID=
-      # - YEMAPT_PASSKEY=
+      # - YEMAPT_AUTH=
       # yemapt的用户UID和密钥
 
 ##############################################
@@ -542,7 +557,7 @@ services:
     hostname: v2raya
     # privileged: true
     volumes:
-      - /lib/modules:/lib/modules:ro
+      # - /lib/modules:/lib/modules:ro
       # 内核，如果不支持或者不想使用全局透明代理，则注释掉
       - /Volume1/User/docker/v2raya:/etc/v2raya
       # 配置文件
