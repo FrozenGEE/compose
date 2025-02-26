@@ -3,16 +3,22 @@
 # https://docs.sillytavern.app/installation/docker
 # https://github.com/SillyTavern/SillyTavern
 
-# 教程
-# https://post.smzdm.com/p/al8nke5g
-# https://www.hqshi.cn/info/knowledge/sillytavern-guide
-
 # Linux 系统一键安装脚本
 # https://github.com/mxw13579/silly-tavern-docker-starts
 
+# 教程
+# https://post.smzdm.com/p/amvwp7kv
+# https://www.hqshi.cn/info/knowledge/sillytavern-guide
+
+# 初次部署以后，会在 /config 文件夹内生成一份config.yaml，按照以下要求修改并保存，然后重启一次容器
+# 第03行 改为 listen: true (必须)
+# 第09行 改为 ipv6: ture (可选)
+# 第12行 改为 port: 48000 (可选，华硕NAS推荐修改)
+# 在18行后面按回车键，输入：- 192.168.1.* (此为你的局域网网段，第四个数字是*保持不动)
+
 ---
 version: "3"
-# 最后编辑时间：2025-02-26
+# 最后编辑时间：2025-02-27
 services:
   sillytavern:
     image: ghcr.io/sillytavern/sillytavern:latest
@@ -38,6 +44,6 @@ services:
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
       # - 8000:8000/tcp
-      # WebUI 端口，华硕NAS注意修改为bridge，映射成别的端口
+      # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
