@@ -1,9 +1,8 @@
-# 香橙派5Plus/友善CM3588 折腾笔记
+# ARM-NAS 折腾笔记
 [遇事不决问deepseek](https://chat.deepseek.com)
 
 [armbian系统入门](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/Armbian.md)
 
-[香橙派 5 Plus 折腾笔记 | 空桑](https://www.hqshi.cn/info/ops/orange-pi-5-plus)
 ## 一、常用命令
 ubuntu/debian/armbian均通用
 ### ⭐确认身份
@@ -220,8 +219,6 @@ docker pull docker.1ms.run/dpanel/dpanel:lite
 | docker rm 容器ID或容器名 | 删除某个容器 |
 | docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
 * stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
-
-
 ### ⭐VPU
 ```
 lsmod | grep -E "vpu|npu"
