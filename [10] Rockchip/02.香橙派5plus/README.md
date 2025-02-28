@@ -241,7 +241,7 @@ https://proxy.1panel.live
 | lsky | 图床 | lobe-chat<br>chatgpt-next | ai助手 | ollama | 本地运行大型语言模型框架 |
 | bili-sync-rs | B站收藏夹下载 | siyuan-note | 思源笔记 | vaultwarden | 密码库 |
 | vocechat | 聊天室 | synctv | 和朋友一起看视频 | smokeping | 网络性能监控工具 |
-| admin<br>mariadb<br>postgresql<br>redis| 数据库套装 | minio | 对象存储 |   |   |
+| admin<br>mariadb<br>postgresql<br>redis| 数据库套装 | minio | 对象存储 | kms-server | 微软激活器 |
 
 
 ### ⭐香橙派5Plus jellyfin硬件转码
