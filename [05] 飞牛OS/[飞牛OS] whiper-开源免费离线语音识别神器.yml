@@ -38,7 +38,7 @@ services:
 #            - gpu
     # 启用gpu
     volumes: 
-      - 【这里替换为你的docker数据存放目录】/whiper:/root/.cache
+      - /vol1/1000/docker/whiper:/root/.cache
       # 缓存目录缓存目录，内含有模型存放目录 /root/.cache/whisper，启动时会自动下载
     environment:
       - ASR_ENGINE=openai_whisper
