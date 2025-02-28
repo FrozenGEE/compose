@@ -26,7 +26,7 @@ apt install -y vim
 ```
 2、批量安装
 ```
-apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo neofetch
+apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo neofetch btop ncdu
 # apt install -y 软件名1 软件名2 软件名3 软件名4 软件名5
 ```
 3、安装deb软件包，使用 apt 会自动处理依赖问题，无需额外操作
@@ -44,6 +44,10 @@ apt remove 包名.deb
 7、完全移除软件包及其配置文件
 ```
 apt purge 包名.deb
+```
+### ⭐安装 x-cmd (个人自用)
+```
+eval "$(wget -O- https://get.x-cmd.com)"
 ```
 ### ⭐查看命令
 ```
