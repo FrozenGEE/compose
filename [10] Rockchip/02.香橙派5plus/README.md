@@ -35,14 +35,6 @@ apt upgrade -y
 ```
 apt update && apt upgrade -y
 ```
-### ⭐安装软件 (个人自用)
-```
-apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo neofetch btop ncdu
-```
-### ⭐安装 x-cmd (个人自用)
-```
-eval "$(wget -O- https://get.x-cmd.com)"
-```
 ### ⭐EMMC/TF/M2挂载到本地/mnt中
 用于单盘NAS挂载存储介质到本地，docker容器的配置文件夹目录均存储在此处，统一路径，此处以香橙派5plus+官方debian系统+加装EMMC和M2 SSD为例
 
@@ -313,3 +305,34 @@ arm_release_ver: g13p0-01eac0, rk_so_ver: 10
 cat /sys/class/vpu/vpu/version
 ```
 也可以通过查看cpu占用情况确认是否硬件转码，如果cpu100%占用，则是cpu软件转码
+
+### ⭐CasaOS (可选)
+一键安装
+```
+curl -fsSL https://get.casaos.io | sudo bash
+```
+一键卸载
+```
+curl -fsSL https://get.icewhale.io/casaos-uninstall.sh | sudo bash
+```
+### ⭐安装1panel (可选)
+一键安装
+```
+curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh && sudo bash quick_start.sh
+```
+一键卸载
+```
+sudo 1pctl uninstall
+```
+```
+1panel app         # 应用相关命令
+1panel completion  # Generate the autocompletion script for the specified shell
+1panel help        # Help about any command
+1panel listen-ip   # 切换监听 IP
+1panel reset       # 重置系统信息
+1panel restore     # 回滚 1Panel 服务及数据
+1panel update      # 修改面板信息
+1panel user-info   # 获取面板信息
+1panel version     # 获取系统版本信息
+1pctl update password #更新密码
+```
