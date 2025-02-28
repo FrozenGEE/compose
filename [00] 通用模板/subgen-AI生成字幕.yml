@@ -1,0 +1,160 @@
+# 官方文档
+# https://github.com/McCloudS/subgen
+# https://hub.docker.com/r/mccloud/subgen
+
+# 注意：依赖于来自 Plex、Emby、Jellyfin 或 Tautulli 的 webhook，JF需要安装webhook插件
+# 请记住，PEJ 和 Subgen 需要能够在完全相同的路径上看到完全相同的文件，否则您需要变量：USE_PATH_MAPPING=True，并且增加更多变量让subgen知道PEJ的媒体库在哪里，且仅支持一个路径，所以建议设置好一条媒体库总目录
+
+# 教程
+# https://blog.yhbsoul.com/archives/177
+
+---
+version: "2"
+# 最后编辑时间：2025-02-28
+services:
+  subgen:
+    image: mccloud/subgen:cpu
+    # 镜像地址，可选tag：cpu/latest，默认tag为cpu，指调用cpu生成，支持amd64和arm64v8，latest仅支持amd64
+    # tag为cpu的镜像大小为740m (amd64) / 450M (arm64v8)
+    # tag为latest的镜像大小为5.11G (amd64)
+    container_name: subgen
+    # 容器名字
+    hostname: subgen
+    # 主机名
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 9630:9630/tcp
+      # WebUI 端口
+    volumes: 
+      # - 【这里替换为你的docker数据存放目录】/subgen/subgen.py:/subgen/subgen.py
+      # 文件映射，需要在外部建立同名空文件，内容自填，或使用变量 UPDATE=True 作为替代，默认使用替代
+      - 【这里替换为你的docker数据存放目录】/subgen/models:/subgen/models
+      # 模型存放目录
+      - 【这里替换为你的docker数据存放目录】/subgen/sub:/sub
+      # 字幕文件生成 存放目录
+      - 【这里替换为你的媒体库总目录】:/data/media
+      # 媒体库存放目录，可以自定义，可以写多个，但此项映射地址需要与 PEJ 内的映射地址参数一致
+      # 翻译翻译：就是要保持和 PEJ 相同的文件映射目录
+      # - 【这里替换为你的媒体库的目录】:/data/【这里替换为你的媒体库的目录的名字】
+    environment:
+      - WEBHOOKPORT=9630
+      # 自定义容器的 WebUI 端口，默认为9000，由于有别的容器会用到，所以预设为9630
+      - UPDATE=True
+      # 是否自动从git库更新程序，一些最新更改可能未包含在镜像中，默认为False，预设为True
+      - RELOAD_SCRIPT_ON_CHANGE=False
+      # 是否在检测到脚本更改时自动重载，默认为False
+      - DEBUG=True
+      # 开启DEBUG日志，默认为True
+
+      ########################################
+      # 路径 相关
+      - MODEL_PATH=/subgen/models
+      # 自定义模型存放的容器目录，照抄不动
+      - MONITOR=True
+      # 是否启用文件夹监控
+      - TRANSCRIBE_FOLDERS=/sub
+      # 需要监控并生成字幕的文件夹路径，照抄不动
+      - PATH_MAPPING_FROM=/data
+      # 容器中的媒体库路径，此项映射地址需要与 PEJ 内的容器地址参数一致
+
+      - USE_PATH_MAPPING=False
+      # 开启路径重映射，默认为False
+      # - PATH_MAPPING_TO=【这里替换为你的媒体库总目录】
+      # NAS中的媒体库路径，此项映射地址需要与 PEJ 内的实际地址参数一致，需要USE_PATH_MAPPING=True才生效，更多内容请看官方github文档
+
+      ########################################
+      # AI模型 相关
+      - HF_ENDPOINT=https://hf-mirror.com
+      # 国内需要设置模型加速地址，默认为https://hf-mirror.com
+      - WHISPER_MODEL=small
+      # 运算大小，越大运算越慢，但是翻译越精准，默认为small，以下为可选项
+      # tiny、tiny.en、base、base.en、small、small.en
+      # medium、medium.en、large-v1、large-v2、large-v3、large
+      # distil-large-v2、distil-large-v3、distil-medium.en、distil-small.en、large-v3-turbo
+
+      ########################################
+      # cpu/gpu 相关
+      - COMPUTE_TYPE=auto
+      # 自动选择使用 CPU 或GPU，默认为auto
+      - TRANSCRIBE_DEVICE=cpu
+      # 使用硬件，有独显可以换成 gpu，可选 cpu/gpu/cuda，默认为cpu
+      - WHISPER_THREADS=2
+      # cpu/gpu并发线程数，默认为4，预设为2
+      - CLEAR_VRAM_ON_COMPLETE=True
+      # 无任务时清除显存，默认为True
+
+      ########################################
+      # 转录 相关
+      - CONCURRENT_TRANSCRIPTIONS=1
+      # 同时转录的视频数，默认为2，预设为1
+      - TRANSCRIBE_OR_TRANSLATE=transcribe
+      # 一定要设置为 transcribe，仅转录
+      - DETECT_LANGUAGE_LENGTH=30
+      # 检测视频语言的时间长度(秒)，默认为30
+      - PROCADDEDMEDIA=True
+      # 是否在新增媒体时触发工作，默认为True
+      - PROCMEDIAONPLAY=True
+      # 是否在媒体播放时触发工作，默认为True
+
+      ########################################
+      # 字幕 相关
+      - FORCE_DETECTED_LANGUAGE_TO=zh
+      # 强制指定转录语言，默认为zh
+      - SKIP_LANG_CODES=
+      # 跳过指定语言的视频字幕生成（为空表示不跳过任何语言）
+
+      - NAMESUBLANG=chi
+      # 需要生成的字幕文件语言后缀，可选：chi / cht，默认为chi
+      - SKIPIFINTERNALSUBLANG=chi
+      # 是否跳过已有中文字幕的视频，根据视频字幕轨的语言而定，默认为chi
+      - SKIPIFEXTERNALSUB=True
+      # 是否跳过带内封字幕的视频，默认为True
+
+      - APPEND=False
+      # 是否在字幕结尾添加 Whisper 文案，默认为False
+      - USE_MODEL_PROMPT=True
+      # 强制使用自定义提示词标点符号，默认为True
+      - CUSTOM_MODEL_PROMPT=本字幕由 subgen 生成
+      # 自定义提示词，预设为：本字幕由 subgen 生成
+
+      - LRC_FOR_AUDIO_FILES=True
+      # 是否为音频文件生成歌词(LRC 文件)，默认为True
+      - WORD_LEVEL_HIGHLIGHT=False
+      # 高亮显示某单词如同ktv字幕效果，默认为False
+      - CUSTOM_REGROUP=cm_sl=84_sl=42++++++1
+      # 优化字幕格式，默认为cm_sl=84_sl=42++++++1
+      - SUBGEN_KWARGS={'vad': True,'prompt_reset_on_temperature': 0.35}
+      # 使用VAD避免幻听，提示前缀避免语言重置，默认为{'vad': True,'prompt_reset_on_temperature': 0.35}
+
+      ########################################
+      # PLEX 相关
+      - PLEXTOKEN=
+      # Plex 媒体服务器的api token
+      - PLEXSERVER=
+      # Plex 媒体服务器的访问地址
+
+      ########################################
+      # JELLYFIN 相关
+      - JELLYFINTOKEN=
+      # Jellyfin 媒体服务器的api token
+      - JELLYFINSERVER=
+      # Jellyfin 媒体服务器的访问地址
+
+      # 看官方github项目，emby好像不需要设置api token和访问地址
+
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/subgen_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:9630]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/subgen.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
