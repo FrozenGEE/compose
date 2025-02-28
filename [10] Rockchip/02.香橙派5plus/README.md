@@ -201,16 +201,12 @@ docker pull k-docker.asia/hslr/sun-panel:beta
 docker pull docker.1ms.run/dpanel/dpanel:lite
 ```
 6、docker 命令
-| 命令 | 含义 |
-| :---- | :---- |
-| docker ps | 查看部署的docker容器 |
-| docker images ps | 查看本地镜像 |
-| docker start 容器ID或容器名 | 启动某个容器 |
-| docker restart 容器ID或容器名 | 重启某个容器 |
-| docker stop 容器ID或容器名 | 停止某个容器 |
-| docker kill 容器ID或容器名 | 直接关闭容器 |
-| docker rm 容器ID或容器名 | 删除某个容器 |
-| docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
+| 命令 | 含义 | 命令 | 含义 |
+| :---- | :---- | :---- | :---- |
+| docker ps | 查看部署的docker容器 | docker images ps | 查看本地镜像 |
+| docker start 容器ID或容器名 | 启动某个容器 | docker stop 容器ID或容器名 | 停止某个容器 |
+| docker restart 容器ID或容器名 | 重启某个容器 | docker kill 容器ID或容器名 | 直接关闭容器 |
+| docker rm 容器ID或容器名 | 删除某个容器 | docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
 * stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
 ### ⭐部署 dpanel —— docker管理器
 ```
