@@ -35,6 +35,14 @@ apt upgrade -y
 ```
 apt update && apt upgrade -y
 ```
+### ⭐安装软件 (个人自用)
+```
+apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo neofetch btop ncdu
+```
+### ⭐安装 x-cmd
+```
+eval "$(wget -O- https://get.x-cmd.com)"
+```
 ### ⭐EMMC/TF/M2挂载到本地/mnt中
 用于单盘NAS挂载存储介质到本地，docker容器的配置文件夹目录均存储在此处，统一路径，此处以香橙派5plus+官方debian系统+加装EMMC和M2 SSD为例
 
