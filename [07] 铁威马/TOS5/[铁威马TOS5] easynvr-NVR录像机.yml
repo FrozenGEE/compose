@@ -17,9 +17,9 @@ version: "3.8"
 services:
   easynvr:
     image: registry.cn-shanghai.aliyuncs.com/rustc/easynvr:v1
-    # 镜像名
+    # 镜像地址
     container_name: easynvr
-    # 容器名
+    # 容器名字
     hostname: easynvr
     # 主机名，这里写设备名字
     logging:
