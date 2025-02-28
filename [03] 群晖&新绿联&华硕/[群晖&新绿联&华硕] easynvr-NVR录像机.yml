@@ -31,16 +31,16 @@ services:
           memory: 12g
           # 限制内存使用上限，根据实际内存修改，默认12g
     volumes:
-      - /volume1/docker/easynvr/configs:/app/configs
-      # 配置文件目录，需要放入授权文件，见上说明
-      - /volume1/docker/easynvr/r:/app/r
-      # 录像存储目录
-      - /volume1/docker/easynvr/stream:/app/stream
-      # 直播临时碎片文件目录
-      - /volume1/docker/easynvr/temporary:/app/temporary
-      # 临时文件目录
       - /volume1/docker/easynvr/logs:/app/logs
       # 日志目录
+      - /volume1/docker/easynvr/configs:/app/configs
+      # 配置文件目录，需要放入授权文件，见上说明
+      - /volume1/video/easynvr/r:/app/r
+      # 录像存储目录
+      - /volume1/video/easynvr/stream:/app/stream
+      # 直播临时碎片文件目录
+      - /volume1/video/easynvr/temporary:/app/temporary
+      # 临时文件目录
     # network_mode: bridge
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉
