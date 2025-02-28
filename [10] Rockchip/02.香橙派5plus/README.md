@@ -233,10 +233,17 @@ https://proxy.1panel.live
 | dpanel<br>portainer | docker管理器 | ddns-go | 域名解析 | lucky | 域名解析、反代、SSL |
 | alist| 网盘挂载 | sun-panel | 导航页 | mt-photos<br>immich | 相册 |
 | ttyd-bridge | 网页端ssh | tailscale<br>zerotier<br>netbird | 异地组网 | wg-easy<br>wireguard<br>openvpn | 自建异地组网 |
-| v2raya | 魔法 | watchtower | 自动更新容器 | dockercopilot | 一键更新容器 |
-| qbittorrent<br>transmission | 种子下载器 | ani-rss | 追番神器 | moviepilot | 媒体库自动化工具 |
-| jellyfin | 媒体库 | cookiecloud | cookie云备份 | frps / frpc | 内网穿透服务 |
-| clouddrive2 | 挂载网盘到本地 | lsky | 图床 | lobe-chat<br>chatgpt-next | ai助手 |
+| syncthing | 多端同步 | v2raya | 魔法 | frps / frpc | 内网穿透服务 |
+| filebrower | 文件管理器 | home-assistant | 家庭自动化平台 | rustdesk | 远程桌面服务 |
+| watchtower | 自动更新容器 | dockercopilot | 一键更新容器 | jellyfin | 媒体库 |
+| ani-rss | 追番神器 | moviepilot | 媒体库自动化工具 | cookiecloud | cookie云备份 |
+| qbittorrent<br>transmission | 种子下载器 | aria2 | 通用下载器 | clouddrive2 | 挂载网盘到本地 |
+| lsky | 图床 | lobe-chat<br>chatgpt-next | ai助手 | ollama | 本地运行大型语言模型框架 |
+| bili-sync-rs | B站收藏夹下载 | siyuan-note | 思源笔记 | vaultwarden | 密码库 |
+| vocechat | 聊天室 | synctv | 和朋友一起看视频 | smokeping | 网络性能监控工具 |
+| admin<br>mariadb<br>postgresql<br>redis| 数据库套装 | minio | 对象存储 |   |   |
+
+
 ### ⭐香橙派5Plus jellyfin硬件转码
 - 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
 
