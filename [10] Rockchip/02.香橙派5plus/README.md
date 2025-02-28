@@ -39,7 +39,7 @@ apt update && apt upgrade -y
 ```
 apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo neofetch btop ncdu
 ```
-### ⭐安装 x-cmd
+### ⭐安装 x-cmd (个人自用)
 ```
 eval "$(wget -O- https://get.x-cmd.com)"
 ```
