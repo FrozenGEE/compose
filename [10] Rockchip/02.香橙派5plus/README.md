@@ -230,8 +230,8 @@ https://proxy.1panel.live
 ### ⭐香橙派5Plus docker部署推荐
 | docker | 用途 | docker | 用途 | docker | 用途 |
 | :---- | :---- | :---- | :---- | :---- | :---- |
-| dpanel<br>portainer | docker管理器 | ddns-go | 域名解析 | lucky | 域名解析、反代、SSL |
-| alist| 网盘挂载 | sun-panel | 导航页 | mt-photos<br>immich | 相册 |
+| dpanel<br>portainer | docker管理器 | ddns-go | 域名解析 | lucky | 域名解析、反代、SSL<br>webdav、ftp、内置filebrower |
+| alist| 网盘挂载<br>webdav | sun-panel | 导航页 | mt-photos<br>immich | 相册 |
 | ttyd-bridge | 网页端ssh | tailscale<br>zerotier<br>netbird | 异地组网 | wg-easy<br>wireguard<br>openvpn | 自建异地组网 |
 | syncthing | 多端同步 | v2raya | 魔法 | frps / frpc | 内网穿透服务 |
 | filebrower | 文件管理器 | home-assistant | 家庭自动化平台 | rustdesk | 远程桌面服务 |
