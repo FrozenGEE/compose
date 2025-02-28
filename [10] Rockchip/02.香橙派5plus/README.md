@@ -232,11 +232,11 @@ https://proxy.1panel.live
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | dpanel<br>portainer | docker管理器 | ddns-go | 域名解析 | lucky | 域名解析、反代、SSL |
 | alist| 网盘挂载 | sun-panel | 导航页 | mt-photos<br>immich | 相册 |
-| ttyd-bridge | 网页端ssh | tailscale<br>zerotier<br>netbird | 异地组网 | wg-easy<br>wireguard<openvpn> | 自建异地组网 |
+| ttyd-bridge | 网页端ssh | tailscale<br>zerotier<br>netbird | 异地组网 | wg-easy<br>wireguard<br>openvpn | 自建异地组网 |
 | v2raya | 魔法 | watchtower | 自动更新容器 | dockercopilot | 一键更新容器 |
 | qbittorrent<br>transmission | 种子下载器 | ani-rss | 追番神器 | moviepilot | 媒体库自动化工具 |
-| jellyfin | 媒体库 | cookiecloud | cookie云备份 | frps<br>frpc | 内网穿透服务 |
-| clouddrive2 | 网盘挂载本地 | lsky | 图床 | lobe-chat<br>chatgpt-next | ai助手 |
+| jellyfin | 媒体库 | cookiecloud | cookie云备份 | frps / frpc | 内网穿透服务 |
+| clouddrive2 | 挂载网盘到本地 | lsky | 图床 | lobe-chat<br>chatgpt-next | ai助手 |
 ### ⭐香橙派5Plus jellyfin硬件转码
 - 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
 
