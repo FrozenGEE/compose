@@ -1,0 +1,71 @@
+# 官方文档
+# https://github.com/openai/whisper
+# https://github.com/ahmetoner/whisper-asr-webservice
+# https://hub.docker.com/r/onerahmet/openai-whisper-asr-webservice
+
+# 支持语言列表：https://github.com/openai/whisper/blob/main/whisper/tokenizer.py
+
+# 教程
+# https://www.itpno.com/1708.html
+# https://zhuanlan.zhihu.com/p/678406937
+# https://zhuanlan.zhihu.com/p/595691785
+# https://sanyers.github.io/blog/article/linux/docker部署whisper.html
+
+# http://localhost:9000/asr 语音识别接口，上传语音或者视频文件，输出文字
+# http://localhost:9000/detect-language 语言检测接口，上传语音或者视频文件，输出语言
+
+---
+version: "3.8"
+# 最后编辑时间：2025-02-28
+services:
+  whisper:
+    image: onerahmet/openai-whisper-asr-webservice:latest
+    # 镜像地址，默认tag为latest，仅支持cpu处理，如果需要使用gpu处理，则使用latest-gpu该tag并且启用gpu支持
+    # latest镜像大小为 2.46G(amd64) / 1.46G(arm64v8)，latest-gpu镜像大小为 8G，仅支持amd64
+    container_name: whiper
+    # 容器名字
+    hostname: whiper
+    # 主机名
+    # privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#          count: all
+#          capabilities:
+#            - gpu
+    # 启用gpu
+    volumes: 
+      - 【这里替换为你的docker数据存放目录】/whiper:/root/.cache
+      # 缓存目录缓存目录，内含有模型存放目录 /root/.cache/whisper，启动时会自动下载
+    environment:
+      - ASR_ENGINE=openai_whisper
+      # 模型，可选openai_whisper、faster_whisper、whisperx
+      - ASR_MODEL=medium
+      # 模型规模，可选：tiny、base、small、medium、large-v3，默认为base，预设为medium
+      - ASR_DEVICE=cpu
+      # 设备选择，默认为cpu，可选：cpu、cuda
+      - MODEL_IDLE_TIMEOUT=
+      # 模型超时卸载时间，单位为秒，默认为空
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 9000:9000/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/whiper_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:9000]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/whiper.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
