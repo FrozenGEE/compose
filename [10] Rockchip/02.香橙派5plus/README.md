@@ -200,6 +200,18 @@ docker pull lscr.io/linuxserver/qbittorrent:latest
 docker pull k-docker.asia/hslr/sun-panel:beta
 docker pull docker.1ms.run/dpanel/dpanel:lite
 ```
+6、docker 命令
+| 命令 | 含义 |
+| :---- | :---- |
+| docker ps | 查看部署的docker容器 |
+| docker images ps | 查看本地镜像 |
+| docker start 容器ID或容器名 | 启动某个容器 |
+| docker restart 容器ID或容器名 | 重启某个容器 |
+| docker stop 容器ID或容器名 | 停止某个容器 |
+| docker kill 容器ID或容器名 | 直接关闭容器 |
+| docker rm 容器ID或容器名 | 删除某个容器 |
+| docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
+* stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
 ### ⭐部署 dpanel —— docker管理器
 ```
 sudo docker run -it -d --name dpanel --restart=always -p 8807:8080 -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/emmc/docker/dpanel:/dpanel dpanel/dpanel:lite
@@ -229,7 +241,6 @@ https://proxy.1panel.live
 | qbittorrent<br>transmission | 种子下载器 | ani-rss | 追番神器 | moviepilot | 媒体库自动化工具 |
 | jellyfin | 媒体库 | cookiecloud | cookie云备份 | frps<br>frpc | 内网穿透服务 |
 | clouddrive2 | 网盘挂载本地 | lsky | 图床 | lobe-chat<br>chatgpt-next | ai助手 |
-
 ### ⭐香橙派5Plus jellyfin硬件转码
 - 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
 
