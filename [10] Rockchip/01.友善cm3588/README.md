@@ -17,7 +17,6 @@ sudo -i
 ```
 passwd root
 # 连续输入两次新密码
-password admin
 ```
 ### ⭐更新软件列表和软件源
 ```
