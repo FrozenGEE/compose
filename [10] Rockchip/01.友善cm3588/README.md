@@ -164,33 +164,7 @@ OMV在WebUI上安装compose插件，插件安装后配置一下即可安装成�
 
 此处缺图
 
-通过apt安装
-```
-apt install -y docker.io
-```
-Docker官方一键安装脚本，使用官方源安装(国内直接访问较慢)
-```
-curl -fsSL https://get.docker.com | bash
-```
-使用阿里源安装
-```
-curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
-```
-使用中国区Azure源安装
-```
-curl -fsSL https://get.docker.com | bash -s docker --mirror AzureChinaCloud
-```
-一键安装最新版Docker Compose
-```
-COMPOSE_VERSION=`git ls-remote https://github.com/docker/compose | grep refs/tags | grep -oP "[0-9]+\.[0-9][0-9]+\.[0-9]+$" | sort --version-sort | tail -n 1`
-sh -c "curl -L https://github.com/docker/compose/releases/download/v${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
-chmod +x /usr/local/bin/docker-compose
-```
-2、设置自启动Docker
-```
-systemctl enable --now docker
-```
-3、配置国内镜像源
+2、配置国内镜像源
 
 [国内 Docker 服务状态 & 镜像加速监控](http://status.kggzs.cn/status/docker)
 ```
@@ -216,11 +190,7 @@ EOF
 # 重启 Docker 服务以使配置生效
 systemctl restart docker
 ```
-4、查看docker和compose版本
-```
-docker version && docker compose version
-```
-5、docker 拉取镜像
+3、docker 拉取镜像
 
 格式：docker pull 镜像源/作者名/镜像名:标签
 - lscr.io，docker.1ms.run，k-docker.asia 为镜像源，也可以叫镜像仓库，可以自建
@@ -231,7 +201,7 @@ docker pull lscr.io/linuxserver/qbittorrent:latest
 docker pull k-docker.asia/hslr/sun-panel:beta
 docker pull docker.1ms.run/dpanel/dpanel:lite
 ```
-6、docker 命令
+4、docker 命令
 | 命令 | 含义 | 命令 | 含义 |
 | :---- | :---- | :---- | :---- |
 | docker ps | 查看部署的docker容器 | docker images ps | 查看本地镜像 |
@@ -258,7 +228,7 @@ https://docker.1panel.live
 https://dockerproxy.1panel.live
 https://proxy.1panel.live
 ```
-### ⭐香橙派5Plus docker部署推荐
+### ⭐友善cm3588 docker部署推荐
 | docker | 用途 | docker | 用途 | docker | 用途 |
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | dpanel<br>portainer | docker管理器 | ddns-go | 域名解析 | lucky | 域名解析、反代、SSL<br>webdav、ftp、内置filebrower |
@@ -273,8 +243,6 @@ https://proxy.1panel.live
 | bili-sync-rs | B站收藏夹下载 | siyuan-note | 思源笔记 | vaultwarden | 密码库 |
 | vocechat | 聊天室 | synctv | 和朋友一起看视频 | smokeping | 网络性能监控工具 |
 | admin<br>mariadb<br>postgresql<br>redis| 数据库套装 | minio | 对象存储 | kms-server | 微软激活器 |
-
-
 ### ⭐香橙派5Plus jellyfin硬件转码
 - 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
 
