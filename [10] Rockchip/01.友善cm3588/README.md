@@ -18,6 +18,21 @@ sudo -i
 passwd root
 # 连续输入两次新密码
 ```
+### ⭐替换apt源为清华apt源
+来源：https://www.cnblogs.com/lcxhk/p/14951334.html
+```
+echo "[Info] 正在备份默认apt源..."
+cp /etc/apt/sources.list /etc/apt/sources.list.bak
+echo "[Info] 正在替换apt源为清华apt源..."
+echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse > /etc/apt/sources.list
+echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse >> /etc/apt/sources.list
+echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse >> /etc/apt/sources.list
+echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse >> /etc/apt/sources.list
+echo "[Info] 正在更新源..."
+apt update
+echo "[Info] 正在更新软件..."
+apt upgrade -y
+```
 ### ⭐更新软件列表和软件源
 ```
 apt update && apt upgrade -y
@@ -142,21 +157,6 @@ cat /proc/version
 此处缺图
 
 5、重启一次系统
-### ⭐替换apt源为清华apt源
-来源：https://www.cnblogs.com/lcxhk/p/14951334.html
-```
-echo "[Info] 正在备份默认apt源..."
-cp /etc/apt/sources.list /etc/apt/sources.list.bak
-echo "[Info] 正在替换apt源为清华apt源..."
-echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse > /etc/apt/sources.list
-echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse >> /etc/apt/sources.list
-echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse >> /etc/apt/sources.list
-echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse >> /etc/apt/sources.list
-echo "[Info] 正在更新源..."
-apt update
-echo "[Info] 正在更新软件..."
-apt upgrade -y
-```
 ### ⭐docker 相关
 1、docker 安装
 
