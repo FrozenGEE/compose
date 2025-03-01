@@ -211,7 +211,7 @@ docker pull docker.1ms.run/dpanel/dpanel:lite
 * stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
 ### ⭐部署 dpanel —— docker管理器
 ```
-sudo docker run -it -d --name dpanel --restart=always -p 8807:8080 -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/emmc/docker/dpanel:/dpanel dpanel/dpanel:lite
+sudo docker run -it -d --name dpanel --restart=always -p 8807:8080 -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/ssd/docker/dpanel:/dpanel dpanel/dpanel:lite
 ```
 ### ⭐dpanel 替换加速源
 ```
