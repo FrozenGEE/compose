@@ -141,7 +141,7 @@ cat /proc/version
 ```
 此处缺图
 
-5、WebUI刷新即可
+5、重启一次系统
 ### ⭐替换apt源为清华apt源
 来源：https://www.cnblogs.com/lcxhk/p/14951334.html
 ```
