@@ -14,6 +14,21 @@ whoami
 sudo -i
 # 后续命令默认root执行
 ```
+### ⭐替换apt源为清华apt源
+来源：https://www.cnblogs.com/lcxhk/p/14951334.html
+```
+echo "[Info] 正在备份默认apt源..."
+cp /etc/apt/sources.list /etc/apt/sources.list.bak
+echo "[Info] 正在替换apt源为清华apt源..."
+echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse > /etc/apt/sources.list
+echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse >> /etc/apt/sources.list
+echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse >> /etc/apt/sources.list
+echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse >> /etc/apt/sources.list
+echo "[Info] 正在更新源..."
+apt update
+echo "[Info] 正在更新软件..."
+apt upgrade -y
+```
 ### ⭐更新软件列表和软件源
 ```
 apt update && apt upgrade -y
@@ -26,7 +41,7 @@ apt install -y vim
 ```
 2、批量安装
 ```
-apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo neofetch btop ncdu
+apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo neofetch btop ncdu lsof
 # apt install -y 软件名1 软件名2 软件名3 软件名4 软件名5
 ```
 3、安装deb软件包，使用 apt 会自动处理依赖问题，无需额外操作
@@ -132,21 +147,6 @@ usermod -aG 组名 用户名
 ```
 usermod -G "保留组列表" 用户名
 ```
-### ⭐替换apt源为清华apt源
-来源：https://www.cnblogs.com/lcxhk/p/14951334.html
-```
-echo "[Info] 正在备份默认apt源..."
-cp /etc/apt/sources.list /etc/apt/sources.list.bak
-echo "[Info] 正在替换apt源为清华apt源..."
-echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse > /etc/apt/sources.list
-echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse >> /etc/apt/sources.list
-echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse >> /etc/apt/sources.list
-echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse >> /etc/apt/sources.list
-echo "[Info] 正在更新源..."
-apt update
-echo "[Info] 正在更新软件..."
-apt upgrade -y
-```
 ### ⭐docker 相关
 1、docker 安装
 
@@ -223,22 +223,67 @@ docker pull docker.1ms.run/dpanel/dpanel:lite
 | docker rm 容器ID或容器名 | 删除某个容器 |
 | docker tag 旧镜像名字 新镜像名 | 修改镜像名字<br>注意是完整的docker镜像名字 |
 * stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
-### ⭐VPU
-```
-lsmod | grep -E "vpu|npu"
-# 检查已加载的内核模块
-dmesg | grep -iE "vpu|rkvdec|rkvenc"
-# 通过内核日志查看与VPU相关的驱动加载信息，驱动名称如 rkvdec(解码)或 rkvenc(编码)会显示在日志中
-cat /sys/class/vpu/vpu/version
-
-apt update && sudo apt install -y clinfo && clinfo
-# 用 clinfo 检查主机上的 OpenCL (GPU 固件)
-docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_device rkmpp=rk -init_hw_device opencl=ocl@rk
-# 要验证 OpenCL 运行时在 docker 容器内是否正常工作，您可以运行此命令，第一个 jellyfin 为容器名字
-# watch -n 1 cat /sys/kernel/debug/rkrga/load
-# 视频转码时，使用命令检查RGA引擎的占用情况
-```
+### ⭐香橙派5Plus jellyfin硬件转码
 - 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
+
+1、确保设备中存在 mpp、rga、dri、dma_heap，否则请将 BSP 内核升级到 5.10 LTS 及更高版本，运行此命令
+```
+$ ls -l /dev | grep -E "mpp|rga|dri|dma_heap"
+
+drwxr-xr-x  2 root       root          80 Jan  1  1970 dma_heap
+drwxr-xr-x  3 root       root         140 Jan 18 18:50 dri
+crw-rw----  1 root       video   241,   0 Jan 18 18:50 mpp_service
+crw-rw----  1 root       video    10, 122 Jan 18 18:50 rga
+```
+2、在主机上安装 ARM Mali OpenCL 
+
+对于Ubuntu-Rockchip和Armbian上的6.1 LTS内核以及旧版5.10 LTS内核，请安装v1.9-1-2d267b0
+
+https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-2d267b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
+
+对于其他 SBC 供应商制作的发行版上的 6.1 LTS 内核，请安装 v1.9-1-55611b0
+
+https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-55611b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
+
+以下为安装命令，请根据实际情况修改
+```
+mkdir -p ~/tmp/libmali && cd ~/tmp/libmali
+wget 'https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-2d267b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb'
+sudo dpkg -i ./libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
+```
+3、用 clinfo 检查主机上的 OpenCL (GPU 固件)
+```
+apt update && sudo apt install -y clinfo && clinfo
+```
+4、部署 jellyfin
+详情见 [compose模板](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/02.%E9%A6%99%E6%A9%99%E6%B4%BE5plus/jellyfin-%E7%A7%81%E4%BA%BA%E5%AA%92%E4%BD%93%E5%BA%93.yml)
+
+5、要验证 OpenCL 运行时在 docker 容器内是否正常工作，您可以运行此命令，第一个 jellyfin 为容器名字
+```
+docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_device rkmpp=rk -init_hw_device opencl=ocl@rk
+```
+视频转码时，使用命令检查RGA引擎的占用情况
+```
+watch -n 1 cat /sys/kernel/debug/rkrga/load
+```
+检查 OpenCL 运行时状态
+```
+sudo /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_device rkmpp=rk -init_hw_device opencl=ocl@rk
+
+arm_release_ver: g13p0-01eac0, rk_so_ver: 10
+[AVHWDeviceContext @ 0xaaaae8321360] 1 OpenCL platforms found.
+[AVHWDeviceContext @ 0xaaaae8321360] 1 OpenCL devices found on platform "ARM Platform".
+[AVHWDeviceContext @ 0xaaaae8321360] 0.0: ARM Platform / Mali-G610 r0p0
+[AVHWDeviceContext @ 0xaaaae8321360] cl_arm_import_memory found as platform extension.
+[AVHWDeviceContext @ 0xaaaae8321360] cl_khr_image2d_from_buffer found as platform extension.
+[AVHWDeviceContext @ 0xaaaae8321360] DRM to OpenCL mapping on ARM function found (clImportMemoryARM).
+...
+```
+通过内核日志查看与VPU相关的驱动加载信息，驱动名称如 rkvdec(解码)或 rkvenc(编码)会显示在日志中
+```
+cat /sys/class/vpu/vpu/version
+```
+也可以通过查看cpu占用情况确认是否硬件转码，如果cpu100%占用，则是cpu软件转码
 ### ⭐NPU
 查看NPU版本
 ```
