@@ -128,7 +128,7 @@ cat /proc/version
 
 此处缺图
 
-4、输入```nano /etc/openmedaivault/config.yaml```，找到下图内容，修改好，退出保存(按 Ctrl+X，回车键，Y)，
+4、输入```nano /etc/openmediavault/config.xml```，找到下图内容，修改好，退出保存(按 Ctrl+X，回车键，Y)，
 ```
 /srv/dev/disk-by-uuid/2692a155-0242-4c73-b968-159e0656471c
 修改为
