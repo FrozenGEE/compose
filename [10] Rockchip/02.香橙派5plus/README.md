@@ -1,4 +1,4 @@
-# 香橙派5Plus 折腾笔记
+# 香橙派5Plus Debian12 折腾笔记
 [遇事不决问deepseek](https://chat.deepseek.com)
 
 [armbian系统入门](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/Armbian.md)
