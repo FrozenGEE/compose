@@ -120,7 +120,7 @@ cat /proc/version
 
 此处缺图
 
-### ⭐修改OMV阵列存储路径
+### ⭐修改OMV阵列存储池挂载路径
 1、打开ssh，此处用xshell和xftp作为演示，添加ssh登录信息，账号密码均为```pi```(根据实际情况填写，此乃友善cm3588初始账号pi默认密码，如有其他账号则使用其他账号)
 
 2、先 ```sudo -i``` 提权，然后再次输入pi的密码```pi```
@@ -161,6 +161,14 @@ apt upgrade -y
 ### ⭐docker 相关
 1、docker 安装
 
+OMV在WebUI上安装compose插件，插件安装后配置一下即可安装成功
+
+此处缺图
+
+通过apt安装
+```
+apt install -y docker.io
+```
 Docker官方一键安装脚本，使用官方源安装(国内直接访问较慢)
 ```
 curl -fsSL https://get.docker.com | bash
