@@ -1,0 +1,28 @@
+# 官方文档
+# https://github.com/jiangrui1994/cloudsaver
+
+# 资源搜索需要配置代理环境，WebUI上可以设置
+# 默认注册码：管理员为230713，普通用户为9527，WebUI上可以设置修改
+
+---
+version: "3"
+# 最后编辑时间：2025-03-06
+services:
+  cloudsaver:
+    image: ghcr.io/jiangrui1994/cloudsaver:latest
+    # 镜像地址，正式版tag为latest，测试版为test
+    container_name: cloudsaver
+    # 容器名字
+    hostname: cloudsaver
+    # 主机名
+    volumes:
+      - /Volume1/User/docker/cloudsaver:/app/data
+      # 配置文件目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8008:8008/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
