@@ -1,0 +1,40 @@
+# 官方文档
+# https://hub.docker.com/r/cnflysky/redroid-rk3588
+# https://github.com/CNflysky/redroid-rk3588
+# https://github.com/CNflysky/redroid-rk3588/blob/main/README_zh.md
+
+# 请先详细阅读官方文档，该镜像仅在此配置上测试正常运行： Orange Pi 5 Plus (16G RAM) ，运行 Debian GNU/Linux 12 (bookworm) ，内核版本 Linux 5.10.160-rockchip-rk3588 (默认自带内核) ，Docker版本 20.10.24+dfsg1
+# 需要通过 scrcpy(adb) 连接才可以访问设备
+
+---
+version: "3"
+# 最后编辑时间：2025-03-06
+services:
+  redroid-rk3588:
+    image: cnflysky/redroid-rk3588:lineage-20
+    # 镜像地址
+    container_name: redroid-rk3588
+    # 容器名字
+    hostname: redroid-rk3588
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    deploy:
+      resources:
+        limits:
+          memory: 8096M
+          cpus: '4'
+          # 限制容器最多可以使用主机上4个CPU，物理内存最高占用为8g，根据实际情况限制，比较吃资源
+    command: androidboot.redroid_height=1920 androidboot.redroid_width=1080 androidboot.redroid_magisk=0
+    # 如需设置更多安卓系统参数，详细看官方github文档，默认预装GAPPS，Magisk-Kitsune(默认为0不启用)
+    volumes:
+      - /mnt/emmc/docker/redroid-rk3588:/data
+      # 数据存放目录
+    network_mode: bridge
+    ports:
+      - 6666:5555/tcp
+      # scrcpy(adb) 远程连接端口，默认端口为5555，但提示已经占用，如果5555可用就写5555，提示占用就保持预设的6666
+      # 不存在WebUI，需要通过 scrcpy(adb) 连接才可以访问设备
+    restart: no
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    # 初次部署建议使用 no 不自启动，按照实际需要选择是否常态自启动，毕竟比较吃资源，部署来也就图一乐
