@@ -13,15 +13,15 @@ version: "3.7"
 # 最后编辑时间：2025-03-06
 services:
   searxng:
-    image: paulgoio/searxng:production
+    image: searxng/searxng:latest
     # 镜像地址
     container_name: searxng
     # 容器名字
     hostname: searxng
     # 主机名
     volumes:
-      - 【这里替换为你的docker数据存放目录】/docker/searxng:/etc/searxng
-      # 配置文件目录
+      - 【这里替换为你的docker数据存放目录】/searxng:/etc/searxng
+      # 配置文件目录，如有更多内容需要自定义修改，可修改目录下的setting.yml
     environment:
       - TZ=Asia/Shanghai
       # 时区
