@@ -3,7 +3,7 @@
 # https://docs.searxng.org
 # https://github.com/searxng/searxng
 # https://github.com/searxng/searxng-docker
-# https://hub.docker.com/r/c
+# https://hub.docker.com/r/searxng/searxng
 
 # 本模板仅部署本体服务，不链接redis
 # 教程：https://blog.laoda.de/archives/docker-compose-install-searxng
