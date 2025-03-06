@@ -3,7 +3,7 @@
 # https://docs.searxng.org
 # https://github.com/searxng/searxng
 # https://github.com/searxng/searxng-docker
-# https://hub.docker.com/r/searxng/searxng
+# https://hub.docker.com/r/c
 
 # 本模板仅部署本体服务，不链接redis
 # 教程：https://blog.laoda.de/archives/docker-compose-install-searxng
@@ -13,7 +13,7 @@ version: "3.7"
 # 最后编辑时间：2025-03-06
 services:
   searxng:
-    image: paulgoio/searxng:production
+    image: searxng/searxng:latest
     # 镜像地址
     container_name: searxng
     # 容器名字
