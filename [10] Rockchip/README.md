@@ -147,6 +147,18 @@ usermod -aG 组名 用户名
 ```
 usermod -G "保留组列表" 用户名
 ```
+11、修改用户名字
+```
+usermod -u 新用户名 旧用户名
+```
+12、修改用户uid
+```
+usermod -u 新UID 用户名
+```
+12、修改用户的组名
+```
+groupmod -n 新组名 旧组名
+```
 ### ⭐docker 相关
 1、docker 安装
 
