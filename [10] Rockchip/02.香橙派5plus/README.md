@@ -1,7 +1,7 @@
 # 香橙派5Plus Debian12 折腾笔记
 ```
 硬件配置
-✨ CPU：瑞芯微 rk3588 4核(Cortex-A76 + Cortex-A55*4)
+✨ CPU：瑞芯微 rk3588 8核(Cortex-A76*4 + Cortex-A55*4)
 ✨ RAM：4/8/16G (LPDDR4/4X)
 ✨ ROM：eMMC 闪存插座 (可选16G/32G/64G/128G/256G), 支持2280的NVME PCIe x4插槽, SD卡槽
 ✨ 数据接口：USB3.0 Type-C *1 , USB3.0 *2, USB2.0 *2
