@@ -1,0 +1,87 @@
+# 官方文档
+# https://github.com/stream-rec/stream-rec
+# https://hub.docker.com/r/streamrec/stream-rec
+# https://hub.docker.com/r/streamrec/stream-rec-front
+# https://www.xzb5.com/tutorial/5254.html
+
+# 账号为stream-rec，模板预设密码为123456，初始化会要求重新设置
+
+---
+version: "3"
+# 最后编辑时间：2025-03-10
+services:
+  stream-rec-frontend:
+    image: streamrec/stream-rec-front:latest
+    # 镜像地址，latest是最新稳定内测版本，dev 是最新开发版
+    container_name: stream-rec-frontend
+    # 容器名字
+    hostname: stream-rec-frontend
+    # 主机名
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+      - API_URL=http://localhost:12555/api
+      - WS_API_URL=ws://localhost:12555/live/update
+      # 后端api地址，以及WS_API_URL，客户端websocket url，用于实时状态更新
+      # localhost:12555 替换为 后端的IP地址 和 后端的端口，如果用host网络模式可以保持默认
+      - AUTH_TRUST_HOST=true
+      # 是否存在反代，列如NGINX，建议打开，NEXT_AUTH暂时有bug
+      - AUTH_SECRET=123456
+      # 加密密钥，用于next-auth，预设为123456
+      # - NEXT_PUBLIC_BASE_URL=https://abc.xyz
+      # 域名基础URL，用于next-auth重定向登录页面
+      # - NEXT_PUBLIC_BASE_PATH=/webui
+      # 域名自定义路径，无需求不要填写
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 15275:15275/tcp
+      # 前端 WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    depends_on:
+      - stream-rec-backend
+      # 关联后端容器
+
+
+  stream-rec-backend:
+    image: streamrec/stream-rec:latest
+    # 镜像地址，latest是最新稳定内测版本，dev 是最新开发版
+    container_name: stream-rec-backend
+    # 容器名字
+    hostname: stream-rec-backend
+    # 主机名
+    volumes:
+      - /sahre/Container/stream-rec:/opt/records
+      # 录像存放位置
+      # - 【Rclone 配置文件路径】:/root/.config/rclone
+      # 对应 Rclone 配置文件路径，如果不需要可以不启用
+    environment:
+      - LOGIN_SECRET=123456
+      # 初始化登录密钥，您可以将其更改为任何您喜欢的字符串, 用于登录
+      # 请注意，该密钥只有第一次运行时有效，后续更改不会生效，预设为123456
+      - DB_PATH=/opt/records
+      # 容器数据库路径
+      - DOWNLOAD_PATH=/opt/records
+      # 容器第一次初始化下载路径
+      # - HTTP_PROXY=http://127.0.0.1:7890
+      # 代理设置，只支持http代理
+      - LOG_LEVEL=INFO
+      # 日志级别，默认为info。调试日志对于调试非常有用，但可能非常冗长。 遇到问题时，您可以将其更改为debug。
+      - PGID=1000
+      - PUID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1000，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 12555:12555/tcp
+      # 后端访问端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
