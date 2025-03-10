@@ -5,7 +5,7 @@
 ✨ RAM：4/8/16G (LPDDR4/4X)
 ✨ ROM：eMMC 闪存插座 (可选16G/32G/64G/128G/256G), 支持2280的NVME PCIe x4插槽, SD卡槽
 ✨ 数据接口：USB3.0 Type-C *1 , USB3.0 *2, USB2.0 *2
-✨ 网络接口：2.5G网口 *2
+✨ 网络接口：2.5G 网口 *2
 ✨ 无线WIFI&蓝牙：2230 Wi-Fi 6/BT模块的M.2插槽
 ✨ 显示：HDMI输入口 *2, HDMI输出口 *2
 ```
