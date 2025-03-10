@@ -45,6 +45,79 @@ apt upgrade -y
 ```
 apt update && apt upgrade -y
 ```
+### ⭐安装常用软件(按需选择)
+1、安装单个
+```
+apt install -y vim
+# apt install -y 软件名
+```
+2、批量安装
+```
+apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo neofetch btop ncdu
+# apt install -y 软件名1 软件名2 软件名3 软件名4 软件名5
+```
+3、安装deb软件包，使用 apt 会自动处理依赖问题，无需额外操作
+```
+apt install ./包名.deb
+```
+4、检查是否安装成功
+```
+5、dpkg -l | grep 包名.deb
+```
+6、卸载 .deb 包
+```
+apt remove 包名.deb
+```
+7、完全移除软件包及其配置文件
+```
+apt purge 包名.deb
+```
+### ⭐安装 x-cmd (个人自用)
+```
+eval "$(wget -O- https://get.x-cmd.com)"
+```
+### ⭐查看命令
+```
+ls：列出当前目录下的文件和目录
+ls -l：以长格式列出文件和目录，显示详细信息(权限、所有者、大小、修改时间等)
+# ll 命令是 ls -l 的别名，如果 ll 不能使用，见下操作
+ls -a：列出所有文件和目录，包括隐藏文件(以 . 开头的文件)
+ls -la 或 ls -al：以长格式列出所有文件和目录，包括隐藏文件
+ls -h：与 -l 一起使用，以人类可读的格式显示文件大小(如 KB、MB)
+ls -R：递归列出子目录中的内容
+```
+### ⭐为 ll 设置别名
+1. 编辑 Shell 配置文件
+
+根据你使用的 Shell，编辑对应的配置文件
+```
+nano ~/.bashrc  # 如果使用 Bash
+nano ~/.zshrc   # 如果使用 Zsh
+```
+2. 添加别名
+
+在文件末尾添加以下内容
+```
+alias ll='ls -l'
+```
+3. 使配置生效
+
+保存并退出编辑器(按ctrl+X，Y，回车键)，然后运行以下命令使配置生效
+```
+source ~/.bashrc  # 如果使用 Bash
+source ~/.zshrc   # 如果使用 Zsh
+```
+### ⭐清屏
+```
+clear
+```
+### ⭐查看内核的命令
+```
+uname -srm
+hostnamectl | grep -i kernel
+cat /proc/version
+# 以上三条均可
+```
 ### ⭐EMMC/TF/M2挂载到本地/mnt中
 用于单盘NAS挂载存储介质到本地，docker容器的配置文件夹目录均存储在此处，统一路径，此处以香橙派5plus+官方debian系统+加装EMMC和M2 SSD为例
 
@@ -221,7 +294,7 @@ docker pull docker.1ms.run/dpanel/dpanel:lite
 * stop和kill的主要区别：stop给与一定的关闭时间交由容器自己保存状态，kill直接关闭容器
 ### ⭐部署 dpanel —— docker管理器
 ```
-sudo docker run -it -d --name dpanel --restart=always -p 8807:8080 -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/emmc/docker/dpanel:/dpanel dpanel/dpanel:lite
+sudo docker run -it -d --name dpanel --restart=always -p 8807:8080 -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/emmc/docker/dpanel:/dpanel registry.cn-hangzhou.aliyuncs.com/dpanel/dpanel:lite
 ```
 ### ⭐dpanel 替换加速源
 ```
