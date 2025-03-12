@@ -1,6 +1,4 @@
 # 【NAS第一个用户的权限说明】
-通常来说，这个账号可以smb访问，但有的NAS安装过程或者初始化中进行预设
-
 unRAID，TruNAS的WebUI登录的账号是root账号，需要手动创建才有
 
 OMV的WebUI登录的账号是admin账号，默认密码是openmediavault，登录后记得第一时间修改
