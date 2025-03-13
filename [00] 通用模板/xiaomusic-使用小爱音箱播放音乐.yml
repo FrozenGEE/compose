@@ -41,7 +41,7 @@ services:
     hostname: xiaomusic
     # 主机名
     volumes:
-      - /xiaomusic:/app/conf
+      - 【这里替换为你的docker数据存放目录】/xiaomusic:/app/conf
       # 配置文件目录
       - 【这里替换为你的音乐库目录】:/app/music
       # 音乐库，如有多个目录可以按照以下格式增添多个
