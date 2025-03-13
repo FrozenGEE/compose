@@ -29,10 +29,10 @@
 ```
 
 ```shell
-💡威联通的docker数据文件目录存放路径及其加速源文件
-cd /share/CACHEDEV1_DATA/.qpkg/container-station/bin/
-cd ../etc
-vi docker.json
+💡威联通的docker数据文件目录存放路径
+/share/CACHEDEV1_DATA/.qpkg/container-station
+💡威联通的docker配置文件存放路径，可用于添加加速源
+/share/CACHEDEV1_DATA/.qpkg/container-station/etc/docker.json
 
 💡威联通的docker容器配置文件目录存放路径
 /share/Container/emby
