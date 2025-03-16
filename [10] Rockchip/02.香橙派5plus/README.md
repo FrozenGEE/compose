@@ -22,7 +22,7 @@ passwd root
 ```
 ### ⭐删除自带用户 orangerpi 同时删除主目录及相关文件(/home/orangerpi)
 ```
-pkill -KILL -u orangerpi && userdel -r orangerpi
+pkill -KILL -u orangepi && userdel -r orangepi
 ```
 ### ⭐创建用户UID和家目录
 ```
