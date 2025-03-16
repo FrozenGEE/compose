@@ -1,7 +1,7 @@
 ##################################################
 # 官方文档
 # https://jellyfin.org
-
+# 
 # https://github.com/jellyfin/jellyfin
 # https://hub.docker.com/r/jellyfin/jellyfin
 
@@ -66,9 +66,10 @@
 # 对于其他 SBC 供应商制作的发行版上的 6.1 LTS 内核，请安装 v1.9-1-55611b0
 # https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-55611b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
 
-# 以下为安装命令，请根据实际情况修改，作用为下载deb包到本地/mnt下，然后安装
-# sudo wget -O /mnt/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb 'https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-2d267b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb'
-# sudo dpkg -i /mnt/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
+# 以下为安装命令，请根据实际情况修改
+# mkdir -p ~/tmp/libmali && cd ~/tmp/libmali
+# wget 'https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-2d267b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb'
+# sudo dpkg -i ./libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
 
 ##################################################
 # 要验证 OpenCL 运行时在 docker 容器内是否正常工作，运行此命令
@@ -87,11 +88,11 @@
 ##################################################
 
 version: "3"
-# 最后编辑时间：2025-03-17
+# 最后编辑时间：2025-02-25
 services:
   jellyfin:
-    # image: jellyfin/jellyifn:latest
-    image: nyanmisaka/jellyfin:latest-rockchip
+    image: jellyfin/jellyfin:latest
+    # image: nyanmisaka/jellyfin:latest-rockchip
     # 镜像地址，也可选官方镜像，但要自己解决一些问题，例如文字显示▢▢▢▢▢的问题
     # 官方镜像：jellyfin/jellyifn:latest
     # nyanmisaka大佬镜像：nyanmisaka/jellyfin:latest-rockchip
@@ -115,7 +116,7 @@ services:
       - /mnt/emmc/docker/docker/jellyfin/cache:/cache
       # 缓存目录
       - /mnt/emmc/docker/字体库:/fonts
-      # 字体目录，非必须，记得在设置中设置字幕字体使用/fonts，可修复官方镜像中文字符问题
+      # 字体目录，非必须，记得在设置中设置字幕字体使用/fonts
       - /dev/shm:/config/transcodes
       # 使用内存作为转码缓冲目录，推荐至少8G才使用
     environment:
