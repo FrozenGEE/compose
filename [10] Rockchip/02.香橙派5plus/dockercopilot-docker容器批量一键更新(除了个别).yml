@@ -5,7 +5,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2025-02-25
+# 最后编辑时间：2025-03-17
 services:
   dockercopilot:
     image: 0nlylty/dockercopilot:UGREEN-DEV
@@ -26,7 +26,7 @@ services:
       # 密码，需要大于八位且非纯数字，预设为orangepi5plus，请自行修改
       - DOCKER_HOST=unix:///var/run/docker.sock
       # 不动，照抄，必须
-      - hubURL=https://docker.1ms.com
+      - hubURL=https://k-docker.asia
       # 使用dockerhub加速源，以便于更好拉取镜像，可自行替换
     # network_mode: bridge
     network_mode: host
