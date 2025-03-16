@@ -66,10 +66,9 @@
 # 对于其他 SBC 供应商制作的发行版上的 6.1 LTS 内核，请安装 v1.9-1-55611b0
 # https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-55611b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
 
-# 以下为安装命令，请根据实际情况修改
-# mkdir -p ~/tmp/libmali && cd ~/tmp/libmali
-# wget 'https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-2d267b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb'
-# sudo dpkg -i ./libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
+# 以下为安装命令，请根据实际情况修改，作用为下载deb包到本地/mnt下，然后安装
+# sudo wget -O /mnt/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb 'https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-2d267b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb'
+# sudo dpkg -i /mnt/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
 
 ##################################################
 # 要验证 OpenCL 运行时在 docker 容器内是否正常工作，运行此命令
