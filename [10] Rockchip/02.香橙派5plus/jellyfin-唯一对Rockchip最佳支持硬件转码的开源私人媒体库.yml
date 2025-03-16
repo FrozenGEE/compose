@@ -98,8 +98,8 @@ services:
     # nyanmisaka大佬镜像：nyanmisaka/jellyfin:latest-rockchip
     container_name: jellyfin
     # 容器名字
-    hostname: jellyfin
-    # 主机名
+    hostname: OrangePi5Plus
+    # 主机名，此处修改为设备名字
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限，必须
     command: 
