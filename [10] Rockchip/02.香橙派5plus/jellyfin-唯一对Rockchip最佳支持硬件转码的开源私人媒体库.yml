@@ -88,9 +88,10 @@
 ##################################################
 
 version: "3"
-# 最后编辑时间：2025-02-25
+# 最后编辑时间：2025-03-17
 services:
   jellyfin:
+    # image: jellyfin/jellyifn:latest
     image: nyanmisaka/jellyfin:latest-rockchip
     # 镜像地址，也可选官方镜像，但要自己解决一些问题，例如文字显示▢▢▢▢▢的问题
     # 官方镜像：jellyfin/jellyifn:latest
@@ -107,15 +108,17 @@ services:
       h265e ; do [ -e "/dev/$dev" ] && echo " --device /dev/$dev"; done`'
     # 照抄，必须
     volumes:
-      - /home/orangepi/docker/jellyfin/config:/config
+      - /mnt/emmc/docker/jellyfin/config:/config
       # 配置文件目录
-      - /home/orangepi:/media
+      - /mnt:/media
       # 可以自定义，可以写多个
       # - 【这里替换为你的媒体库的目录】:/【这里替换为你的媒体库的目录的名字】
-      - /home/orangepi/docker/jellyfin/cache:/cache
+      - /mnt/emmc/docker/docker/jellyfin/cache:/cache
       # 缓存目录
-      - /home/orangepi/字体库:/fonts
-      # 字体目录，非必须，记得在设置中设置字幕字体使用/fonts
+      - /mnt/emmc/docker/字体库:/fonts
+      # 字体目录，非必须，记得在设置中设置字幕字体使用/fonts，可修复官方镜像中文字符问题
+      - /dev/shm:/config/transcodes
+      # 使用内存作为转码缓冲目录，推荐至少8G才使用
     environment:
       - TZ=Asia/Shanghai
       # 时区
