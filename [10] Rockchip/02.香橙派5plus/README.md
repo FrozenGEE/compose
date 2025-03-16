@@ -286,7 +286,14 @@ docker pull lscr.io/linuxserver/qbittorrent:latest
 docker pull k-docker.asia/hslr/sun-panel:beta
 docker pull docker.1ms.run/dpanel/dpanel:lite
 ```
-6、docker 命令
+6、将用户加入docker组
+
+如果遇到权限问题，将用户添加到 docker 组
+```
+usermod -aG docker rk3588
+# sudo usermod -aG docker 用户名
+```
+7、docker 命令
 | 命令 | 含义 | 命令 | 含义 |
 | :---- | :---- | :---- | :---- |
 | docker ps | 查看部署的docker容器 | docker images ps | 查看本地镜像 |
