@@ -94,7 +94,7 @@ services:
     image: jellyfin/jellyfin:latest
     # image: nyanmisaka/jellyfin:latest-rockchip
     # 镜像地址，也可选官方镜像，但要自己解决一些问题，例如文字显示▢▢▢▢▢的问题
-    # 官方镜像：jellyfin/jellyifn:latest
+    # 官方镜像：jellyfin/jellyfin:latest
     # nyanmisaka大佬镜像：nyanmisaka/jellyfin:latest-rockchip
     container_name: jellyfin
     # 容器名字
