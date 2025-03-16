@@ -93,7 +93,7 @@ services:
   jellyfin:
     image: nyanmisaka/jellyfin:latest-rockchip
     # 镜像地址，也可选官方镜像，但要自己解决一些问题，例如文字显示▢▢▢▢▢的问题
-    # 官方镜像：jellyfin/jellyifn:latest
+    # 官方镜像：jellyfin/jellyfin:latest
     # nyanmisaka大佬镜像：nyanmisaka/jellyfin:latest-rockchip
     container_name: jellyfin
     # 容器名字
@@ -116,6 +116,8 @@ services:
       # 缓存目录
       # - 【这里替换为你的字体文件存放目录】:/fonts
       # 字体目录，非必须，记得在设置中设置字幕字体使用/fonts
+      # - /dev/shm:/config/transcodes
+      # 使用内存作为转码缓冲目录，推荐至少8G才使用，默认不启用
     environment:
       - TZ=Asia/Shanghai
       # 时区
