@@ -1,3 +1,4 @@
+
 # 官方文档
 # https://netbird.io
 # https://docs.netbird.io/how-to/installation#installation
@@ -12,14 +13,14 @@
 
 ---
 version: "3"
-# 最后编辑时间：2025-02-25
+# 最后编辑时间：2025-03-17
 services:
   netbird:
     image: netbirdio/netbird:latest
     # 镜像地址
     container_name: netbird
     # 容器名字
-    hostname: OrangePiPlus
+    hostname: OrangePi5Plus
     # 主机名，此处修改为设备名字
     cap_add:
       - NET_ADMIN
