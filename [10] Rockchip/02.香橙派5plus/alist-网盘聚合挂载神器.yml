@@ -22,6 +22,8 @@ services:
     # 容器名字
     hostname: alist
     # 主机名
+    # privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
       - /mnt/emmc/docker/alist:/opt/alist/data
       # 配置目录
