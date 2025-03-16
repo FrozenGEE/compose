@@ -1,4 +1,4 @@
-##################################################
+fin##################################################
 # 官方文档
 # https://jellyfin.org
 # https://github.com/jellyfin/jellyfin
@@ -97,7 +97,7 @@ services:
     container_name: jellyfin
     # 容器名字
     hostname: jellyfin
-    # 主机名
+    # 主机名，此处修改为设备名字
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限，必须
     command: 
@@ -115,6 +115,8 @@ services:
       # 缓存目录
       # - 【这里替换为你的字体文件存放目录】:/fonts
       # 字体目录，非必须，记得在设置中设置字幕字体使用/fonts
+      - /dev/shm:/config/transcodes
+      # 使用内存作为转码缓冲目录，推荐至少8G才使用
     environment:
       - TZ=Asia/Shanghai
       # 时区
