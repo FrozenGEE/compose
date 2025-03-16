@@ -22,11 +22,6 @@ services:
     # 容器名字
     hostname: alist
     # 主机名
-    # privileged: true
-    # 赋予容器最高权限
-    # devices:
-      # - /dev/dri:/dev/dri
-      # 开启硬件转码
     volumes:
       - /mnt/emmc/docker/alist:/opt/alist/data
       # 配置目录
