@@ -14,6 +14,8 @@
 [armbian系统入门](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/Armbian.md)
 
 [香橙派 5 Plus 折腾笔记 | 空桑](https://www.hqshi.cn/info/ops/orange-pi-5-plus)
+### ⭐开机后不需要LED灯闪烁
+先使用```orangepi-config```命令进入香橙派配置程序，选择```System```→```Hardware```，然后使用空格键选中```opi5plus-disable-leds```配置、选中```<Save>```回车键保存即可，最后```<Reboot>```重启系统使其生效
 ### ⭐修改root密码
 ```
 passwd root
