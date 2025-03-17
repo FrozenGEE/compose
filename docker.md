@@ -60,7 +60,8 @@ sudo apt update
 ```
 apt-cache policy docker-ce
 ```
-你应该看到它指向 https://download.docker.com/，确保这就是官方的 Docker 仓库。
+你应该看到它指向```https://download.docker.com/```，确保这就是官方的 Docker 仓库
+
 6. 安装 Docker
 ```
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
