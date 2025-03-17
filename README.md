@@ -6,7 +6,6 @@
 - 直接armbian手搓NAS？很好，[香橙派5Plus(RK3588)](https://github.com/FrozenGEE/compose/tree/main/%5B10%5D%20Rockchip%2F02.%E9%A6%99%E6%A9%99%E6%B4%BE5plus)拿去参考
 - 单盘nas?oec?tn3568?荐片tv?这些内置单sata的当NAS?真不巧了，没有，说个笑话，oect我tm刷机一直boot失败，hhhhhhhh，其实可以参考上一条
 - 继续挖坑不填的dpanel
-- 自动化媒体库一条龙部署新增ani-rss，并添加修改不少内容
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
