@@ -7,7 +7,7 @@ Docker 支持以下的 64 位 Debian 版本：
 支持的架构包括 x86_64（amd64）、armhf、arm64 和 ppc64le
 
 ### ⭐卸载旧版本
-如果你之前安装过 Docker Engine 之前，你需要卸载旧版本，避免冲突：
+如果你之前安装过 Docker Engine 之前，你需要卸载旧版本，避免冲突
 ```
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
