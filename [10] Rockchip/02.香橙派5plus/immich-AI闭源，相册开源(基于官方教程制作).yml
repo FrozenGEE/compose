@@ -59,8 +59,8 @@ services:
       # 外部库目录，此文件夹将定期扫描，内容将自动导入immich，需要在immich上进行设置，容器路径可以自定义多个，理解映射就会明白了，默认为/usr/src/app/external
       # - 【这里替换为你的本地相册存放目录】:/【这里替换为你的本地相册存放目录的名字】
       # 自定义外部库目录，可以写多个，容器路径可随便自定义
-      - /mnt/emmc/immich/immich-machine-learning/i18n-iso-countries:/usr/src/app/node_modules/i18n-iso-countries
-      - /mnt/emmc/immich/immich-machine-learning/geodata:/build/geodata
+      - /mnt/emmc/docker/immich/immich-machine-learning/i18n-iso-countries:/usr/src/app/node_modules/i18n-iso-countries
+      - /mnt/emmc/docker/immich/immich-machine-learning/geodata:/build/geodata
       # immich相册反向地理编码设置为中文所需的路径
     environment:
       - IMMICH_PORT=2283
@@ -99,10 +99,8 @@ services:
     # 主机名
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
-      - 【这里替换为你的docker数据存放目录】/immich/immich-machine-learning:/cache
+      - /mnt/emmc/docker/immich/immich-machine-learning:/cache
       # clip与人脸识别模型的目录，推荐使用XLM-Roberta-Large-Vit-B-16Plus
       # 请将XLM-Roberta-Large-Vit-B-16Plus.zip解压缩后的XLM-Roberta-Large-Vit-B-16Plus文件夹放到/cache/clip内
       # 目录结构：/xxx/immich/immich-machine-learning/clip/XLM-Roberta-Large-Vit-B-16Plus
@@ -110,9 +108,6 @@ services:
     environment:
       - TZ=Asia/Shanghai
       # 时区
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES【=N卡的ID】
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       ####################
       #
       # 以下均为默认不需要修改，除非有特殊需要
@@ -142,7 +137,7 @@ services:
     hostname: immich-redis
     # 主机名
     volumes:
-      - 【这里替换为你的docker数据存放目录】/immich/immich-redis:/data
+      - /mnt/emmc/docker/immich/immich-redis:/data
       # 数据库目录
     network_mode: immich-net
     restart: unless-stopped
@@ -158,7 +153,7 @@ services:
     hostname: immich-pgsql
     # 主机名
     volumes:
-      - 【这里替换为你的docker数据存放目录】/immich/immich-pgsql:/var/lib/postgresql/data
+      - /mnt/emmc/docker/immich/immich-pgsql:/var/lib/postgresql/data
       # 数据库目录
     environment:
       - POSTGRES_DB=immich
