@@ -27,5 +27,5 @@ services:
     # ports:
       # - 8282:8282/tcp
       # 前端 WebUI 端口
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
