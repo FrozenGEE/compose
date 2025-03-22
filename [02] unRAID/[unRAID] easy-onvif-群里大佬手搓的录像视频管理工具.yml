@@ -17,9 +17,9 @@ services:
     hostname: easy-onvif
     # 主机名
     volumes:
-      - /mnt/user/appdata/onvif/config:/config
+      - /mnt/user/appdata/easy-onvif:/config
       # 配置文件目录
-      - /mnt/user/appdata/onvif/movie:/movie
+      - /mnt/user/easy-onvif:/movie
       # 录像存放目录
     # network_mode: bridge
     network_mode: host
