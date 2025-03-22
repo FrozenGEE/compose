@@ -65,5 +65,5 @@ services:
       # 用于 TURN 服务器通信
       # - 50000-50100:50000-50100/udp
       # 用于创建连接或 WebRTC
-    restart: unless-stopped
+    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
