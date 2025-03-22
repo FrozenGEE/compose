@@ -1,0 +1,31 @@
+# 官方文档
+# https://hub.docker.com/r/qq918652593/easy-onvif
+
+# 默认账号 admin，默认密码 adminadmin 
+
+# 太卷了，都手搓docker了，呜呜呜，群除我佬
+
+---
+version: "3"
+# 最后编辑时间：2025-03-22
+services:
+  easy-onvif:
+    image: qq918652593/easy-onvif:stable
+    # 镜像地址，仅支持amd64
+    container_name: easy-onvif
+    # 容器名字
+    hostname: easy-onvif
+    # 主机名
+    volumes:
+      - /Volume1/docker/onvif/config:/config
+      # 配置文件目录
+      - /Volume1/docker/onvif/movie:/movie
+      # 录像存放目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8282:8282/tcp
+      # 前端 WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
