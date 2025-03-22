@@ -1,0 +1,69 @@
+# 官方文档
+# https://www.ispyconnect.com/zh-cn
+# https://www.ispyconnect.com/zh-cn/docs/agent/about
+# https://hub.docker.com/r/mekayelanik/ispyagentdvr
+
+---
+version: "3"
+# 最后编辑时间：2025-03-09
+services:
+  ispyagentdvr:
+    image: mekayelanik/ispyagentdvr:latest
+    # 镜像地址
+    container_name: ispyagentdvr
+    # 容器名字
+    hostname: ispyagentdvr
+    # 主机名
+    devices:
+      - /dev/dri:/dev/dri
+     #  - /dev/kfd:/dev/kfd
+    # 调用核显，第二条属于AMD GPU，原书写如下，按照实际情况启用
+    ########################################
+    # 适用于Intel GPU和iGPU
+    # devices:
+    #   - /dev/dri/renderD128:/dev/dri/renderD128
+    #   - /dev/dri/card0:/dev/dri/card0
+    ########################################
+    # 适用于 AMD GPU 和 iGPU
+    # devices:
+    #   - /dev/dri/renderD128:/dev/dri/renderD128
+    #   - /dev/dri/card0:/dev/dri/card0
+    #   - /dev/kfd:/dev/kfd
+    ########################################
+    # 适用于 Rockchip SBC 的集成 VPU
+    # `for dev in dri dma_heap mali0 rga mpp_service \
+    #    iep mpp-service vpu_service vpu-service \
+    #    hevc_service hevc-service rkvdec rkvenc vepu h265e ; do \
+    #   [ -e "/dev/$dev" ] && echo " --device /dev/$dev"; \
+    #  done` 
+    ########################################
+    volumes:
+      - /Volume1/docker/ispyagentdvr/config:/AgentDVR/Media/XML
+      # 配置文件目录
+      - /Volume1/docker/ispyagentdvr/commands:/AgentDVR/Commands
+      # 存储所需 iSpy 代理 DVR 命令的位置
+      - /Volume1/ispyagentdvr:/AgentDVR/Media/WebServerRoot/Media
+      # 录像存放目录
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1000，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - AGENTDVR_WEBUI_PORT=8090
+      # 自定义容器WebUI端口
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8090:8090/tcp
+      # WebUI 端口
+      # - 3478:3478/udp
+      # 用于 TURN 服务器通信
+      # - 50000-50100:50000-50100/udp
+      # 用于创建连接或 WebRTC
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
