@@ -17,9 +17,9 @@ services:
     hostname: easy-onvif
     # 主机名
     volumes:
-      - /mnt/unas/data/docker/onvif/config:/config
+      - /mnt/unas/data/docker/easy-onvif:/config
       # 配置文件目录
-      - /mnt/unas/data/docker/onvif/movie:/movie
+      - /mnt/unas/data/easy-onvif:/movie
       # 录像存放目录
     # network_mode: bridge
     network_mode: host
