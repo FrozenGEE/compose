@@ -17,6 +17,8 @@ services:
     hostname: homepage
     # 主机名
     environment:
+      - HOMEPAGE_ALLOWED_HOSTS＝x.x.x.x:3000
+      # v1.04更新后，必加环境参数，填写你的ip地址+端口号或者域名+端口，二选一
       - PORT=3000
       # 自定义容器端口，默认为3000
       - PUID=1000
