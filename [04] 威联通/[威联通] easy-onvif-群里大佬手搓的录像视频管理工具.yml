@@ -17,9 +17,9 @@ services:
     hostname: easy-onvif
     # 主机名
     volumes:
-      - /share/Container/onvif:/config
+      - /share/Container/easy-onvif:/config
       # 配置文件目录
-      - /share/Pulic/onvif:/movie
+      - /share/Pulic/easy-onvif:/movie
       # 录像存放目录
     # network_mode: bridge
     network_mode: host
