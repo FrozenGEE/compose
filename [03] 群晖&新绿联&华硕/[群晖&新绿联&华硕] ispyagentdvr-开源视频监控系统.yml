@@ -42,7 +42,7 @@ services:
       # 配置文件目录
       - /volume1/docker/ispyagentdvr/commands:/AgentDVR/Commands
       # 存储所需 iSpy 代理 DVR 命令的位置
-      - 【这里替换为你的数据存放目录】/ispyagentdvr:/AgentDVR/Media/WebServerRoot/Media
+      - /volume1/media/ispyagentdvr:/AgentDVR/Media/WebServerRoot/Media
       # 录像存放目录
     environment:
       - PUID=1000
