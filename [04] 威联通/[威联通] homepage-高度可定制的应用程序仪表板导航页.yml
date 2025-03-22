@@ -7,7 +7,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-07-11
+# 最后编辑时间：2025-03-22
 services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -17,6 +17,8 @@ services:
     hostname: homepage
     # 主机名
     environment:
+      - HOMEPAGE_ALLOWED_HOSTS＝127.0.0.1:3000;abc.xyz:3000
+      # v1.04更新后，必加环境参数，填写你的ip地址+端口号或者域名+端口，二选一或者都写或者写多个，用英文;隔开
       - PORT=3000
       # 自定义容器端口，默认为3000
       - PUID=1000
