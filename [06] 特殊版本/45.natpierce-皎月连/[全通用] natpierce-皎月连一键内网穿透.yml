@@ -1,0 +1,48 @@
+# 官方文档
+# https://www.natpierce.cn
+# https://hub.docker.com/r/natpierce/natpierce
+
+# 使用帮助：https://www.natpierce.cn/pc/infolist/index.html
+# 常见问题：https://www.natpierce.cn/pc/infolist/index.html?id=6
+# 签到和充值：https://www.natpierce.cn/pc/infolist/index.html?id=9
+
+# 服务到期后不会主动断开已建立的连接
+# 服务到期后不会影响服务端接受客户端连接
+# 服务到期后客户端无法主动发起连接
+# 签到一次增加24小时服务时长
+# 签到后的22小时内不可再次签到
+# 可以随时使用随时签到，不需要连续签到
+# 签到用户在连接成功时会显示广告（如果有）
+# 充值后增加相应服务时长且无需签到
+
+# 充值金额：1元/7天、3元/30天，36元/365天，如果觉得有用，就支持一下吧
+
+---
+version: "3"
+# 最后编辑时间：2025-03-23
+services:
+  natpierce:
+    image: natpierce/natpierce:latest
+    # 镜像地址
+    container_name: natpierce
+    # 容器名字
+    hostname: natpierce
+    # 主机名，这里替换为你的设备名，在官网上就会显示设置的名称
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限，必须
+    network_mode: host
+    # 直接用host，必须
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/natpierce_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: https://www.natpierce.cn
+      # 适用于unraid界面打开WebUI，无WebUI界面，直接去访问官网
+      net.unraid.docker.icon: /mnt/user/LOGO/natpierce.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
