@@ -1,0 +1,34 @@
+# 官方文档
+# https://www.phpmyadmin.net
+# https://docs.linuxserver.io/images/docker-phpmyadmin
+# https://hub.docker.com/r/linuxserver/phpmyadmin
+
+---
+version: "3"
+# 最后编辑时间：2025-03-23
+services:
+  phpmyadmin:
+    image: linuxserver/phpmyadmin:latest
+    # 镜像地址
+    container_name: phpmyadmin
+    # 容器名字
+    hostname: phpmyadmin
+    # 主机名
+    volumes:
+      - /share/Container/phpmyadmin:/config
+      # 配置文件夹
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 80端口被占用了，所以使用bridge
+    ports:
+      - 6381:80/tcp
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
