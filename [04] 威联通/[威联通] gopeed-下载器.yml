@@ -13,7 +13,7 @@ services:
     # 容器名字
     hostname: gopeed
     # 主机名
-    # command：-u admin -p 123456
+    # command: -u admin -p 123456
     # 预设的账号和密码
     volumes:
       - /share/Container/gopeed:/app/storage
