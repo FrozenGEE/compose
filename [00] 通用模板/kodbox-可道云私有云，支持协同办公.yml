@@ -24,8 +24,8 @@ services:
     ports:
       - 1780:80/tcp
       # WebUI 端口
-    restart: always
-    # 重启策略
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       icon: http://IP:PORT/i/user_01/kodcloud.png
       # 适用于CasaOS导入时自动写上图标地址
