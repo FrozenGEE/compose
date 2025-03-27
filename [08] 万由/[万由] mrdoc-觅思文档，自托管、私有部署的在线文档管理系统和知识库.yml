@@ -32,7 +32,7 @@
 # https://doc.mrdoc.pro/doc/3312
 
 # 创建管理员账户
-docker exec -it mrdoc python manage.py createsuperuser
+# docker exec -it mrdoc python manage.py createsuperuser
 # 修改用户密码
 # docker exec -it mrdoc python manage.py changepassword 用户名
 
