@@ -8,7 +8,7 @@ version: "3.5"
 # 最后编辑时间：2024-04-20
 services:
   kodbox:
-    image: kodcloud/kodbox
+    image: kodcloud/kodbox:latest
     # 镜像地址
     container_name: kodbox
     # 容器名字
