@@ -12,7 +12,7 @@ version: "3"
 # 最后编辑时间：2024-05-16
 services:
   kms-server:
-    image: dnomd343/kms-server
+    image: dnomd343/kms-server:latest
     # 镜像地址
     container_name: kms-server
     # 容器名字
