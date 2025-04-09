@@ -216,6 +216,50 @@ df -h | grep ssd
 mount: (hint) your fstab has been modified, but systemd still uses
        the old version; use 'systemctl daemon-reload' to reload.
 ```
+### ⭐开启WebDAV
+
+### ⭐使用WebDAV挂载其他服务器
+1、安装软件包
+```
+apt update
+apt install davfs2 -y
+```
+2、创建挂载点目录，例如 /mnt/emmc/webdav
+```
+mkdir /mnt/emmc/webdav
+```
+3、配置 WebDAV 凭据 (可选)
+
+编辑 /etc/davfs2/secrets，添加 WebDAV 服务器的用户名和密码
+```
+nano /etc/davfs2/secrets
+```
+添加如下内容 (替换 WEBDAV_URL、USERNAME、PASSWORD)，然后保存并退出
+```
+https://example.com/webdav  USERNAME  PASSWORD
+```
+4、挂载 WebDAV
+```
+mount -t davfs https://example.com/webdav /mnt/webdav
+```
+如果未在 secrets 文件配置密码，会提示输入用户名和密码
+5、验证挂载
+```
+df -h | grep webdav
+ls /mnt/emmc/webdav
+```
+6、开机自动挂载
+```
+nano /etc/fstab
+```
+7、添加以下内容
+```
+https://example.com/webdav  /mnt/emmc/webdav  davfs  user,rw,noauto  0  0
+```
+8、挂载
+```
+mount -a
+```
 ### ⭐docker 相关
 1、docker 安装
 
