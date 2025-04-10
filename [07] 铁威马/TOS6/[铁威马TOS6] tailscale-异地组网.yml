@@ -56,7 +56,8 @@ services:
       # 配置文件目录
     
       - /dev/net/tun:/dev/net/tun
-      # 照抄，这是tun模式，别问，我也不是特别动，有不懂你还不如问deepseek
+      # 照抄，这是tun模式，别问，我也不是特别懂，有不懂你还不如问deepseek
+      # 可以在ssh中使用 sudo modprobe tun 加载一下tun模块，验证是否生效(无报错提示就是生效)，要是不能用，其实你写啥路径都可以，如下
       # 如果NAS不能使用compose也没法在ssh上操作，只能在webui上部署，则参考以下这条，但应该没啥用，至少减少未映射卷
       # - /Volume1/docker/tailscale/tun:/dev/net/tun
 
