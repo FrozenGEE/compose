@@ -42,11 +42,11 @@ services:
       # 如果使用密钥方式登录，则不需要去容器内的ssh终端内进行tailscale login命令登录
       # 如果去容器内的ssh终端内使用tailscale login命令登录，则不需要配置该项
       
-      # - TS_ROUTES=192.168.1.0/24
+      - TS_ROUTES=192.168.1.0/24
       # 192.168.1.0/24为本机所在的局域网网段，注意修改
       # 该设置用途是通过将 IP 范围公布为子网路由，连接到无法安装 Tailscale 的设备
       
-      # - TS_EXTRA_ARGS=--advertise-exit-node
+      - TS_EXTRA_ARGS=--advertise-exit-node
       # 允许本机作为流量出站点
       # 需要到TS官网-Machine，点击设备右侧的三个点，点击Edit route settings，在Exit node和Subnet routes下方的选项勾选上
       # 当其他设置需要使用本机器B作为流量出站口，如果该机器可以访问谷歌，设置好使用后，那么设备A也可以访问谷歌
