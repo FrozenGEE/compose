@@ -1,0 +1,55 @@
+# 官方文档
+# https://wiki.metacubex.one
+# https://metacubexd.pages.dev
+# https://github.com/MetaCubeX/metacubexd
+# https://github.com/MetaCubeX/meta-rules-dat
+
+# https://windowbr.top/2024/09/17/fnos-mihomo
+# https://windowbr.top/2024/11/02/mihomo-docker
+# https://windowbr.top/2024/09/17/fnos-mihomo/#编写-config-yaml
+
+# 教程
+# 1、按照上方教程将config.yaml编辑好，修改好里面的第19，20，25行的内容
+# 2、打开https://github.com/MetaCubeX/meta-rules-dat，将表格中全部文件下载下来，建议选JSdelivr-CF来下载
+# 3、将config.yaml以及country.mmdb、geoip.dat、geoip.db、geoip.metadb、country-lite.mmdb、geoip-lite.dat、geoip-lite.db、geosite.dat、geosite.db、geosite-lite.dat、geosite-lite.db、GeoLite2-ASN.mmdb等多个文件放到该compose第52行的实际路径中
+# 4、打开metacubexd的WebUI，输入mihomo后端地址：IP:9090
+
+version: '3'
+# 最后编辑时间：2025-04-15
+services:
+  metacubexd:
+    image: ghcr.io/metacubex/metacubexd:latest
+    # 镜像名字，拉取不动可以选择该镜像 gzxhwq/metacubexd:latest
+    container_name: metacubexd
+    # 容器名字
+    hostname: metacubexd
+    # 主机名
+    network_mode: bridge
+    # 80端口有别的服务要用，因此使用bridge
+    ports:
+      - 9097:80
+      # WebUI 端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    
+  meta:
+    image: metacubex/mihomo:latest
+    # 镜像名字
+    container_name: meta
+    # 容器名字
+    hostname: meta
+    # 主机名
+    cap_add:
+      - ALL
+    pid: host
+    ipc: host
+    network_mode: host
+    # 推荐使用host网络模式，以上照抄
+    # 不存在WebUI，后端地址为 IP:9090
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+      # TUN模式，照抄，要是不支持，就没用，不懂问deepseek
+      - /mnt/unas/data/docker/mihomo:/root/.config/mihomo
+      # 配置文件存放目录，根据上方12-15行的教程去操作
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
