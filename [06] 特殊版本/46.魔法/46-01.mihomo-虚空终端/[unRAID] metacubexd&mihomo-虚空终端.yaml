@@ -62,6 +62,8 @@ services:
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: https://github.com/MetaCubeX/metacubexd
+      # 不存在WebUI，此处修改为项目的地址
       net.unraid.docker.icon: /mnt/user/LOGO/mihomo.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
