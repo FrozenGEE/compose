@@ -29,7 +29,7 @@ services:
     ports:
       - 9097:80
       # WebUI 端口
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     
   meta:
@@ -51,5 +51,5 @@ services:
       # TUN模式，照抄，要是不支持，就没用，不懂问deepseek
       - /Volume1/docker/mihomo:/root/.config/mihomo
       # 配置文件存放目录，根据上方12-15行的教程去操作
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
