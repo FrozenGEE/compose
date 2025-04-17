@@ -39,6 +39,7 @@ services:
       - TRANSMISSION_WEB_HOME=/config/webui
       # WEBUI主页路径，写容器路径，用于放汉化文件
       # 4.x版本的汉化文件下载地址：https://github.com/ronggang/transmission-web-control
+      # 国内源地址：https://gitee.com/culturist/transmission-web-control
       # 将 "/src" 这个文件夹里的东西放到 "/config/webui" 内即可
       - USER=cheems
       - PASS=cheems
