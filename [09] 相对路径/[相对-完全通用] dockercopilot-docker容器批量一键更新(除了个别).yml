@@ -23,7 +23,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # 用于管理docker，必须
-      - ./dockercopilot:/data
+      - ./data:/data
       # 配置文件目录
     environment:
       # - account=1688888888
