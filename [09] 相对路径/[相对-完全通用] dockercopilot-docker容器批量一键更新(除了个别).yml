@@ -5,11 +5,14 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-04-24
+# 最后编辑时间：2025-04-17
+# 2025-04-17更新01：定期替换别的dockerhub加速源
+# 2025-04-17更新02：tag支持使用latest和latest-dev，原UGREEN，UGREEN-DEV，ZSPACE，ZSPACE-DEV还能继续使用
+# 2025-04-17更新03：极空间再也不需要在环境变量上写上极空间的账号才可以使用，变量不作删除
 services:
   dockercopilot:
-    image: 0nlylty/dockercopilot:UGREEN-DEV
-    # 镜像地址，tag有UGREEN，UGREEN-DEV，ZSPACE，ZSPACE-DEV
+    image: 0nlylty/dockercopilot:latest
+    # 镜像地址
     container_name: dockercopilot
     # 容器名字
     hostname: dockercopilot
@@ -24,13 +27,13 @@ services:
     environment:
       # - account=1688888888
       # 输入你的极空间账号(具体看"NAS的路径说明"中极空间那部分)
-      # 仅极空间才需要写，其余NAS不需要写hhhhh
-      # 难怪我部署后一直都出错，不愧是极空间，真的恶心
-      - secretKey=dokcer123
+      # 仅极空间才需要写，其余NAS不需要写hhhhh,，难怪我部署后一直都出错，不愧是极空间，真的恶心
+      # 出处：https://post.smzdm.com/p/a96o9m50
+      - secretKey=docker123
       # 密码，需要大于八位且非纯数字，预设为docker123，请自行修改
       - DOCKER_HOST=unix:///var/run/docker.sock
       # 不动，照抄，必须
-      - hubURL=https://dockerpull.com
+      - hubURL=https://k-docker.asia
       # 使用dockerhub加速源，以便于更好拉取镜像，可自行替换，可在下方挑选
       # http://status.kggzs.cn/status/docker
     # network_mode: bridge
