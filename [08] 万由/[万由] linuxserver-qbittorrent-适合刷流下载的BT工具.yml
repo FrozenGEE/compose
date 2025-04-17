@@ -26,7 +26,7 @@ services:
       # 配置文件目录
       - /mnt/unas/data/downloads:/downloads
       # 默认下载目录
-      - /mnt/unas/data/downloads/[00] Torrents监控自动下载目录:/watch
+      - /mnt/unas/data/downloads/QB种子监控自动下载目录:/watch
       # 种子监控自动下载目录
       # - 【这里替换为你想映射到QB内的路径】:/【这里替换为你想映射到QB内的路径】
       # 可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
