@@ -28,8 +28,9 @@ services:
       # 密码，需要大于八位且非纯数字，预设为docker123，请自行修改
       - DOCKER_HOST=unix:///var/run/docker.sock
       # 不动，照抄，必须
-      - hubURL=https://k-docker.asia
-      # 使用dockerhub加速源，以便于更好拉取镜像，可自行替换
+      - hubURL=https://dockerpull.com
+      # 使用dockerhub加速源，以便于更好拉取镜像，可自行替换，可在下方挑选
+      # http://status.kggzs.cn/status/docker
     # network_mode: bridge
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
