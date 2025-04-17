@@ -1,5 +1,8 @@
 # 官方文档
 # https://tailscale.com
+# https://tailscale.com/kb/1017/install
+# https://github.com/tailscale/tailscale
+# https://hub.docker.com/r/tailscale/tailscale
 # linux一键安装命令
 # curl -fsSL https://tailscale.com/install.sh | sh
 
