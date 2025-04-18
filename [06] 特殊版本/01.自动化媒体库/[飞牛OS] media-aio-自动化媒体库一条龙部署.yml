@@ -315,7 +315,7 @@ services:
       - USER=cheems
       - PASS=cheems
       # TR账号密码，预设为cheems，记住一定要修改密码，否则后果自负
-      - PEERPORT=14569
+      - PEERPORT=24680
       # 自定义peer传输端口
       - PUID=0
       - PGID=0
