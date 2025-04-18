@@ -58,8 +58,8 @@ services:
     # ports:
       # - 9091:9091/tcp
       # WebUI 端口
-      # - 14569:14569/tcp
-      # - 14569:14569/udp
+      # - 24680:24680/tcp
+      # - 24680:24680/udp
       # 传输端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
