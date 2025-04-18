@@ -39,7 +39,7 @@ services:
       - USER=cheems
       - PASS=cheems
       # TR账号密码，预设为cheems，记住一定要修改密码，否则后果自负
-      - PEERPORT=14569
+      - PEERPORT=24680
       # 自定义peer传输端口
       - PUID=0
       - PGID=0
@@ -58,8 +58,8 @@ services:
     # ports:
       # - 9091:9091/tcp
       # WebUI 端口
-      # - 14569:14569/tcp
-      # - 14569:14569/udp
+      # - 24680:24680/tcp
+      # - 24680:24680/udp
       # 传输端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
