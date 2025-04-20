@@ -1,8 +1,9 @@
 # 【更新日志-2025-04-20】
 - [极空间compose到底如何？](https://www.bilibili.com/video/BV1V95EzFEfe/)
 - 更新[volumes.md](https://github.com/FrozenGEE/compose/blob/main/volumes.md)内容，新增极空间的compose存放路径：/zspace/applications/services/zdocker/config/compose_config/项目名字.yaml
-- 注意：如果出现新建compose部署，但是极空间compose提示路径报错的，先把报错的路径在前方加上#号注释掉，然后再去修改，去掉#号由注释变成参数，再重新部署
-- 注意：极空间因为路径上有手机号码，每一个存储池路径都不一样，而且compose存放路径为系统内部，也无法使用相对路径的写法，因此无法编写现成模板，除了全通用模板
+- 注意01：如果出现新建compose部署，但是极空间compose提示路径报错的，先把报错的路径在前方加上#号注释掉，然后再去修改，去掉#号由注释变成参数，再重新部署
+- 注意02：极空间因为路径上有手机号码，每一个存储池路径都不一样，而且compose存放路径为系统内部，也无法使用相对路径的写法，因此无法编写现成模板，除了全通用模板
+- 注意03：听说compose功能需要开启官方SSH才可以支持，我还以为可以直接compose跑一个ttyd(网页ssh终端工具)从而绕开官方设置中开启SSH
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
