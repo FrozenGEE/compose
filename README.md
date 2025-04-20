@@ -5,6 +5,7 @@
 - 注意02：极空间因为路径上有手机号码，每一个存储池路径都不一样，而且compose存放路径为系统内部，也无法使用相对路径的写法，因此无法编写现成模板，除了全通用模板
 - 注意03：听说compose功能需要开启官方SSH才可以支持，我还以为可以直接compose跑一个ttyd(网页ssh终端工具)从而绕开官方设置中开启SSH
 - 注意04：极空间compose中所创建过的每一份compose.yaml文件均不会再你删除的时候一并删除
+- 注意05：使用compose创建容器时，如果没有映射对路径，删除compose项目，不会自动删除未映射卷(很多都会这样)
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
