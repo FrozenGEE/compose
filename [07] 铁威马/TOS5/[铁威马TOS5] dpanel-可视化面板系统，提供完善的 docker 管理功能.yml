@@ -19,7 +19,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       # docker核心
       - /Volume1/User/docker/dpanel:/dpanel
-      # 数据库文件目录
+      # 数据文件目录
+      # - 【这里替换为你的系统创建docker compose所存放目录】:/dpanel/compose
+      # 可以写多条，必须在/dpanel/compose之下，路径可以往后延伸
     network_mode: bridge
     # 推荐使用bridge模式，8080有别的要用
     ports:
