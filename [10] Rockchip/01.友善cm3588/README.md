@@ -227,7 +227,6 @@ https://proxy.1panel.live
 | admin<br>mariadb<br>postgresql<br>redis| 数据库套装 | minio | 对象存储 | kms-server | 微软激活器 |
 ### ⭐友善cm3588 jellyfin硬件转码
 - 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
-
 1. 确保设备中存在 mpp. rga. dri. dma_heap，否则请将 BSP 内核升级到 5.10 LTS 及更高版本，运行此命令
 ```
 $ ls -l /dev | grep -E "mpp|rga|dri|dma_heap"
@@ -238,7 +237,6 @@ crw-rw----  1 root       video   241,   0 Jan 18 18:50 mpp_service
 crw-rw----  1 root       video    10, 122 Jan 18 18:50 rga
 ```
 2. 在主机上安装 ARM Mali OpenCL 
-
 对于Ubuntu-Rockchip和Armbian上的6.1 LTS内核以及旧版5.10 LTS内核，请安装v1.9-1-2d267b0
 
 https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-2d267b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
@@ -259,7 +257,6 @@ apt update && sudo apt install -y clinfo && clinfo
 ```
 4. 部署 jellyfin
 详情见 [compose模板](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/02.%E9%A6%99%E6%A9%99%E6%B4%BE5plus/jellyfin-%E7%A7%81%E4%BA%BA%E5%AA%92%E4%BD%93%E5%BA%93.yml)
-
 5. 要验证 OpenCL 运行时在 docker 容器内是否正常工作，您可以运行此命令，第一个 jellyfin 为容器名字
 ```
 docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_device rkmpp=rk -init_hw_device opencl=ocl@rk
