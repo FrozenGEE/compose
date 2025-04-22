@@ -20,10 +20,7 @@ services:
       # docker核心
       - /mnt/emmc/docker/dpanel:/dpanel
       # 数据文件目录
-
-      - /mnt/emmc/docker/docker-images:/dpanel/storage
-      # docker镜像导出目录，可以使dpanel导出镜像文件到NAS上，非必须
-
+      
       # - 【这里替换为你的系统创建docker compose文件的路径】:/dpanel/compose/【这里替换为docker项目名字】/compose.yaml
       # 可以使dpanel挂载外部创建的compose进行管理，非必须
       # 例子：- /xxx/yyy/alist.yaml:/dpanel/compose/alist/compose.yaml
