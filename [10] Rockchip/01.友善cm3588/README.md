@@ -38,29 +38,29 @@ apt upgrade -y
 apt update && apt upgrade -y
 ```
 ### ⭐安装常用软件(按需选择)
-1、安装单个
+1. 安装单个
 ```
 apt install -y vim
 # apt install -y 软件名
 ```
-2、批量安装
+2. 批量安装
 ```
 apt install -y vim nano samba nfs-kernel-server rclone git pip clinfo neofetch btop ncdu dnsmasq avahi-daemon
 # apt install -y 软件名1 软件名2 软件名3 软件名4 软件名5
 ```
-3、安装deb软件包，使用 apt 会自动处理依赖问题，无需额外操作
+3. 安装deb软件包，使用 apt 会自动处理依赖问题，无需额外操作
 ```
 apt install ./包名.deb
 ```
-4、检查是否安装成功
+4. 检查是否安装成功
 ```
-5、dpkg -l | grep 包名.deb
+5. dpkg -l | grep 包名.deb
 ```
-6、卸载 .deb 包
+6. 卸载 .deb 包
 ```
 apt remove 包名.deb
 ```
-7、完全移除软件包及其配置文件
+7. 完全移除软件包及其配置文件
 ```
 apt purge 包名.deb
 ```
@@ -71,29 +71,27 @@ eval "$(wget -O- https://get.x-cmd.com)"
 ### ⭐查看命令
 ```
 ls：列出当前目录下的文件和目录
-ls -l：以长格式列出文件和目录，显示详细信息(权限、所有者、大小、修改时间等)
+ls -l：以长格式列出文件和目录，显示详细信息(权限. 所有者. 大小. 修改时间等)
 # ll 命令是 ls -l 的别名，如果 ll 不能使用，见下操作
 ls -a：列出所有文件和目录，包括隐藏文件(以 . 开头的文件)
 ls -la 或 ls -al：以长格式列出所有文件和目录，包括隐藏文件
-ls -h：与 -l 一起使用，以人类可读的格式显示文件大小(如 KB、MB)
+ls -h：与 -l 一起使用，以人类可读的格式显示文件大小(如 KB. MB)
 ls -R：递归列出子目录中的内容
 ```
-### ⭐为 ll 设置别名
+### ⭐为 ll 设置别名以及提示符彩色
 1. 编辑 Shell 配置文件
-
 根据你使用的 Shell，编辑对应的配置文件
 ```
 nano ~/.bashrc  # 如果使用 Bash
 nano ~/.zshrc   # 如果使用 Zsh
 ```
 2. 添加别名
-
 在文件末尾添加以下内容
 ```
 alias ll='ls -l'
+PS1='\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\] \[\e[1;31m\]\$\[\e[0m\] '
 ```
 3. 使配置生效
-
 保存并退出编辑器(按ctrl+X，Y，回车键)，然后运行以下命令使配置生效
 ```
 source ~/.bashrc  # 如果使用 Bash
@@ -111,39 +109,29 @@ cat /proc/version
 # 以上三条均可
 ```
 ### ⭐格式化清空硬盘
-1、打开OMV7的WebUI，登录账号，输入密码
+1. 打开OMV7的WebUI，登录账号，输入密码
 
-2、点击左侧的 存储器 → 磁盘
+2. 点击左侧的 存储器 → 磁盘
 
-3、选中设备，点击 擦除 → 勾选确认 → 是 → 快速，等待完成即可
+3. 选中设备，点击 擦除 → 勾选确认 → 是 → 快速，等待完成即可
 
 ### ⭐创建文件系统/阵列
-1、打开```OMV7的WebUI```，登录账号```admin```，输入密码```openmediavault```(根据实际情况填写，此乃初始默认密码，记得及时修改)
-
+1. 打开```OMV7的WebUI```，登录账号```admin```，输入密码```openmediavault```(根据实际情况填写，此乃初始默认密码，记得及时修改)
 此处缺图
-
-2、点击左侧的```存储器```→```文件系统```，然后点击```挂载现有文件系统```或者```创建并挂载文件系统```
+2. 点击左侧的```存储器```→```文件系统```，然后点击```挂载现有文件系统```或者```创建并挂载文件系统```
 * 挂载现有文件系统：这是对现有已经存在存储分区所用的
 * 创建并挂载文件系统：这是对于空盘所用的
 * 演示使用挂载现有文件系统，请根据实际操作如果在役系统需要修改，最好把smb共享，webdav共享，docker等服务都停止
-
 此处缺图
-
-3、选中```已有的文件系统```，点击```保存```，此时会出现```黄色横幅提示：“待应用的配置更改 您必须应用配置变更才会使他们生效。”```，点```√```确认保存
+3. 选中```已有的文件系统```，点击```保存```，此时会出现```黄色横幅提示：“待应用的配置更改 您必须应用配置变更才会使他们生效。”```，点```√```确认保存
 * 这是OMV的二次确认，保存后才会将修改的内容生效，后续不再重新赘述
-
 此处缺图
-
 ### ⭐修改OMV阵列存储池挂载路径
-1、打开ssh，此处用xshell和xftp作为演示，添加ssh登录信息，账号密码均为```pi```(根据实际情况填写，此乃友善cm3588初始账号pi默认密码，如有其他账号则使用其他账号)
-
-2、先 ```sudo -i``` 提权，然后再次输入pi的密码```pi```
-
-3、输入```nano /etc/fstab```，将```/srv/dev-disk-by-uuid-2692a155-0242-4c73-b968-159e0656471c```修改为```/srv/sd-card```，内容自定义，接着退出保存 (按 Ctrl+X，回车键，Y)
-
+1. 打开ssh，此处用xshell和xftp作为演示，添加ssh登录信息，账号密码均为```pi```(根据实际情况填写，此乃友善cm3588初始账号pi默认密码，如有其他账号则使用其他账号)
+2. 先 ```sudo -i``` 提权，然后再次输入pi的密码```pi```
+3. 输入```nano /etc/fstab```，将```/srv/dev-disk-by-uuid-2692a155-0242-4c73-b968-159e0656471c```修改为```/srv/sd-card```，内容自定义，接着退出保存 (按 Ctrl+X，回车键，Y)
 此处缺图
-
-4、输入```nano /etc/openmediavault/config.xml```，找到下图内容，修改好，退出保存(按 Ctrl+X，回车键，Y)，
+4. 输入```nano /etc/openmediavault/config.xml```，找到下图内容，修改好，退出保存(按 Ctrl+X，回车键，Y)，
 ```
 /srv/dev/disk-by-uuid/2692a155-0242-4c73-b968-159e0656471c
 修改为
@@ -155,17 +143,12 @@ cat /proc/version
 /srv/sdcard
 ```
 此处缺图
-
-5、重启一次系统
+5. 重启一次系统
 ### ⭐docker 相关
-1、docker 安装
-
+1. docker 安装
 OMV在WebUI上安装compose插件，插件安装后配置一下即可安装成功
-
 此处缺图
-
-2、配置国内镜像源
-
+2. 配置国内镜像源
 [国内 Docker 服务状态 & 镜像加速监控](http://status.kggzs.cn/status/docker)
 ```
 #- 终端命令添加 Docker 镜像加速
@@ -190,8 +173,7 @@ EOF
 # 重启 Docker 服务以使配置生效
 systemctl restart docker
 ```
-3、docker 拉取镜像
-
+3. docker 拉取镜像
 格式：docker pull 镜像源/作者名/镜像名:标签
 - lscr.io，docker.1ms.run，k-docker.asia 为镜像源，也可以叫镜像仓库，可以自建
 - hslr/sun-panel 为作者名和镜像名，可以去[dockerhub](https://hub.docker.com/)上搜索，有的不在dockerhub仓库上，特别是ghcr.io开头的
@@ -201,7 +183,7 @@ docker pull lscr.io/linuxserver/qbittorrent:latest
 docker pull k-docker.asia/hslr/sun-panel:beta
 docker pull docker.1ms.run/dpanel/dpanel:lite
 ```
-4、docker 命令
+4. docker 命令
 | 命令 | 含义 | 命令 | 含义 |
 | :---- | :---- | :---- | :---- |
 | docker ps | 查看部署的docker容器 | docker images ps | 查看本地镜像 |
@@ -231,7 +213,7 @@ https://proxy.1panel.live
 ### ⭐友善cm3588 docker部署推荐
 | docker | 用途 | docker | 用途 | docker | 用途 |
 | :---- | :---- | :---- | :---- | :---- | :---- |
-| dpanel<br>portainer | docker管理器 | ddns-go | 域名解析 | lucky | 域名解析、反代、SSL<br>webdav、ftp、内置filebrower |
+| dpanel<br>portainer | docker管理器 | ddns-go | 域名解析 | lucky | 域名解析. 反代. SSL<br>webdav. ftp. 内置filebrower |
 | alist| 网盘挂载<br>webdav | sun-panel | 导航页 | mt-photos<br>immich | 相册 |
 | ttyd-bridge | 网页端ssh | tailscale<br>zerotier<br>netbird | 异地组网 | wg-easy<br>wireguard<br>openvpn | 自建异地组网 |
 | syncthing | 多端同步 | v2raya | 魔法 | frps / frpc | 内网穿透服务 |
@@ -246,7 +228,7 @@ https://proxy.1panel.live
 ### ⭐友善cm3588 jellyfin硬件转码
 - 参考资料：[Rockchip VPU jellyfin硬件转码](https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip)
 
-1、确保设备中存在 mpp、rga、dri、dma_heap，否则请将 BSP 内核升级到 5.10 LTS 及更高版本，运行此命令
+1. 确保设备中存在 mpp. rga. dri. dma_heap，否则请将 BSP 内核升级到 5.10 LTS 及更高版本，运行此命令
 ```
 $ ls -l /dev | grep -E "mpp|rga|dri|dma_heap"
 
@@ -255,7 +237,7 @@ drwxr-xr-x  3 root       root         140 Jan 18 18:50 dri
 crw-rw----  1 root       video   241,   0 Jan 18 18:50 mpp_service
 crw-rw----  1 root       video    10, 122 Jan 18 18:50 rga
 ```
-2、在主机上安装 ARM Mali OpenCL 
+2. 在主机上安装 ARM Mali OpenCL 
 
 对于Ubuntu-Rockchip和Armbian上的6.1 LTS内核以及旧版5.10 LTS内核，请安装v1.9-1-2d267b0
 
@@ -271,14 +253,14 @@ mkdir -p ~/tmp/libmali && cd ~/tmp/libmali
 wget 'https://github.com/tsukumijima/libmali-rockchip/releases/download/v1.9-1-2d267b0/libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb'
 sudo dpkg -i ./libmali-valhall-g610-g13p0-gbm_1.9-1_arm64.deb
 ```
-3、用 clinfo 检查主机上的 OpenCL (GPU 固件)
+3. 用 clinfo 检查主机上的 OpenCL (GPU 固件)
 ```
 apt update && sudo apt install -y clinfo && clinfo
 ```
-4、部署 jellyfin
+4. 部署 jellyfin
 详情见 [compose模板](https://github.com/FrozenGEE/compose/blob/main/%5B10%5D%20Rockchip/02.%E9%A6%99%E6%A9%99%E6%B4%BE5plus/jellyfin-%E7%A7%81%E4%BA%BA%E5%AA%92%E4%BD%93%E5%BA%93.yml)
 
-5、要验证 OpenCL 运行时在 docker 容器内是否正常工作，您可以运行此命令，第一个 jellyfin 为容器名字
+5. 要验证 OpenCL 运行时在 docker 容器内是否正常工作，您可以运行此命令，第一个 jellyfin 为容器名字
 ```
 docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/ffmpeg -v debug -init_hw_device rkmpp=rk -init_hw_device opencl=ocl@rk
 ```
