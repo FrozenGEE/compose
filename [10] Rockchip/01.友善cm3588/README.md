@@ -180,8 +180,8 @@ echo >/etc/docker/daemon.json
 cat >/etc/docker/daemon.json <<EOF
 {
 "registry-mirrors": [
-"https://docker.1panel.live",
 "https://k-docker.asia",
+"https://spp-docker.asia",
 "https://docker.1ms.run"
 ]
 }
