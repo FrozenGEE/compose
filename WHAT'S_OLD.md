@@ -5,8 +5,10 @@
 - [电视盒子(armbain)](https://github.com/ophub/amlogic-s9xxx-armbian)可以参考[黑豹PatherX2(RK3566)](https://github.com/FrozenGEE/compose/tree/main/%5B10%5D%20Rockchip/03.%E9%BB%91%E8%B1%B9PatherX2)的模板，建议
 - OMV或多盘位ARM-NAS可以参考[友善CM3588(RK3588)](https://github.com/FrozenGEE/compose/tree/main/%5B10%5D%20Rockchip/01.%E5%8F%8B%E5%96%84cm3588)的模板
 - 直接armbian手搓NAS？很好，[香橙派5Plus(RK3588)](https://github.com/FrozenGEE/compose/tree/main/%5B10%5D%20Rockchip%2F02.%E9%A6%99%E6%A9%99%E6%B4%BE5plus)拿去参考
-- 单盘nas?oec?tn3568?荐片tv?这些内置单sata的当NAS?真不巧了，没有，说个笑话，oect我tm刷机一直boot失败，hhhhhhhh，其实可以参考上一条
-- 继续挖坑不填的dpanel
+- <del>单盘nas?oec?tn3568?荐片tv?这些内置单sata的当NAS?真不巧了，没有，说个笑话，oect我tm刷机一直boot失败，hhhhhhhh，其实可以参考上一条
+- 买了一台TN3568，单盘NAS可以参考搞搞
+- <del>继续挖坑不填的dpanel
+- 填了[dpanel快速上手介绍，docker新手入门必备工具](https://www.bilibili.com/video/BV1SVZWYeEU6/)
 
 #### 【更新日志-2025-01-08】
 - 待办：找个时间，把portainer换成dpanel，dpanel上手很不错
