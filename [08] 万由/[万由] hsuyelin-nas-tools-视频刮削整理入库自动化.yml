@@ -1,15 +1,20 @@
+# 官方文档
 # https://hub.docker.com/r/hsuyelin/nas-tools
 # https://hub.docker.com/r/linyuan0213/nas-tools
+# https://github.com/linyuan0213/nas-tools
 # 原作者不再维护nas-tools，因为被派派助手（也叫群晖助手）的作者破解了，这是接盘后的镜像，也是破解了的，支持BT，不需要认证
+
+# 开启公开站点：在 config.yaml 的 laboratory 添加 show_more_sites: true
+# 3.3.0 以上版本通过 gunicorn 部署，并且依赖redis，其他版本安装请自行安装redis，docker 3.2.6及以下版本需要重新拉取新镜像
 
 ---
 version: "3"
-# 最后编辑时间：2025-01-30
-# 更新日志：翻新，建议使用MP-v2，更多说明看MP的模板
+# 最后编辑时间：2025-04-24
+# 更新日志-2025-01-30：翻新，建议使用MP-v2，更多说明看MP的模板
+# 更新日志-2025-04-24：翻新，替换使用linyuan0213/nas-tools，不再使用hsuyelin/nas-tools，也缺少维护了
 services:
   nas-tools:
-    image: hsuyelin/nas-tools:latest
-    # 镜像地址，该镜像版本为3.4.1，可选：linyuan0213/nas-tools:latest，版本为3.6.5 (截止2025-01)
+    image: linyuan0213/nas-tools:lates
     container_name: nas-tools
     # 容器名字
     hostname: nas-tools
