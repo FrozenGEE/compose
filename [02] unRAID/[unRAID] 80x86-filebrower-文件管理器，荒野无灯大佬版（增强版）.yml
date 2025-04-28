@@ -16,7 +16,7 @@ services:
     # 容器名字
     hostname: filebrowser
     # 主机名
-    privileged: true
+    # privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     devices:
       - /dev/dri:/dev/dri
