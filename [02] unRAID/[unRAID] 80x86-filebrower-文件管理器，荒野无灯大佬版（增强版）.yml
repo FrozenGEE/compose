@@ -3,6 +3,8 @@
 # 部署教程
 # https://post.smzdm.com/p/apvp2p2w
 
+# 初始账号密码均为 admin
+
 ---
 version: "3"
 # 最后编辑时间：2024-04-28
@@ -25,6 +27,12 @@ services:
       - /mnt/user:/unRAID
       # 映射本地其他路径使其可以访问，可以自定义多个
     environment:
+      - PUID=0
+      - PGID=0
+      # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射
+      # 如果文件/文件夹打不开，ssh中执行 chmod -R 777 /路径 进行修改文件/文件夹的权限
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
       - WEB_PORT=8082
       # 自定义容器端口
       - TZ=Asia/Shanghai
