@@ -195,6 +195,7 @@ services:
       icon: http://IP:PORT/i/user_01/immich-redis.png
       # 适用于CasaOS导入时自动写上图标地址
       # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.icon: /mnt/user/LOGO/immich-redis.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
@@ -230,6 +231,7 @@ services:
       icon: http://IP:PORT/i/user_01/immich-pgsql.png
       # 适用于CasaOS导入时自动写上图标地址
       # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.icon: /mnt/user/LOGO/immich-pgsql.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
