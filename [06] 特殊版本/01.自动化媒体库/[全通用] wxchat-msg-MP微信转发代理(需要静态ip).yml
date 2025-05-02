@@ -1,9 +1,12 @@
 # 官方文档
 # https://github.com/DDS-Derek/wxchat-Docker
 # https://hub.docker.com/r/ddsderek/wxchat
-# https://club.fnnas.com/forum.php?mod=viewthread&tid=2072
 
-# 需要静态IP，家宽都是动态IP，推荐部署在VPS上
+# 需要静态IP，家宽都是动态IP，推荐部署在VPS上，也可以在使用下方现成的
+# https://wx.darklotus.cn
+# 使用教程
+# https://blog.darklotus.cn/tutorials/moviepilotwechat.html
+# https://club.fnnas.com/forum.php?mod=viewthread&tid=2072
 
 version: '3.3'
 # 最后编辑时间：2025-05-02
