@@ -20,14 +20,6 @@ services:
     ports:
       - 9980:80
       # WebUI 端口，没啥用，只是一个搭建成功提示罢了
-    dns:
-      - 223.6.6.6
-      - 119.29.29.29
-      - 114.114.114.114
-      - 8.8.8.8
-      # 配置DNS，以解决部署后nginx访问不了qyapi.weixin.qq.com，日志内容如下
-      # 日志内容：nginx: [emerg] host not found in upstream "qyapi.weixin.qq.com" in /etc/nginx/http.d/default.conf:10
-      # https://github.com/DDS-Derek/wxchat-Docker/issues/13
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
