@@ -28,7 +28,7 @@ services:
       # https://github.com/DDS-Derek/wxchat-Docker/issues/13
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
-        labels:
+    labels:
       icon: http://IP:PORT/i/user_01/wechat_A.png
       # 适用于CasaOS导入时自动写上图标地址
       # 注意：在导入CasaOS时，记得补全本机端口号
