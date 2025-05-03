@@ -1,0 +1,91 @@
+# 官方文档
+# https://t.me/CF_NAT/38840
+# 首先声明，这款软件并非 cmliu 原创开发，而是目前了解到由 股神 在 CF中转IP 频道 发布的一款实时筛选 Cloudflare 数据中心的软件。cmliu 所编写的脚本是在这位开发者的原始版本基础上进行的二次开发。
+
+# https://blog.cmliussss.com/p/cfnat
+# https://github.com/cmliu/CFnat-Docker
+# https://github.com/cmliu/CFnat-Windows-GUI
+# https://hub.docker.com/r/cmliu/cfnat
+
+# 视频教程
+# CFnat：Windows篇
+# https://www.youtube.com/watch?v=N2Y9TsiBgls
+# CFnat：安卓 & Linux篇
+# https://www.youtube.com/watch?v=4906t5zygAE
+# CFnat：Docker篇
+# https://www.youtube.com/watch?v=_GVqBaSzVwo
+
+# 一键脚本部署
+# curl -sSL https://raw.cmliussss.com/cfnat.sh -o ~/cfnat.sh && chmod +x ~/cfnat.sh
+# bash ~/cfnat.sh
+# 适用场景：拥有干净网关的Linux设备，OpenWRT软路由使用时必须保证 cfnat 处于直连环境！！！
+
+# CFnat 是一款自动查找并优化 Cloudflare IP 转发的工具，旨在解决泛播 IP 路由不稳定的问题
+# 如果你曾找到过速度不错的 Cloudflare IP，CFnat 能帮助你快速筛选出最佳 IP 并实现端口转发，从而提升网络使用体验
+# 因此，这款工具对于移动、广电网络用户来说尤为明显！
+# CFnat 使用场景也必须是在国内机子长期上运行！必须是在国内机子长期上运行！必须是在国内机子长期上运行！！！
+
+# 1、cfnat和梯子在同一台设备上运行时使用本地服务IP:端口连接。
+# 2、cfnat和梯子分别处在同一局域网内的两台设备上运行时使用内网服务IP:端口连接。
+# 3、如果你是使用 cmliu/edgetunnel 的节点，可将本地服务IP:端口和内网服务IP:端口都添加至ADD变量里，直接订阅食用即可
+# 4、移动/广电用户设置数据中心HKG直接起飞！电信/联通用户设置SJC,LAX！
+# 5、在跑过一次优选之后，可在colo文件夹里可以看到ip.csv扫描结果, 里面就能看到你的当前网络网络环境下能跑出来的所有数据中心！
+# 6、不推荐直接在OpenWRT上直接跑，除非你会设置cfnat不走代理！！！或者等一个大佬开发cfnat的luci界面？
+# 7、那个AS209242的IP库就是个笑话，别用！
+
+---
+version: "3"
+# 最后编辑时间：2025-05-03
+services:
+  cfnat:
+    image: cmliu/cfnat:latest
+    # 镜像地址
+    container_name: cfnat
+    # 容器名字
+    hostname: cfnat
+    # 主机名
+    environment:
+      - colo=HKG,SJC,LAX
+      # 筛选数据中心，例如 HKG,SJC,LAX
+      # 电信/联通 推荐 SJC,LAX
+      # 移动/广电 推荐 HKG
+      - delay=300
+      # 有效延迟（毫秒），超过此延迟将断开连接
+      - ips=4
+      # 指定生成IPv4还是IPv6地址
+      - port=443
+      # 转发的目标端口
+      - tls=true
+      # 是否为 TLS 端口
+      - random=true
+      # 是否随机生成IP，如果为false，则从CIDR中拆分出所有IP
+      - ipnum=10
+      # 提取的有效IP数量
+      - num=10
+      # 目标负载 IP 数量
+      - task=100
+      # 并发请求最大协程数
+      - code=200
+      # HTTP/HTTPS 响应状态码
+      - domain=cloudflaremirrors.com/debian
+      # 响应状态码检查的域名地址
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 1234:1234/tcp
+      # 端口映射
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/cloudflared_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:1234]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/cloudflared.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
