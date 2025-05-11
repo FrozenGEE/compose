@@ -26,7 +26,7 @@ services:
     # 特权模式，赋予容器几乎与主机相同的权限
     devices:
       - /dev/dri:/dev/dri
-      # 开启硬件转码
+    # 开启硬件转码
     # runtime: nvidia
     # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
