@@ -12,7 +12,7 @@
 # 在 Orange Pi 5 上设置具有硬件加速功能的 Jellyfin （Rockchip RK3558）
 # https://akashrajpurohit.com/blog/setup-jellyfin-with-hardware-acceleration-on-orange-pi-5-rockchip-rk3558
 
-# 务必查看官方文档：https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip
+# 务必查看官方文档：https://jellyfin.org/docs/general/post-install/transcoding/hardware-acceleration/rockchip
 ##################################################
 # 建议使用64位Linux发行版，需要Rockchip BSP内核(6.1 或 5.10 LTS)，命令如下，三条均可
 # uname -srm
