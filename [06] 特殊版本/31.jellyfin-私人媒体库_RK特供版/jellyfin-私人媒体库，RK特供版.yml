@@ -101,6 +101,9 @@ services:
     # 主机名，此处修改为设备名字
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限，必须
+    devices:
+      - /dev/dri:/dev/dri
+    # 开启硬件转码
     command: 
       '`for dev in dri dma_heap mali0 rga mpp_service iep mpp-service
       vpu_service vpu-service hevc_service hevc-service rkvdec rkvenc vepu
