@@ -17,14 +17,10 @@ services:
     # 容器名字
     hostname: v2raya
     # 主机名
-    # environment:
-      # - V2RAYA_LOG_FILE=/tmp/v2raya.log
-      # 定义日志文件路径，不管，照抄
-      # - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
-      # V2RAYA_V2RAY_BIN 的值应当是 /usr/local/bin/v2ray 或 /usr/local/bin/xray，默认的核心是 xray
     volumes:
       - 【这里替换为你的docker数据存放目录】/v2raya/v2raya:/etc/v2raya
       # 配置文件目录
+      
       - /etc/resolv.conf:/etc/resolv.conf
       # 请确报有这条路径，有这个文件，需不然会创建成文件夹
       # 上面这条如果 /etc 内没有或不会进去，新建 resolv.conf 文件，可以写下面这条，注意新建好 resolv.conf 文件，这是文件映射
