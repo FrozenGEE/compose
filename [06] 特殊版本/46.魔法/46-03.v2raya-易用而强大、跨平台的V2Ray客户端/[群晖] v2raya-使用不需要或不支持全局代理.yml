@@ -32,11 +32,6 @@ services:
     # 容器名字
     hostname: v2raya
     # 主机名
-    environment:
-      - V2RAYA_LOG_FILE=/tmp/v2raya.log
-      # 定义日志文件路径，不管，照抄
-      - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
-      # V2RAYA_V2RAY_BIN 的值应当是 /usr/local/bin/v2ray 或 /usr/local/bin/xray，默认的核心是 xray
     volumes:
       - /volume1/docker/v2raya:/etc/v2raya
       # 配置文件目录
@@ -44,11 +39,19 @@ services:
       # 照抄，踩点了，有该文件存在
       # 上面这条如果 /etc 内没有或不会进去新建 resolv.conf 文件，可以写下面这条，注意新建好 resolv.conf 文件，这是文件映射
       # - 【这里替换为你的docker数据存放目录】/v2raya/resolv.conf:/etc/resolv.conf
-    network_mode: bridge
-    ports:
-      - 2017:2017/tcp
+
+    # network_mode: bridge
+    network_mode: host
+    # 可 host 也可 bridge，如果端口冲突，预设使用host
+
+    # bridge 时，在同一个docker容器子网 bridge 中，其他容器可以通过 172.17.0.1:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
+    # host 时，在同一个docker容器子网 host 中，其他容器可以通过 127.0.0.1:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
+    # 但是不在统一docker容器子网的，无法通过以上方式通讯，可通过以下方式
+    # 对于局域网中其他设备，你直接写 服务器的IP:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
+
+      # - 2017:2017/tcp
       # WebUI 端口：2017
-      - 20170-20172/tcp
+      # - 20170-20172:20170-20172/tcp
       # sock 代理端口：20170
       # http 代理端口：20171
       # http 代理端口(带分流规则)：20172
