@@ -1,11 +1,6 @@
-# 【更新日志-2025-04-20】
-- [极空间compose到底如何？](https://www.bilibili.com/video/BV1V95EzFEfe/)
-- 更新[volumes.md](https://github.com/FrozenGEE/compose/blob/main/volumes.md)内容，新增极空间的compose存放路径```/zspace/applications/services/zdocker/config/compose_config/项目名字.yaml```
-- 注意01：如果出现新建compose部署，但是极空间compose提示路径报错的，先把报错的路径在前方加上#号注释掉，然后再去修改，去掉#号由注释变成参数，再重新部署
-- 注意02：极空间因为路径上有手机号码，每一个存储池路径都不一样，而且compose存放路径为系统内部，也无法使用相对路径的写法，因此无法编写现成模板，除了全通用模板
-- 注意03：听说compose功能需要开启官方SSH才可以支持，我还以为可以直接compose跑一个ttyd(网页ssh终端工具)从而绕开官方设置中开启SSH
-- 注意04：极空间compose中所创建过的每一份compose.yaml文件均不会再你删除的时候一并删除
-- 注意05：使用compose创建容器时，如果没有映射对路径，删除compose项目，不会自动删除未映射卷(很多都会这样)
+# 【更新日志-2025-05-12】
+- 修正更新```v2rayA```的模板，统一都放到了[[06]特殊版本/46.魔法](https://github.com/FrozenGEE/compose/tree/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/46.%E9%AD%94%E6%B3%95/46-03.v2raya-%E6%98%93%E7%94%A8%E8%80%8C%E5%BC%BA%E5%A4%A7%E3%80%81%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84V2Ray%E5%AE%A2%E6%88%B7%E7%AB%AF)里面
+- ```media-aio```模板中v2ryA的内容，均使用不支持全局代理的模板，如果有需要使用全局代理的，自行修改
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
