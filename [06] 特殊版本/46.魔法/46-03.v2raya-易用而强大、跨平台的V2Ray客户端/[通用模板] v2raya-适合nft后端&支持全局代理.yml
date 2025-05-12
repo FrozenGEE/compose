@@ -7,9 +7,10 @@
 # 建议看看官方文档，如果你使用 macOS 或其他不支持 host 模式的环境，在该情况下无法使用全局透明代理，或者你不希望使用全局透明代理，docker 命令会略有不同
 # 注意此为适合 nft/legacy 后端&支持全局代理的部署模板，默认使用的是 iptables (即 nft )
 
-# nftables和iptables的支持查询方法如下，最好直接问deepseek
+# nft 和 legacy 的支持查询方法如下，最好直接问deepseek
 
-# 【方法1】查看iptables版本信息：iptables --version
+# 【方法1】查看iptables版本信息
+# iptables --version
 # 若输出包含 nf_tables 或 nftables，如 iptables v1.8.7 (nf_tables)，则使用 nft 后端
 # 若未提及这些关键词，如 iptables v1.6.0，则使用 legacy 后端
 
@@ -18,7 +19,8 @@
 # 若存在 iptables-nft 包，则系统默认使用 nft 后端
 # 若存在 iptables-legacy 包，则使用 legacy 后端
 
-# 【方法3】检查内核是否支持nftables：lsmod | grep nf_tables
+# 【方法3】检查内核是否支持nftables
+# lsmod | grep nf_tables
 # 若有输出，如 nf_tables 模块，则内核支持 nftables
 
 # 【方法4】直接测试命令兼容性
