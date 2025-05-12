@@ -12,7 +12,7 @@ ssh 中执行```iptables --version```得出以下结果
 | 系统 / 设备 | 系统版本 | Linux内核 |  输出结果 | legacy 后端 | nft 后端 | 
 | :----: | :----: | :----: | :----: | :----: | :----: |
 | unRAID | 7.1.2 | 6.12.24-Unraid | iptables v1.8.11 (legacy) | ✅ |  | 
-| TrueNAS SCALE | 没装起来  | 不写  |   |   |   | 
+| TrueNAS SCALE | 没装起来  | 不写  |   |   | 你猜 | 
 | OMV7 | 没装起来  | 不写  |  |   | 猜的✅ | 
 | 群晖ds918+ | 7.2.1-69057 Update7 | 4.4.302+ | iptables v1.8.3 (legacy) | ✅ |  | 
 | 威联通 | 没设备  | 不写  |  |   | 猜的✅ | 
