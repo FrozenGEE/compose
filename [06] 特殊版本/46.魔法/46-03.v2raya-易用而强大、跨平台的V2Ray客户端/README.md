@@ -14,16 +14,17 @@ ssh 中执行```iptables --version```得出以下结果
 | 系统 / 设备 | 系统版本 | Linux内核 |  输出结果 | legacy 后端 | nft 后端 | 
 | :----: | :----: | :----: | :----: | :----: | :----: |
 | unRAID | 7.1.2 | 6.12.24-Unraid | iptables v1.8.11 (legacy) | ✅ |  | 
-| TrueNAS SCALE |   |   |   |  |  | 
+| TrueNAS SCALE |   |   |   |   |   | 
 | 群晖ds918+ | 7.2.1-69057 Update7 | 4.4.302+ | iptables v1.8.3 (legacy) | ✅ |  | 
-| U-NAS |   |   |   |  |  | 
+| 万由 U-NAS |   |   |   |   |   | 
 | 绿联dx4600 | UGOS Pro 1.4.0 | 6.1.27 | iptables v1.8.9 (nf_tables) |  | ✅ | 
 | 绿联dxp2800 | UGOS Pro 1.4.0 | 6.1.27 | iptables v1.8.9 (nf_tables) |  | ✅ | 
-| 飞牛OS |   |   |   |  |  | 
+| 飞牛OS |   |   |   |   |   | 
 | 极空间T2 | zos | 5.10.110 | iptables v1.8.7 (nf_tables) |  | ✅ | 
 | 香橙派5plus | Ubuntu 22.04.5 LTS | 5.10.160 | iptables v1.8.7 (nf_tables) |  | ✅ | 
 | 友善cm3588 | OMV 7.7.7-1 (Sandworm) | 6.1.99 | iptables v1.8.9 (nf_tables) |  | ✅ | 
 | TN3568 | Armbian OS 25.05.0 bookworm | 6.1.134-ophub | iptables v1.8.9 (nf_tables) |  | ✅ | 
+| 华硕NAS |   |   |   |   |   | 
 
 ### 运行 v2rayA:
 1. ```V2RAYA_V2RAY_BIN```的值应当是```/usr/local/bin/v2ray```或```/usr/local/bin/xray```，默认的核心是```xray```。
