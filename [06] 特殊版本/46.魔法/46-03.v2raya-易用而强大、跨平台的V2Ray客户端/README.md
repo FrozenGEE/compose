@@ -24,7 +24,6 @@ ssh 中执行```iptables --version```得出以下结果
 | 香橙派5plus | Ubuntu 22.04.5 LTS | 5.10.160 | iptables v1.8.7 (nf_tables) |  | ✅ | 
 | 友善cm3588 | OMV 7.7.7-1 (Sandworm) | 6.1.99 | iptables v1.8.9 (nf_tables) |  | ✅ | 
 | TN3568 | Armbian OS 25.05.0 bookworm | 6.1.134-ophub | iptables v1.8.9 (nf_tables) |  | ✅ | 
-| 华硕NAS |   |   |   |   |   | 
 
 ### 运行 v2rayA:
 1. ```V2RAYA_V2RAY_BIN```的值应当是```/usr/local/bin/v2ray```或```/usr/local/bin/xray```，默认的核心是```xray```。
