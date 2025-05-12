@@ -457,13 +457,26 @@ services:
     image: mzz2017/v2raya:latest
     container_name: v2raya
     hostname: v2raya
-    # privileged: true
+    privileged: true
+    environment:
+      - V2RAYA_LOG_FILE=/tmp/v2raya.log
+      # 定义日志文件路径，不管，照抄
+      - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
+      # V2RAYA_V2RAY_BIN 的值应当是 /usr/local/bin/v2ray 或 /usr/local/bin/xray，默认的核心是 xray
+      - V2RAYA_NFTABLES_SUPPORT=off
+      # 如果你的宿主系统使用原生的 nftables，那么就把 V2RAYA_NFTABLES_SUPPORT 设置为 on
+      - IPTABLES_MODE=iptables
+      # 如果你的宿主系统使用 iptables，那么可以通过 IPTABLES_MODE 变量来指定后端，将该变量的值设置为 nftables 将使用 nft 后端，设置为 legacy 将使用传统后端
+      # - V2RAYA_ADDRESS=0.0.0.0:2017
+      # 可在设置内修改
     volumes:
-      - /mnt/emmc/docker/v2raya/etc/v2raya:/etc/v2raya
-      # 配置文件
+      - /lib/modules:/lib/modules:ro
+      # 内核，如果不支持或者不想使用全局透明代理，则注释掉
       - /etc/resolv.conf:/etc/resolv.conf
       # 需要预先创建好一个文件，不然会创建成文件夹；上面这条如果/etc内没有或不会进去新建resolv.conf，可以写下面这条
-      # - /mnt/emmc/docker/v2raya/resolv.conf:/etc/resolv.conf
+      # - 【这里替换为你的docker数据存放目录】/v2raya/etc/resolv.conf:/etc/resolv.conf
+      - /mnt/emmc/docker/v2raya:/etc/v2raya
+      # 配置文件目录
     environment:
       - TZ=Asia/Shanghai
     network_mode: host
