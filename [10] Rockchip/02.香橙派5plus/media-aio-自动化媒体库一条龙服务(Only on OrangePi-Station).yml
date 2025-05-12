@@ -477,8 +477,6 @@ services:
       # - 【这里替换为你的docker数据存放目录】/v2raya/etc/resolv.conf:/etc/resolv.conf
       - /mnt/emmc/docker/v2raya:/etc/v2raya
       # 配置文件目录
-    environment:
-      - TZ=Asia/Shanghai
     network_mode: host
     restart: always
 
