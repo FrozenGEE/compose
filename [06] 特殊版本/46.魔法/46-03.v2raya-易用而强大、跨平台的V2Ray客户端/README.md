@@ -83,7 +83,7 @@ iptables v1.8.3 (legacy)
 ```
 
 本仓库提供以下系统的预编译模块，经测试可以正常加载。
-
+- 表格内容较旧，仅供参考
 | arch       | kernel   | iptables version | system model | platform version |
 | :--------- | :------- | :--------------- | :----------- | :--------------- |
 | apollolake | 4.4.180+ | v1.8.3           | DS918+       | 7.0.1-42218      |
