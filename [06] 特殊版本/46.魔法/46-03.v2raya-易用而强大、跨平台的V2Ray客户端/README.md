@@ -5,6 +5,8 @@
 
 [群晖实现透明代理](https://v2raya.org/docs/advanced-application/synology-transparent-proxy)
 
+[群晖系统缺失的一些iptables模块](https://github.com/sjtuross/syno-iptables)
+
 ### v2RayA 内核情况说明
 ssh 中执行```iptables --version```得出以下结果
 - 数据更新日期：2025-05-12
