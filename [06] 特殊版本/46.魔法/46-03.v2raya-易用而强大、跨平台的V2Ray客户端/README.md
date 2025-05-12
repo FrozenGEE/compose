@@ -16,6 +16,7 @@ ssh 中执行```iptables --version```得出以下结果
 | unRAID | 7.1.2 | 6.12.24-Unraid | iptables v1.8.11 (legacy) | ✅ |  | 
 | TrueNAS SCALE |   |   |   |  |  | 
 | 群晖ds918+ | 7.2.1-69057 Update7 | 4.4.302+ | iptables v1.8.3 (legacy) | ✅ |  | 
+| U-NAS |   |   |   |  |  | 
 | 绿联dx4600 | UGOS Pro 1.4.0 | 6.1.27 | iptables v1.8.9 (nf_tables) |  | ✅ | 
 | 绿联dxp2800 | UGOS Pro 1.4.0 | 6.1.27 | iptables v1.8.9 (nf_tables) |  | ✅ | 
 | 飞牛OS |   |   |   |  |  | 
