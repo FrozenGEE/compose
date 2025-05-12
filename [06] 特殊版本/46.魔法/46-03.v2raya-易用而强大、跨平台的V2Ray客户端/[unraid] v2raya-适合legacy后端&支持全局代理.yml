@@ -1,0 +1,87 @@
+# 官方文档
+# https://v2raya.org
+# https://v2raya.org/docs/prologue/introduction
+# https://v2raya.org/docs/prologue/installation/docker
+# https://hub.docker.com/r/mzz2017/v2raya
+
+# 建议看看官方文档，如果你使用 macOS 或其他不支持 host 模式的环境，在该情况下无法使用全局透明代理，或者你不希望使用全局透明代理，docker 命令会略有不同
+# 注意此为适合 nft/legacy 后端&支持全局代理的部署模板，默认使用的是 iptables (即 nft )
+
+# nft 和 legacy 的支持查询方法如下，最好直接问deepseek
+# 2025-05-12，unraid 7.1.2 通过【方法1】查询结果为：iptables v1.8.11 (legacy)，因为模板中变量改为使用 legacy 而不是 iptables
+
+# 【方法1】查看iptables版本信息
+# iptables --version
+# 若输出包含 nf_tables 或 nftables，如 iptables v1.8.7 (nf_tables)，则使用 nft 后端
+# 若未提及这些关键词，如 iptables v1.6.0，则使用 legacy 后端
+
+# 【方法2】：检查已安装的软件包
+# dpkg -l | grep iptables
+# 若存在 iptables-nft 包，则系统默认使用 nft 后端
+# 若存在 iptables-legacy 包，则使用 legacy 后端
+
+# 【方法3】检查内核是否支持nftables
+# lsmod | grep nf_tables
+# 若有输出，如 nf_tables 模块，则内核支持 nftables
+
+# 【方法4】直接测试命令兼容性
+# sudo iptables-legacy -L 2>/dev/null && echo "Legacy backend detected"
+# sudo iptables-nft -L 2>/dev/null && echo "NFT backend detected"
+# 若某条命令成功列出规则，则对应后端被使用
+
+# 【方法5】检查环境变量 IPTABLES_MODE
+# grep IPTABLES_MODE /etc/default/iptables /etc/sysconfig/iptables 2>/dev/null
+# 若找到 IPTABLES_MODE=nftables 或 IPTABLES_MODE=legacy，则明确指定了后端
+
+---
+version: "3"
+# 最后编辑时间：2025-05-12
+services:
+  v2raya:
+    image: mzz2017/v2raya:latest
+    # 镜像地址
+    container_name: v2raya
+    # 容器名字
+    hostname: v2raya
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    environment:
+      - V2RAYA_LOG_FILE=/tmp/v2raya.log
+      # 定义日志文件路径，不管，照抄
+      - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
+      # V2RAYA_V2RAY_BIN 的值应当是 /usr/local/bin/v2ray 或 /usr/local/bin/xray，默认的核心是 xray
+      - V2RAYA_NFTABLES_SUPPORT=off
+      # 如果你的宿主系统使用原生的 nftables，那么就把 V2RAYA_NFTABLES_SUPPORT 设置为 on
+
+      - IPTABLES_MODE=legacy
+      # 如果你的宿主系统使用 iptables，那么可以通过 IPTABLES_MODE 变量来指定后端，将该变量的值设置为 nftables 将使用 nft 后端，设置为 legacy 则将使用传统后端
+      # 默认预设为 iptables，判断方法见最上，本人手头上的机器部署时试过使用 legacy 导致无法连接到其他容器，个人网络水平有限，不懂，欢迎解答，虽然我还是听不懂
+
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      # 内核，请确保支持使用全局透明代理
+      - /mnt/user/appdata/v2raya/v2raya:/etc/v2raya
+      # 配置文件目录
+
+      - /etc/resolv.conf:/etc/resolv.conf
+      # 请确报有这条路径，且有这个文件，不然会创建成文件夹，没有可以创建一个空白内容的 resolv.conf 文件
+      # 上面这条如果 /etc 内没有或不会进去，新建名为 resolv.conf 的空白内容的文件，可以写下面这条，注意新建好 resolv.conf 文件，这是文件映射
+      # - /mnt/user/appdata/v2raya/resolv.conf:/etc/resolv.conf
+
+    network_mode: host
+    # 用host，以下均为 tcp 端口
+    # WebUI 端口：2017
+    # sock 代理端口：20170
+    # http 代理端口：20171
+    # http 代理端口(带分流规则)：20172
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:2017]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/v2raya.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
