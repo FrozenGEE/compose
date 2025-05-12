@@ -8,7 +8,7 @@
 # 注意此为适合 nft/legacy 后端&支持全局代理的部署模板，默认使用的是 iptables (即 nft )
 
 # nft 和 legacy 的支持查询方法如下，最好直接问deepseek
-# 2025-05-12，unraid 7.1.2 通过【方法1】查询结果为：iptables v1.8.11 (legacy)，记得修改
+# 请根据实际情况修改变量，实在不会，用另一个版本
 
 # 【方法1】查看iptables版本信息
 # iptables --version
