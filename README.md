@@ -1,6 +1,6 @@
 # 【更新日志-2025-05-12】
 - 修正更新```v2rayA```的模板，统一都放到了[[06]特殊版本/46.魔法](https://github.com/FrozenGEE/compose/tree/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/46.%E9%AD%94%E6%B3%95/46-03.v2raya-%E6%98%93%E7%94%A8%E8%80%8C%E5%BC%BA%E5%A4%A7%E3%80%81%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84V2Ray%E5%AE%A2%E6%88%B7%E7%AB%AF)里面
-- ```media-aio```模板中v2ryA的内容，均使用不支持全局代理的模板，如果有需要使用全局代理的，自行修改
+- ```media-aio```模板中```v2rayA```的内容，均统一使用不支持全局代理的模板，如果有需要使用全局代理的，自行修改
 - ```飞牛OS 0.9.2```最新版本实测docker compose使用```unless-stopped```已经可以重启docker后容器自启动，后续的模板将统一使用
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
