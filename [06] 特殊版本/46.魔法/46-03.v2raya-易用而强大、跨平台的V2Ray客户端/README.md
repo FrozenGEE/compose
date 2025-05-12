@@ -17,7 +17,7 @@ ssh 中执行```iptables --version```得出以下结果
 | 绿联dxp2800 | UGOS Pro 1.4.0 | 6.1.27 | iptables v1.8.9 (nf_tables) |  | ✅ | 
 | 极空间T2 | zos | 5.10.110 | iptables v1.8.7 (nf_tables) |  | ✅ | 
 | 香橙派5plus | Ubuntu 22.04.5 LTS | 5.10.160 | iptables v1.8.7 (nf_tables) |  | ✅ | 
-| 友善cm3588 | OMV7.7.7-1 (Sandworm) | 6.1.99 | iptables v1.8.9 (nf_tables) |  | ✅ | 
+| 友善cm3588 | OMV 7.7.7-1 (Sandworm) | 6.1.99 | iptables v1.8.9 (nf_tables) |  | ✅ | 
 | TN3568 | Armbian OS 25.05.0 bookworm | 6.1.134-ophub | iptables v1.8.9 (nf_tables) |  | ✅ | 
 
 ### 运行 v2rayA:
