@@ -168,13 +168,13 @@ services:
       # 以下是为PLEX添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      - ALL_PROXY=http://127.0.0.1:20171
-      - HTTP_PROXY=http://127.0.0.1:20171
+      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
     network_mode: bridge
     ports:
       - 32400:32400
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -207,13 +207,13 @@ services:
       # emby推荐不写，而是安装神医插件：https://github.com/sjtuross/StrmAssistant
       - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      - ALL_PROXY=http://127.0.0.1:20171
-      - HTTP_PROXY=http://127.0.0.1:20171
+      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
     network_mode: bridge
     ports:
       - 8096:8096
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -243,13 +243,13 @@ services:
       # 以下是为JF添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      - ALL_PROXY=http://127.0.0.1:20171
-      - HTTP_PROXY=http://127.0.0.1:20171
+      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
     network_mode: bridge
     ports:
       - 8097:8096
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 #                                            #
@@ -285,7 +285,7 @@ services:
       - UMASK=022
       - TZ=Asia/Shanghai
     network_mode: host
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -323,7 +323,7 @@ services:
       - TZ=Asia/Shanghai
     network_mode: host
     # 如需修改WebUI的端口，到/config/setting.json中第54行的"rpc-port": 9091的端口改为自定义端口
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 #                                            #
@@ -335,7 +335,7 @@ services:
     image: jxxghp/moviepilot-v2:latest
     container_name: moviepilot-v2
     hostname: moviepilot-v2
-    restart: always
+    restart: unless-stopped
     network_mode: host
 ##############################################
 ## 第一次运行时，MoviePilot 会下载大量文件到本地，请在留意日志中的进度，如果有什么问题，可以寻找网友求助
@@ -366,7 +366,7 @@ services:
       # 超级管理者用户名，默认为admin，初次安装后失效
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效
       
-      # - PROXY_HOST=127.0.0.1:20171
+      # - PROXY_HOST=【这里替换为你的NAS的IP地址】:20171
       # 网络代理，访问themoviedb或者重启更新需要使用代理访问，如果你没有配置魔法就注释掉
       # 格式为http(s)://ip:port、socks5://user:pass@host:port
       # - BIG_MEMORY_MOD=true
@@ -506,7 +506,7 @@ services:
       # 自定义容器端口
       - TZ=Asia/Shanghai
     network_mode: host
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 #                                            #
@@ -527,7 +527,7 @@ services:
       - WATCHTOWER_CLEANUP=true
       # 更新后移除旧的镜像
       - TZ=Asia/Shanghai
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -539,7 +539,7 @@ services:
     ports:
       - 8188:8088/tcp
       # WebUI 端口，可能会有别的服务使用8088，所以改用bridge
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -556,7 +556,7 @@ services:
     ports:
       - 8780:8780
       # 注：8780是容器内nginx的监听端口，反向代理了 8787、3131
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -565,15 +565,24 @@ services:
     container_name: v2raya
     hostname: v2raya
     # privileged: true
+    environment:
+      - V2RAYA_LOG_FILE=/tmp/v2raya.log
+      - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
     volumes:
-      # - /lib/modules:/lib/modules:ro
-      # 内核，如果不支持或者不想使用全局透明代理，则注释掉
       - /mnt/unas/data/docker/v2raya:/etc/v2raya
-      # 配置文件
+      # 配置文件目录
       - /etc/resolv.conf:/etc/resolv.conf
-      # 需要预先创建好一个文件，不然会创建成文件夹；上面这条如果/etc内没有或不会进去新建resolv.conf，可以写下面这条
-      # - /mnt/unas/data/docker/v2raya/resolv.conf:/etc/resolv.conf
-    network_mode: host
-    restart: always
+      # 照抄，踩点了，有该文件存在
+    network_mode: bridge
+    # 由于书写有不同方式，这里统一采用bridge，使用不支持透明代理的模板，如果你清楚如何使用，则自行修改
+    # 你直接写 服务器的IP:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
+    ports:
+      - 2017:2017/tcp
+      # WebUI 端口：2017
+      - 20170-20172:20170-20172/tcp
+      # sock 代理端口：20170
+      # http 代理端口：20171
+      # http 代理端口(带分流规则)：20172
+    restart: unless-stopped
 
 ##############################################
