@@ -40,5 +40,5 @@ services:
       # 代理端口，如果占用，则改为7891
       - 9098:8080/tcp
       # WebUI 端口
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
