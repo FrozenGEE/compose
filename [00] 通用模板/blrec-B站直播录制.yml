@@ -23,7 +23,7 @@ services:
       # 配置文件目录
       - 【这里替换为你的docker数据存放目录】/blrec/log:/log
       # 日志文件目录
-      - 【这里替换为你录播的存放目录】/rec:/rec
+      - 【这里替换为你录播的存放目录】:/rec
       # 录像存放目录
     # network_mode: bridge
     network_mode: host
