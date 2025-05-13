@@ -76,7 +76,7 @@ services:
     ports:
       - 2283:2283/tcp
       # WebUI 端口
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     depends_on:
        - immich-redis
@@ -124,7 +124,7 @@ services:
       # AI深度学习的超时时间，默认为120
       #
       ####################
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ############################################################################
@@ -139,7 +139,7 @@ services:
     volumes:
       - /vol1/1000/docker/immich/immich-redis:/data
       # 数据库目录
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ############################################################################
@@ -159,7 +159,7 @@ services:
       - POSTGRES_USER=immich
       - POSTGRES_PASSWORD=immich
       # pgsql的子数据库，账号密码均为预设的immich
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 ############################################################################
