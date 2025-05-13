@@ -37,7 +37,7 @@ services:
       # 时区
     network_mode: host
     # 推荐直接使用host网络模式，不具备WebUI
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
 
