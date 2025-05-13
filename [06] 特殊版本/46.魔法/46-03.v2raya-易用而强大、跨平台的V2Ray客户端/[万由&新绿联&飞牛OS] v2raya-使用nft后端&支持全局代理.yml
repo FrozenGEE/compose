@@ -8,7 +8,7 @@
 # 注意此为适合 nft/legacy 后端&支持全局代理的部署模板，默认使用的是 iptables (即 nft )
 
 # nft 和 legacy 的支持查询方法如下，最好直接问deepseek
-# 绿联和飞牛OS根据【方法1】实测是 iptables v1.8.9 (nf_tables)，因为使用相对路径，所以都通用
+# 万由、绿联、飞牛OS 根据【方法1】实测是 nf_tables，因为使用相对路径，所以都通用
 
 # 【方法1】查看iptables版本信息
 # iptables --version
