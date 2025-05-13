@@ -1,0 +1,43 @@
+# 官方文档
+# https://icret.github.io/EasyImages2.0
+# https://github.com/icret/EasyImages2.0
+
+# 由热心TG网友Derek DDS制作的Docker版本 
+# https://github.com/DDS-Derek/EasyImage-Docker
+# https://hub.docker.com/r/ddsderek/easyimage
+
+# 由热心网友咕咕 制作的使用教程
+# 宝塔版使用教程 https://blog.laoda.de/archives/aapanel-install-easyimage
+# docker 版使用教程 https://blog.laoda.de/archives/docker-compose-install-easyimage
+# 视频安装教程 视频地址 https://www.bilibili.com/video/BV1Ya411e7ES?zw
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  easyimage:
+    image: ddsderek/easyimage:latest
+    # 镜像地址
+    container_name: easyimage
+    # 容器名字
+    hostname: easyimage
+    # 主机名
+    volumes:
+      - /vol1/1000/docker/easyimage:/app/web/config
+      # 配置文件目录
+      - /vol1/1000/docker/简单图床:/app/web/i
+      # 图床目录
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 8280:80/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

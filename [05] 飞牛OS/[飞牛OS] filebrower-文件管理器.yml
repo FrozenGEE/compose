@@ -1,0 +1,32 @@
+# 官方文档
+# https://hub.docker.com/r/filebrowser/filebrowser
+# 部署教程
+# https://post.smzdm.com/p/apvp2p2w
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    # 镜像地址
+    container_name: filebrowser
+    # 容器名字
+    hostname: filebrowser
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    volumes:
+      - /vol1/1000/docker:/srv
+      - /vol1:/vol1
+      # 映射本地其他路径使其可以访问，可以自定义多个
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 3670:80/tcp
+      # WebUI http端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
