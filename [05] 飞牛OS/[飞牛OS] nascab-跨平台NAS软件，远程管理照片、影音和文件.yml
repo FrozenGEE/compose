@@ -1,0 +1,49 @@
+# 官方文档
+# https://www.nascab.cn
+# https://www.nascab.cn/docker.html
+# https://hub.docker.com/r/ypptec/nascab
+
+# 服务端支持Windows，Linux，Mac系统直接安装使用，个人版免费，其他收费
+# 客户端支持Andriod，Andriod TV，iOS
+# 个人版：照片管理，影音管理，图书管理，音乐管理，文件分享，文件备份，文件管理，加密空间，电影海报匹配，多用户数量为2个
+# 专业版：在 个人版 基础上，多了歌词匹配，照片去重，专属域名DDNS，多用户数量变成5个
+# 白金版：在 专业版 基础上，多了内网穿透，多用户数量无限制
+
+# 初始化设置后，文件管理器，相册，影视，图书，音乐等的目录选择，直接更加偏向于windows桌面端的，如果对于linux不太了解的，不推荐安装使用
+
+---
+version: "3"
+# 最后编辑时间：2024-11-11
+services:
+  nascab:
+    image: ypptec/nascab:latest
+    # 镜像地址
+    container_name: nascab
+    # 容器名字
+    hostname: nascab
+    # 主机名
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+    # 部分绿联Nas用户反馈docker日志过大，请运行docker的时候务必加上限制日志大小的选项
+    volumes:
+      - /vol1/1000/docker/nascab:/root/.local/share/nascab
+      # 数据库和缓存目录
+      - /vol1/1000:/NAS数据总目录/存储池1/NAS用户01
+      # 数据目录，映射本地其他路径使其可以访问，可以自定义多个，飞牛用户注意去看NAS路径说明
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+    network_mode: bridge
+    # 有多个端口冲突，不推荐host网络模式
+    ports:
+      - 4747:80/tcp
+      # WebUI HTTP端口
+      - 47443:443/tcp
+      # WebUI HTTPS端口
+      - 4790:90/tcp
+      # WebDAV分享端口
+      - 4721:21/tcp
+      # FTP分享端口
+      # 如不需要设置文件分享，可以不映射90和21端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

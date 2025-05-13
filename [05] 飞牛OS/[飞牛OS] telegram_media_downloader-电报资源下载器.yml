@@ -1,0 +1,110 @@
+# 官方文档
+# https://github.com/tangyoha/telegram_media_downloader
+# 教程
+# https://github.com/tangyoha/telegram_media_downloader/blob/master/README_CN.md
+
+---
+version: "3.3"
+# 最后编辑时间：2025-02-23
+services:
+  telegram_media_downloader:
+    image: tangyoha/telegram_media_downloader:latest
+    # 镜像地址
+    container_name: telegram_media_downloader
+    # 容器名字
+    hostname: telegram_media_downloader
+    # 主机名
+    volumes:
+      - /vol1/1000/docker/telegram下载目录:/app/downloads
+      # 下载目录
+      - /vol1/1000/docker/telegram下载器:/app/temp
+      # 临时缓存目录
+      - /vol1/1000/docker/telegram下载器:/app/sessions
+      # 会话目录
+      - /vol1/1000/docker/telegram下载器:/app/log
+      # 日志目录
+      - /vol1/1000/docker/telegram下载器/config.yaml:/app/config.yaml
+      - /vol1/1000/docker/telegram下载器/data.yaml:/app/data.yaml
+      # 配置文件映射，注意：需要从官方github项目中获取config.yaml和data.yaml文件，修改好配置内容，放到相应的目录中，内容可见本compose结尾部分，下载地址如下
+      # https://github.com/tangyoha/telegram_media_downloader/blob/master/config.yaml
+      # https://github.com/tangyoha/telegram_media_downloader/blob/master/data.yaml
+    environment:
+      - http_proxy=http://127.0.0.1:10811
+      - https_proxy=http://127.0.0.1:10811
+      # 网络代理，根据实际情况填写
+    network_mode: bridge
+    # network_mode: host
+    # 不推荐用host，除非没有被占用，有别的服务或docker需要用到5000端口
+    # 可选择修改 config.yaml 中的 "web_port"，然后使用host网络模式
+    ports:
+      - 5230:5000/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+########################################
+# 注意：以下内容详见官方教程文档，docker部署时记得删除掉
+
+# 以下为 data.yaml 文件内容，照抄即可
+########################################
+
+ids_to_retry: []
+
+########################################
+
+# 以下为 config.yaml 文件内容，请根据最上方的教程修改，也可以见如下内容
+########################################
+
+api_hash: your_api_hash
+api_id: your_api_id
+# 电报应用程序获得的 API 密钥，由两部分组成：api_id 和api_hash
+bot_token: your_bot_token
+# 电报机器人的 ID
+chat:
+- chat_id: telegram_chat_id
+  last_read_message_id: 0
+  download_filter: message_date >= 2022-12-01 00:00:00 and message_date <= 2023-01-17 00:00:00
+- chat_id: telegram_chat_id_2
+  last_read_message_id: 0
+# 我们将ids_to_retry移到data.yaml
+ids_to_retry: []
+media_types:
+- audio
+- document
+- photo
+- video
+- voice
+- animation #gif
+file_formats:
+  audio:
+  - all
+  document:
+  - pdf
+  - epub
+  video:
+  - mp4
+save_path: D:\telegram_media_downloader
+file_path_prefix:
+- chat_title
+- media_datetime
+upload_drive:
+  enable_upload_file: true
+  remote_dir: drive:/telegram
+  before_upload_file_zip: True
+  after_upload_file_delete: True
+hide_file_name: true
+file_name_prefix:
+- message_id
+- file_name
+file_name_prefix_split: ' - '
+max_download_task: 5
+web_host: 127.0.0.1
+web_port: 5000
+# 可在此处修改容器内的端口号，默认为5000
+web_login_secret: 123
+allowed_user_ids:
+- 'me'
+date_format: '%Y_%m'
+enable_download_txt: false
+
+########################################

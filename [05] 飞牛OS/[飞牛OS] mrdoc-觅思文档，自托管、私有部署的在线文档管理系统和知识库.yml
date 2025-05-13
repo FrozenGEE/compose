@@ -1,0 +1,72 @@
+# 官方文档
+# https://mrdoc.pro
+# https://doc.mrdoc.pro/p/deploy
+# https://doc.mrdoc.pro/doc/3958
+# https://hub.docker.com/r/zmister/mrdoc
+
+# 演示站点
+# 开源版 - http://mrdoc.zmister.com
+# 专业版 - https://doc.mrdoc.pro
+# 用户名：test1 密码：123456
+
+# 开源版和专业版对比
+# https://doc.mrdoc.pro/doc/3441
+# 如何对站点数据进行备份？
+# https://doc.mrdoc.pro/doc/44614
+# 开源版与专业版 数据导出与导入
+# https://doc.mrdoc.pro/doc/3467
+# https://doc.mrdoc.pro/doc/3468
+# 开源版>专业版数据迁移步骤
+# https://doc.mrdoc.pro/doc/3383
+
+# 配置指南
+# https://doc.mrdoc.pro/doc/1363
+# Docker 下使用 MySQL 数据库，省流，去修改
+# https://doc.mrdoc.pro/doc/44846
+# MySQL 数据库支持 emoji 的配置，省流：数据库字符集使用 utf8mb4_unicode_ci 即可
+# https://doc.mrdoc.pro/doc/44847
+
+# 管理员忘记密码怎么办？
+# https://doc.mrdoc.pro/doc/3068
+# 如何进行站点数据备份/站点迁移？
+# https://doc.mrdoc.pro/doc/3312
+
+# 创建管理员账户
+# docker exec -it mrdoc python manage.py createsuperuser
+# 修改用户密码
+# docker exec -it mrdoc python manage.py changepassword 用户名
+
+# MrDoc 的完整运行环境镜像，以 uwsgi 方式部署，集成Chromium、LibreOffice，必须挂载本地MrDoc目录使用，支持开源版、专业版
+# 注意1：请确保已经安装了 Git 工具，如果没有安装，请自行参考 https://www.runoob.com/git/git-install-setup.html 进行安装
+# 注意2：内网环境请前往仓库 Web 页面下载代码，然后将代码复制到内网机器相应目录
+
+# 开源版命令：git clone https://gitee.com/zmister/MrDoc.git
+# 专业版命令：git clone https://{用户名}:{密码}@git.mrdoc.pro/MrDoc/MrDocPro.git
+# 不要在用户名密码外面加花括号！
+# 例子：git clone https://mrdoc:123456@git.mrdoc.pro/MrDoc/MrDocPro.git
+
+# 下载到本地的/MrDoc目录内的全部文件移动到 /app/MrDoc 该容器路径的实际目录内
+
+---
+version: "3"
+# 最后编辑时间：2025-01-05
+services:
+  mrdoc:
+    image: zmister/mrdoc:v9.0
+    # 镜像地址，支持amd64和arm64
+    # armv7使用该镜像：jonnyan404/mrdoc:latest
+    container_name: mrdoc
+    # 容器名字
+    hostname: mrdoc
+    # 主机名
+    volumes:
+      - /vol1/1000/docker/mrdoc:/app/MrDoc
+      # 数据目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 10086:10086/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
