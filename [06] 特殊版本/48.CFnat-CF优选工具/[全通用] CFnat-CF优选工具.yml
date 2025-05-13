@@ -75,7 +75,7 @@ services:
     # ports:
       # - 1234:1234/tcp
       # 端口映射
-    restart: always
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       icon: http://IP:PORT/i/user_01/cloudflared_A.png
