@@ -638,7 +638,7 @@ services:
       - V2RAYA_LOG_FILE=/tmp/v2raya.log
       - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
     volumes:
-      - /mnt/user/appdata/v2raya/v2raya:/etc/v2raya
+      - /mnt/user/appdata/v2raya:/etc/v2raya
       # 配置文件目录
       - /etc/resolv.conf:/etc/resolv.conf
       # 照抄，踩点了，有该文件存在
