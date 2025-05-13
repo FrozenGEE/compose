@@ -174,7 +174,7 @@ services:
     network_mode: bridge
     ports:
       - 32400:32400
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -213,7 +213,7 @@ services:
     network_mode: bridge
     ports:
       - 8096:8096
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -249,7 +249,7 @@ services:
     network_mode: bridge
     ports:
       - 8097:8096
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 #                                            #
@@ -286,7 +286,7 @@ services:
       - UMASK=022
       - TZ=Asia/Shanghai
     network_mode: host
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -324,7 +324,7 @@ services:
       - TZ=Asia/Shanghai
     network_mode: host
     # 如需修改WebUI的端口，到/config/setting.json中第54行的"rpc-port": 9091的端口改为自定义端口
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 #                                            #
@@ -336,7 +336,7 @@ services:
     image: jxxghp/moviepilot-v2:latest
     container_name: moviepilot-v2
     hostname: moviepilot-v2
-    restart: always
+    restart: unless-stopped
     network_mode: host
 ##############################################
 ## 第一次运行时，MoviePilot 会下载大量文件到本地，请在留意日志中的进度，如果有什么问题，可以寻找网友求助
@@ -507,7 +507,7 @@ services:
       # 自定义容器端口
       - TZ=Asia/Shanghai
     network_mode: host
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 #                                            #
@@ -528,7 +528,7 @@ services:
       - WATCHTOWER_CLEANUP=true
       # 更新后移除旧的镜像
       - TZ=Asia/Shanghai
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -540,7 +540,7 @@ services:
     ports:
       - 8188:8088/tcp
       # WebUI 端口，可能会有别的服务使用8088，所以改用bridge
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -557,7 +557,7 @@ services:
     ports:
       - 8780:8780
       # 注：8780是容器内nginx的监听端口，反向代理了 8787、3131
-    restart: always
+    restart: unless-stopped
 
 ##############################################
 
@@ -575,6 +575,6 @@ services:
       # 需要预先创建好一个文件，不然会创建成文件夹；上面这条如果/etc内没有或不会进去新建resolv.conf，可以写下面这条
       # - /vol1/1000/docker/v2raya/resolv.conf:/etc/resolv.conf
     network_mode: host
-    restart: always
+    restart: unless-stopped
 
 ##############################################
