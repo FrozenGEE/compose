@@ -1,0 +1,54 @@
+# 官方文档
+# https://hfish.net
+# https://github.com/hacklcx/HFish
+# https://hub.docker.com/r/threatbook/hfish-server
+
+# 除非性能极度紧张或环境所限，否则HFish官方强烈建议使用MySQL/MariaDB数据库！在设置中就可以配置
+# 特别注意：HFish只支持SQLite向MySQL/MariaDB数据库迁移，不支持反向迁移
+# https://hfish.net/#/2-4-mariadb
+
+# 联网和安全说明
+# https://hfish.net/#/2-5-env
+# 基于安全考虑，不建议用户将HFish管理端Web管理端口TCP/4433暴露在互联网
+# TCP/4433端口和TCP/22端口 “只能”被安全区的管理设备访问
+# TCP/4434端口“必须能”被蜜罐节点访问
+
+# 登陆地址：https://[server]:4433/web/
+# 初始用户名：admin
+# 初始密码：HFish2021
+
+---
+version: "3"
+# 最后编辑时间：2025-5-12
+services:
+  hfish:
+    image: threatbook/hfish-server:latest
+    # 镜像地址
+    container_name: hfish
+    # 容器名字
+    hostname: hfish
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/hfish:/usr/share/hfish
+      # 配置文件目录
+
+    network_mode: host
+    # 注意：当前Docker版本使用host模式启动，如果您不希望Docker的管理端开放除TCP/4433和TCP/4434以外的端口，可暂停管理端内置默认节点
+    # WebUI 端口：4433
+
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/hfish_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:4433]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/hfish.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
