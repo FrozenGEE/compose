@@ -1,0 +1,46 @@
+# 官方文档
+# https://space.bilibili.com/1980888009
+# https://hub.docker.com/r/d9ee/lss
+# 详细教程地址：https://zui6.de/t/392f605c6a045c7062773318252a⁠
+
+# 演示地址：https://lss.zui6.de/⁠
+# 默认密码：1235678（默认密码为1～8的7位数字，没有4，部署后密码也是这个）
+
+# 虽然镜像支持arm，但是转码不支持RKMPP
+
+---
+version: "3"
+# 最后编辑时间：2025-5-15
+services:
+ lss:
+    image: d9ee/lss:latest
+    # 镜像地址
+    container_name: lss
+    # 容器名字
+    hostname: lss
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    devices:
+      - /dev/dri:/dev/dri
+    # 开启硬件转码
+    volumes:
+      -/volume1/docker/lss/Streamer:/home/lss/Streamer
+      # 串流目录
+      # 该目录存储转码切片后的视频文件，按“年-月”目录归档
+      # 注意：在设置里配置串流目录路径的时候，注意要写的是容器路径
+      
+      - 【这里替换为你需要监控的媒体文件的存放目录】:/watch
+      # 监控目录，支持添加多个监控目录
+      # - 【这里替换为你需要监控的媒体文件的存放目录2】:/watch2
+      # - 【这里替换为你需要监控的媒体文件的存放目录3】:/watch3
+      # 在设置里配置监控目录路径的时候，注意要写的是容器路径
+      
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 9003:9003/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
