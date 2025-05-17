@@ -554,9 +554,9 @@ services:
     hostname: peerbanhelper
     stop_grace_period: 30s
     volumes:
-      - /mnt/sata/docker/peerbanhelper:/app/data
+      - /mnt/unas/data/docker/peerbanhelper:/app/data
       # 配置文件目录
-      - /mnt/sata/docker/peerbanhelper:/app/data
+      - /mnt/unas/data/docker/peerbanhelper:/app/data
       # 临时缓存目录
     network_mode: host
     restart: unless-stopped
