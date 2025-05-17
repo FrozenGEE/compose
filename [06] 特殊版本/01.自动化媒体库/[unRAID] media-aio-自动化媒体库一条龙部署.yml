@@ -20,36 +20,37 @@
 # 重要内容，硬链接只能够存在于同一个存储池上
 # 重要内容，硬链接只能够存在于同一个存储池上
 #
-# /mnt/user/media
-#           |---/动漫
-#           |---/下载
-#           |
-#           |---/电影
-#           |     |---/国产电影
-#           |     |---/欧美电影
-#           |     |---/日韩电影
-#           |
-#           |---/电视剧
-#                  |---/国产电视剧
-#                  |---/欧美电视剧
-#                  |---/日韩电视剧
+# /mnt/unas/data/media
+#                |---/动漫
+#                |---/下载
+#                |
+#                |---/电影
+#                |     |---/国产电影
+#                |     |---/欧美电影
+#                |     |---/日韩电影
+#                |
+#                |---/电视剧
+#                      |---/国产电视剧
+#                      |---/欧美电视剧
+#                      |---/日韩电视剧
 #
-# ①：/mnt/user/meida——————media为共享文件夹，存储池预设为第1个存储池，请根据自己实际情况修改【这是实际路径】
-# ②：/mnt/user/meida/下载——————用于QB和TR下载，MP中设置对应的容器路径/downloads用于传递【这是实际路径】
-# ③：/mnt/user/meida/电影；/mnt/user/meida/电视剧——————用于媒体库的分类存放，可根据自己需要增添【这是实际路径】
+# ①：/mnt/unas/data/media——————media为共享文件夹，存储池预设为第1个存储池，请根据自己实际情况修改【这是实际路径】
+# ②：/mnt/unas/data/media/下载——————用于QB和TR下载，MP中设置对应的容器路径/downloads用于传递【这是实际路径】
+# ③：/mnt/unas/data/media/电影；/mnt/unas/data/media/电视剧——————用于媒体库的分类存放，可根据自己需要增添【这是实际路径】
 # ④：请在MP设置中，把下载目录设置为“/meida/下载”；把 电影/电视剧 等分类的目录设置从“/meida”开始选择【这是容器路径】
 # ⑤：MP和QB,TR都使用同一条路径映射“/meida/下载”【必须完全一样】
 # 不懂可以看看MP-01和MP-03这两张图，MP-02是效果图
-# ⑥：/mnt/user/meida/动漫——————用于ani-rss动漫bt下载，自身带重命名整理功能，刮削功能可以由PEJ负责
+# ⑥：/mnt/unas/data/media/动漫——————用于ani-rss动漫bt下载，自身带重命名整理功能，刮削功能可以由PEJ负责
+# ⑦：注意，需要在ani-rss的设置中，将下载地址修改为/ani-rss
 #
 ##############################################
 # 注意事项
-# 本模板包含PLEX,EMBY,JF,QB,TR,MP,ANI-RSS,COOKIECLOUD,IYUU,V2RAYA,WATCHTOWER
+# 本模板包含PLEX,EMBY,JF,QB,TR,MP,ANI-RSS,COOKIECLOUD,IYUU,V2RAYA,WATCHTOWER,PEERBANHELPER
 # 如果设置了使用网络代理(不一定是v2raya，可以是软路由)，请提前启用并激活好魔法，否则EMBY,JF,MP无法正常连接TMDB，MP可能无法正常下载核心文件
 # 模板预设使用的网络代理为v2raya的http端口20171，如果使用了别的，请根据实际情况修改，总不会有人连魔法都不会用不？不会吧？不会吧？
 # 部分参数不说明，如果想知道有什么用，可以参考其他的模板
 # 权限均设置为root以保证访问不会出错，注释内容多多阅读
-# 媒体库路径预设使用unRAID的阵列存储池/mnt/user，请根据实际情况修改
+# 媒体库路径预设使用第一个存储池/mnt/unas/data，请根据实际情况修改
 # 媒体库，iyuu，cookiecloud使用bridge；其余统一使用host，需要改变端口就去修改变量，看注释说明
 # iyuu使用host模式会占用mariadb/mysql的3306端口，所以使用bridge
 # QB和TR使用host，只要宿主机拥有IPV6，即可连上IPV6传输数据，如果宿主机没有，请检查网络环境
@@ -83,6 +84,8 @@
 #
 # cookiecloud使用教程：https://post.smzdm.com/p/a905kd5p
 #
+# peerbanhelper文档：https://github.com/PBH-BTN/PeerBanHelper
+# 
 ##############################################
 # 镜像地址
 # https://hub.docker.com/r/linuxserver/plex
@@ -124,15 +127,18 @@
 # moviepilot      ip:55055
 # ani-rss         ip:7789
 # cookiecloud     ip:8188
+# peerbanhelper   ip:9898
 # iyuu            ip:8780
 # v2raya          ip:2017
 # watchtower      不存在，后台自动更新容器镜像
+#
+# 如果要使用peerbanhelper，QB和TR必须使用host网络模式，模板默认为host网络模式，且对QB和TR的版本号有要求，注意查看文档
 #
 ##############################################
 
 ---
 version: "3"
-# 最后编辑时间：2025-02-11
+# 最后编辑时间：2025-05-17
 services:
 ##############################################
 #                                            #
@@ -603,6 +609,21 @@ services:
       net.unraid.docker.icon: /mnt/user/LOGO/cookiecloud.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+##############################################
+
+  peerbanhelper:
+    image: ghostchu/peerbanhelper:latest
+    container_name: peerbanhelper
+    hostname: peerbanhelper
+    stop_grace_period: 30s
+    volumes:
+      - /mnt/user/appdata/peerbanhelper:/app/data
+      # 配置文件目录
+      - /mnt/user/appdata/peerbanhelper/tmp:/tmp
+      # 临时缓存目录
+    network_mode: host
+    restart: unless-stopped
 
 ##############################################
 
