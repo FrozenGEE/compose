@@ -1,0 +1,49 @@
+# 官方文档
+# https://github.com/PBH-BTN/PeerBanHelper
+# https://hub.docker.com/r/ghostchu/peerbanhelper
+
+# 所有安装在 Docker 中的下载器，必须使用 host 网络驱动程序。PBH 需要下载器能获得 Peer 的真实 IP，不能使用 bridge 桥接模式！
+
+# 支持的客户端版本如下
+# qBittorrent/qBitorrent，4.5.0 或更高版本，不支持 XDown
+# BiglyBT（需要安装插件）
+# Deluge（需要安装插件）
+# Transmission (4.1.0-beta2 或更高版本)
+# BitComet v2.10 Beta6 [20240928] 或更高版本 (不支持 P2SP LTSeed 长效种子反吸血，因为 BitComet 暂时无法封禁长效连接)
+# PeerBanHelper 仅支持对传统 IPv4 或 IPv6 地址的反吸血，如遇 I2P 或者 Tor 连接将主动忽略。
+
+---
+version: "3"
+# 最后编辑时间：2025-05-17
+  peerbanhelper:
+    image: ghostchu/peerbanhelper:latest
+    # 镜像地址
+    container_name: peerbanhelper
+    # 容器名字
+    hostname: peerbanhelper
+    # 主机名
+    stop_grace_period: 30s
+    # 允许服务在 30 秒内优雅退出
+    volumes:
+      - /mnt/user/appdata/peerbanhelper:/app/data
+      # 配置文件目录
+      - /mnt/user/appdata/peerbanhelper/tmp:/tmp
+      # 临时缓存目录
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 9898:9898/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:9898]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/peerbanhelper.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
