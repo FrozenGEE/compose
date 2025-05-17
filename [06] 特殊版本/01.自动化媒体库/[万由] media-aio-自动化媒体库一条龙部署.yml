@@ -45,7 +45,7 @@
 #
 ##############################################
 # 注意事项
-# 本模板包含PLEX,EMBY,JF,QB,TR,MP,ANI-RSS,COOKIECLOUD,IYUU,V2RAYA,WATCHTOWER
+# 本模板包含PLEX,EMBY,JF,QB,TR,MP,ANI-RSS,COOKIECLOUD,IYUU,V2RAYA,WATCHTOWER,PEERBANHELPER
 # 如果设置了使用网络代理(不一定是v2raya，可以是软路由)，请提前启用并激活好魔法，否则EMBY,JF,MP无法正常连接TMDB，MP可能无法正常下载核心文件
 # 模板预设使用的网络代理为v2raya的http端口20171，如果使用了别的，请根据实际情况修改，总不会有人连魔法都不会用不？不会吧？不会吧？
 # 部分参数不说明，如果想知道有什么用，可以参考其他的模板
@@ -84,6 +84,8 @@
 #
 # cookiecloud使用教程：https://post.smzdm.com/p/a905kd5p
 #
+# peerbanhelper文档：https://github.com/PBH-BTN/PeerBanHelper
+# 
 ##############################################
 # 镜像地址
 # https://hub.docker.com/r/linuxserver/plex
@@ -125,15 +127,18 @@
 # moviepilot      ip:55055
 # ani-rss         ip:7789
 # cookiecloud     ip:8188
+# peerbanhelper   ip:9898
 # iyuu            ip:8780
 # v2raya          ip:2017
 # watchtower      不存在，后台自动更新容器镜像
+#
+# 如果要使用peerbanhelper，QB和TR必须使用host网络模式，模板默认为host网络模式，且对QB和TR的版本号有要求，注意查看文档
 #
 ##############################################
 
 ---
 version: "3"
-# 最后编辑时间：2025-02-11
+# 最后编辑时间：2025-05-17
 services:
 ##############################################
 #                                            #
@@ -539,6 +544,21 @@ services:
     ports:
       - 8188:8088/tcp
       # WebUI 端口，可能会有别的服务使用8088，所以改用bridge
+    restart: unless-stopped
+
+##############################################
+
+  peerbanhelper:
+    image: ghostchu/peerbanhelper:latest
+    container_name: peerbanhelper
+    hostname: peerbanhelper
+    stop_grace_period: 30s
+    volumes:
+      - /mnt/sata/docker/peerbanhelper:/app/data
+      # 配置文件目录
+      - /mnt/sata/docker/peerbanhelper:/app/data
+      # 临时缓存目录
+    network_mode: host
     restart: unless-stopped
 
 ##############################################
