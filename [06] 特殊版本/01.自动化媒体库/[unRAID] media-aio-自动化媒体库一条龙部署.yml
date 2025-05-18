@@ -85,6 +85,7 @@
 # 
 ##############################################
 # 镜像地址
+# 镜像地址
 # https://hub.docker.com/r/linuxserver/plex
 # https://hub.docker.com/r/linuxserver/emby
 # https://hub.docker.com/r/nyanmisaka/jellyfin
@@ -92,6 +93,7 @@
 # https://hub.docker.com/r/linuxserver/transmission
 # https://hub.docker.com/r/jxxghp/moviepilot
 # https://hub.docker.com/r/easychen/cookiecloud
+# https://hub.docker.com/r/ghostchu/peerbanhelper
 # https://hub.docker.com/r/iyuucn/iyuuplus-dev
 # https://hub.docker.com/r/mzz2017/v2raya
 # https://hub.docker.com/r/wushuo894/ani-rss
