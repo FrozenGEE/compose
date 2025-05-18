@@ -74,9 +74,6 @@
 #
 # iyuu需要注册扫码获取token，初始化安装第一步只需要输入token即可
 #
-# 在/mnt/user/appdata/v2raya这个目录下，请预先创建好一个 resolv.conf 的文件，用文本编辑保存后修改后缀即可，也可以使用ssh命令vi/nano生成
-# v2raya设置中激活【开启端口分享】
-#
 # MP如果遇到cookiecloud设置正确但是无法同步成功的，试试重启几次再去同步，实在不是，手动添加吧
 # MP v2.0.7及以上版本，已支持通过UI进行用户认证：点击用户头像 -> 用户认证，无需配置环境变量，模板继续保留原有的认证变量
 #
@@ -85,7 +82,7 @@
 # cookiecloud使用教程：https://post.smzdm.com/p/a905kd5p
 #
 # peerbanhelper文档：https://github.com/PBH-BTN/PeerBanHelper
-# 
+#
 ##############################################
 # 镜像地址
 # https://hub.docker.com/r/linuxserver/plex
@@ -95,6 +92,7 @@
 # https://hub.docker.com/r/linuxserver/transmission
 # https://hub.docker.com/r/jxxghp/moviepilot
 # https://hub.docker.com/r/easychen/cookiecloud
+# https://hub.docker.com/r/ghostchu/peerbanhelper
 # https://hub.docker.com/r/iyuucn/iyuuplus-dev
 # https://hub.docker.com/r/mzz2017/v2raya
 # https://hub.docker.com/r/wushuo894/ani-rss
