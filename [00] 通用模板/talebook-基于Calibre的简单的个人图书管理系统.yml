@@ -42,12 +42,15 @@ services:
     hostname: talebook
     # 主机名
     volumes:
-      - 【这里替换为你的docker数据存放目录】:/data
+      - 【这里替换为你的docker数据存放目录】/talebook:/data
       # 配置文件夹
 
       # - 【这里替换为你的电子书存放目录1】:/data/books/imports/【这里替换为你的电子书存放目录1的名字】
       # - 【这里替换为你的电子书存放目录2】:/data/books/imports/【这里替换为你的电子书存放目录2的名字】
-      # 之所以要这么写，是因为将本地多个书籍的路径，均映射在“talebook的导入目录”之下，可以写多个
+      # 之所以要这么写，是因为将本地多个书籍的路径，均映射在“talebook的导入目录”之下，可以写多个，可不写
+
+      # - 【这里替换为你的电子书上传目录】:/data/books/uploads
+      # 之所以要这么写，是因为可以将上传目录单独拎出来，可不写
 
     network_mode: bridge
     # 80 443端口被占用，不能用host
@@ -60,7 +63,7 @@ services:
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     depends_on:
       - douban-rs-api
-    # 关联douban-rs-api
+    # 关联 douban-rs-api
     labels:
       icon: http://IP:PORT/i/user_01/talebook.png
       # 适用于CasaOS导入时自动写上图标地址
