@@ -1,0 +1,164 @@
+# 官方文档
+# https://github.com/HappyQuQu/jellyfin-library-poster
+# https://hub.docker.com/r/evanqu/jellyfin-library-poster
+
+# 需要在官方github项目上下载 config.json，编辑好后，放在容器的 config 目录之下，也可以看 compose 最后的内容
+
+---
+version: "3"
+# 最后编辑时间：2025-05-15
+services:
+  jellyfin-library-poster:
+    image: evanqu/jellyfin-library-poster:latest
+    # 镜像地址
+    container_name: jellyfin-library-poster
+    # 容器名字
+    hostname: jellyfin-library-poster
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    volumes:
+      - /share/Container/jellyfin-library-poster/config:/app/config
+      # 配置文件目录
+      # 需要提前新建一个 config.json 文件，然后复制参考示例的内容并修改后写进去
+
+      - /share/Container/jellyfin-library-poster/poster:/app/poster
+      # 存放下载得海报(可选)
+      - /share/Container/jellyfin-library-poster/output:/app/output
+      # 存放生成的媒体库封面(可选)
+      - /share/Container/jellyfin-library-poster/logs:/app/logs
+      # 存放日志(可选)
+      - /share/Container/jellyfin-library-poster/myfont:/app/myfont
+      # 存放自定义字体文件(可选,须调整配置文件)
+
+    network_mode: host
+    # 并不存在端口，只是减少新增网络
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
+
+
+# 以下内容不属于 compose，在部署前删除掉，来源与官方github项目上的配置文件，具体见最上方说明
+# https://github.com/HappyQuQu/jellyfin-library-poster/blob/main/config/config.json
+########################################
+
+{
+  "jellyfin": [
+
+# 注意：可以写多个
+    ##### 第一个 #####
+    {
+      "server_name": "MyJellyfin",
+# Jellyfin/Emby 服务器名称，必填项
+      "server_type": "jellyfin",
+# Jellyfin/Emby 服务器类型，必填项，填写 jellyfin 或者 emby
+      "base_url": "http://192.168.2.211:8089",
+# Jellyfin/Emby 服务器地址，必填项
+      "user_name": "user",
+      "password": "pass",
+# Jellyfin/Emby 用户名和密码，必填项
+      "update_poster": false
+# 是否自动上传更新媒体库海报到服务器，会覆盖服务器上原有的媒体库海报，建议先写 false，看实际生成效果满意改成 true，重新运行一遍，非必填项
+    },
+
+    ##### 第二个 #####
+
+    {
+      "server_name": "MyJellyfin",
+      "server_type": "emby",
+      "base_url": "http://192.168.2.211:8089",
+      "user_name": "user",
+      "password": "pass",
+      "update_poster": false
+    }
+
+    ##### 类推 #####
+
+  ],
+
+
+  "cron": "0 1 * * *",
+# 表示每天凌晨 1 点执行任务
+# Cron 表达式的格式为：分钟 小时 日 月 星期
+# 例子
+# 每天中午 12 点：0 12 * * *
+# 每周一凌晨 2 点：0 2 * * 1
+
+
+  "exclude_update_library": ["Short", "Playlists", "合集"],
+# exclude_update_library节点，用于排除更新的媒体库
+
+
+  "style_config": [
+    {
+      "style_name": "style1",
+# 海报样式名称,固定值style1，必填项
+      "style_ch_font": "字体名带后缀",
+# 海报样式名称,固定值style1
+      "style_eng_font": "字体名带后缀"
+# 海报英文字体名称,名称带后缀如 微软雅黑.ttf
+    }
+  ],
+
+
+  "template_mapping": [
+    {
+      "library_name": "Anime",
+# Jellyfin/Emby 中的媒体库名称，必填项
+      "library_ch_name": "动漫",
+# 海报的中文名称(用于海报显示)，必填项
+      "library_eng_name": "ANIME",
+# 海报的英文名称(用于海报显示)，必填项
+      "poster_sort": "DateLastContentAdded"
+# 海报的排序方式，非必填项
+    },
+
+# 后续类推
+
+    {
+      "library_name": "Classic TV",
+      "library_ch_name": "电视剧",
+      "library_eng_name": "TV",
+      "poster_sort": "Random"
+    },
+    {
+      "library_name": "Movie",
+      "library_ch_name": "电影",
+      "library_eng_name": "MOVIE",
+      "poster_sort": "DateCreated"
+    },
+    {
+      "library_name": "Documentary",
+      "library_ch_name": "纪录片",
+      "library_eng_name": "DOC"
+    },
+    {
+      "library_name": "合集",
+      "library_ch_name": "合集",
+      "library_eng_name": "COLLECTIONS"
+    },
+    {
+      "library_name": "Hot Movie",
+      "library_ch_name": "正在热映",
+      "library_eng_name": "HOT MOVIE"
+    },
+    {
+      "library_name": "Hot TV",
+      "library_ch_name": "正在热播",
+      "library_eng_name": "HOT TV",
+      "poster_sort": "DateLastContentAdded"
+    },
+    {
+      "library_name": "Short",
+      "library_ch_name": "短剧",
+      "library_eng_name": "SHORT"
+    },
+    {
+      "library_name": "TEST TV",
+      "library_ch_name": "测试电视",
+      "library_eng_name": "TEST TV"
+    }
+  ]
+}
+
+########################################
