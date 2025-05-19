@@ -7,20 +7,19 @@ version: "3"
 # 最后编辑时间：2025-05-19
 services:
   splayer:
-   image: imsyy/splayer:latest
-   # 镜像地址
-   container_name: splayer
-   # 容器名字
-   hostname: splayer
-   # 主机名
+    image: imsyy/splayer:latest
+    # 镜像地址，此为正式版，内置aria2
+    container_name: splayer
+    # 容器名字
+    hostname: splayer
     # network_mode: bridge
-   network_mode: host
+    network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
       # - 7899:7899/tcp
       # WebUI 端口
-   restart: unless-stopped
-   # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       icon: http://IP:PORT/i/user_01/splayer_A.png
       # 适用于CasaOS导入时自动写上图标地址
