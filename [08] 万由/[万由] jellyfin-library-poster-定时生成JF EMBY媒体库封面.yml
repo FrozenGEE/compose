@@ -21,13 +21,13 @@ services:
       # 需要提前新建一个 config.json 文件，然后复制参考示例的内容并修改后写进去
 
       - /mnt/unas/data/docker/jellyfin-library-poster/poster:/app/poster
-      # 存放下载得海报(可选)
+      # 存放下载得海报 (可选)
       - /mnt/unas/data/docker/jellyfin-library-poster/output:/app/output
-      # 存放生成的媒体库封面(可选)
+      # 存放生成的媒体库封面 (可选)
       - /mnt/unas/data/docker/jellyfin-library-poster/logs:/app/logs
-      # 存放日志(可选)
+      # 存放日志 (可选)
       - /mnt/unas/data/docker/jellyfin-library-poster/myfont:/app/myfont
-      # 存放自定义字体文件(可选,须调整配置文件)
+      # 存放自定义字体文件 (可选，须调整配置文件)
 
     network_mode: host
     # 并不存在端口，只是减少新增网络
