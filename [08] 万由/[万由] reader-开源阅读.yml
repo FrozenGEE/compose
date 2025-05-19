@@ -21,7 +21,7 @@
 # 接口服务使用文件存储书源及目录等信息，存储位置为 storage 目录(可通过运行时添加 -Dreader.app.storagePath=/path/to/storage 修改
 # 数据存储目录结构如下：
 # storage
-# # ├── assets                                          # 静态资源
+# ├── assets                                            # 静态资源
 # │   ├── background                                    # 自定义阅读背景图片保存目录
 # │   │   └── 6.jpg
 # │   └── reader.css                                    # 自定义CSS样式文件
