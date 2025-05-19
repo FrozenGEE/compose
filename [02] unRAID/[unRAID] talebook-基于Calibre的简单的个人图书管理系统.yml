@@ -1,0 +1,96 @@
+# 官方文档
+# https://www.talebook.org
+# https://github.com/talebook/talebook
+# https://hub.docker.com/r/talebook/talebook
+# https://github.com/talebook/talebook/blob/master/document/README.zh_CN.md
+
+# 部署教程
+# https://tech.yemengstar.com/docker-your-own-talebook
+# https://www.lllyyb.com/archives/fYqnJRWP
+
+# 演示网站：https://demo.talebook.org
+# 密码：demodemo
+
+# 目录结构(只写关键的)
+# /data
+#  ├── logo							# favicon和导航菜单中的二维码logo(适用于v3.5.9及后续版本)
+#  ├── library						# 书籍缓存总目录
+#  │   ├── metadata.db					# 元数据的数据库文件
+#  │   ├── UnKnown							# 无数据的作者名字
+#  │   └── Wu Ming Shi						# 有数据的作者名字
+#  │       ├── Bei Feng (13)					# 书籍名字 (ID)
+#  │       ├── Chun Tian (9)
+#  │       └── Dong Feng (6)
+#  │           ├── Dong Feng - Wu Ming Shi.epub		# 书籍文件
+#  │           ├── cover.jpg						# 封面文件
+#  │           └── metadata.opf						# 书籍元数据
+#  ├── imports						# 书籍导入总目录
+#  └── upload						# 书籍上传总目录
+
+# 注意：部署后，打开 管理-系统设置，在 互联网书籍信息源 中输入以下内容，注意替换
+# http://服务器的IP地址:8884
+
+---
+version: "2.4"
+# 最后编辑时间：2025-05-19
+services:
+  talebook:
+    image: talebook/talebook:latest
+    # 镜像地址
+    container_name: talebook
+    # 容器名字
+    hostname: talebook
+    # 主机名
+    volumes:
+      - /mnt/user/appdata/talebook:/data
+      # 配置文件夹
+
+      # - 【这里替换为你的电子书存放目录1】:/data/books/imports/【这里替换为你的电子书存放目录1的名字】
+      # - 【这里替换为你的电子书存放目录2】:/data/books/imports/【这里替换为你的电子书存放目录2的名字】
+      # 之所以要这么写，是因为将本地多个书籍的路径，均映射在“talebook的导入目录”之下，可以写多个，可不写
+
+      # - 【这里替换为你的电子书上传目录】:/data/books/uploads
+      # 之所以要这么写，是因为可以将上传目录单独拎出来，可不写
+
+    network_mode: bridge
+    # 80 443端口被占用，不能用host
+    ports:
+      - 8882:80/tcp
+      # WebUI HTTP 端口
+      - 8883:443/tcp
+      # WebUI HTTPS 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    depends_on:
+      - douban-rs-api
+    # 关联 douban-rs-api
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:80]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/talebook.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+
+  douban-rs-api:
+    image: ghcr.io/cxfksword/douban-api-rs:latest
+    # 镜像地址
+    container_name: douban-api-rs
+    # 容器名字
+    hostname: douban-api-rs
+    # 主机名
+    network_mode: bridge
+    # 80 端口被占用，不能用host
+    ports:
+      - 8884:80/tcp
+      # 调用端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: https://www.talebook.org
+      # 不存在WebUI，这里设置为talebook的官方网站
+      net.unraid.docker.icon: /mnt/user/LOGO/douban.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
