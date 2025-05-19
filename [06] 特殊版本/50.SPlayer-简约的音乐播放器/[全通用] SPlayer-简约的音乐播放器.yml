@@ -8,7 +8,7 @@ version: "3"
 services:
   splayer:
     image: imsyy/splayer:latest
-    # 镜像地址，此为正式版，内置aria2
+    # 镜像地址
     container_name: splayer
     # 容器名字
     hostname: splayer
