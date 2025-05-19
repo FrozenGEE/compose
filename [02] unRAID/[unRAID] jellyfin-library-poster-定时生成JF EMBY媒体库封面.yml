@@ -34,7 +34,6 @@ services:
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
-    labels:
       # 该镜像只在后台运行，无WebUI 
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: https://github.com/HappyQuQu/jellyfin-library-poster
