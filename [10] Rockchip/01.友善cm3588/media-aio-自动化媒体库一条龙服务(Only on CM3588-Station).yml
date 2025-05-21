@@ -150,9 +150,7 @@ services:
     hostname: jellyfin
     privileged: true
     command: 
-      '`for dev in dri dma_heap mali0 rga mpp_service iep mpp-service
-      vpu_service vpu-service hevc_service hevc-service rkvdec rkvenc vepu
-      h265e ; do [ -e "/dev/$dev" ] && echo " --device /dev/$dev"; done`'
+      sh -c "echo $(for dev in dri dma_heap mali0 rga mpp_service iep mpp-service vpu_service vpu-service hevc_service hevc-service rkvdec rkvenc vepu h265e; do [ -e /dev/$dev ] && echo --device /dev/$dev; done)"
     # 照抄，必须，有前置工作，务必阅读 https://jellyfin.org/docs/general/administration/hardware-acceleration/rockchip
     volumes:
       - 【这里替换为你的docker数据目录】/jellyfin/config:/config
