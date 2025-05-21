@@ -6,16 +6,16 @@
 version: "3"
 # 最后编辑时间：2025-05-21
 services:
-  juptime-kuma:
-    image: louislam/uptime-kuma:latest
-    # 镜像地址，tag有latest和beta
-    container_name: uptime-kuma
-    # 容器名字
-    hostname: uptime-kuma
-    # 主机名
-    volumes:
-      - /mnt/user/appdata/uptime-kuma:/app/data
-      # 配置文件目录
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    # 镜像地址，tag有latest和beta
+    container_name: uptime-kuma
+    # 容器名字
+    hostname: uptime-kuma
+    # 主机名
+    volumes:
+      - /mnt/user/appdata/uptime-kuma:/app/data
+      # 配置文件目录
     network_mode: bridge
     # 3001有别的服务可能要用，因此推荐使用bridge
     ports:
