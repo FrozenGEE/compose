@@ -14,6 +14,8 @@ services:
     hostname: uptime-kuma
     # 主机名
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # docker核心
       - /mnt/unas/data/docker/uptime-kuma:/app/data
       # 配置文件目录
     network_mode: bridge
