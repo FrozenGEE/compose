@@ -7,7 +7,7 @@ version: "3"
 # 最后编辑时间：2025-05-21
 services:
   uptime-kuma:
-    image: louislam/uptime-kuma:latest
+    image: louislam/uptime-kuma:latest
     # 镜像地址，tag有latest和beta
     container_name: uptime-kuma
     # 容器名字
