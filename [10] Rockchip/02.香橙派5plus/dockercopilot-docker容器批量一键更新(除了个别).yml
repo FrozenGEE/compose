@@ -1,15 +1,19 @@
 # 官方文档
+# https://github.com/onlyLTY/dockerCopilot
 # https://hub.docker.com/r/0nlylty/dockercopilot
 # 该镜像主要是针对于绿联，极空间这两国产NAS系统而定制的docker管理工具，其他NAS系统也可以安装部署，支持一键更新docker容器
 # 支持x86，arm64设备
 
 ---
 version: "3"
-# 最后编辑时间：2025-03-17
+# 最后编辑时间：2025-04-17
+# 2025-04-17更新01：定期替换别的dockerhub加速源
+# 2025-04-17更新02：tag支持使用latest和latest-dev，原UGREEN，UGREEN-DEV，ZSPACE，ZSPACE-DEV还能继续使用
+# 2025-04-17更新03：极空间再也不需要在环境变量上写上极空间的账号才可以使用，变量不作删除
 services:
   dockercopilot:
-    image: 0nlylty/dockercopilot:UGREEN-DEV
-    # 镜像地址，tag有UGREEN，UGREEN-DEV，ZSPACE，ZSPACE-DEV
+    image: 0nlylty/dockercopilot:latest
+    # 镜像地址
     container_name: dockercopilot
     # 容器名字
     hostname: dockercopilot
@@ -28,6 +32,7 @@ services:
       # 不动，照抄，必须
       - hubURL=https://k-docker.asia
       # 使用dockerhub加速源，以便于更好拉取镜像，可自行替换
+      # http://status.kggzs.cn/status/docker
     # network_mode: bridge
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
