@@ -86,6 +86,25 @@
 # Successfully parsed a group of options.
 
 ##################################################
+# 没有可靠的方法可以读取 Rockchip SoC 上 VPU 的占用情况，仍然可以通过读取其他引擎来验证这一点，例如 RGA (2D hwaccel blitter)
+# 1、在 Jellyfin Web 客户端播放视频，通过设置较低的分辨率或比特率触发视频转码
+# 2、使用 命令检查 RGA 引擎的占用情况：sudo watch -n 1 cat /sys/kernel/debug/rkrga/load
+
+# Every 1.0s: cat /sys/kernel/debug/rkrga/load
+# num of scheduler = 3
+# ================= load ==================
+# scheduler[0]: rga3_core0
+#          load = 42%
+# -----------------------------------
+# scheduler[1]: rga3_core1
+#          load = 27%
+# -----------------------------------
+# scheduler[2]: rga2
+#          load = 0%
+# -----------------------------------
+#          process 17: pid = 217002, name: /usr/lib/jellyfin-ffmpeg/ffmpeg ... -init_hw_device rkmpp=rk -hwaccel rkmpp -hwaccel_output_format drm_prime ...
+
+##################################################
 
 version: "3"
 # 最后编辑时间：2025-02-25
