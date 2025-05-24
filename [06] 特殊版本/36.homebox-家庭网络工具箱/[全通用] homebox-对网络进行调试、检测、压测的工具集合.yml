@@ -14,7 +14,7 @@
 services:
 # 最后编辑时间：2024-12-09
   homebox:
-    image: networkstatic/homebox:latest
+    image: xgheaven/homebox:latest
     # 镜像地址
     container_name: homebox
     # 容器名字
