@@ -23,8 +23,8 @@ services:
     ports:
       - 3331:3001/tcp
       # WebUI 端口
-    restart: unless-stopped
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:3001]
