@@ -3,7 +3,7 @@
 - ```media-aio```模板中```v2rayA```的内容，均统一使用不支持全局代理的模板，如果有需要使用全局代理的，自行修改
 - ```飞牛OS 0.9.2```最新版本实测docker compose使用```unless-stopped```已经可以重启docker后容器自启动，后续的模板将统一使用
 - 新增一份基于nastool的自动化媒体库一条路模板，暂时用着还可以，以BT为主
-- 新增绿联的compose模板，以使用相对路径为主，模板内标记是否支持什么架构，DH4300Plus (RK3588C ARM64v8) 大部分日常使用的都支持
+- 新增单独的绿联compose模板，以使用相对路径为主，模板内标记是否支持什么架构，DH4300Plus (RK3588C ARM64v8) 大部分日常使用的都支持
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
