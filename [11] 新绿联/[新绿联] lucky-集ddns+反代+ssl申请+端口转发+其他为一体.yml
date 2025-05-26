@@ -1,0 +1,34 @@
+# 官方文档
+# https://hub.docker.com/r/gdy666/lucky
+# https://www.lucky666.cn/docs/install
+# https://www.lucky666.cn
+
+# 支持 amd64 和 arm64
+
+---
+version: "3"
+# 最后编辑时间：2025-05-26
+services:
+  lucky:
+    image: gdy666/lucky:latest
+    # 镜像地址
+    container_name: lucky
+    # 容器名字
+    hostname: lucky
+    # 主机名
+    volumes:
+      - ./:/goodluck
+      # 配置文件目录
+      # - /home:/绿联个人文件夹
+      # - /volume1:/存储池1
+      # - /volume2:/存储池2
+      # - /volume3:/存储池3
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      # 映射本地其他路径使其可以访问，可以自定义多个
+      # 如需文件管理，FTP，WebDAV功能，去掉#注释
+    network_mode: host
+    # 直接使用host模式，可在设置内自定义WebUI端口
+    # ipv6的解析需要使用host网络模式
+    # WebUI是16601，默认账号密码为666，记得登陆后尽快修改
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
