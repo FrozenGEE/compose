@@ -6,7 +6,8 @@
 - 将绿联从群晖模板中分离，compose模板以使用相对路径为主，默认都支持X86，ARM是否支持可以看注释，如果是针对ARM的镜像会特别标注，特指```MT相册``` ```Jellyfin媒体库``` ```easyNVR-录像机```
 - DH4300Plus```(RK3588C ARM64v8)```大部分日常使用的docker镜像都支持，会特别标记 (还没写进去)
 - 后续不再带华硕NAS，铁威马TOS5玩了，删了，减少工作量；删除/修改部分compose
-- 翻新alist模板，tag使用```latest-aio```
+- 翻新alist模板，tag使用```latest-aio```，如果需要让alist使用```maraidb/mysql```，则见[此内容](https://github.com/FrozenGEE/compose/blob/main/.images/07.Alist/ALIST-DB.jpg)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/07.Alist/ALIST-DB.jpg)
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
