@@ -1,0 +1,37 @@
+# 官方文档
+# https://qd-today.github.io/qd/zh_CN
+# https://github.com/qd-today/qd
+# https://hub.docker.com/r/qdtoday/qd
+
+# 官方默认部署方式是容器端口为80，使用bridge网络模式，映射80端口为8923
+# 该模板使用变量内自定义容器端口，使用host网络模式
+# 所以使用第二种方式创建容器后, 请将模板里 http://localhost/ 形式的 api 请求, 手动改成 api:// 或 http://localhost:8923/ 后, 才能正常完成相关API请求
+
+---
+version: "3"
+# 最后编辑时间：2024-10-03
+services:
+  qd:
+    image: qdtoday/qd:latest
+    # 镜像地址
+    # 如不需要OCR功能或者硬盘空间不大于600M, 请使用 qdtoday/qd:lite-latest 镜像, 该镜像仅去除了OCR相关功能, 其他与主线版本保持一致
+    container_name: qd
+    # 容器名字
+    hostname: qd
+    # 主机名
+    volumes:
+      - /volume1/docker/qd:/usr/src/app/config
+      # 配置文件目录
+    environment:
+      - PORT=8923
+      # 自定义容器端口
+      # 更多变量见下方链接说明
+      # https://qd-today.github.io/qd/zh_CN/guide/deployment.html
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8923:8923/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

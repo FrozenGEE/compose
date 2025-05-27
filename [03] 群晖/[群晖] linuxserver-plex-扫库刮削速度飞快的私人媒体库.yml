@@ -1,0 +1,61 @@
+# 官方文档
+# https://hub.docker.com/r/linuxserver/plex
+# https://docs.linuxserver.io/images/docker-plex
+
+# 如果提示无法打开plex.tv，开魔法吧
+# 如果无法跳转到初始化页面上，则打开以下网址，记得修改IP:PORT
+# http://IP:PORT/web/index.html#!/setup
+
+---
+version: "3"
+# 最后编辑时间：2024-12-03
+services:
+  plex:
+    image: linuxserver/plex:latest
+    # 镜像地址，支持arm64v8，但不能硬件转码
+    container_name: plex
+    # 容器名字
+    hostname: plex
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    devices:
+      - /dev/dri:/dev/dri
+      # 开启硬件转码，其实能访问到核显的目录也是可以
+    # runtime: nvidia
+    # 使用N卡的需要装好N卡驱动，并且设置这个参数
+    volumes:
+      - /volume1/docker/plex:/config
+      # 配置文件目录
+      - /volume1:/data
+      # 可以自定义，可以写多个
+    environment:
+      - PLEX_CLAIM=登录密钥
+      # 登录密钥，打开下面的地址，注册并登录后获取，如果对账号注册有洁癖，plex账号哪怕你买了pass通行证也可以注销
+      # https://plex.tv/claim
+      # - NVIDIA_DRIVER_CAPABILITIES=all
+      # - NVIDIA_VISIBLE_DEVICES=N卡的ID
+      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
+      - PUID=0
+      - PGID=0
+      # 用户和用户组权限，这里写0 0以确保硬件转码能正常使用
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 32400:32400/tcp
+      # WebUI 端口
+      # - 3005:3005/tcp
+      # - 8324:8324/tcp
+      # - 32469:32469/tcp
+      # - 1900:1900/udp
+      # - 32410:32410/udp
+      # - 33242:32412/udp
+      # - 33243:32413/udp
+      # - 33244:32414/udp
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

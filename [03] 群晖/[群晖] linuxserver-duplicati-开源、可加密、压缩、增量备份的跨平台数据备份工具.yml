@@ -1,0 +1,50 @@
+# 官网
+# https://docs.linuxserver.io/images/docker-duplicati
+# https://hub.docker.com/r/linuxserver/duplicati
+# https://docs.watercalmx.com/docker-jing-xiang/docker-duplicati
+
+# 部署使用教程
+# https://zhuanlan.zhihu.com/p/588678612
+
+---
+version: "2.1"
+# 最后编辑时间：2024-03-11
+services:
+  duplicati:
+    image: linuxserver/duplicati:latest
+    # 镜像地址
+    container_name: duplicati
+    # 容器名字
+    hostname: duplicati
+    # 主机名
+    # privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    volumes:
+      - /volume1/docker/duplicati:/config
+      # 配置文件目录
+      - /volume1/docker/duplicati备份:/backups
+      # 存储本地备份的路径，用于从其他地方备份到本机
+      - /volume1/docker:/source
+      # 存储源备份的路径，用于将此处备份到其他地方
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      # 可以自定义，可以写多个
+    environment:
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+      # CLI_ARGS=
+      # 指定要用于启动程序的CLI参数，可选，非必要
+    # network_mode: bridge
+    network_mode: host
+    # 设置内可以自定义容器端口，这样就可以愉快地用host模式
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8200:8200/tcp
+      # WebUI 端口
+    restart: always
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
