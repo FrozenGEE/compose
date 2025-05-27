@@ -1,0 +1,41 @@
+# 官方文档
+# https://hub.docker.com/r/neosmemo/memos
+# https://www.usememos.com
+# memos关联数据库搭建教程
+# https://blog.memos.ee/archives/120.html
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  memos:
+    image: ghcr.io/usememos/memos:latest
+    # 镜像地址
+    container_name: memos
+    # 容器名字
+    hostname: memos
+    # 主机名
+    volumes:
+      - ./memos:/var/opt/memos
+      # 配置文件目录
+    environment:
+      # - MEMOS_DRIVER=mysql
+      # 使用mysql作为memos的数据库，非必须，默认情况下用自带的sqlite
+      # - MEMOS_DSN=memos:password@tcp(localhost)/memos  
+      # 开头的memos为子数据库的用户，password为子数据库的密码，localhost为数据库地址，结尾的memos为数据库的子数据库名字
+      - PUID=1000
+      - PGID=100
+      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
+      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+     # - 5230:5230/tcp
+     # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

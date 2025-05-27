@@ -1,0 +1,23 @@
+# 官方文档
+# https://hub.docker.com/r/whyour/qinglong
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  qinglong:
+    image: whyour/qinglong:latest
+    # 镜像地址
+    container_name: qinglong
+    # 容器名字
+    hostname: qinglong
+    # 主机名
+    # network_mode: bridge
+    volumes:
+      - ./qinglong:/ql/data
+    environment:
+      - QlPort=5699
+      # 自定义WebUI端口号，默认为5700
+    network_mode: host
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

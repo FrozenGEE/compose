@@ -1,0 +1,25 @@
+# 官方文档
+# https://hub.docker.com/r/synctvorg/synctv
+# 默认账号/密码：root/root
+
+---
+version: "3"
+# 最后编辑时间：2024-03-11
+services:
+  synctv:
+    image: synctvorg/synctv:latest
+    # 镜像地址
+    container_name: synctv
+    # 容器名字
+    hostname: synctv
+    # 主机名
+    volumes:
+      - ./synctv:/root/.synctv
+      # 配置文件目录
+    network_mode: bridge
+    # 推荐使用bridge模式，8080有别的docker镜像要用
+    ports:
+      - 20202:8080/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
