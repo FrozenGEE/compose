@@ -1,0 +1,34 @@
+# 官方文档
+# https://searx.space
+# https://docs.searxng.org
+# https://github.com/searxng/searxng
+# https://github.com/searxng/searxng-docker
+# https://hub.docker.com/r/searxng/searxng
+
+# 本模板仅部署本体服务，不链接redis
+# 教程：https://blog.laoda.de/archives/docker-compose-install-searxng
+
+---
+version: "3.7"
+# 最后编辑时间：2025-03-06
+services:
+  searxng:
+    image: searxng/searxng:latest
+    # 镜像地址
+    container_name: searxng
+    # 容器名字
+    hostname: searxng
+    # 主机名
+    volumes:
+      - ./searxng:/etc/searxng
+      # 配置文件目录，如有更多内容需要自定义修改，可修改目录下的setting.yml
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: bridge
+    # 8080端口有别的服务要用，因此选择bridge
+    ports:
+      - 8180:8080/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

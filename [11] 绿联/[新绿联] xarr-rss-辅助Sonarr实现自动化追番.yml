@@ -1,0 +1,33 @@
+# 官网
+# https://xarr.52nyg.com
+# 官方文档
+# https://hub.docker.com/r/xiaoyi510/xarr-rss
+# 部署教程
+# https://xarr-doc.52nyg.com/xarr-rss/#/README
+# 前排提示：部分功能收费，需要部署Sonarr搭配使用
+
+---
+version: "2.1"
+# 最后编辑时间：2024-04-25
+services:
+  xarr-rss:
+    image: xiaoyi510/xarr-rss:latest
+    # 镜像地址
+    container_name: xarr-rss
+    # 容器名字
+    hostname: xarr-rss
+    # 主机名
+    volumes:
+      - ./xarr-rss:/app/conf
+      # 配置文件目录
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8086:8086/tcp
+      # WebUI HTTP端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
