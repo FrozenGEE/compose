@@ -17,7 +17,7 @@ version: "3.8"
 services:
   easynvr:
     image: registry.cn-shanghai.aliyuncs.com/rustc/easynvr_amd64:latest
-    # 镜像地址，arm镜像使用该tag：registry.cn-shanghai.aliyuncs.com/rustc/easynvr_arm64:latest
+    # 镜像地址，arm镜像使用：registry.cn-shanghai.aliyuncs.com/rustc/easynvr_arm64:latest
     container_name: easynvr
     # 容器名字
     hostname: easynvr
