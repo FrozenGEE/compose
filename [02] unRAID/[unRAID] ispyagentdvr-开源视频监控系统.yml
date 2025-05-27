@@ -16,19 +16,19 @@ services:
     # 主机名
     devices:
       - /dev/dri:/dev/dri
-     #  - /dev/kfd:/dev/kfd
+    #  - /dev/kfd:/dev/kfd
     # 调用核显，第二条属于AMD GPU，原书写如下，按照实际情况启用
     ########################################
     # 适用于Intel GPU和iGPU
     # devices:
-    #   - /dev/dri/renderD128:/dev/dri/renderD128
-    #   - /dev/dri/card0:/dev/dri/card0
+    #  - /dev/dri/renderD128:/dev/dri/renderD128
+    #  - /dev/dri/card0:/dev/dri/card0
     ########################################
     # 适用于 AMD GPU 和 iGPU
     # devices:
-    #   - /dev/dri/renderD128:/dev/dri/renderD128
-    #   - /dev/dri/card0:/dev/dri/card0
-    #   - /dev/kfd:/dev/kfd
+    #  - /dev/dri/renderD128:/dev/dri/renderD128
+    #  - /dev/dri/card0:/dev/dri/card0
+    #  - /dev/kfd:/dev/kfd
     ########################################
     # 适用于 Rockchip SBC 的集成 VPU
     # `for dev in dri dma_heap mali0 rga mpp_service \
