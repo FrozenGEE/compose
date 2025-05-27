@@ -3,10 +3,10 @@
 - ```media-aio```模板中```v2rayA```的内容，均统一使用不支持全局代理的模板，如果有需要使用全局代理的，自行修改
 - ```飞牛OS 0.9.2```最新版本实测docker compose使用```unless-stopped```已经可以重启docker后容器自启动，后续的模板将统一使用
 - 新增一份基于nastool的自动化媒体库一条路模板，暂时用着还可以，以BT为主
-- 将绿联从群晖模板中分离，compose模板以使用相对路径为主，默认都支持X86，ARM是否支持可以看注释，如果是针对ARM的镜像会特别标注，特指MT相册和Jellyfin媒体库
-- DH4300Plus (RK3588C ARM64v8) 大部分日常使用的docker镜像都支持，会特别标记 (还没写进去)
-- 后续不再带华硕NAS，铁威马TOS5玩了，删了，减少工作量
-- 修正部分compose错误的内容
+- 将绿联从群晖模板中分离，compose模板以使用相对路径为主，默认都支持X86，ARM是否支持可以看注释，如果是针对ARM的镜像会特别标注，特指```MT相册``` ```Jellyfin媒体库``` ```easyNVR-录像机```
+- DH4300Plus```(RK3588C ARM64v8)```大部分日常使用的docker镜像都支持，会特别标记 (还没写进去)
+- 后续不再带华硕NAS，铁威马TOS5玩了，删了，减少工作量；删除/修改部分compose
+- 翻新alist模板，tag使用```latest-aio```
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
