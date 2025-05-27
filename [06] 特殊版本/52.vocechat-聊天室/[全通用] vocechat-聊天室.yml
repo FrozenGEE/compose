@@ -15,9 +15,6 @@ services:
     # 容器名字
     hostname: vocechat
     # 主机名
-    volumes:
-      - 【这里替换为你的docker数据存放目录】/vobechat:/home/vocechat-server/data
-      # 配置文件目录
     network_mode: bridge
     # 推荐使用bridge模式，3000有别的docker镜像要用
     ports:
