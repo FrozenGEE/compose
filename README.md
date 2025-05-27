@@ -8,6 +8,7 @@
 - 后续不再带华硕NAS，铁威马TOS5玩了，删了，减少工作量；删除/修改部分compose
 - 翻新alist模板，tag使用```latest-aio```，如果需要让alist使用```maraidb/mysql```，则见[此内容](https://github.com/FrozenGEE/compose/blob/main/.images/07.Alist/ALIST-DB.jpg)
 ![image](https://github.com/FrozenGEE/compose/blob/main/.images/07.Alist/ALIST-DB.jpg)
+![image](https://github.com/FrozenGEE/compose/blob/main/.images/07.Alist/ALIST-01.jpg)
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
