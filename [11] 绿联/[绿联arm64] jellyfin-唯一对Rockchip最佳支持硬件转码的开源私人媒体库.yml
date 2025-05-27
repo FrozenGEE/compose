@@ -1,0 +1,51 @@
+# 官方文档
+# http://github.com/nyanmisaka
+# https://hub.docker.com/r/nyanmisaka/jellyfin
+# https://jellyfin.org/docs/general/installation/container
+
+---
+version: "3"
+# 最后编辑时间：2024-11-27
+services:
+  jellyfin:
+    image: nyanmisaka/jellyfin:latest-rockchip
+    # 镜像地址，无脑推荐使用ny大佬的JF，做好了全部修正优化，开箱即用追新即可,另外JF和EMBY同根生，可以使用相同的模板
+    container_name: jellyfin
+    # 容器名字
+    hostname: jellyfin
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    volumes:
+      - ./jellyfin/config:/config
+      # 配置文件目录
+      - /volume1:/media
+      - /volume2:/media2
+      # 可以自定义，可以写多个
+      # - 【这里替换为你的媒体库的目录】:/【这里替换为你的媒体库的目录的名字】
+      - ./jellyfin/cache:/cache
+      # 缓存目录
+      # - 【这里替换为你的字体文件存放目录】:/fonts
+      # 字体目录，非必须，记得在设置中设置字幕字体使用/fonts
+      - /dev/shm:/config/transcodes
+      # 使用内存作为转码缓冲目录，推荐至少8G才使用
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+      # 以下是为JF添加网络代理，自行准备好魔法
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      # 保持默认
+      #- ALL_PROXY=http://192.168.2.80:20171
+      # 更换为自己的http代理
+      #- HTTP_PROXY=http://192.168.2.80:20171
+      # 更换为自己的http代理
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+     # - 8096:8096/tcp
+     # WebUI http端口
+     # - 8920:8920/tcp
+     # WebUI https端口，非必要
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
