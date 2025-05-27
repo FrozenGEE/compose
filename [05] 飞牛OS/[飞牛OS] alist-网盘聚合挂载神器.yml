@@ -1,12 +1,8 @@
 # 官方文档
 # https://alist.nn.ci/zh/guide
 # https://hub.docker.com/r/xhofe/alist
-# 正式版tag为latest，测试版为beta
-# 如果需要自带离线下载功能，预装aria2，使用xhofe/alist-aria2
-# 如果需要自带ffmpeg，则在tag后面加入-ffmpeg，如 xhofe/alist:beta-ffmpeg
-
-## 低于v3.25.0版本，重置密码，admin为账号名，注意替换
-# docker exec -it alist ./alist admin
+# 正式版tag为latest-aio，测试版为beta-aio
+# aio为带全部功能，推荐
 
 ## 3.25.0以上版本将密码改成加密方式存储的hash值，无法直接反算出密码，如果忘记了密码只能通过重新 随机生成 或者 手动设置
 # 随机生成一个密码，`admin`为账号名，注意替换
@@ -16,11 +12,11 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-03-11
+# 最后编辑时间：2025-05-28
 services:
   alist:
-    image: xhofe/alist-aria2:latest
-    # 镜像地址，此为正式版，内置aria2
+    image: xhofe/alist-aria2:latest-aio
+    # 镜像地址
     container_name: alist
     # 容器名字
     hostname: alist
