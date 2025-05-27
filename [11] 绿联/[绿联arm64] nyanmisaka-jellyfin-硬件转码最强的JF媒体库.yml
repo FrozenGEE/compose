@@ -33,11 +33,11 @@ services:
       - TZ=Asia/Shanghai
       # 时区
       # 以下是为JF添加网络代理，自行准备好魔法
-      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      #- ALL_PROXY=http://192.168.2.80:20171
+      # - ALL_PROXY=http://192.168.2.80:20171
       # 更换为自己的http代理
-      #- HTTP_PROXY=http://192.168.2.80:20171
+      # - HTTP_PROXY=http://192.168.2.80:20171
       # 更换为自己的http代理
     # network_mode: bridge
     network_mode: host
