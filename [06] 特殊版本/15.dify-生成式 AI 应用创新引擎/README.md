@@ -94,7 +94,7 @@ cp .env.example .env
 ```
 nano docker-compose.yaml
 ```
-按 PgDn键 或者 方向键↓ 找到第590行，如下内容
+按 PgDn键 或者 方向键↓ 找到第590行，如下内容 (请根据实际情况查找，官方可能有个更新，202-05-27时，此时是755行)
 ```
     ports:
       - '${EXPOSE_NGINX_PORT:-80}:${NGINX_PORT:-80}'
