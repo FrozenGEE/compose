@@ -16,7 +16,7 @@ services:
     # 主机名
     devices:
       - /dev/dri:/dev/dri
-     #  - /dev/kfd:/dev/kfd
+    #  - /dev/kfd:/dev/kfd
     # 调用核显，第二条属于AMD GPU，原书写如下，按照实际情况启用
     ########################################
     # 适用于Intel GPU和iGPU
