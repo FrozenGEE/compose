@@ -2,7 +2,7 @@
 # https://www.easynvr.com
 # https://www.easynvr.com/doc.html
 # https://www.easynvr.com/video.html
-# 需要下载该文件，内含docker镜像文件和官方dokcer compose，有一个configs文件夹，将里面的四个授权文件复制到 /configs 中
+# 需要下载该文件，内含docker镜像文件和官方docker compose，有一个configs文件夹，将里面的四个授权文件复制到 /configs 中
 # https://www.easynvr.com/download.html
 # 免费可以使用4路，最低购买10路(500 rmb)，接入路数收费按【一个摄像机算一路、NVR一个通道算一路】 ，不限制客户端访问数量和播放并发数量
 # https://www.easynvr.com/index.html#calculator
@@ -13,10 +13,11 @@
 
 ---
 version: "3.8"
+# 最后编辑时间：2025-05-28
 services:
   easynvr:
-    image: registry.cn-shanghai.aliyuncs.com/rustc/easynvr:v1
-    # 镜像地址
+    image: registry.cn-shanghai.aliyuncs.com/rustc/easynvr_amd64:latest
+    # 镜像地址，arm镜像使用：registry.cn-shanghai.aliyuncs.com/rustc/easynvr_arm64:latest
     container_name: easynvr
     # 容器名字
     hostname: easynvr
@@ -28,8 +29,8 @@ services:
     deploy:
       resources:
         limits:
-          memory: 12g
-          # 限制内存使用上限，根据实际内存修改，默认12g
+          memory: 4g
+          # 限制内存使用上限，根据实际内存修改，默认4g
     volumes:
       - /volume1/docker/easynvr/logs:/app/logs
       # 日志目录
