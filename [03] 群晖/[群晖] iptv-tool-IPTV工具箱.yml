@@ -1,0 +1,32 @@
+# 官方文档
+# https://space.bilibili.com/262880702/dynamic
+# https://www.bilibili.com/video/BV1em41117Vu
+# https://hub.docker.com/r/wangao/iptv-tool
+# IPTV常用地址
+# https://m3u.ibert.me/
+# http://tonkiang.us/
+# https://iptv.b2og.com/
+
+---
+version: '3'
+# 最后编辑时间：2024-07-10
+services:
+  iptv-tool:
+    image: wangao/iptv-tool:latest
+    # 镜像地址
+    container_name: iptv-tool
+    # 容器名字
+    hostname: iptv-tool
+    # 主机名
+    volumes:
+      - /volume1/docker/iptv-tool:/app/data
+      # 数据文件存放目录
+    # network_mode: bridge
+    network_mode: host
+    # 用host才可以获取到ipv6的电视源
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 6789:6789/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -1,0 +1,28 @@
+# 官方文档
+# https://hub.docker.com/kodcloud/kodbox
+# https://kodcloud.com
+# https://docs.kodcloud.com/setup/docker
+
+---
+version: "3.5"
+# 最后编辑时间：2024-04-20
+services:
+  kodbox:
+    image: kodcloud/kodbox:latest
+    # 镜像地址
+    container_name: kodbox
+    # 容器名字
+    hostname: kodbox
+    # 主机名
+    volumes:
+      - /volume1/kodbox:/var/www/html
+      # 数据目录
+      - /volume1:/volume1
+      # 映射本地其他路径使其可以访问，可以自定义多个
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 1780:80/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
