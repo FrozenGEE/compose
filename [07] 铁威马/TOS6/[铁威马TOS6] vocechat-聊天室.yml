@@ -1,9 +1,12 @@
 # 官方文档
+# https://voce.chat/zh-CN
+# https://doc.voce.chat/zh-cn
+# https://github.com/Privoce/vocechat-server-rust
 # https://hub.docker.com/r/privoce/vocechat-server
 
 ---
 version: "3"
-# 最后编辑时间：2024-03-11
+# 最后编辑时间：2025-05-28
 services:
   vocechat:
     image: privoce/vocechat-server:latest
@@ -12,10 +15,13 @@ services:
     # 容器名字
     hostname: vocechat
     # 主机名
+    volumes:
+      - /Volume1/docker/vobechat:/home/vocechat-server/data
+      # 配置文件目录
     network_mode: bridge
     # 推荐使用bridge模式，3000有别的docker镜像要用
     ports:
-      - 3040:3000/tcp 
+      - 3456:3000/tcp 
       # WebUI http端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
