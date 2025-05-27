@@ -10,7 +10,7 @@ version: "3"
 services:
   vocechat:
     image: privoce/vocechat-server:latest
-    # 镜像地址
+    # 镜像地址，如果为arm64则使用：privoce/vocechat-server:latest-arm64
     container_name: vocechat
     # 容器名字
     hostname: vocechat
