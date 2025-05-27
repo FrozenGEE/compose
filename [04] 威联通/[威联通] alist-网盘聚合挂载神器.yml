@@ -15,7 +15,7 @@ version: "3"
 # 最后编辑时间：2025-05-28
 services:
   alist:
-    image: xhofe/alist-aria2:latest-aio
+    image: xhofe/alist:latest-aio
     # 镜像地址
     container_name: alist
     # 容器名字
