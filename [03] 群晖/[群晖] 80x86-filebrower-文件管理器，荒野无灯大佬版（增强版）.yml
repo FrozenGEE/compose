@@ -22,7 +22,7 @@ services:
       - /dev/dri:/dev/dri
       # 开启硬件转码
     volumes:
-      - /volume1/docker/filebrower:/config
+      - /volume1/docker/filebrowser:/config
       # 配置文件目录
       - /volume1:/volume1
       # 映射本地其他路径使其可以访问，可以自定义多个
