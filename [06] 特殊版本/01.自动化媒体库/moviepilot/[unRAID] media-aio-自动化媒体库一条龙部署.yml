@@ -136,7 +136,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2025-05-17
+# 最后编辑时间：2025-05-30
 services:
 ##############################################
 #                                            #
@@ -151,8 +151,6 @@ services:
     # privileged: true
     devices:
       - /dev/dri:/dev/dri
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
       - /mnt/user/appdata/plex:/config
       # 配置文件目录
@@ -162,18 +160,19 @@ services:
       - PLEX_CLAIM=【登录密钥】
       # 登录密钥，打开下面的地址，注册并登录后获取，如果对账号注册有洁癖，plex账号哪怕你买了pass通行证也可以注销
       # https://plex.tv/claim
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=N卡的ID
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       - PUID=0
       - PGID=0
+      - UMASK=022
       - TZ=Asia/Shanghai
+      
       # 以下是为PLEX添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
       - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
+      # 切记设置好V2raya，如果你没有配置魔法就注释掉
+
     network_mode: bridge
     ports:
       - 32400:32400
@@ -197,29 +196,26 @@ services:
     # privileged: true
     devices:
       - /dev/dri:/dev/dri
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
       - /mnt/user/appdata/emby:/config
       # 配置文件目录
       - /mnt/user:/data
       # 媒体库目录，可以自定义，可以写多个
     environment:
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=N卡的ID
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       - PUID=0
       - PGID=0
-      # 用户和用户组权限，这里写0 0以确保硬件转码能正常使用
       - UMASK=022
       - TZ=Asia/Shanghai
+      
       # 以下是为EMBY添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       # emby推荐不写，而是安装神医插件：https://github.com/sjtuross/StrmAssistant
-      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      # - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
-      # - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
+      # 切记设置好V2raya，如果你没有配置魔法就注释掉
+
     network_mode: bridge
     ports:
       - 8096:8096
@@ -243,8 +239,6 @@ services:
     # privileged: true
     devices:
       - /dev/dri:/dev/dri
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
       - /mnt/user/appdata/jellyfin/config:/config
       # 配置文件目录
@@ -253,16 +247,16 @@ services:
       - /mnt/user/appdata/jellyfin/cache:/cache
       # 缓存目录
     environment:
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=N卡的ID
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       - TZ=Asia/Shanghai
+      
       # 以下是为JF添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
       - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
+      # 切记设置好V2raya，如果你没有配置魔法就注释掉
+
     network_mode: bridge
     ports:
       - 8097:8096
@@ -294,10 +288,12 @@ services:
       # MP，QB，TR统一的下载目录，见上目录结构说明的④⑤
       - /mnt/user/media/动漫:/ani-rss
       # ANI-RSS，QB，TR统一的下载目录，见上目录结构说明的⑥⑦
+
       # - 【这里替换为你想映射到QB内的路径】:/【这里替换为你想映射到QB内的路径】
       # 下载目录，可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
       # - 【这里替换为你的数据存放目录】/Torrents监控自动下载目录:/watch
       # 种子监控自动下载目录，非必须，用于把种子放到目录内后，自动添加下载任务
+
     environment:
       - WEBUI_PORT=8085
       # 自定义WebUI端口
@@ -305,7 +301,6 @@ services:
       # 自定义传输端口，别写6881，看站规！！！
       - PUID=0
       - PGID=0
-      # 用户和用户组权限，ssh中使用“id 用户名”查看，一般为1000，100，有问题就写0，0
       - UMASK=022
       - TZ=Asia/Shanghai
     network_mode: host
@@ -333,23 +328,24 @@ services:
       # MP，QB，TR统一的下载目录，见上目录结构说明的④⑤
       - /mnt/user/media/动漫:/ani-rss
       # ANI-RSS，QB，TR统一的下载目录，见上目录结构说明的⑥⑦
+
       # - 【这里替换为你想映射到TR内的路径】:/【这里替换为你想映射到TR内的路径】
       # 下载目录，可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
       # - 【这里替换为你的数据存放目录】/Torrents监控自动下载目录:/watch
       # 种子监控自动下载目录，非必须，用于把种子放到目录内后，自动添加下载任务
+
     environment:
       - TRANSMISSION_WEB_HOME=/config/webui
       # WEBUI主页路径，写容器路径，用于放汉化文件
       # 汉化文件下载地址：https://github.com/ronggang/transmission-web-control
-      # 将 "/src" 这个文件夹里的东西放到 "/config/webui" 内即可
-      - USER=cheems
-      - PASS=cheems
-      # TR账号密码，预设为cheems，记住一定要修改密码，否则后果自负
+      # 将 "/src" 这个文件夹里的东西放到 "/mnt/user/appdata/transmission/webui" 内即可
+      - USER=unraid
+      - PASS=unraid
+      # TR账号密码，预设为unraid，记住一定要修改密码，否则后果自负
       - PEERPORT=24680
       # 自定义peer传输端口
       - PUID=0
       - PGID=0
-      # 用户和用户组权限，ssh中使用“id 用户名”查看，一般为1000，100，有问题就写0，0
       - UMASK=022
       - TZ=Asia/Shanghai
     network_mode: host
@@ -388,11 +384,11 @@ services:
       # 默认下载目录
       - /mnt/user/media:/media
       # MP，QB，TR统一的下载目录，见上目录结构说明的④⑤
-      #
+
       - /mnt/user/appdata/qbittorrent/qBittorrent/BT_backup:/QB-BT
       - /mnt/user/appdata/transmission/torrents:/TR-BT
       # 用于自动转种所使用的路径，请根据实际情况修改，模板仅供参考，如不需要，则删除掉
-      #
+
 ##############################################
     environment:
       - MOVIEPILOT_AUTO_UPDATE=true
@@ -404,7 +400,7 @@ services:
       # 超级管理者用户名，默认为admin，初次安装后失效
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效
       
-      # - PROXY_HOST=【这里替换为你的NAS的IP地址】:20171
+      - PROXY_HOST=【这里替换为你的NAS的IP地址】:20171
       # 网络代理，访问themoviedb或者重启更新需要使用代理访问，如果你没有配置魔法就注释掉
       # 格式为http(s)://ip:port、socks5://user:pass@host:port
       # - BIG_MEMORY_MOD=true
@@ -412,7 +408,6 @@ services:
       - UMASK=022
       # 默认创建新文件的权限，一般写022，MP默认为000，可以不写，也可以考虑设置为022
       - TZ=Asia/Shanghai
-      # 时区
 
       - GITHUB_TOKEN=
       - GITHUB_PROXY=https://mirror.ghproxy.com/
