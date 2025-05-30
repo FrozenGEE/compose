@@ -150,8 +150,6 @@ services:
     # privileged: true
     devices:
       - /dev/dri:/dev/dri
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
       - /volume1/docker/plex:/config
       # 配置文件目录
@@ -161,9 +159,6 @@ services:
       - PLEX_CLAIM=【登录密钥】
       # 登录密钥，打开下面的地址，注册并登录后获取，如果对账号注册有洁癖，plex账号哪怕你买了pass通行证也可以注销
       # https://plex.tv/claim
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=N卡的ID
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       - PUID=0
       - PGID=0
       - TZ=Asia/Shanghai
@@ -190,17 +185,12 @@ services:
     # privileged: true
     devices:
       - /dev/dri:/dev/dri
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
       - /volume1/docker/emby:/config
       # 配置文件目录
       - /volume1:/data
       # 媒体库目录，可以自定义，可以写多个
     environment:
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=N卡的ID
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       - PUID=0
       - PGID=0
       - UMASK=022
@@ -230,8 +220,6 @@ services:
     # privileged: true
     devices:
       - /dev/dri:/dev/dri
-    # runtime: nvidia
-    # 使用N卡的需要装好N卡驱动，并且设置这个参数
     volumes:
       - /volume1/docker/jellyfin/config:/config
       # 配置文件目录
@@ -240,9 +228,6 @@ services:
       - /volume1/docker/jellyfin/cache:/cache
       # 缓存目录
     environment:
-      # - NVIDIA_DRIVER_CAPABILITIES=all
-      # - NVIDIA_VISIBLE_DEVICES=N卡的ID
-      # 使用N卡的需要装好N卡驱动，并且设置这两个N卡参数
       - TZ=Asia/Shanghai
       
       # 以下是为JF添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
