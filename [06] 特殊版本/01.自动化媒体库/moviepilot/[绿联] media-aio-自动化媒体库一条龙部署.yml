@@ -313,7 +313,7 @@ services:
       - TRANSMISSION_WEB_HOME=/config/webui
       # WEBUI主页路径，写容器路径，用于放汉化文件
       # 汉化文件下载地址：https://github.com/ronggang/transmission-web-control
-      # 将 "/src" 这个文件夹里的东西放到 "/config/webui" 内即可
+      # 将 "/src" 这个文件夹里的东西放到 "/共享文件夹/docekr/transmission/webui" 内即可
       - USER=ugreen
       - PASS=ugreen
       # TR账号密码，预设为ugreen，记住一定要修改密码，否则后果自负
