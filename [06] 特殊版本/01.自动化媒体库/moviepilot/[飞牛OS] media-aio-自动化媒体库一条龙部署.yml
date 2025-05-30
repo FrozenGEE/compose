@@ -166,11 +166,12 @@ services:
       - TZ=Asia/Shanghai
       
       # 以下是为PLEX添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
-      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      # - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
-      # - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
+      # 切记设置好V2raya，如果你没有配置魔法就注释掉
 
     network_mode: bridge
     ports:
@@ -201,11 +202,12 @@ services:
       
       # 以下是为EMBY添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       # emby推荐不写，而是安装神医插件：https://github.com/sjtuross/StrmAssistant
-      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      # - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
-      # - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
+      # 切记设置好V2raya，如果你没有配置魔法就注释掉
       
     network_mode: bridge
     ports:
@@ -234,11 +236,12 @@ services:
       - TZ=Asia/Shanghai
       
       # 以下是为JF添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
-      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      # - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
-      # - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
+      # 切记设置好V2raya，如果你没有配置魔法就注释掉
       
     network_mode: bridge
     ports:
@@ -307,7 +310,7 @@ services:
       - TRANSMISSION_WEB_HOME=/config/webui
       # WEBUI主页路径，写容器路径，用于放汉化文件
       # 汉化文件下载地址：https://github.com/ronggang/transmission-web-control
-      # 将 "/src" 这个文件夹里的东西放到 "/config/webui" 内即可
+      # 将 "/src" 这个文件夹里的东西放到 "/vol1/1000/docker/transmission/webui" 内即可
       - USER=fnos
       - PASS=fnos
       # TR账号密码，预设为fnos，记住一定要修改密码，否则后果自负
@@ -362,7 +365,7 @@ services:
       # 超级管理者用户名，默认为admin，初次安装后失效
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效
       
-      # - PROXY_HOST=【这里替换为你的NAS的IP地址】:20171
+      - PROXY_HOST=【这里替换为你的NAS的IP地址】:20171
       # 网络代理，访问themoviedb或者重启更新需要使用代理访问，如果你没有配置魔法就注释掉
       # 格式为http(s)://ip:port、socks5://user:pass@host:port
       # - BIG_MEMORY_MOD=true
