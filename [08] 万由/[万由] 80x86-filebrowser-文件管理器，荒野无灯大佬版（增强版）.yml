@@ -22,7 +22,7 @@ services:
       - /dev/dri:/dev/dri
       # 开启硬件转码
     volumes:
-      - /mnt/unas/data/docker/filebrower:/config
+      - /mnt/unas/data/docker/filebrowser:/config
       # 配置文件目录
       - /mnt/unas/data:/data
       # 映射本地其他路径使其可以访问，可以自定义多个
