@@ -365,7 +365,7 @@ services:
       # 超级管理者用户名，默认为admin，初次安装后失效
       # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效
       
-      # - PROXY_HOST=【这里替换为你的NAS的IP地址】:20171
+      - PROXY_HOST=【这里替换为你的NAS的IP地址】:20171
       # 网络代理，访问themoviedb或者重启更新需要使用代理访问，如果你没有配置魔法就注释掉
       # 格式为http(s)://ip:port、socks5://user:pass@host:port
       # - BIG_MEMORY_MOD=true
