@@ -20,7 +20,7 @@
 # 重要内容，硬链接只能够存在于同一个存储池上
 # 重要内容，硬链接只能够存在于同一个存储池上
 #
-# /xxx/media
+# /volume1/media
 #          |---/动漫
 #          |---/下载
 #          |
@@ -34,13 +34,13 @@
 #                 |---/欧美电视剧
 #                 |---/日韩电视剧
 #
-# ①：/xxx/media——————media为共享文件夹，存储池预设为第1个存储池，请根据自己实际情况修改【这是实际路径】
-# ②：/xxx/media/下载——————用于QB和TR下载，MP中设置对应的容器路径/downloads用于传递【这是实际路径】
-# ③：/xxx/media/电影；【这里替换为你的媒体库总目录】/电视剧——————用于媒体库的分类存放，可根据自己需要增添【这是实际路径】
+# ①：/volume1/media——————media为共享文件夹，存储池预设为第1个存储池，请根据自己实际情况修改【这是实际路径】
+# ②：/volume1/media/下载——————用于QB和TR下载，MP中设置对应的容器路径/downloads用于传递【这是实际路径】
+# ③：/volume1/media/电影；/volume1/media/电视剧——————用于媒体库的分类存放，可根据自己需要增添【这是实际路径】
 # ④：请在MP设置中，把下载目录设置为“/meida/下载”；把 电影/电视剧 等分类的目录设置从“/meida”开始选择【这是容器路径】
 # ⑤：MP和QB,TR都使用同一条路径映射“/meida/下载”【必须完全一样】
 # 不懂可以看看MP-01和MP-03这两张图，MP-02是效果图
-# ⑥：/xxx/media/动漫——————用于ani-rss动漫bt下载，自身带重命名整理功能，刮削功能可以由PEJ负责
+# ⑥：/volume1/media/动漫——————用于ani-rss动漫bt下载，自身带重命名整理功能，刮削功能可以由PEJ负责
 # ⑦：注意，需要在ani-rss的设置中，将下载地址修改为/ani-rss
 #
 ##############################################
@@ -165,11 +165,12 @@ services:
       - TZ=Asia/Shanghai
 
       # 以下是为PLEX添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
-      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      # - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
-      # - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
+      # 切记设置好V2raya，如果你没有配置魔法就注释掉
 
     network_mode: bridge
     ports:
@@ -200,11 +201,12 @@ services:
 
       # 以下是为EMBY添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       # emby推荐不写，而是安装神医插件：https://github.com/sjtuross/StrmAssistant
-      # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
+      - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      # - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
-      # - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
+      # 切记设置好V2raya，如果你没有配置魔法就注释掉
 
     network_mode: bridge
     ports:
@@ -243,6 +245,7 @@ services:
       - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
       # 更换为自己的http代理
+      # 切记设置好V2raya，如果你没有配置魔法就注释掉
 
     network_mode: bridge
     ports:
@@ -263,11 +266,11 @@ services:
       - ./qbittorrent:/config
       # 配置文件目录
 
-      - 【这里替换为你的媒体库总目录】/下载:/downloads
+      - /volume1/media/下载:/downloads
       # 默认下载目录
-      - 【这里替换为你的媒体库总目录】:/media
+      - /volume1/media:/media
       # MP，QB，TR统一的下载目录，见上目录结构说明的④⑤
-      - 【这里替换为你的媒体库总目录】/动漫:/ani-rss
+      - /volume1/media/动漫:/ani-rss
       # ANI-RSS，QB，TR统一的下载目录，见上目录结构说明的⑥⑦
 
       # - 【这里替换为你想映射到QB内的路径】:/【这里替换为你想映射到QB内的路径】
@@ -296,11 +299,11 @@ services:
     volumes:
       - ./transmission:/config
       # 配置文件目录
-      - 【这里替换为你的媒体库总目录】/下载:/downloads
+      - /volume1/media/下载:/downloads
       # 默认下载目录
-      - 【这里替换为你的媒体库总目录】:/media
+      - /volume1/media:/media
       # MP，QB，TR统一的下载目录，见上目录结构说明的④⑤
-      - 【这里替换为你的媒体库总目录】/动漫:/ani-rss
+      - /volume1/media/动漫:/ani-rss
       # ANI-RSS，QB，TR统一的下载目录，见上目录结构说明的⑥⑦
       # - 【这里替换为你想映射到TR内的路径】:/【这里替换为你想映射到TR内的路径】
       # 下载目录，可以自定义，可以写多个，这里如果你理解了映射是什么，就会明白是什么意思，如果不会，别写
@@ -345,9 +348,9 @@ services:
       ## 程序主目录
       - ./moviepilot-v2/config:/config
       ## 配置目录
-      - 【这里替换为你的媒体库总目录】/下载:/downloads
+      - /volume1/media/下载:/downloads
       # 默认下载目录
-      - 【这里替换为你的媒体库总目录】:/media
+      - /volume1/media:/media
       # MP，QB，TR统一的下载目录，见上目录结构说明的④⑤
 
       - ./qbittorrent/qBittorrent/BT_backup:/QB-BT
@@ -498,7 +501,7 @@ services:
     volumes:
       - ./ani-rss:/config
       # 配置文件目录
-      - 【这里替换为你的媒体库总目录】/动漫:/ani-rss
+      - /volume1/media/动漫:/ani-rss
       # ANI-RSS，QB，TR统一的下载目录，见上目录结构说明的⑥⑦
     environment:
       - PORT=7789
