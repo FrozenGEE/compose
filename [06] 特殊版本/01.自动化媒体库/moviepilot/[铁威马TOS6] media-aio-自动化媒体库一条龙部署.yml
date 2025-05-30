@@ -160,6 +160,7 @@ services:
       # https://plex.tv/claim
       - PUID=0
       - PGID=0
+      - UMASK=022
       - TZ=Asia/Shanghai
       
       # 以下是为PLEX添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
