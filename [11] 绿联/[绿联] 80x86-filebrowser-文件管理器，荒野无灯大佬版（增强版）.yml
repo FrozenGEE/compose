@@ -22,7 +22,7 @@ services:
       - /dev/dri:/dev/dri
       # 开启硬件转码
     volumes:
-      - ./filebrower:/config
+      - ./filebrowser:/config
       # 配置文件目录
       - /home:/绿联个人文件夹
       - /volume1:/存储池1
