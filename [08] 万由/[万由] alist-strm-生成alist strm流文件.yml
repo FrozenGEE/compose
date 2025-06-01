@@ -1,0 +1,29 @@
+# 官方文档
+# https://github.com/tefuirZ/alist-strm
+# https://hub.docker.com/r/itefuir/alist-strm
+
+---
+version: "3"
+# 最后编辑时间：2025-06-01
+services:
+  alist-strm:
+    image: itefuir/alist-strm:test
+    # 镜像地址，正式版tag为latest，测试版为test
+    container_name: alist-strm
+    # 容器名字
+    hostname: alist-strm
+    # 主机名
+    volumes:
+      - /mnt/unas/docker/alist-strm:/config
+      # 配置文件目录
+      - /mnt/unas:/mnt/unas
+      # 媒体库目录，可以写多条，容器路径要和配置中的“目标目录”对应
+      # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5000:5000/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
