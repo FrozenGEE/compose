@@ -29,6 +29,9 @@
 # alist-strm     ip:5000
 # qilin-auto     ip:9394
 # v2raya         ip:2017
+   # sock 代理端口：20170
+   # http 代理端口：20171
+   # http 代理端口(带分流规则)：20172
 # 如果有端口占用，则自行修改为bridge端口映射
 
 # 相关教程(未补全)
