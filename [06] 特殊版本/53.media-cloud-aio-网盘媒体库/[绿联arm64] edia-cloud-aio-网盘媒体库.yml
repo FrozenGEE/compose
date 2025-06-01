@@ -1,0 +1,268 @@
+# github项目地址
+# https://github.com/AlistGo/alist
+# https://github.com/dr34m-cn/taosync
+# https://github.com/jiangrui1994/CloudSaver
+# https://github.com/tefuirZ/alist-strm
+# https://github.com/linzxcw/qilin-Auto
+# https://github.com/v2rayA/v2rayA
+
+# dockerhub镜像地址
+# https://hub.docker.com/r/xhofe/alist
+# https://hub.docker.com/r/dr34m/tao-sync
+# https://hub.docker.com/r/jiangrui1994/cloudsaver
+# https://hub.docker.com/r/itefuir/alist-strm
+# https://hub.docker.com/r/qilinzhu/qilin-auto
+# https://hub.docker.com/r/mzz2017/v2raya
+
+# 各个docker容器的作用
+# alist，负责挂载NAS本地存储和网盘
+# tao-sync，负责把alist中的目录进行同步，可以是网盘到本地，也可以本地到网盘
+# cloudsaver，负责从Telegram上搜索资源，但是需要魔法以及TG频道(下方有提供部分TG频道)
+# alist-strm，负责见alist中的文件生成strm文件，strm文件不知道干嘛的上网搜
+# qilin-auto，还没测试完毕
+# v2raya，魔法，自备好魔法订阅链接，https://xfltd.org
+
+# WebUI界面
+# alist			ip:5244
+# tao-sync		ip:8023
+# cloudsaver	ip:8008
+# alist-strm	ip:5000
+# qilin-auto	ip:9394
+# v2raya		ip:2017
+# 如果有端口占用，则自行修改为bridge端口映射
+
+# 相关教程(未补全)
+# https://www.bilibili.com/video/BV1h3RUYwEnn
+# https://www.bilibili.com/video/BV1nAdKYhEAz
+# https://blog.ctftools.com/2024/07/newpost-57
+# https://www.bilibili.com/video/BV1KwZmYcEwK
+# https://www.bilibili.com/video/BV1VzLEzYE7u
+# https://www.yuque.com/qilinzhu-qvn1j/oxp3nl/eb8dz4116tmruf9o?singleDoc#，访问密码：gity
+
+# alist相关设置
+# 打开alist容器的终端，新建，确认，输入内容：./alist admin set 123456
+# 123456为admin的密码，可根据自己的需要修改
+# 打开alist的WebUI，登录后，点击底部的“管理”，左侧的“设置”--“全局”，把“签名所有”去掉启用，保存(必须做)
+# 再点击“令牌”，将最下方的“API令牌”内容复制
+# 点击左侧的“用户”，编辑自己的账号，把全部权限勾选上，保存
+
+# tao-sync的账号为admin，密码看日志
+# 登陆后，点击“引擎管理”，输入alist的API令牌以及访问地址
+# 如果你需要让alist定时从网盘下载文件到NAS本地，需要在alist配置单中设置好容器目录，并且在alist中挂上，不懂的具体看相关教程
+# 点击左侧“作业管理”，新建作业时，调用方式选“cron”，在hour那一栏输入：*/1；意思是每一小时执行一次任务，实在不懂/想自定义的，旁边有“点击查看cron简易教程”可以教你
+
+# cloudsaver的管理员邀请码是230713，给普通用户注册的则是9527
+# 资源搜索需要配置魔法，需要提前在v2raya中配置好或者你有别的途径
+# 代理服务器IP和代理端口按照实际情况设置
+# cookie如何获取自行问AI，或者网上找教程
+# 拉到最底部，点击批量导入，把这一张compose中最底下的内容复制粘贴进去
+
+---
+version: "3"
+# 最后编辑时间：2025-06-01
+services:
+  alist:
+    image: xhofe/alist:latest-aio
+    container_name: alist
+    hostname: alist
+    privileged: true
+    volumes:
+      - ./alist:/opt/alist/data
+      # 配置文件目录
+      - /home:/alist/绿联个人文件夹
+      - /volume1:/alist/存储池1
+      # - /volume2:/alist/存储池2
+      # 映射本地其他路径使其可以访问，可以自定义多个
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=022
+      - TZ=Asia/Shanghai
+    network_mode: host
+    restart: unless-stopped
+
+########################################
+  cloudsaver:
+    image: jiangrui1994/cloudsaver:test
+    container_name: cloudsaver
+    hostname: cloudsaver
+    volumes:
+      - ./cloudsaver:/app/data
+      # 配置文件目录
+    network_mode: host
+    restart: unless-stopped
+
+########################################
+  alist-strm:
+    image: itefuir/alist-strm:test
+    container_name: alist-strm
+    hostname: alist-strm
+    volumes:
+      - ./alist-strm:/config
+      # 配置文件目录
+      - 【这里修改为你的媒体库目录】:/media
+      # 媒体库目录，可以自定义多个，容器路径要和配置中的目标目录对应，下面是一些示例
+      # - /volume1:/alist/存储池1
+      # - /volume2:/alist/存储池2
+    network_mode: host
+    restart: unless-stopped
+
+########################################
+  qilin-auto:
+    image: qilinzhu/qilin-auto:arm64
+    container_name: qilin-auto
+    hostname: qilin-auto
+    command: npm run preview
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./qilin-auto:/app/server/data
+      # 配置文件目录
+      - ./cloudsaver/logs:/app/logs
+      # cloudsaver的宿主机日志文件夹，请根据实际路径修改，本模板内都已经对应好
+    network_mode: bridge
+    # 9090有别的服务要用，所以不推荐host
+    ports:
+      - 9394:9090/tcp
+      - 9349:9009/tcp
+      # WebUI 端口
+    restart: unless-stopped
+
+########################################
+  tao-sync:
+    image: dr34m/tao-sync:latest
+    container_name: tao-sync
+    hostname: tao-sync
+    volumes:
+      - ./tao-sync:/app/data
+      # 配置文件目录
+    network_mode: host
+    restart: unless-stopped
+
+########################################
+  v2raya:
+  # 使用不进行全局代理的部署方式
+    image: mzz2017/v2raya:latest
+    container_name: v2raya
+    hostname: v2raya
+    environment:
+      - V2RAYA_LOG_FILE=/tmp/v2raya.log
+      - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
+    volumes:
+      - ./v2raya:/etc/v2raya
+      # 配置文件目录
+      
+      - /etc/resolv.conf:/etc/resolv.conf
+      # 绿联NAS的有，已经踩点
+
+    # network_mode: bridge
+    network_mode: host
+    # 可 host 也可 bridge，如果端口冲突，预设使用host
+
+    # bridge 时，在同一个docker容器子网 bridge 中，其他容器可以通过 172.17.0.1:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
+    # host 时，在同一个docker容器子网 host 中，其他容器可以通过 127.0.0.1:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
+    # 但是不在统一docker容器子网的，无法通过以上方式通讯，可通过以下方式
+    # 对于局域网中其他设备，你直接写 服务器的IP:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
+
+      # - 2017:2017/tcp
+      # WebUI 端口：2017
+      # - 20170-20172:20170-20172/tcp
+      # sock 代理端口：20170
+      # http 代理端口：20171
+      # http 代理端口(带分流规则)：20172
+    restart: unless-stopped
+
+
+# 将下方#号内的内容复制粘贴，内容不属于compose的，记得删掉，不如部署时会提示错误
+########################################
+   [
+       {
+           "name": "网盘资源收藏(夸克) ",
+           "id": "yunpanshare"
+       },
+       {
+           "name": "阿里云盘发布频道",
+           "id": "shareAliyun"
+       },
+       {
+           "name": "肯德基の4K影视综合电影云盘站",
+           "id": "XiangxiuNB"
+       },
+       {
+           "name": "夸克云盘综合资源",
+           "id": "Quark_Movies"
+       },
+       {
+           "name": "阿里云盘资源",
+           "id": "zaihuayun"
+       },
+       {
+           "name": "资源宇宙",
+           "id": "tgsearchers"
+       },
+       {
+           "name": "盘酱酱Club",
+           "id": "PanjClub"
+       },
+       {
+           "name": "奥斯卡4K蓝光(精品)影视磁力站",
+           "id": "Oscar_4Kmovies"
+       },
+       {
+           "name": "可乐小屋",
+           "id": "baidudianshi"
+       },
+       {
+           "name": "夸克云盘盘",
+           "id": "kuakeyun"
+       },
+       {
+           "name": "阿里云盘4K影视",
+           "id": "Aliyun_4K_ Movies"
+       },
+       {
+           "name": "115影视资源分享频道",
+           "id": "guaguale115"
+       },
+       {
+           "name": "115网盘资源分享频道",
+           "id": "hao115"
+       },
+       {
+           "name": "123云盘资源频道",
+           "id": "xx123pan"
+       },
+       {
+           "name": "百度网盘综合频道",
+           "id": "bdwpzhpd"
+       },
+       {
+           "name": "天翼云盘综合频道",
+           "id": "tyypzhpd"
+       },
+       {
+           "name": "爱影115资源分享频道",
+           "id": "pan115_share"
+       },
+       {
+           "name": "移动云盘资源分享",
+           "id": "ydypzyfx"
+       },
+       {
+           "name": "天翼云盘资源发布频道",
+           "id": "cloudtianyi"
+       },
+       {
+           "name": "天翼云盘资源频道",
+           "id": "tianyirigeng"
+       },
+       {
+           "name": "网盘资源分享",
+           "id": "gotopan"
+       },
+       {
+           "name": "网盘4K影视",
+           "id": "Aliyun_4K_Movies"
+       }
+   ]
+########################################
