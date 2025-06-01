@@ -2,15 +2,21 @@
 # https://github.com/jiangrui1994/cloudsaver
 # https://www.yuque.com/xiaoruihenbangde/ggogn3/ga6gaaiy5fsyw62l
 
-# 资源搜索需要配置代理环境，WebUI上可以设置
 # 默认注册码：管理员为230713，普通用户为9527，WebUI上可以设置修改
+
+# 资源搜索需要配置魔法，需要提前在v2raya中配置好或者你有别的途径
+# 代理服务器IP和代理端口按照实际情况设置
+
+# cookie如何获取自行问AI，或者网上找教程
+
+# 拉到最底部，点击批量导入，把这一张compose中最底下的内容复制粘贴进去
 
 ---
 version: "3"
-# 最后编辑时间：2025-03-06
+# 最后编辑时间：2025-06-01
 services:
   cloudsaver:
-    image: ghcr.io/jiangrui1994/cloudsaver:latest
+    image: jiangrui1994/cloudsaver:test
     # 镜像地址，正式版tag为latest，测试版为test
     container_name: cloudsaver
     # 容器名字
@@ -34,3 +40,98 @@ services:
       net.unraid.docker.icon: /mnt/user/LOGO/cloudsaver.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
+
+# 将下方#号内的内容复制粘贴，内容不属于compose的，记得删掉，不如部署时会提示错误
+########################################
+   [
+       {
+           "name": "网盘资源收藏(夸克) ",
+           "id": "yunpanshare"
+       },
+       {
+           "name": "阿里云盘发布频道",
+           "id": "shareAliyun"
+       },
+       {
+           "name": "肯德基の4K影视综合电影云盘站",
+           "id": "XiangxiuNB"
+       },
+       {
+           "name": "夸克云盘综合资源",
+           "id": "Quark_Movies"
+       },
+       {
+           "name": "阿里云盘资源",
+           "id": "zaihuayun"
+       },
+       {
+           "name": "资源宇宙",
+           "id": "tgsearchers"
+       },
+       {
+           "name": "盘酱酱Club",
+           "id": "PanjClub"
+       },
+       {
+           "name": "奥斯卡4K蓝光(精品)影视磁力站",
+           "id": "Oscar_4Kmovies"
+       },
+       {
+           "name": "可乐小屋",
+           "id": "baidudianshi"
+       },
+       {
+           "name": "夸克云盘盘",
+           "id": "kuakeyun"
+       },
+       {
+           "name": "阿里云盘4K影视",
+           "id": "Aliyun_4K_ Movies"
+       },
+       {
+           "name": "115影视资源分享频道",
+           "id": "guaguale115"
+       },
+       {
+           "name": "115网盘资源分享频道",
+           "id": "hao115"
+       },
+       {
+           "name": "123云盘资源频道",
+           "id": "xx123pan"
+       },
+       {
+           "name": "百度网盘综合频道",
+           "id": "bdwpzhpd"
+       },
+       {
+           "name": "天翼云盘综合频道",
+           "id": "tyypzhpd"
+       },
+       {
+           "name": "爱影115资源分享频道",
+           "id": "pan115_share"
+       },
+       {
+           "name": "移动云盘资源分享",
+           "id": "ydypzyfx"
+       },
+       {
+           "name": "天翼云盘资源发布频道",
+           "id": "cloudtianyi"
+       },
+       {
+           "name": "天翼云盘资源频道",
+           "id": "tianyirigeng"
+       },
+       {
+           "name": "网盘资源分享",
+           "id": "gotopan"
+       },
+       {
+           "name": "网盘4K影视",
+           "id": "Aliyun_4K_Movies"
+       }
+   ]
+########################################
