@@ -51,9 +51,6 @@ services:
     # 主机名
     # privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
-    devices:
-      - /dev/dri:/dev/dri
-      # 开启硬件加速支持，注意：arm设备不支持硬件加速
     volumes:
       - ./mt-photos/config:/config
       # 配置文件目录
