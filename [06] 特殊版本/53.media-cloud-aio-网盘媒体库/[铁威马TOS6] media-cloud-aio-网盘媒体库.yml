@@ -1,33 +1,33 @@
 # github项目地址
 # https://github.com/AlistGo/alist
-# https://github.com/dr34m-cn/taosync
 # https://github.com/jiangrui1994/CloudSaver
 # https://github.com/tefuirZ/alist-strm
 # https://github.com/linzxcw/qilin-Auto
+# https://github.com/dr34m-cn/taosync
 # https://github.com/v2rayA/v2rayA
 
 # dockerhub镜像地址
 # https://hub.docker.com/r/xhofe/alist
-# https://hub.docker.com/r/dr34m/tao-sync
 # https://hub.docker.com/r/jiangrui1994/cloudsaver
 # https://hub.docker.com/r/itefuir/alist-strm
 # https://hub.docker.com/r/qilinzhu/qilin-auto
+# https://hub.docker.com/r/dr34m/tao-sync
 # https://hub.docker.com/r/mzz2017/v2raya
 
 # 各个docker容器的作用
 # alist，负责挂载NAS本地存储和网盘
-# tao-sync，负责把alist中的目录进行同步，可以是网盘到本地，也可以本地到网盘
 # cloudsaver，负责从Telegram上搜索资源，但是需要魔法以及TG频道(下方有提供部分TG频道)
 # alist-strm，负责见alist中的文件生成strm文件，strm文件不知道干嘛的上网搜
 # qilin-auto，还没测试完毕
+# tao-sync，负责把alist中的目录进行同步，可以是网盘到本地，也可以本地到网盘
 # v2raya，魔法，自备好魔法订阅链接，https://xfltd.org
 
 # WebUI界面
 # alist          ip:5244
-# tao-sync       ip:8023
 # cloudsaver     ip:8008
 # alist-strm     ip:5000
 # qilin-auto     ip:9394
+# tao-sync       ip:8023
 # v2raya         ip:2017
    # sock 代理端口：20170
    # http 代理端口：20171
