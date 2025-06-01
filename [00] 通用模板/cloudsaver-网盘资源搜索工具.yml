@@ -16,7 +16,7 @@ version: "3"
 # 最后编辑时间：2025-06-01
 services:
   cloudsaver:
-    image: jiangrui1994/cloudsaver:latest
+    image: jiangrui1994/cloudsaver:test
     # 镜像地址，正式版tag为latest，测试版为test
     container_name: cloudsaver
     # 容器名字
