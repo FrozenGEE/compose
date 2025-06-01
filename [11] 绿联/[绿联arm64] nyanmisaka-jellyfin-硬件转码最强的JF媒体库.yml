@@ -5,7 +5,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-11-27
+# 最后编辑时间：2025-05-28
 services:
   jellyfin:
     image: nyanmisaka/jellyfin:latest-rockchip
@@ -32,6 +32,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
       # 时区
+
       # 以下是为JF添加网络代理，自行准备好魔法
       # - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
@@ -39,6 +40,8 @@ services:
       # 更换为自己的http代理
       # - HTTP_PROXY=http://192.168.2.80:20171
       # 更换为自己的http代理
+      # 切记设置好V2raya，如果你没有配置魔法就注释掉
+
     # network_mode: bridge
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
