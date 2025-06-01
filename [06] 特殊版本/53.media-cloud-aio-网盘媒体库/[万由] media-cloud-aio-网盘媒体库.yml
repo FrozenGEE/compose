@@ -51,7 +51,7 @@
 
 # alist添加各个网盘教程：https://alistgo.com/zh/guide
 # alist添加本机存储教程：https://alistgo.com/zh/guide/drivers/local.html
-# 上面的"挂载路径"写 /你的机器型号；下面的"根文件夹路径"写 /alist
+# 上面的"挂载路径"写 /你的机器型号；下面的"根文件夹路径"写 /unas
 
 # tao-sync的账号为admin，密码看日志
 # 登陆后，点击"引擎管理"，输入alist的API令牌以及访问地址
@@ -76,7 +76,7 @@ services:
     volumes:
       - /mnt/unas/data/docker/alist:/opt/alist/data
       # 配置文件目录
-      - /mnt/unas/data:/data
+      - /mnt/unas/data:/unas
       # 映射本地其他路径使其可以访问，可以自定义多个
     environment:
       - PUID=0
@@ -105,7 +105,7 @@ services:
     volumes:
       - /mnt/unas/data/docker/alist-strm:/config
       # 配置文件目录
-      - /mnt/unas/data:/data
+      - /mnt/unas/data:/unas
       # 媒体库目录，可以自定义多个，容器路径要和配置中的目标目录对应
     network_mode: host
     restart: unless-stopped
