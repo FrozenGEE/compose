@@ -113,6 +113,7 @@ services:
 ########################################
   qilin-auto:
     image: qilinzhu/qilin-auto:latest
+    # 镜像地址，如果是arm设备，tag改为arm64
     container_name: qilin-auto
     hostname: qilin-auto
     command: npm run preview
