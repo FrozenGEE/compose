@@ -1,8 +1,11 @@
-# 【更新日志-2025-05-28】
+# 【更新日志-2025-06-01】
+- 新增一份```alist``` ```tao-sync``` ```cloudsaver``` ```alist-strm``` ```qilin-auto``` ```v2raya```组合的compose[media-cloud-aio](https://github.com/FrozenGEE/compose/tree/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/53.media-cloud-aio-%E7%BD%91%E7%9B%98%E5%AA%92%E4%BD%93%E5%BA%93)
+- ```alist```+```tao-sync```+```cloudsaver```+```v2raya```可以做到转存网盘资源然后定时下载到NAS本地
+- ```alist```+```cloudsaver```+```alist-strm```+```qilin-auto```+```v2raya```可以转存网盘资源然后生成strm文件供本地媒体库使用
+- 新增一份基于```nastool```的自动化媒体库一条路模板，暂时用着还可以，以BT为主
 - 修正更新```v2rayA```的模板，统一都放到了[[06]特殊版本/46.魔法](https://github.com/FrozenGEE/compose/tree/main/%5B06%5D%20%E7%89%B9%E6%AE%8A%E7%89%88%E6%9C%AC/46.%E9%AD%94%E6%B3%95/46-03.v2raya-%E6%98%93%E7%94%A8%E8%80%8C%E5%BC%BA%E5%A4%A7%E3%80%81%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84V2Ray%E5%AE%A2%E6%88%B7%E7%AB%AF)里面
 - ```media-aio```模板中```v2rayA```的内容，均统一使用不支持全局代理的模板，如果有需要使用全局代理的，自行修改
 - ```飞牛OS 0.9.2```最新版本实测docker compose使用```unless-stopped```已经可以重启docker后容器自启动，后续的模板将统一使用
-- 新增一份基于nastool的自动化媒体库一条路模板，暂时用着还可以，以BT为主
 - 将绿联从群晖模板中分离，compose模板以使用相对路径为主，默认都支持X86，ARM是否支持可以看注释，如果是针对ARM的镜像会特别标注，特指```MT相册``` ```Jellyfin媒体库``` ```easyNVR-录像机```
 - DH4300Plus```(RK3588C ARM64v8)```大部分日常使用的docker镜像都支持，会在名字特别标记```绿联arm64```
 - 后续不再带华硕NAS，铁威马TOS5玩了，删了，减少工作量；删除/修改部分compose
