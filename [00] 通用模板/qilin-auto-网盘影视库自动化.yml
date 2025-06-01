@@ -26,6 +26,7 @@ services:
       # 日志文件目录
     environment:
       - NODE_ENV=production
+      # 照抄
     network_mode: bridge
     # 9090有别的服务要用，所以不推荐host
     ports:
