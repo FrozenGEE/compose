@@ -1,0 +1,48 @@
+# 官方文档
+# https://github.com/linzxcw/qilin-auto
+# https://hub.docker.com/r/qilinzhu/qilin-auto
+# https://www.bilibili.com/video/BV1knLEz1EjE
+
+# https://www.yuque.com/qilinzhu-qvn1j/oxp3nl/eb8dz4116tmruf9o?singleDoc#
+# 密码：gity
+
+# 初始用户名/密码:admin
+
+---
+version: "3"
+# 最后编辑时间：2025-05-28
+services:
+  qilin-auto:
+    image: qilinzhu/qilin-auto:latest
+    # 镜像地址，arm64的tag为：arm64
+    container_name: qilin-auto
+    # 容器名字
+    hostname: qilin-auto
+    # 主机名
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/qilin-auto/data:/app/server/data
+      # 配置文件目录
+      - 【这里替换为你的docker数据存放目录】/qilin-auto/logs:/app/logs
+      # 日志文件目录
+    environment:
+      - NODE_ENV=production
+    network_mode: bridge
+    # 9090有别的服务要用，所以不推荐host
+    ports:
+      - 9394:9090
+      - 9349:9009
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/qilin-auto_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:5000]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/qilin-auto.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
