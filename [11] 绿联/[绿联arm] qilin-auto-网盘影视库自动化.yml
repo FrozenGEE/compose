@@ -1,0 +1,37 @@
+# 官方文档
+# https://github.com/linzxcw/qilin-auto
+# https://hub.docker.com/r/qilinzhu/qilin-auto
+# https://www.bilibili.com/video/BV1knLEz1EjE
+
+# https://www.yuque.com/qilinzhu-qvn1j/oxp3nl/eb8dz4116tmruf9o?singleDoc#
+# 密码：gity
+
+# 初始用户名/密码:admin
+
+---
+version: "3"
+# 最后编辑时间：2025-05-28
+services:
+  qilin-auto:
+    image: qilinzhu/qilin-auto:arm64
+    # 镜像地址
+    container_name: qilin-auto
+    # 容器名字
+    hostname: qilin-auto
+    # 主机名
+    volumes:
+      - ./qilin-auto/data:/app/server/data
+      # 配置文件目录
+      - ./qilin-auto/logs:/app/logs
+      # 日志文件目录
+    environment:
+      - NODE_ENV=production
+      # 照抄
+    network_mode: bridge
+    # 9090有别的服务要用，所以不推荐host
+    ports:
+      - 9394:9090
+      - 9349:9009
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
