@@ -1,3 +1,7 @@
+# 需要准备好魔法，网盘，网盘会员
+# 如果docker网络拉取失败，可以给镜像地址加上加速源，使用文本批量替换即可将下方中括号的内容批量替换掉
+# [images: ] → [images: k-docker.asia/]，注意"images: "是带空格
+
 # github项目地址
 # https://github.com/AlistGo/alist
 # https://github.com/jiangrui1994/CloudSaver
