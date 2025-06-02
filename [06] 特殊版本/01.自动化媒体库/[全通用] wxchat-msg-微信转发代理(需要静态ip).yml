@@ -2,7 +2,9 @@
 # https://github.com/DDS-Derek/wxchat-Docker
 # https://hub.docker.com/r/ddsderek/wxchat
 
-# 需要静态IP，家宽都是动态IP，推荐部署在VPS上，也可以在使用下方现成的
+# 需要静态IP，家宽都是动态IP，推荐部署在VPS上，也可以在使用下方现成的，所以除非自己有vps，不如可以直接用现成的
+# 需要静态IP，家宽都是动态IP，推荐部署在VPS上，也可以在使用下方现成的，所以除非自己有vps，不如可以直接用现成的
+# 需要静态IP，家宽都是动态IP，推荐部署在VPS上，也可以在使用下方现成的，所以除非自己有vps，不如可以直接用现成的
 # https://wx.darklotus.cn
 # 使用教程
 # https://blog.darklotus.cn/tutorials/moviepilotwechat.html
