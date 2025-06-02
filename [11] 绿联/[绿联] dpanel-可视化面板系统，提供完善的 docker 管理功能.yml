@@ -8,7 +8,7 @@ version: "3"
 # 最后编辑时间：2024-11-28
 services:
   dpanel:
-    image: dpanel/dpanel:latest
+    image: registry.cn-hangzhou.aliyuncs.com/dpanel/dpanel:latest
     # 镜像地址，tag可选 latest/lite
     # lite 版去掉了域名转发相关，需要自行转发域名绑定容器，不需要绑定 80 及 443 端口
     container_name: dpanel
