@@ -1,0 +1,72 @@
+# 官方文档
+# https://www.maccms.la
+# https://github.com/magicblack/maccms10
+# https://t.me/maccms_channel
+
+# 教程
+# https://www.maccms.la/guide
+# https://www.bilibili.com/video/BV1iM4y157Zm
+# https://www.bilibili.com/video/BV1TF4m1w7Wv
+# https://www.ywsj365.com/archives/docker-da-jian-yi-ge-ping-guo-cms-nei-rong-guan-li-xi-tong
+
+# 下载cms源码程序，放到容器路径：/cms 下，即NAS实际路径：/共享文件夹/docker/cms 下
+# https://www.maccms.la/down/maccms10.zip
+
+# 配置：https://www.maccms.la/config
+# 第三方资源：https://www.maccms.la/guide/assets
+
+# 目录结构
+# https://www.maccms.la/guide/directory-structure
+#  │─application //应用目录
+#  │  │─admin //后台模块
+#  │  │─api //api模块
+#  │  │─common //公共模块
+#  │  │─extra //配置文件
+#  │  │─index //前台模块
+#  │  │─install //安装模块
+#  │  │─lang //语言包
+#  │  │─database.php //数据库配置文件
+#  │  │─config.php //tp5应用配置文件
+#  │  │─route.php //伪静态路配置文件 
+#  │  │─common.php //伪静态路配置文件
+#  │─addons  //插件目录
+#  │─extend  //扩展目录
+#  │─runtime //缓存目录
+#  │─static //静态文件目录
+#  │─template //前台模板目录
+#  │─thinkphp //tp目录
+#  │─upload //附件目录
+#  │─vendor //第三发库目录
+#  └─index.php //入口文件
+#  └─api.php //api入口文件
+#  └─admin.php //后台入口文件
+
+version: '3.9'
+# 最后编辑时间：2025-06-02
+services:
+  lnmp:
+    image: 2233466866/lnmp:latest
+    # 镜像名字
+    container_name: cms
+    # 容器名字
+    hostname: cms
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    volumes:
+      - ./cms/mysql:/data/mysql
+      # 数据库目录
+      - ./cms/www:/www
+      # 网站根目录
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    ports:
+      - 2580:80/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
