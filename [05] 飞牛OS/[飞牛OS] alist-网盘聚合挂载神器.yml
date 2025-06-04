@@ -10,9 +10,12 @@
 # 手动设置一个密码，`admin`为账号名，`NEW_PASSWORD`是指你需要设置的密码，注意替换
 # docker exec -it alist ./alist admin set NEW_PASSWORD
 
+# AList 问答
+# https://alistgo.com/zh/faq/why.html
+
 ---
 version: "3"
-# 最后编辑时间：2025-05-28
+# 最后编辑时间：2025-06-04
 services:
   alist:
     image: xhofe/alist:latest-aio
@@ -28,6 +31,12 @@ services:
       # 配置文件目录
       - /vol1:/vol1
       # 映射本地其他路径使其可以访问，可以自定义多个
+
+      # - 【这里替换为你的aria2离线下载目录】:/opt/alist/data/temp/aria2
+      # - 【这里替换为你的qbittorrent离线下载目录】:/opt/alist/data/temp/qBittorrent
+      # 出处 https://alistgo.com/zh/guide/advanced/offline-download.html
+      # 注意需要额外部署一个aria2
+      
     environment:
       - PUID=0
       - PGID=0
