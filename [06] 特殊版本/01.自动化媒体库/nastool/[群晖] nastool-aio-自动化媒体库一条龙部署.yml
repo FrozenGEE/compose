@@ -85,6 +85,7 @@
 # iyuu需要注册扫码获取token，初始化安装第一步只需要输入token即可
 
 # cookiecloud使用教程：https://post.smzdm.com/p/a905kd5p
+# chinesesubfinder使用教程：https://post.smzdm.com/p/awz7xpem
 
 ##############################################
 # 镜像地址
@@ -96,6 +97,7 @@
 # https://hub.docker.com/r/linyuan0213/nas-tools
 # https://hub.docker.com/r/linyuan0213/nas-tools-ocr
 # https://hub.docker.com/r/linyuan0213/nas-tools-chrome
+# https://hub.docker.com/r/allanpk716/chinesesubfinder
 # https://hub.docker.com/r/easychen/cookiecloud
 # https://hub.docker.com/r/linuxserver/jackett
 # https://hub.docker.com/r/linuxserver/prowlarr
@@ -129,6 +131,7 @@
 # nastool            ip:22022
 # nas-tools-ocr      ip:9300
 # nas-tools-chrome   ip:9850
+# chinesesubfinder   ip:19035
 # cookiecloud        ip:8188
 # peerbanhelper      ip:9898
 # jackett            ip:9117
@@ -416,6 +419,25 @@ services:
       # 更新后移除旧的镜像
       - TZ=Asia/Shanghai
     restart: unless-stopped
+
+##############################################
+
+  chinesesubfinder:
+    image: wwfnle/chinesesubfinder:latest
+    container_name: chinesesubfinder
+    hostname: chinesesubfinder
+    volumes:
+      - /volume1/docker/chinesesubfinder:/config
+      # 配置文件存放目录
+      - /volume1/media:/media
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=022
+      - PERMS=false
+      - TZ=Asia/Shanghai
+    network_mode: host
+    restart: always
 
 ##############################################
 
