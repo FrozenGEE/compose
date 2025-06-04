@@ -92,6 +92,8 @@
 # https://hub.docker.com/r/linuxserver/qbittorrent
 # https://hub.docker.com/r/linuxserver/transmission
 # https://hub.docker.com/r/linyuan0213/nas-tools
+# https://hub.docker.com/r/linyuan0213/nas-tools-ocr
+# https://hub.docker.com/r/linyuan0213/nas-tools-chrome
 # https://hub.docker.com/r/easychen/cookiecloud
 # https://hub.docker.com/r/linuxserver/jackett
 # https://hub.docker.com/r/linuxserver/prowlarr
@@ -117,24 +119,26 @@
 
 ##############################################
 # 各个服务的WebUI
-# plex            ip:32400
-# emby            ip:8096
-# jellyfin        ip:8097
-# qbittorrent     ip:8085
-# transmission    ip:9091
-# nastool         ip:22022
-# cookiecloud     ip:8188
-# peerbanhelper   ip:9898
-# jackett         ip:9117
-# prowlarr        ip:9696
-# iyuu            ip:8780
-# v2raya          ip:2017
+# plex               ip:32400
+# emby               ip:8096
+# jellyfin           ip:8097
+# qbittorrent        ip:8085
+# transmission       ip:9091
+# nastool            ip:22022
+# nas-tools-ocr      ip:9300
+# nas-tools-chrome   ip:9850
+# cookiecloud        ip:8188
+# peerbanhelper      ip:9898
+# jackett            ip:9117
+# prowlarr           ip:9696
+# iyuu               ip:8780
+# v2raya             ip:2017
   # sock 代理端口：20170
   # http 代理端口：20171
   # http 代理端口(带分流规则)：20172
 # watchtower      不存在，后台自动更新容器镜像
-# aria2           ip:5321
-  # aria2-RPC     ip:6868
+# aria2              ip:5321
+  # aria2-RPC        ip:6868
 
 # 如果要使用peerbanhelper，QB和TR必须使用host网络模式，模板默认为host网络模式，且对QB和TR的版本号有要求，注意查看文档
 # jellyfin 镜像地址，如果为arm64则使用：nyanmisaka/jellyfin:latest-rockchip
@@ -366,11 +370,34 @@ services:
       - 22022:3000/tcp
       # WebUI http端口
     restart: unless-stopped
-
+    depends_on:
+      - nas-tools-ocr
+      - nas-tools-chrome
+      
 ##############################################
 #                                            #
 #          其他辅助工具，根据需要部署          #
 #                                            #
+##############################################
+
+  nas-tools-ocr:
+    image: linyuan0213/nas-tools-ocr:latest
+    container_name: nas-tools-ocr
+    hostname: nas-tools-ocr
+    network_mode: host
+    restart: unless-stopped
+
+##############################################
+
+  nas-tools-chrome:
+    image: linyuan0213/nas-tools-chrome:latest
+    container_name: nas-tools-chrome
+    hostname: nas-tools-ocr
+    shm_size: 2g
+    # 共享内存大小，预设限制为2G，请根据实际情况限制
+    network_mode: host
+    restart: unless-stopped
+
 ##############################################
 
   watchtower:
