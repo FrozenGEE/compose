@@ -24,18 +24,18 @@
 # 重要内容，硬链接只能够存在于同一个存储池上
 
 # /Volume1/media
-#             |---/动漫
-#             |---/下载
-#             |
-#             |---/电影
-#             |     |---/国产电影
-#             |     |---/欧美电影
-#             |     |---/日韩电影
-#             |
-#             |---/电视剧
-#                    |---/国产电视剧
-#                    |---/欧美电视剧
-#                    |---/日韩电视剧
+#           |---/动漫
+#           |---/下载
+#           |
+#           |---/电影
+#           |     |---/国产电影
+#           |     |---/欧美电影
+#           |     |---/日韩电影
+#           |
+#           |---/电视剧
+#                  |---/国产电视剧
+#                  |---/欧美电视剧
+#                  |---/日韩电视剧
 
 # ①：/Volume1/media——————media为共享文件夹，存储池预设为第1个存储池，请根据自己实际情况修改【这是实际路径】
 # ②：/Volume1/media/下载——————用于QB和TR下载，MP中设置对应的容器路径/downloads用于传递【这是实际路径】
@@ -108,14 +108,11 @@
 # https://wiki.movie-pilot.org/zh/plugin
 # PT玩家看站规！！！PT玩家看站规！！！PT玩家看站规！！！
 
-# ani-rss 文档
-# https://docs.wushuo.top
+# ani-rss 文档：https://docs.wushuo.top
 
-# iyuu 文档
-# https://doc.iyuu.cn/guide/getting-started
+# iyuu 文档：https://doc.iyuu.cn/guide/getting-started
 
-# 媒体库规范化命名手册（PEJ通用）
-# https://emby.media/support/articles/Home.html
+# 媒体库规范化命名手册（PEJ通用）：https://emby.media/support/articles/Home.html
 
 # peerbanhelper文档：https://github.com/PBH-BTN/PeerBanHelper
 
