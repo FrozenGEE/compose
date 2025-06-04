@@ -60,7 +60,7 @@
 
 # EMBY和JF在【控制台-高级】中生成【API密钥】，MP需要用
 # PLEX需要注册登录生成登录密钥，用于登录使用，设置好后，浏览器F12->网络，从Plex请求URL中获取的X-Plex-Token，MP需要用
-#
+
 # QB 初始化账号为 admin，密码在日志中查看
 # QB可选修改：用于传入连接的端口，随机生成一个，记得看站规；并且在路由器上做好端口映射，如果有公网的话
 # QB关闭：启用 DHT (去中心化网络) 以找到更多用户
@@ -108,14 +108,11 @@
 # https://wiki.movie-pilot.org/zh/plugin
 # PT玩家看站规！！！PT玩家看站规！！！PT玩家看站规！！！
 
-# ani-rss 文档
-# https://docs.wushuo.top
+# ani-rss 文档：https://docs.wushuo.top
 
-# iyuu 文档
-# https://doc.iyuu.cn/guide/getting-started
+# iyuu 文档：https://doc.iyuu.cn/guide/getting-started
 
-# 媒体库规范化命名手册（PEJ通用）
-# https://emby.media/support/articles/Home.html
+# 媒体库规范化命名手册（PEJ通用）：https://emby.media/support/articles/Home.html
 
 # peerbanhelper文档：https://github.com/PBH-BTN/PeerBanHelper
 
