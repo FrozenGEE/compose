@@ -423,7 +423,7 @@ services:
 ##############################################
 
   chinesesubfinder:
-    image: wwfnle/chinesesubfinder:latest
+    image: allanpk716/chinesesubfinder:latest
     container_name: chinesesubfinder
     hostname: chinesesubfinder
     volumes:
