@@ -16,6 +16,10 @@
 # https://alistgo.com/zh/guide/webdav.html
 # S3
 # https://alistgo.com/zh/guide/advanced/s3.html
+# FTP / SFTP
+# https://alistgo.com/zh/guide/advanced/ftp.html
+# 更多 高级设置
+# https://alistgo.com/zh/guide/advanced
 
 ---
 version: "3"
