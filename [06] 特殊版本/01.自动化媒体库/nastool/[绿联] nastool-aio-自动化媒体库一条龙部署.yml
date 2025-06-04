@@ -23,6 +23,7 @@
 # iyuu是用于辅助做种的；v2raya是用于解决网络不顺畅的问题，可以不搞；cookiecloud用于定期把电脑浏览器的PT站cookie同步到NT上
 # jackett和prowlarr为索引器，只用jackett即可，此外prowlarr还是搜刮器，建议用来批量搜刮下载动漫BT
 # QB适合下种，TR适合做种
+# aria2是一个通用下载器
 
 ##############################################
 # 重要内容，硬链接只能够存在于同一个存储池上
@@ -52,7 +53,7 @@
 
 ##############################################
 # 注意事项
-# 本模板包含PLEX,EMBY,JF,QB,TR,NT,COOKIECLOUD,PEERBANHELPER,JACKETT,PROWLARR,IYUU,V2RAYA,WATCHTOWER
+# 本模板包含PLEX,EMBY,JF,QB,TR,NT,COOKIECLOUD,PEERBANHELPER,JACKETT,PROWLARR,IYUU,V2RAYA,WATCHTOWER,ARIA2
 # 如果设置了使用网络代理(不一定是v2raya，可以是软路由)，请提前启用并激活好魔法，否则EMBY,JF,NT无法正常连接TMDB
 # 模板预设使用的网络代理为v2raya的http端口20171，如果使用了别的，请根据实际情况修改，总不会有人连魔法都不会用不？不会吧？不会吧？
 # 部分参数不说明，如果想知道有什么用，可以参考其他的模板
@@ -82,7 +83,6 @@
 # iyuu需要注册扫码获取token，初始化安装第一步只需要输入token即可
 
 # cookiecloud使用教程：https://post.smzdm.com/p/a905kd5p
-
 
 ##############################################
 # 镜像地址
