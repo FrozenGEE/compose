@@ -618,9 +618,8 @@ services:
     container_name: vocechat
     hostname: vocechat
     network_mode: bridge
+    # 推荐使用bridge模式，3000有别的docker镜像要用
     ports:
       - 3456:3000/tcp 
       # WebUI http端口
     restart: unless-stopped
-    
-##############################################
