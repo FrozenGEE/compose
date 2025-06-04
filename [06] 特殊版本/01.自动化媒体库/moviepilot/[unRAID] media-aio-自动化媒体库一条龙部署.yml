@@ -17,12 +17,12 @@
 # 这样一来，PEJ检测到本地有新的媒体入库，并且本地已经存在刮削数据可以读取，即完成入库
 # iyuu是用于辅助做种的；v2raya是用于解决网络不顺畅的问题，可以不搞；cookiecloud用于定期把电脑浏览器的PT站cookie同步到MP上
 # QB适合下种，TR适合做种
-#
+
 ##############################################
 # 重要内容，硬链接只能够存在于同一个存储池上
 # 重要内容，硬链接只能够存在于同一个存储池上
 # 重要内容，硬链接只能够存在于同一个存储池上
-#
+
 # /mnt/user/media
 #            |---/动漫
 #            |---/下载
@@ -36,7 +36,7 @@
 #                  |---/国产电视剧
 #                  |---/欧美电视剧
 #                  |---/日韩电视剧
-#
+
 # ①：/mnt/user/media——————media为共享文件夹，存储池预设为第1个存储池，请根据自己实际情况修改【这是实际路径】
 # ②：/mnt/user/media/下载——————用于QB和TR下载，MP中设置对应的容器路径/downloads用于传递【这是实际路径】
 # ③：/mnt/user/media/电影；/mnt/user/media/电视剧——————用于媒体库的分类存放，可根据自己需要增添【这是实际路径】
@@ -45,10 +45,10 @@
 # 不懂可以看看MP-01和MP-03这两张图，MP-02是效果图
 # ⑥：/mnt/user/media/动漫——————用于ani-rss动漫bt下载，自身带重命名整理功能，刮削功能可以由PEJ负责
 # ⑦：注意，需要在ani-rss的设置中，将下载地址修改为/ani-rss
-#
+
 ##############################################
 # 注意事项
-# 本模板包含PLEX,EMBY,JF,QB,TR,MP,ANI-RSS,COOKIECLOUD,IYUU,V2RAYA,WATCHTOWER,PEERBANHELPER
+# 本模板包含PLEX,EMBY,JF,QB,TR,MP,ANI-RSS,COOKIECLOUD,IYUU,V2RAYA,WATCHTOWER,PEERBANHELPER,VOCECHAT
 # 如果设置了使用网络代理(不一定是v2raya，可以是软路由)，请提前启用并激活好魔法，否则EMBY,JF,MP无法正常连接TMDB，MP可能无法正常下载核心文件
 # 模板预设使用的网络代理为v2raya的http端口20171，如果使用了别的，请根据实际情况修改，总不会有人连魔法都不会用不？不会吧？不会吧？
 # 部分参数不说明，如果想知道有什么用，可以参考其他的模板
@@ -57,7 +57,7 @@
 # 媒体库，iyuu，cookiecloud使用bridge；其余统一使用host，需要改变端口就去修改变量，看注释说明
 # iyuu使用host模式会占用mariadb/mysql的3306端口，所以使用bridge
 # QB和TR使用host，只要宿主机拥有IPV6，即可连上IPV6传输数据，如果宿主机没有，请检查网络环境
-# 
+
 # EMBY和JF在【控制台-高级】中生成【API密钥】，MP需要用
 # PLEX需要注册登录生成登录密钥，用于登录使用，设置好后，浏览器F12->网络，从Plex请求URL中获取的X-Plex-Token，MP需要用
 #
@@ -67,25 +67,23 @@
 # QB关闭：启用用户交换 (PeX) 以找到更多用户
 # QB关闭：启用本地用户发现以找到更多用户
 # QB关闭：启用跨站请求伪造 (CSRF) 保护
-#
+
 # TR需要把汉化文件存放到对应目录，看注释说明
 # TR不打开：启用随机端口，或使用固定端口。端口号设置好并且在路由器上做好端口映射，如果有公网的话
 # TR关闭：启用本地用户发现(LPD)
 # TR关闭：启用带宽管理(µTP)
 # TR关闭：启用分布式哈希表(DHT)
 # TR关闭：启用用户交换
-#
+
 # iyuu需要注册扫码获取token，初始化安装第一步只需要输入token即可
-#
+
 # MP如果遇到cookiecloud设置正确但是无法同步成功的，试试重启几次再去同步，实在不是，手动添加吧
 # MP v2.0.7及以上版本，已支持通过UI进行用户认证：点击用户头像 -> 用户认证，无需配置环境变量，模板继续保留原有的认证变量
-#
+
 # ANI-RSS的用户名和密码均为 admin
-#
+
 # cookiecloud使用教程：https://post.smzdm.com/p/a905kd5p
-#
-# peerbanhelper文档：https://github.com/PBH-BTN/PeerBanHelper
-# 
+
 ##############################################
 # 镜像地址
 # https://hub.docker.com/r/linuxserver/plex
@@ -100,7 +98,8 @@
 # https://hub.docker.com/r/mzz2017/v2raya
 # https://hub.docker.com/r/wushuo894/ani-rss
 # https://hub.docker.com/r/containrrr/watchtower
-#
+# https://hub.docker.com/r/privoce/vocechat-server
+
 ##############################################
 # MP 文档
 # https://github.com/jxxghp/MoviePilot
@@ -108,16 +107,20 @@
 # MP 插件
 # https://wiki.movie-pilot.org/zh/plugin
 # PT玩家看站规！！！PT玩家看站规！！！PT玩家看站规！！！
-#
+
 # ani-rss 文档
 # https://docs.wushuo.top
-#
+
 # iyuu 文档
 # https://doc.iyuu.cn/guide/getting-started
-#
+
 # 媒体库规范化命名手册（PEJ通用）
 # https://emby.media/support/articles/Home.html
-# 
+
+# peerbanhelper文档：https://github.com/PBH-BTN/PeerBanHelper
+
+# vocecha文档：https://doc.voce.chat/zh-cn
+
 ##############################################
 # 各个服务的WebUI
 # plex            ip:32400
@@ -131,15 +134,19 @@
 # peerbanhelper   ip:9898
 # iyuu            ip:8780
 # v2raya          ip:2017
+  # sock 代理端口：20170
+  # http 代理端口：20171
+  # http 代理端口(带分流规则)：20172
 # watchtower      不存在，后台自动更新容器镜像
-#
+# vocechat        ip:3456
+
 # 如果要使用peerbanhelper，QB和TR必须使用host网络模式，模板默认为host网络模式，且对QB和TR的版本号有要求，注意查看文档
-#
+
 ##############################################
 
 ---
 version: "3"
-# 最后编辑时间：2025-05-30
+# 最后编辑时间：2025-06-04
 services:
 ##############################################
 #                                            #
@@ -679,3 +686,21 @@ services:
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
 
 ##############################################
+
+  vocechat:
+    image: privoce/vocechat-server:latest
+    container_name: vocechat
+    hostname: vocechat
+    network_mode: bridge
+    # 推荐使用bridge模式，3000有别的docker镜像要用
+    ports:
+      - 3456:3000/tcp 
+      # WebUI http端口
+    restart: unless-stopped
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:3000]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/vocechat.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
