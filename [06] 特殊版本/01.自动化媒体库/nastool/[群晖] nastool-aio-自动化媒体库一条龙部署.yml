@@ -429,8 +429,9 @@ services:
     volumes:
       - /volume1/docker/chinesesubfinder:/config
       # 配置文件存放目录
-      - /volume1:/data
-      # - /volume2:/data2
+      - /volume1:/media/data1
+      # - /volume2:/media/data2
+      # 软件运行在Docker中，请将电影和电视剧目录修改为 /media 下的目录，否则可能会因为权限问题导致无法正确的加载媒体库
     environment:
       - PUID=0
       - PGID=0
