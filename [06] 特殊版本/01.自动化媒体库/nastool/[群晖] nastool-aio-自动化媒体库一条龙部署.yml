@@ -250,7 +250,7 @@ services:
       - /volume1/docker/jellyfin/config:/config
       # 配置文件目录
       - /volume1:/media
-      - /volume2:/media2
+      # - /volume2:/media2
       # 媒体库目录，可以自定义，可以写多个
       - /volume1/docker/jellyfin/cache:/cache
       # 缓存目录
@@ -429,7 +429,8 @@ services:
     volumes:
       - /volume1/docker/chinesesubfinder:/config
       # 配置文件存放目录
-      - /volume1/media:/media
+      - /volume1:/data
+      # - /volume2:/data2
     environment:
       - PUID=0
       - PGID=0
