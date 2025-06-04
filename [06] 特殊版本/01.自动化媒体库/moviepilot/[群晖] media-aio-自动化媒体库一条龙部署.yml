@@ -140,8 +140,6 @@
 # vocechat        ip:3456
 
 # 如果要使用peerbanhelper，QB和TR必须使用host网络模式，模板默认为host网络模式，且对QB和TR的版本号有要求，注意查看文档
-# jellyfin 镜像地址，如果为arm64则使用：nyanmisaka/jellyfin:latest-rockchip
-# vocechat 镜像地址，如果为arm64则使用：privoce/vocechat-server:latest-arm64
 
 ##############################################
 
@@ -396,7 +394,7 @@ services:
 
 ##############################################
 #### 认证站点 ####
-      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt
+      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt,hspt,xingyunge,cspt,tmpt,raingfh,gtkpw,ptlgs,hdbao,sewerpt,ptskit
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔，会依次执行认证操作，直到有一个站点认证成功
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
       ## 密钥在控制面板中查看，切勿泄露
@@ -498,6 +496,46 @@ services:
       # - YEMAPT_UID=
       # - YEMAPT_AUTH=
       # yemapt的用户UID和密钥
+##############################################
+      # - HSPT_UID=
+      # - HSPT_AUTH=
+      # hspt的用户UID和密钥
+##############################################
+      # - XINGYUNGE_UID=
+      # - XINGYUNGE_PASSKEY=
+      # xingyunge的用户UID和密钥
+##############################################
+      # - CSPT_UID=
+      # - CSPT_PASSKEY=
+      # cspt的用户UID和密钥
+##############################################
+      # - TMPT_UID=
+      # - TMPT_PASSKEY=
+      # tmpt的用户UID和密钥
+##############################################
+      # - RAINGFH_UID=
+      # - RAINGFH_PASSKEY=
+      # raingfh的用户UID和密钥
+##############################################
+      # - GTKPW_UID=
+      # - GTKPW_PASSKEY=
+      # gtkpw的用户UID和密钥
+##############################################
+      # - PTLGS_UID=
+      # - PTLGS_PASSKEY=
+      # ptlgs的用户UID和密钥
+##############################################
+      # - HDBAO_UID=
+      # - HDBAO_PASSKEY=
+      # hdbao的用户UID和密钥
+##############################################
+      # - SEWERPT_UID=
+      # - SEWERPT_PASSKEY=
+      # sewerpt的用户UID和密钥
+##############################################
+      # - PTSKIT_UID=
+      # - PTSKIT_PASSKEY=
+      # ptskit的用户UID和密钥
 
 ##############################################
 
