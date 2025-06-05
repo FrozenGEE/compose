@@ -8,7 +8,7 @@
 
 ---
 version: "2.1"
-# 最后编辑时间：2024-03-11
+# 最后编辑时间：2025-06-05
 services:
   duplicati:
     image: linuxserver/duplicati:latest
