@@ -8,7 +8,7 @@
 
 ---
 version: "2.1"
-# 最后编辑时间：2024-03-11
+# 最后编辑时间：2025-06-05
 services:
   duplicati:
     image: linuxserver/duplicati:latest
@@ -37,8 +37,8 @@ services:
       # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
       # 时区
-      - SETTINGS_ENCRYPTION_KEY=
-      # 设置数据库的加密密钥。最少 8 个字符，字母数字
+      - SETTINGS_ENCRYPTION_KEY=linuxserver
+      # 设置数据库的加密密钥，最少 8 个字符，可字母数字，预设为linuxserver
       # - DUPLICATI__WEBSERVICE_PASSWORD=
       # WebUI 访问密码，如果未设置，则默认以WebUI中的设置为准
       # CLI_ARGS=
