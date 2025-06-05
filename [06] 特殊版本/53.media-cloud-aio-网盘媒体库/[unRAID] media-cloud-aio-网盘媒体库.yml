@@ -46,6 +46,12 @@
 # https://www.bilibili.com/video/BV1VzLEzYE7u
 # https://www.yuque.com/qilinzhu-qvn1j/oxp3nl/eb8dz4116tmruf9o?singleDoc#，访问密码：gity
 
+# v2raya相关设置
+# 1、先去买魔法，复制订阅链接，部署后打开v2aya，初始化设置账号密码
+# 2、导入订阅链接，全选线路，ping速度
+# 3、选择一个延迟低的线路，点左上角红色的[就绪]
+# 4、点右上角的设置，把[开启IP转发]点掉，点起[开启端口转发]，保存并应用
+
 # alist相关设置
 # 打开alist容器的终端，新建，确认，输入内容：./alist admin set 123456
 # 123456为admin的密码，可根据自己的需要修改
