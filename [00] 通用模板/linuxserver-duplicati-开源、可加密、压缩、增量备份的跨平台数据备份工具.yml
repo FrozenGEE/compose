@@ -22,11 +22,10 @@ services:
     volumes:
       - 【这里替换为你的docker数据存放目录】/duplicati:/config
       # 配置文件目录
-      - 【这里替换为你的数据存放目录】/duplicati/duplicati备份目录:/backups
+      - 【这里替换为你想要存放备份的目录】:/backups
       # 存储本地备份的路径，用于从其他地方备份到本机
-      - 【这里替换为你的数据存放目录】/duplicati/duplicati源目录:/source
+      - 【这里替换为你的备份的目录】:/source
       # 存储源备份的路径，用于将此处备份到其他地方
-      # 以上两个路径均为示例，请按照以下说明操作，/backups和/source不映射这两个容器会产生未映射卷
       # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
       # 可以自定义，可以写多个
     environment:
