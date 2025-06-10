@@ -76,10 +76,10 @@
 
 ---
 version: "3"
-# 最后编辑时间：2025-06-01
+# 最后编辑时间：2025-06-11
 services:
   alist:
-    image: xhofe/alist:latest-aio
+    image: xhofe/alist:v3.40.0-ffmpeg
     container_name: alist
     hostname: alist
     privileged: true
