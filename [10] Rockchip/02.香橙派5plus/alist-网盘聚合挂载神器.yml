@@ -12,11 +12,12 @@
 
 ---
 version: "3"
-# 最后编辑时间：2025-05-28
+# 最后编辑时间：2025-06-11
 services:
   alist:
-    image: xhofe/alist:latest-aio
+    image: xhofe/alist:v3.40.0-ffmpeg
     # 镜像地址
+    # alist疑似被售，暂时先将alist锁为3.40版本
     container_name: alist
     # 容器名字
     hostname: alist
