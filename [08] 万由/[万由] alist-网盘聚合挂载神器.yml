@@ -29,7 +29,7 @@ services:
   alist:
     image: xhofe/alist:v3.40.0-ffmpeg
     # 镜像地址
-    # alist疑似被售，暂时先将alist锁为3.40版本
+    # alist被售了，暂时锁版本为3.40，等后续观望，可以follow/fork/star 这个组织后续项目 https://github.com/AlistTeam
     container_name: alist
     # 容器名字
     hostname: alist
