@@ -80,6 +80,7 @@ version: "3"
 services:
   alist:
     image: xhofe/alist:v3.40.0-ffmpeg
+    # alist被售了，暂时锁版本为3.40，等后续观望，可以follow/fork/star 这个组织后续项目 https://github.com/AlistTeam
     container_name: alist
     hostname: alist
     privileged: true
