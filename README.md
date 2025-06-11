@@ -1,5 +1,5 @@
 # 【更新日志-2025-06-11】
-- [alist疑似被出售](https://linux.do/t/topic/714827)
+- [alist卖掉了](https://linux.do/t/topic/714827)
 - [alist_github_issue](https://github.com/AlistGo/alist/issues/8649)
 - 暂时先将alist的tag锁为3.40版本
 
