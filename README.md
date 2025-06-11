@@ -1,7 +1,7 @@
 # 【更新日志-2025-06-11】
 - [alist卖掉了](https://linux.do/t/topic/714827)
 - [alist_github_issue](https://github.com/AlistGo/alist/issues/8649)
-- 暂时先将alist的tag锁为3.40版本
+- alist的tag锁为3.40版本，后续观望换个镜像
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
