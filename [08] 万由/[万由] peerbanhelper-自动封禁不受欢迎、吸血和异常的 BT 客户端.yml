@@ -16,6 +16,7 @@
 ---
 version: "3"
 # 最后编辑时间：2025-05-17
+services:
   peerbanhelper:
     image: ghostchu/peerbanhelper:latest
     # 镜像地址
