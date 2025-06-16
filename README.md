@@ -3,7 +3,7 @@
 - [项目是被卖了吗？官网已经 404 了，隔壁 docs 的文档被大改持续两个星期](https://github.com/AlistGo/alist/issues/8649)
 - [新的alist组织](https://github.com/AlistTeam)，强烈建议follow，fork，star走起
 - alist的tag锁为3.40版本，后续观望换个镜像
-- 2025-06-16 后续：openlist已经放出测试版[docker镜像地址](https://hub.docker.com/r/openlistteam/openlist)，需要的可以使用，模板暂时不替换，等稳定后才替换
+- 2025-06-16 后续：openlist已经放出测试版docker镜像：[openlistteam/openlist:beta-aio](https://hub.docker.com/r/openlistteam/openlist)，需要的可以使用，模板暂时不替换，等稳定后才替换
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
