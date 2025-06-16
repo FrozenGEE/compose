@@ -20,7 +20,7 @@ services:
       - /share/Container/iosbackup/lockdown:/var/lib/lockdown
       - /share/Container/iosbackup/configs:/configs
       # 配置文件夹
-      - /share/Pulic/ios-backups/:/backups
+      - /share/Container/iosbackup/backups/:/backups
       # iOS 数据备份文件夹
       - /var/run/dbus:/run/dbus
       - /dev/bus/usb:/dev/bus/usb
