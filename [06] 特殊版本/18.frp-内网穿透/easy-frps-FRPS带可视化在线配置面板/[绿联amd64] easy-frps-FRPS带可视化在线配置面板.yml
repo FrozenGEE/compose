@@ -4,6 +4,7 @@
 # https://github.com/stilleshan/frps
 # 镜像地址
 # https://hub.docker.com/r/qq918652593/easy-frps
+# 软件作者：隔壁小王
 
 # 最新版使用的是toml的书写格式，服务运行中修改 frps.toml 配置后需重启 frps 服务
 
