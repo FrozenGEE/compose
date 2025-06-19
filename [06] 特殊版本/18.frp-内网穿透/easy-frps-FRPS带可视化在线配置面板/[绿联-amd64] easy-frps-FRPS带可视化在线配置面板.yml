@@ -19,7 +19,7 @@ services:
     container_name: easy-frps
     # 容器名字
     volumes:
-      - ./frp/easy-frps:/app/data
+      - ./easy-frps:/app/data
       # 配置文件目录
     environment:
       - TZ=Asia/Shanghai
