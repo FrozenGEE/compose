@@ -54,5 +54,7 @@ services:
     # ports:
       # - 12345:12345/tcp
       # WebUI 端口
+      # 程序默认绑定 0.0.0.0:12345 运行 http 服务
+      # 可同时修改 compose 文件与 config.toml 变更服务运行的端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
