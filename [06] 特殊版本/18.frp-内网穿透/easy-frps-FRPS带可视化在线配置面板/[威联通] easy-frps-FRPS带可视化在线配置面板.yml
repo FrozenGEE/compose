@@ -6,17 +6,8 @@
 # https://hub.docker.com/r/qq918652593/easy-frps
 # 软件作者：隔壁小王
 
-# 最新版使用的是toml的书写格式，服务运行中修改 frps.toml 配置后需重启 frps 服务
-
 # 相关教程
 # https://gofrp.org/zh-cn/docs
-
-# 相关命令
-# sudo systemctl start frps        启动服务 
-# sudo systemctl enable frps       开机自启
-# sudo systemctl status frps       状态查询
-# sudo systemctl restart frps      重启服务
-# sudo systemctl stop frps         停止服务
 
 ---
 version: "3"
@@ -30,8 +21,8 @@ services:
     hostname: easy-frps
     # 主机名
     volumes:
-      - /share/Container/frp/easy-frps:/etc/frp
-      # 配置文件目录，把 frps.toml 文件存放到该目录之下，否则容器将无法启动
+      - /share/Container/frp/easy-frps:/app/data
+      # 配置文件目录
     environment:
       - TZ=Asia/Shanghai
       # 时区
