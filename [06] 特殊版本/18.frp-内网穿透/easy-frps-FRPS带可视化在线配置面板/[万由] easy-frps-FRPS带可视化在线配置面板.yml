@@ -22,7 +22,7 @@ services:
     # 主机名
     volumes:
       - /mnt/unas/data/docker/frp/easy-frps:/etc/frp
-      # 配置文件目录，把 frps.toml 文件存放到该目录之下，否则容器将无法启动
+      # 配置文件目录
     environment:
       - TZ=Asia/Shanghai
       # 时区
