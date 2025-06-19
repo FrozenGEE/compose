@@ -18,8 +18,6 @@ services:
     # 镜像地址，仅支持amd64
     container_name: easy-frps
     # 容器名字
-    hostname: easy-frps
-    # 主机名
     volumes:
       - 【这里替换为你的docker数据存放目录】/frp/easy-frps:/app/data
       # 配置文件目录
