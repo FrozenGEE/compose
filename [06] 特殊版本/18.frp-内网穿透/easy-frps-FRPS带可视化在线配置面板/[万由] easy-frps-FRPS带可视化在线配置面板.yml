@@ -18,8 +18,6 @@ services:
     # 镜像地址，仅支持amd64
     container_name: easy-frps
     # 容器名字
-    hostname: easy-frps
-    # 主机名
     volumes:
       - /mnt/unas/data/docker/frp/easy-frps:/etc/frp
       # 配置文件目录
