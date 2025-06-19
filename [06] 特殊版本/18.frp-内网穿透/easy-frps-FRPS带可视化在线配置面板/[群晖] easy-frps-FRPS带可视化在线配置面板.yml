@@ -1,0 +1,31 @@
+# 官方文档
+# https://github.com/snowdreamtech/frp
+# https://github.com/fatedier/frp
+# https://github.com/stilleshan/frps
+# 镜像地址
+# https://hub.docker.com/r/qq918652593/easy-frps
+# 软件作者：隔壁小王
+
+# 相关教程
+# https://gofrp.org/zh-cn/docs
+
+---
+version: "3"
+# 最后编辑时间：2026-06-20
+services:
+  easy-frps:
+    image: qq918652593/easy-frps:latest
+    # 镜像地址，仅支持amd64
+    container_name: easy-frps
+    # 容器名字
+    volumes:
+      - /volume1/docker/frp/easy-frps:/app/data
+      # 配置文件目录
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    network_mode: host
+    # 推荐直接使用host网络模式，除非5000端口被占用，例如群晖
+    # easy-frps的可视化在线配置面板端口默认为5000，frps仪表盘端口默认为7500，具体看 frps.toml 中的设置
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
