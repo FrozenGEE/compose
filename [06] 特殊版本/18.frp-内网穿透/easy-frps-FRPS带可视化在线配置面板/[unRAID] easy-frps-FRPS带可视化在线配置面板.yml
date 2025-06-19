@@ -6,6 +6,9 @@
 # https://hub.docker.com/r/qq918652593/easy-frps
 # 软件作者：隔壁小王
 
+# 相关教程
+# https://gofrp.org/zh-cn/docs
+
 ---
 version: "3"
 # 最后编辑时间：2026-06-20
