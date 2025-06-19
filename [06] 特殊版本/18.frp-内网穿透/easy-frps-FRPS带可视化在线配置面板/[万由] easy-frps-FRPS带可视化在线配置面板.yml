@@ -27,6 +27,5 @@ services:
     network_mode: host
     # 推荐直接使用host网络模式，除非5000端口被占用，例如群晖
     # easy-frps的可视化在线配置面板端口默认为5000，frps仪表盘默认为7500，具体看 frps.toml 中的设置
-
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
