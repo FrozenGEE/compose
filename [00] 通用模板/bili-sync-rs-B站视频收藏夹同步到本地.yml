@@ -27,11 +27,12 @@
 # 步骤4：在右侧表格中分别获取到"sessdata","bili_jct","buvid3","dedeuserid"的值
 # 步骤5：将"sessdata","bili_jct","buvid3","dedeuserid","ac_time_value"这5个值写进 config.toml 中
 # 步骤6：剩余的步骤就不说了，看教程吧，收藏夹的id可以打开自己的收藏夹，在地址栏上的数字就是收藏夹id号码
+# 步骤7：因为已经支持WebUI，所以第一行为 WebUI 上的 API 访问密钥，这个可以自定义，不写会默认自动随机字符串，建议修改
 
 ---
 version: "3"
 # 最后编辑时间：2025-06-20
-# 已支持webui前端
+# 已支持 WebUI 前端
 services:
   bili-sync-rs:
     image: amtoaer/bili-sync-rs:latest
