@@ -4,6 +4,7 @@
 # https://github.com/stilleshan/frps
 # 镜像地址
 # https://hub.docker.com/r/qq918652593/easy-frps
+# 软件作者：隔壁小王
 
 # 最新版使用的是toml的书写格式，服务运行中修改 frps.toml 配置后需重启 frps 服务
 
@@ -23,7 +24,7 @@ version: "3"
 services:
   easy-frps:
     image: qq918652593/easy-frps:latest
-    # 镜像地址
+    # 镜像地址，仅支持amd64
     container_name: easy-frps
     # 容器名字
     hostname: easy-frps
@@ -39,7 +40,7 @@ services:
     # 群晖的WebUI默认端口为5000，如果要使用，需要改为bridge网络，端口映射为15000，或者修改掉群晖WebUI的默认端口，只要不冲突就行
     
     # 推荐直接使用host网络模式，除非5000端口被占用，例如群晖
-    # easy-frps的可视化在线配置面板端口默认为5000，frps的面板端口默认为7500，具体看 frps.toml 中的设置
+    # easy-frps的可视化在线配置面板端口默认为5000，frps的数据查看面板端口默认为7500，具体看 frps.toml 中的设置
 
 # 注意:桥接模式下你客户端配置的服务开放端口也要做映射，不然外网是不通的
 # 注意:桥接模式下你客户端配置的服务开放端口也要做映射，不然外网是不通的
@@ -48,7 +49,7 @@ services:
       # - 5000:5000/tcp
       # 可视化在线配置面板
       # - 7500:7500/tcp
-      # 可视化在线配置面板
+      # frps数据查看面板
       # - 10000:10000/tcp
       # - 10001-10010:10001-10010/tcp
       # 自定义开放的端口，以上两个仅为参考例子，请按照实际情况修改，强烈建议使用host网络模式
