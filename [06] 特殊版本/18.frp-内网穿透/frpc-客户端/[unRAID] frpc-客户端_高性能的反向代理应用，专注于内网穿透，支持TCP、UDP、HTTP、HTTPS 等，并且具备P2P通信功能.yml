@@ -18,6 +18,9 @@
 # sudo systemctl restart frpc      重启服务
 # sudo systemctl stop frpc         停止服务
 
+# 强烈推荐去使用 隔壁小王 那个带可视化在线编辑配置面板的frps项目
+# https://hub.docker.com/r/qq918652593/easy-frps
+
 ---
 version: "3"
 # 最后编辑时间：2024-08-11
