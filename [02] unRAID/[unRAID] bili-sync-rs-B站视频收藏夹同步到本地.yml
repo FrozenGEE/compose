@@ -1,9 +1,24 @@
 # 官方文档
+# https://bili-sync.allwens.work
 # https://github.com/amtoaer/bili-sync
 # https://hub.docker.com/r/amtoaer/bili-sync-rs
+
 # 部署教程
 # https://blog.hesuisui.top/archives/Docker-Bili-Sync
-# 部署前，请先把配置文件弄好再启动启动
+# https://bili-sync.allwens.work/quick-start
+
+# 配置文件
+# https://bili-sync.allwens.work/configuration
+# 工作原理
+# https://bili-sync.allwens.work/design
+# 获取收藏夹信息
+# https://bili-sync.allwens.work/favorite
+# 获取视频合集/视频列表信息
+# https://bili-sync.allwens.work/collection
+# 获取 UP 主信息
+# https://bili-sync.allwens.work/submission
+# 常见问题
+# https://bili-sync.allwens.work/question
 
 # 配置文件步骤简要说明
 # 步骤1：打开，浏览器，按F12，点击上方的"控制台"，打开b站，退出登录，然后重新登录，一定要重新登录
@@ -15,7 +30,8 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-04-23
+# 最后编辑时间：2025-06-20
+# 已支持webui前端
 services:
   bili-sync-rs:
     image: amtoaer/bili-sync-rs:latest
@@ -32,13 +48,20 @@ services:
     environment:
       - TZ=Asia/Shanghai
       # 时区
+    # network_mode: bridge
     network_mode: host
-    # 不存在webui，这一条网络模式仅用于不然它创建一个私有网段，强迫症而已
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 12345:12345/tcp
+      # WebUI 端口
+      # 程序默认绑定 0.0.0.0:12345 运行 http 服务
+      # 可同时修改 compose 文件与 config.toml 变更服务运行的端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
-      # 该镜像只在后台运行，无WebUI
       net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:12345]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
       net.unraid.docker.icon: /mnt/user/LOGO/bili-sync.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
