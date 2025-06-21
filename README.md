@@ -5,8 +5,6 @@
 - alist的tag锁为3.40版本，后续观望换个镜像
 - 2025-06-16 alist后续：openlist已经放出测试版docker镜像：[openlistteam/openlist:beta-aio](https://hub.docker.com/r/openlistteam/openlist)，需要的可以使用，模板暂时不替换，等稳定后才替换
 - 玩 frp 的用户，强烈推荐去使用 [隔壁小王](https://hub.docker.com/r/qq918652593) 那个带可视化在线编辑配置面板的 [frps](https://hub.docker.com/r/qq918652593/easy-frps) 和 [frpc](https://hub.docker.com/r/qq918652593/easy-frpc) 项目<del>(除了arm用户，因为不支持)</del>，已经有arm64版本了，虽然frps暂时还有问题
-
----
 - 进入ui后点击初始化有提供默认配置，有详细的中文注释，可以直接在ui上操作配置和服务，快去体验吧！！
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
