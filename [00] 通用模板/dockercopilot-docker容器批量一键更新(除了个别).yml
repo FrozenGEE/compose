@@ -36,6 +36,8 @@ services:
       # 不动，照抄，必须
       - hubURL=https://docker.1ms.run
       # 使用dockerhub加速源，以便于更好拉取镜像，可自行替换，可在下方挑选
+      # https://blog.xuanyuan.me/archives/1154
+      # https://status.lwxcloud.me/status/docker
       # http://status.kggzs.cn/status/docker
     # network_mode: bridge
     network_mode: host
