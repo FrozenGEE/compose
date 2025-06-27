@@ -15,9 +15,9 @@ services:
     hostname: m3u8-dl
     # 主机名
     volumes:
-      - /mnt/user/m3u8:/app/downloads
+      - /mnt/user/m3u8-dl:/app/downloads
       # 下载目录
-      - /mnt/user/appdata/m3u8-dl:/app/cache
+      - /mnt/user/m3u8-dl/.cache:/app/cache
       # 缓冲目录
     environment:
       - DS_SAVE_DIR=/app/downloads
