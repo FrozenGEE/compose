@@ -1,0 +1,38 @@
+# 官方文档
+# https://github.com/lzwme/m3u8-dl
+# https://hub.docker.com/r/lzwme/m3u8-dl
+
+---
+version: "3"
+# 最后编辑时间：2025-06-27
+# 注：docker 部署模式同时包含了 AriaNg 静态资源
+services:
+  m3u8-dl:
+    image: lzwme/m3u8-dl:latest
+    # 镜像地址
+    container_name: m3u8-dl
+    # 容器名字
+    hostname: m3u8-dl
+    # 主机名
+    volumes:
+      - 【这里替换为你的下载数据存放目录】/m3u8-dl:/app/downloads
+      # 下载目录
+      - 【这里替换为你的下载数据存放目录】/m3u8-dl/.cache:/app/cache
+      # 缓冲目录
+    environment:
+      - DS_SAVE_DIR=/app/downloads
+      # 自定义容器的下载目录，不动
+      - DS_CACHE_DIR=/app/cache
+      # 自定义容器的缓冲目录，不动
+      - DS_PORT=6600
+      # 自定义容器的WebUI端口，默认6600
+      - DS_SECRET=password
+      # 自定义访问密码，默认为password，可以留空
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 6600:6600/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
