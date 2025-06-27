@@ -33,7 +33,7 @@ services:
       # 数据库目录
       - 【这里替换为你的docker数据存放目录】/surveyking/logs:/app/logs
       # 日志目录
-      environment:
+    environment:
       - SERVER_PORT=1991
       # 自定义容器的WebUI端口
       - DB_URL=jdbc:mysql://【IP:PORT】/surveyking
