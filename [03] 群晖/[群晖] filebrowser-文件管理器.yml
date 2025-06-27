@@ -21,9 +21,9 @@ services:
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
-      - /volume1/docker/filebrower/config:/config
+      - /volume1/docker/filebrowser/config:/config
       # 配置目录
-      - /volume1/docker/filebrower/database:/database
+      - /volume1/docker/filebrowser/database:/database
       # 数据库目录
       - /volume1/docker:/srv
       - /volume1:/volume1
