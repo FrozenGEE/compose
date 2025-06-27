@@ -13,6 +13,8 @@ services:
     # 镜像地址，仅支持amd64
     container_name: easy-ytd
     # 容器名字
+    hostname: easy-ytd
+    # 主机名
     volumes:
       - /share/Multimeida/easy-ytd:/app/downloads
       # 下载目录
