@@ -1,11 +1,15 @@
 # 官方文档
+# https://github.com/filebrowser/filebrowser
 # https://hub.docker.com/r/filebrowser/filebrowser
 # 部署教程
+# https://github.com/filebrowser/filebrowser/blob/master/docs/installation.md
 # https://post.smzdm.com/p/apvp2p2w
+
+# 默认账号为 admin，密码看日志，存放在数据库当中
 
 ---
 version: "3"
-# 最后编辑时间：2024-03-11
+# 最后编辑时间：2025-06-27
 services:
   filebrowser:
     image: filebrowser/filebrowser:latest
@@ -17,6 +21,10 @@ services:
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
+      - /share/Container/filebroswer/config:/config
+      # 配置目录
+      - /share/Container/filebrowser/database:/database
+      # 数据库目录
       - /share/Container:/srv
       - /share:/data
       # 映射本地其他路径使其可以访问，可以自定义多个
