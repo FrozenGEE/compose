@@ -15,9 +15,9 @@ services:
     hostname: m3u8-dl
     # 主机名
     volumes:
-      - 【这里替换为你的下载数据存放目录】:/app/downloads
+      - 【这里替换为你的下载数据存放目录】/m3u8-dl:/app/downloads
       # 下载目录
-      - 【这里替换为你的docker数据存放目录】/m3u8-dl:/app/cache
+      - 【这里替换为你的下载数据存放目录】/m3u8-dl/.cache:/app/cache
       # 缓冲目录
     environment:
       - DS_SAVE_DIR=/app/downloads
