@@ -1,0 +1,45 @@
+# 官方文档
+# https://github.com/lzwme/m3u8-dl
+# https://hub.docker.com/r/lzwme/m3u8-dl
+
+---
+version: "3"
+# 最后编辑时间：2025-06-27
+# 注：docker 部署模式同时包含了 AriaNg 静态资源
+services:
+  m3u8-dl:
+    image: lzwme/m3u8-dl:latest
+    # 镜像地址
+    container_name: m3u8-dl
+    # 容器名字
+    hostname: m3u8-dl
+    # 主机名
+    volumes:
+      - /mnt/user/m3u8:/app/downloads
+      # 下载目录
+      - /mnt/user/appdata/m3u8-dl:/app/cache
+      # 缓冲目录
+    # network_mode: bridge
+    environment:
+      - DS_SAVE_DIR=/app/downloads
+      # 自定义容器的下载目录，不动
+      - DS_CACHE_DIR=/app/cache
+      # 自定义容器的缓冲目录，不动
+      - DS_PORT=6600
+      # 自定义容器的WebUI端口，默认6600
+      - DS_SECRET=password
+      # 自定义访问密码，默认为password，可以留空
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 6600:6600/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:6600]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/m3u8-dl.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
