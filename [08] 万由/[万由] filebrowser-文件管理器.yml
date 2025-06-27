@@ -21,9 +21,9 @@ services:
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
-      - /mnt/unas/data/docker/filebrower/config:/config
+      - /mnt/unas/data/docker/filebrowser/config:/config
       # 配置目录
-      - /mnt/unas/data/docker/filebrower/database:/database
+      - /mnt/unas/data/docker/filebrowser/database:/database
       # 数据库目录
       - /mnt/unas/data/docker:/srv
       - /mnt/unas/data:/data
