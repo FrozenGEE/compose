@@ -1,4 +1,4 @@
-# easy-frps可视化frpc版本，软件作者：隔壁小王
+# easy-frps可视化frps版本，软件作者：隔壁小王
 
 <del>注意：不支持 arm64 设备部署
 
