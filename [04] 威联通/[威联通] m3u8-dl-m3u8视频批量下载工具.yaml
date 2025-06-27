@@ -1,6 +1,6 @@
 # 官方文档
-# https://github.com/lzwme/m3u8-dl
-# https://hub.docker.com/r/lzwme/m3u8-dl
+# https://github.com/renxia/m3u8-dl
+# https://hub.docker.com/r/renxia/m3u8-dl
 
 ---
 version: "3"
@@ -8,7 +8,7 @@ version: "3"
 # 注：docker 部署模式同时包含了 AriaNg 静态资源
 services:
   m3u8-dl:
-    image: lzwme/m3u8-dl:latest
+    image: renxia/m3u8-dl:latest
     # 镜像地址
     container_name: m3u8-dl
     # 容器名字
