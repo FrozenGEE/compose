@@ -1,11 +1,15 @@
 # 官方文档
+# https://github.com/filebrowser/filebrowser
 # https://hub.docker.com/r/filebrowser/filebrowser
 # 部署教程
+# https://github.com/filebrowser/filebrowser/blob/master/docs/installation.md
 # https://post.smzdm.com/p/apvp2p2w
+
+# 默认账号为 admin，密码看日志
 
 ---
 version: "3"
-# 最后编辑时间：2024-03-11
+# 最后编辑时间：2025-06-27
 services:
   filebrowser:
     image: filebrowser/filebrowser:latest
