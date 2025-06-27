@@ -305,8 +305,8 @@ echo >/etc/docker/daemon.json
 cat >/etc/docker/daemon.json <<EOF
 {
 "registry-mirrors": [
-"https://k-docker.asia",
-"https://docker.ketches.cn",
+"https://docker.amingg.com",
+"https://hub.rat.dev",
 "https://docker.1ms.run"
 ]
 }
@@ -327,7 +327,7 @@ docker version && docker compose version
 - latest，beta 为镜像的标签，一般情况不写则会自动拉取latest，某些镜像的tag不存在latest，或者某些架构的tag不一样，具体去看镜像详细页面上的tag
 ```
 docker pull lscr.io/linuxserver/qbittorrent:latest
-docker pull k-docker.asia/hslr/sun-panel:beta
+docker pull docker.amingg.com/hslr/sun-panel:beta
 docker pull docker.1ms.run/dpanel/dpanel:lite
 ```
 6、将用户加入docker组
@@ -351,19 +351,11 @@ sudo docker run -it -d --name dpanel --restart=always -p 8807:8080 -v /var/run/d
 ```
 ### ⭐dpanel 替换加速源
 ```
-https://k-docker.asia
-https://io.k-docker.asia
-https://docker.1panel.top
 https://docker.1ms.run
-https://docker.ketches.cn
 https://docker.amingg.com
-https://spp-docker.asia
-https://lq-docker.asia
-https://hj-docker.asia
-https://docker.1panel.live
-https://dockerproxy.1panel.live
-https://proxy.1panel.live
+https://hub.rat.dev
 ```
+
 ### ⭐香橙派5Plus docker部署推荐
 | docker | 用途 | docker | 用途 | docker | 用途 |
 | :---- | :---- | :---- | :---- | :---- | :---- |
