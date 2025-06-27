@@ -11,7 +11,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2026-06-20
+# 最后编辑时间：2025-06-21
 services:
   easy-frps:
     image: qq918652593/easy-frps:latest
