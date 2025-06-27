@@ -280,7 +280,7 @@ docker version && docker compose version
 - latest，beta 为镜像的标签，一般情况不写则会自动拉取latest，某些镜像的tag不存在latest，或者某些架构的tag不一样，具体去看镜像详细页面上的tag
 ```
 docker pull lscr.io/linuxserver/qbittorrent:latest
-docker pull k-docker.asia/hslr/sun-panel:beta
+docker pull docker.amingg.com/hslr/sun-panel:beta
 docker pull docker.1ms.run/dpanel/dpanel:lite
 ```
 6、将用户加入docker组
@@ -304,34 +304,10 @@ sudo docker run -it -d --name dpanel --restart=always -p 8807:8080 -v /var/run/d
 ```
 ### ⭐dpanel 替换加速源
 ```
-https://k-docker.asia
-https://io.k-docker.asia
-https://docker.1panel.top
 https://docker.1ms.run
-https://docker.ketches.cn
 https://docker.amingg.com
-https://spp-docker.asia
-https://lq-docker.asia
-https://hj-docker.asia
-https://docker.1panel.live
-https://dockerproxy.1panel.live
-https://proxy.1panel.live
+https://hub.rat.dev
 ```
-### ⭐香橙派5Plus docker部署推荐
-| docker | 用途 | docker | 用途 | docker | 用途 |
-| :---- | :---- | :---- | :---- | :---- | :---- |
-| dpanel<br>portainer | docker管理器 | ddns-go | 域名解析 | lucky | 域名解析、反代、SSL<br>webdav、ftp、内置filebrower |
-| alist| 网盘挂载<br>webdav | sun-panel | 导航页 | mt-photos<br>immich | 相册 |
-| ttyd-bridge | 网页端ssh | tailscale<br>zerotier<br>netbird | 异地组网 | wg-easy<br>wireguard<br>openvpn | 自建异地组网 |
-| syncthing | 多端同步 | v2raya | 魔法 | frps / frpc | 内网穿透服务 |
-| filebrower | 文件管理器 | home-assistant | 家庭自动化平台 | rustdesk | 远程桌面服务 |
-| watchtower | 自动更新容器 | dockercopilot | 一键更新容器 | jellyfin | 媒体库 |
-| ani-rss | 追番神器 | moviepilot | 媒体库自动化工具 | cookiecloud | cookie云备份 |
-| qbittorrent<br>transmission | 种子下载器 | aria2 | 通用下载器 | clouddrive2 | 挂载网盘到本地 |
-| lsky | 图床 | lobe-chat<br>chatgpt-next | ai助手 | smokeping | 网络性能监控工具 |
-| bili-sync-rs | B站收藏夹下载 | siyuan-note | 思源笔记 | vaultwarden | 密码库 |
-| vocechat | 聊天室 | synctv | 和朋友一起看视频 | nextcloud | 私人云盘 |
-| admin<br>mariadb<br>postgresql<br>redis| 数据库套装 | minio | 对象存储 | kms-server | 微软激活器 |
 
 
 ### ⭐香橙派5Plus jellyfin硬件转码
