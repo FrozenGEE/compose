@@ -1,0 +1,29 @@
+# 官方文档
+# https://hub.docker.com/r/qq918652593/easy-frpc
+# 软件作者：隔壁小王
+
+# 进入UI后，粘贴YouTube视频链接即可获取视频信息，支持多种格式下载、字幕下载、封面下载等功能。界面极简美观，操作流畅，支持中文提示和详细下载进度。快来体验极客级的YouTube下载服务吧！！
+
+---
+version: "3"
+# 最后编辑时间：2026-06-27
+services:
+  easy-ytd:
+    image: qq918652593/easy-ytd:latest
+    # 镜像地址，仅支持amd64
+    container_name: easy-ytd
+    # 容器名字
+    volumes:
+      - 【这里替换为你的数据下载存放目录】/easy-ytd:/app/downloads
+      # 下载目录
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8000:8000/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
