@@ -18,9 +18,9 @@ services:
     volumes:
       - /volume1/downloads/easy-vdl:/app/downloads
       # 视频下载及管理目录，可自定义挂载
-      - /volume1/docker/easy-vdl:/app/database
+      - /volume1/docker/easy-vdl/database:/app/database
       # 日志目录，建议挂载本地便于排查问题
-      - /volume1/docker/easy-vdl:/app/logs
+      - /volume1/docker/easy-vdl/logs:/app/logs
       # 数据库目录，建议挂载本地保证数据持久化
     network_mode: bridge
     # 80端口被占用，不能用host
