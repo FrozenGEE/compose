@@ -22,9 +22,6 @@ services:
       # 日志目录，建议挂载本地便于排查问题
       - 【这里替换为你的docker数据存放目录】/easy-vdl:/app/logs
       # 数据库目录，建议挂载本地保证数据持久化
-    environment:
-      - TZ=Asia/Shanghai
-      # 时区
     network_mode: bridge
     # 80端口被占用，不能用host
     ports:
