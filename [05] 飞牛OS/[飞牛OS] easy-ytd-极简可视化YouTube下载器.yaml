@@ -1,31 +1,31 @@
 # 官方文档
-# https://hub.docker.com/r/qq918652593/easy-frpc
+# https://hub.docker.com/r/qq918652593/easy-vdl
 # 软件作者：隔壁小王
 
-# 进入UI后，粘贴YouTube视频链接即可获取视频信息，支持多种格式下载、字幕下载、封面下载等功能。界面极简美观，操作流畅，支持中文提示和详细下载进度。快来体验极客级的YouTube下载服务吧！！
+# easy-vdl 是一款支持多平台（某音、某书、YouTube等）的视频解析与下载的可视化平台。内置智能缓存、批量解析、Emby/Jellyfin 元数据自动生成，界面美观，操作简单，适合个人和媒体库用户
 
 ---
 version: "3"
-# 最后编辑时间：2026-06-27
+# 最后编辑时间：2026-07-04
 services:
-  easy-ytd:
-    image: qq918652593/easy-ytd:latest
+  easy-vdl:
+    image: qq918652593/easy-vdl:latest
     # 镜像地址，仅支持amd64
-    container_name: easy-ytd
+    container_name: easy-vdl
     # 容器名字
-    hostname: easy-ytd
+    hostname: easy-vdl
     # 主机名
     volumes:
-      - 【这里替换为你的数据下载存放目录】/easy-ytd:/app/downloads
-      # 下载目录
-    environment:
-      - TZ=Asia/Shanghai
-      # 时区
-    # network_mode: bridge
-    network_mode: host
-    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    # ports:
-      # - 8000:8000/tcp
+      - 【这里替换为你的数据下载存放目录】/easy-vdl:/app/downloads
+      # 视频下载及管理目录，可自定义挂载
+      - /vol1/1000/docker/easy-vdl/database:/app/database
+      # 日志目录，建议挂载本地便于排查问题
+      - /vol1/1000/docker/easy-vdl/logs:/app/logs
+      # 数据库目录，建议挂载本地保证数据持久化
+    network_mode: bridge
+    # 80端口被占用，不能用host
+    ports:
+      - 8170:80/tcp
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
