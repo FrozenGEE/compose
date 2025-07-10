@@ -1,0 +1,70 @@
+# 前言
+# alist被卖了，详情见下链接。暂时锁版本为3.40，等后续观望，可以follow/fork/star 这个组织后续项目 https://github.com/AlistTeam
+# https://linux.do/t/topic/714827
+# https://github.com/AlistGo/alist/issues/8649（不用看了，这个issuse已经删掉了）
+
+# 官方文档
+# https://github.com/AlistTeam
+# https://docs.openlist.team/zh
+# https://hub.docker.com/r/openlistteam/openlist
+
+# 密码改成加密方式存储的hash值，无法直接反算出密码，如果忘记了密码只能通过重新 随机生成 或者 手动设置
+# 随机生成一个密码，`admin`为账号名，注意替换
+# docker exec -it openlist ./alist admin random
+# 手动设置一个密码，`admin`为账号名，`NEW_PASSWORD`是指你需要设置的密码，注意替换
+# docker exec -it openlist ./alist admin set NEW_PASSWORD
+
+# openlist 问答
+# https://docs.openlist.team/zh/faq/why.html
+# WebDAV
+# https://docs.openlist.team/zh/guide/webdav.html
+# S3
+# https://docs.openlist.team/zh/guide/advanced/s3.html
+# FTP / SFTP
+# https://docs.openlist.team/zh/guide/advanced/ftp.html
+# 更多 高级设置
+# https://docs.openlist.team/zh/guide/advanced
+
+---
+version: "3.3"
+# 最后编辑时间：2025-07-10
+# alist被售了，暂时锁版本为3.40，等后续观望，可以follow/fork/star 这个组织后续项目 https://github.com/AlistTeam
+# 2025-07-10更新：翻新为 openlist
+services:
+  openlist:
+    image: openlistteam/openlist:latest-aio
+    # 镜像地址，可选tag有不少，具体去dockerhub看，预设为latest-aio
+    container_name: openlist
+    # 容器名字
+    hostname: openlist
+    # 主机名
+    volumes:
+      - ./alist:/opt/alist/data
+      # 配置文件目录
+      - /home:/openlist/绿联个人文件夹
+      - /volume1:/openlist/存储池1
+      # - /volume2:/openlist/存储池2
+      - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      # 映射本地其他路径使其可以访问，可以自定义多个
+
+      # - 【这里替换为你的aria2离线下载目录】:/opt/openlist/data/temp/aria2
+      # - 【这里替换为你的qbittorrent离线下载目录】:/opt/openlist/data/temp/qBittorrent
+      # 出处 https://docs.openlist.team/zh/guide/advanced/offline-download.html
+      # 注意需要额外部署一个aria2
+      
+    environment:
+      - PUID=0
+      - PGID=0
+      # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5244:5244/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
