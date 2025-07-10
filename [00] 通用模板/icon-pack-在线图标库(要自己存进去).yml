@@ -1,0 +1,45 @@
+# 官方文档
+# https://github.com/verkyer/icon-pack
+# https://hub.docker.com/r/verky/icon-pack
+# 演示站点：https://icon.nastool.de
+
+---
+version: "3"
+# 最后编辑时间：2026-07-10
+services:
+  icon-pack:
+    image: verky/icon-pack:latest
+    # 镜像地址
+    container_name: icon-pack
+    # 容器名字
+    hostname: icon-pack
+    # 主机名
+    volumes:
+      - 【这里替换为你的docker数据存放目录】/icon-pack:/app/images
+      # 图标目录，注意是你自己要存图标文件进去
+      # JPG、PNG图标，需要放到/images/分组目录文件下； 例如/images/docker/1.png，才会显示在首页docker分类下面
+    environment:
+      - SITE_NAME=icons
+      # 网站标题
+      # - LOGO_IMG=favicon.ico
+      # 设置站点logo(路径或网址)
+    network_mode: bridge
+    # network_mode: host
+    # 推荐直接使用bridge网络模式，除非5000端口没有占用，模板预设使用bridge
+    ports:
+      - 50005:5000/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/icon-pack.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:5000]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/icon-pack.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
