@@ -1,5 +1,14 @@
 # 历史更新内容
-#### 【更新日志-2025-04-20】
+#### 【更新日志-2025-06-11】
+- [alist卖掉了](https://linux.do/t/topic/714827)
+- [项目是被卖了吗？官网已经 404 了，隔壁 docs 的文档被大改持续两个星期](https://github.com/AlistGo/alist/issues/8649)
+- [新的alist组织](https://github.com/AlistTeam)，强烈建议follow，fork，star走起
+- alist的tag锁为3.40版本，后续观望换个镜像
+- 2025-06-16 alist后续：openlist已经放出测试版docker镜像：[openlistteam/openlist:beta-aio](https://hub.docker.com/r/openlistteam/openlist)，需要的可以使用，模板暂时不替换，等稳定后才替换
+- 玩 frp 的用户，强烈推荐去使用 [隔壁小王](https://hub.docker.com/r/qq918652593) 那个带可视化在线编辑配置面板的 [frps](https://hub.docker.com/r/qq918652593/easy-frps) 和 [frpc](https://hub.docker.com/r/qq918652593/easy-frpc) 项目<del>(除了arm用户，因为不支持)</del>，已经有arm64版本了，虽然frps暂时还有问题
+- 进入ui后点击初始化有提供默认配置，有详细的中文注释，可以直接在ui上操作配置和服务，快去体验吧！！
+
+## 【更新日志-2025-04-20】
 - [极空间compose到底如何？](https://www.bilibili.com/video/BV1V95EzFEfe/)
 - 更新[volumes.md](https://github.com/FrozenGEE/compose/blob/main/volumes.md)内容，新增极空间的compose存放路径```/zspace/applications/services/zdocker/config/compose_config/项目名字.yaml```
 - 注意01：如果出现新建compose部署，但是极空间compose提示路径报错的，先把报错的路径在前方加上#号注释掉，然后再去修改，去掉#号由注释变成参数，再重新部署
