@@ -25,7 +25,7 @@ services:
       - /vol1/1000/docker/dockercopilot:/data
       # 配置文件目录
     environment:
-      - secretKey=dokcer123
+      - secretKey=docker123
       # 密码，需要大于八位且非纯数字，预设为docker123，请自行修改
       - DOCKER_HOST=unix:///var/run/docker.sock
       # 不动，照抄，必须
@@ -42,3 +42,4 @@ services:
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
