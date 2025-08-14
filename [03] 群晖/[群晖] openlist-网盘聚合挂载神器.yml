@@ -8,11 +8,12 @@
 # https://docs.openlist.team/zh
 # https://hub.docker.com/r/openlistteam/openlist
 
+# 以下内容在 NAS ssh终端 中执行，如果在 openlist容器终端 中执行，则只需要执行 ./ 开始的这部分
 # 密码改成加密方式存储的hash值，无法直接反算出密码，如果忘记了密码只能通过重新 随机生成 或者 手动设置
 # 随机生成一个密码，`admin`为账号名，注意替换
-# docker exec -it openlist ./alist admin random
+# docker exec -it openlist ./openlist admin random
 # 手动设置一个密码，`admin`为账号名，`NEW_PASSWORD`是指你需要设置的密码，注意替换
-# docker exec -it openlist ./alist admin set NEW_PASSWORD
+# docker exec -it openlist ./openlist admin set NEW_PASSWORD
 
 # openlist 问答
 # https://docs.openlist.team/zh/faq/why.html
