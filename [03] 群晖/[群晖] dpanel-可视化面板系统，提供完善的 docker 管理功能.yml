@@ -13,8 +13,6 @@ services:
     # lite 版去掉了域名转发相关，需要自行转发域名绑定容器，不需要绑定 80 及 443 端口
     container_name: dpanel
     # 容器名字
-    hostname: dpanel
-    # 主机名
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # docker核心
@@ -39,4 +37,5 @@ services:
       # 域名转发相关，lite版不需要
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
 
