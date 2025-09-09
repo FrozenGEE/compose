@@ -1,5 +1,7 @@
 # 历史更新内容
-#### 【更新日志-2025-06-11】
+#### 【更新日志-2025-07-10】
+- alist更改为openlist
+## 【更新日志-2025-06-11】
 - [alist卖掉了](https://linux.do/t/topic/714827)
 - [项目是被卖了吗？官网已经 404 了，隔壁 docs 的文档被大改持续两个星期](https://github.com/AlistGo/alist/issues/8649)
 - [新的alist组织](https://github.com/AlistTeam)，强烈建议follow，fork，star走起
