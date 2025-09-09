@@ -212,15 +212,15 @@ services:
     # 容器名
     hostname: pgloader
     # 主机名
-    volumes:
-      - ./moviepilot-v2/config:/mp_config
-      # 照抄
     command: >
       pgloader
       sqlite:///mp_config/user.db
       postgresql://moviepilot:moviepilot@172.17.0.1:55053/moviepilot
      # 数据库迁移命令，如果你是使用我的模板，照抄即可，如果有自己的使用方式，可自行修改
      # 书写格式 postgresql://【子数据库的账号】:【子数据库的密码】【pgsql的IP地址】:【pgsql的端口号】/【子数据库名字】
+    volumes:
+      - ./moviepilot-v2/config:/mp_config
+      # 照抄
     network_mode: bridge
     # 只是为了不自动创建一个docker子网，需要和pgsql处于同一个docker子网当中
     restart: no
