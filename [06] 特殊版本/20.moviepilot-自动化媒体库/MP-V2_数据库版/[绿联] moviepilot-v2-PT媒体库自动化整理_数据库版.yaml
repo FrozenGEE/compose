@@ -221,6 +221,8 @@ services:
       postgresql://moviepilot:moviepilot@172.17.0.1:55053/moviepilot
      # 数据库迁移命令，如果你是使用我的模板，照抄即可，如果有自己的使用方式，可自行修改
      # 书写格式 postgresql://【子数据库的账号】:【子数据库的密码】【pgsql的IP地址】:【pgsql的端口号】/【子数据库名字】
+    network_mode: bridge
+    # 只是为了不自动创建一个docker子网，需要和pgsql处于同一个docker子网当中
     restart: no
     # 重启策略为no，即不会在docker启动时该容器也一起启动，因为仅使用一次，在数据库迁移后就不再需要，可以从模板中删除
     depends_on:
