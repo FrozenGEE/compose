@@ -51,12 +51,9 @@
 
 
 # 数据库版说明
-# 1、最下面那个pgloader是用来迁移数据库的，如果初次部署，不需要那个；如果是现有项目需要升级到数据库版，则需要迁移MP的数据库到pgsql中
-# 2、pgsql和redis使用的是brige网络模式，和MP的host网络模式处于不同的docker子网，所以得用宿主机的IP进行链接
-# 3、pgsql和pgloader使用的是brige网络模式，因此可以通过docker子网172.17.0.1进行访问，端口号为映射后的端口
-# 4、jahan9/pgloader 该镜像支持amd64和arm64，而MP官方模板的镜像 dimitri/pgloader 仅支持amd64，因此替换掉
-# 5、删掉站点认证，因为官方已经支持在WebUI上进行认证的操作了，如果还是喜欢在模板上写好，部署好就自动完成部署的，可以自己写上，说实话，我也喜欢这样，奈何这样会导致模板贼长
-# 6、记得【】删除掉，故意这么写的，要是不删，部署会出错，出错你就知道没改好，我故意这么搞的
+# 1、删掉站点认证，因为官方已经支持在WebUI上进行认证的操作了，如果还是喜欢在模板上写好，部署好就自动完成部署的，可以自己写上，说实话，我也喜欢这样，奈何这样会导致模板贼长
+# 2、记得【】删除掉，故意这么写的，要是不删，部署会出错，出错你就知道没改好，我故意这么搞的
+# 3、如果有原本的数据，务必备份好数据再部署
 
 ---
 version: "3"
@@ -201,31 +198,3 @@ services:
       timeout: 5s
       retries: 5
     # 照抄
-
-
-# 最后这个是迁移数据库的，如果初次部署，不需要这个；如果是现有项目需要升级到数据库版，则需要迁移MP的数据库到pgsql中
-
-  pgloader:
-    image: jahan9/pgloader:latest
-    # 镜像地址，该镜像支持amd64和arm64，而MP官方模板的镜像 dimitri/pgloader 仅支持amd64，因此替换掉
-    container_name: pgloader
-    # 容器名
-    hostname: pgloader
-    # 主机名
-    command: >
-      pgloader
-      sqlite:///mp_config/user.db
-      postgresql://moviepilot:moviepilot@172.17.0.1:55053/moviepilot
-     # 数据库迁移命令，如果你是使用我的模板，照抄即可，如果有自己的使用方式，可自行修改
-     # 书写格式 postgresql://【子数据库的账号】:【子数据库的密码】【pgsql的IP地址】:【pgsql的端口号】/【子数据库名字】
-    volumes:
-      - ./moviepilot-v2/config:/mp_config
-      # 照抄
-    network_mode: bridge
-    # 只是为了不自动创建一个docker子网，需要和pgsql处于同一个docker子网当中
-    restart: no
-    # 重启策略为no，即不会在docker启动时该容器也一起启动，因为仅使用一次，在数据库迁移后就不再需要，可以从模板中删除
-    depends_on:
-      postgresql:
-        condition: service_healthy
-    # 关联pgsql，照抄
