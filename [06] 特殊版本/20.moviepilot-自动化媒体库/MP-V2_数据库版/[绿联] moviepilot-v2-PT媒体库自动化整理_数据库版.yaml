@@ -226,4 +226,4 @@ services:
     depends_on:
       postgresql:
         condition: service_healthy
-    # 关联容器，照抄
+    # 关联pgsql，照抄
