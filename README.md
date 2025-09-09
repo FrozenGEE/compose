@@ -1,5 +1,6 @@
-# 【更新日志-2025-07-10】
-- alist更改为openlist
+# 【更新日志-2025-09-10】
+- NS2真好玩
+- 新增MP-V2数据库版，单独部署的已新增，media-aio中还没加入数据库的那部分内容，感觉模板越写越长，注释又多，考虑后续把部分内容拆分掉
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
