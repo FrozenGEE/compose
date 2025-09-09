@@ -141,7 +141,7 @@ services:
 
       ### 如果你有一个redis的容器，懂得使用方法，可以根据实际情况填写 ###
       - CACHE_BACKEND_TYPE=redis
-      - CACHE_BACKEND_URL=redis://:mp-redis@【这里是redis的IP地址，也就是你的NAS的IP地址】:55054
+      - CACHE_BACKEND_URL=redis://:moviepilot@【这里是redis的IP地址，也就是你的NAS的IP地址】:55054
       # 连接redis，本模板redis的访问端口预设为55054
       # 书写格式为 redis://:【redis的密码】@【redis的IP地址】:【redis的访问端口】
 
@@ -153,8 +153,8 @@ services:
     # 容器名字
     hostname: mp-redis
     # 主机名
-    command: redis-server --save 600 1 --requirepass mp-redis
-    # 最后一串字符为redis的密码，预设为mp-redis
+    command: redis-server --save 600 1 --requirepass moviepilot
+    # 最后一串字符为redis的密码，预设为moviepilot
     volumes:
       - /volume1/docker/moviepilot-v2/redis:/data
       # 数据目录
@@ -185,8 +185,8 @@ services:
       # 数据目录
     environment:
       - POSTGRES_DB=moviepilot
-      - POSTGRES_USER=mp
-      - POSTGRES_PASSWORD=mp-pgsql
+      - POSTGRES_USER=moviepilot
+      - POSTGRES_PASSWORD=moviepilot
       # 预设新建一个子数据库，子账号及其密码，统一为 moviepilot
     network_mode: bridge
     # 模板预设使用bridge网络模式，如果懂得使用方法，可以根据实际情况来修改
