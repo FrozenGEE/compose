@@ -1,13 +1,14 @@
 # 官方文档
 # https://github.com/Cp0204/ttydBridge
+# https://hub.docker.com/r/cp0204/ttydbridge
 # 因泄露自己的ttydBridge导致造成的损失概不负责，后果自负
 
 ---
 version: "3"
-# 最后编辑时间：2024-10-03
+# 最后编辑时间：2025-09-11
 services:
   ttyd-bridge:
-    image: ghcr.io/cp0204/ttydbridge:latest
+    image: cp0204/ttydbridge:latest
     # 镜像地址
     container_name: ttyd-bridge
     # 容器名字
@@ -20,15 +21,15 @@ services:
       - /opt:/opt
       # 配置文件目录
     environment:
-      - PORT=2222
-      # 自定义容器端口
+      - PORT=22222
+      # 自定义容器端口，默认为2222
       # - START_COMMAND=login
       # ttyd 初始命令，login 为使用系统身份验证，需要输入管理员账号密码登录，bash 为直接登录为root账号。默认为login，推荐，切勿让别人知道随意访问你的服务器，后果自负
     # network_mode: bridge
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 2222:2222/tcp
+      # - 22222:22222/tcp
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
@@ -39,8 +40,9 @@ services:
       # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
       ########################################
       net.unraid.docker.managed: dockerman
-      net.unraid.docker.webui: http://[IP]:[PORT:2222]
+      net.unraid.docker.webui: http://[IP]:[PORT:22222]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
       net.unraid.docker.icon: /mnt/user/LOGO/ttyd-bridge.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
