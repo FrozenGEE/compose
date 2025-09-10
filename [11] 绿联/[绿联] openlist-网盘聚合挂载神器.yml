@@ -28,7 +28,7 @@
 
 ---
 version: "3.3"
-# 最后编辑时间：2025-07-10
+# 最后编辑时间：2025-09-10
 # alist被售了，暂时锁版本为3.40，等后续观望，可以follow/fork/star 这个组织后续项目 https://github.com/AlistTeam
 # 2025-07-10更新：翻新为 openlist
 services:
