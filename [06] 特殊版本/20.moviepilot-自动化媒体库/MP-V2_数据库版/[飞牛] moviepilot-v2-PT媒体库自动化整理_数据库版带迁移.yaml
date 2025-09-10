@@ -68,6 +68,8 @@ services:
     # 镜像地址
     container_name: moviepilot-v2
     # 容器名字
+    hostname: moviepilot-v2
+    # 主机名
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     network_mode: host
