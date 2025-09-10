@@ -453,7 +453,7 @@ services:
     command: redis-server --save 600 1 --requirepass moviepilot
     # 最后一串字符为redis的密码，预设为moviepilot
     volumes:
-      - /volume1/docker/moviepilot/redis:/data
+      - /vol1/1000/docker/moviepilot-v2/redis:/data
       # 数据目录
     network_mode: bridge
     # 模板预设使用bridge网络模式，如果懂得使用方法，可以根据实际情况来修改
@@ -472,7 +472,7 @@ services:
     container_name: mp-pgsql
     hostname: mp-pgsql
     volumes:
-      - /volume1/docker/moviepilot/pgsql:/var/lib/postgresql/data
+      - /vol1/1000/docker/moviepilot-v2/pgsql:/var/lib/postgresql/data
       # 数据目录
     environment:    
       - POSTGRES_DB=moviepilot
@@ -593,3 +593,4 @@ services:
       - 3456:3000/tcp 
       # WebUI http端口
     restart: unless-stopped
+
