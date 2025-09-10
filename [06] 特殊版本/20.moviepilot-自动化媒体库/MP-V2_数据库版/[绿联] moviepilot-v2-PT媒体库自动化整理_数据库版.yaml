@@ -53,7 +53,7 @@
 # 数据库版说明
 # 1、该模板为现有数据库转移到数据库版本的部署，需要最后一个pgloader，用一次转移好就行
 # 2、如果全新部署，最后一个pgsql不需要部署
-# 3、fridus/pgloader:latest 该镜像支持arm64和amd64，而MP官方模板的镜像 dimitri/pgloader:latest 仅支持amd64，因此替换掉，其实也是dimitri/pgloader的分支
+# 3、fridus/pgloader:latest 该镜像支持arm64和amd64，而MP官方模板的镜像 dimitri/pgloader:latest 仅支持amd64，因此替换掉，其实它也是dimitri/pgloader的分支
 # 4、模板越写越长，注释本来就多，于是删减了一些变量，因为官方已经支持在WebUI上进行认证的操作了
 # 5、如果还是喜欢在模板上写好预设的变量，部署好就自动完成部署的，就自己写上，说实话，我也喜欢这样，奈何这样会导致模板贼长
 # 6、compose写了变量，会在webui上提示无法修改，这也是我删减变量的原因之一，仅保留/个人自定义修改的一些变量
@@ -78,7 +78,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # 使MP支持内建的重启操作，用于自动更新后重启
       - ./core:/moviepilot/.cache/ms-playwright
-      # 浏览器内核
+      # 内核浏览器
       - ./config:/config
       # 配置目录
       - 【这里替换为你的媒体库及下载目录的上一级目录路径】:/media
@@ -209,7 +209,7 @@ services:
 
   pgloader:
     image: fridus/pgloader:latest
-    # 镜像地址，fridus/pgloader:latest 该镜像支持arm64和amd64，而MP官方模板的镜像 dimitri/pgloader:latest 仅支持amd64，因此替换掉
+    # 镜像地址，fridus/pgloader:latest 该镜像支持arm64和amd64，而MP官方模板的镜像 dimitri/pgloader:latest 仅支持amd64，因此替换掉，其实它也是dimitri/pgloader的分支
     container_name: pgloader
     # 容器名
     hostname: pgloader
