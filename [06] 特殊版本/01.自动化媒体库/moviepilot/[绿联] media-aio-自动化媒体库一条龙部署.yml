@@ -97,6 +97,8 @@
 # https://hub.docker.com/r/mzz2017/v2raya
 # https://hub.docker.com/r/containrrr/watchtower
 # https://hub.docker.com/r/privoce/vocechat-server
+# https://hub.docker.com/_/redis
+# https://hub.docker.com/_/postgres
 
 ##############################################
 # MP 文档
@@ -134,16 +136,18 @@
   # http 代理端口(带分流规则)：20172
 # watchtower      不存在，后台自动更新容器镜像
 # vocechat        ip:3456
+# redis + pgsql   不存在webui，只需要让mp链接即可
 
 # 如果要使用peerbanhelper，QB和TR必须使用host网络模式，模板默认为host网络模式，且对QB和TR的版本号有要求，注意查看文档
-# jellyfin 镜像地址，如果为arm64则使用：nyanmisaka/jellyfin:latest-rockchip
-# vocechat 镜像地址，如果为arm64则使用：privoce/vocechat-server:latest-arm64
+# redis和pgsql均使用bridge网络模式，仅提供给MP使用，如果你有单独已经部署好的redis和pgsql容器，懂得如何链接上，自行修改，本模板已经整合号，部署即可使用
+# 2025-09-10：MP已经支持在WebUI上进行认证，因此删除掉认证部分，同时，部分变量在compose中写了，就无法在WebUI上随时修改，因此也删掉了
+# 2025-09-10：本模板改为MP使用带数据库的版本，因某些原因，某些NAS无法好好地由现有版本升级为带数据库版本，所以改模板适合全新部署，如果需要迁移版，可以查看官方文档部署一个pgloader即可（单独写在了说明文档中，详见github）
+# 2025-09-10：实测以下NAS可以完美迁移：飞牛OS，群晖，绿联(仅amd64)，极空间
 
-##############################################
 
 ---
 version: "3"
-# 最后编辑时间：2025-06-04
+# 最后编辑时间：2025-09-10
 services:
 ##############################################
 #                                            #
@@ -175,8 +179,8 @@ services:
       # 以下是为PLEX添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
-      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - ALL_PROXY=http://localhost:20171
+      - HTTP_PROXY=http://localhost:20171
       # 更换为自己的http代理
       # 切记设置好V2raya，如果你没有配置魔法就注释掉
 
@@ -211,8 +215,8 @@ services:
       # emby推荐不写，而是安装神医插件：https://github.com/sjtuross/StrmAssistant
       - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
-      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - ALL_PROXY=http://localhost:20171
+      - HTTP_PROXY=http://localhost:20171
       # 更换为自己的http代理
       # 切记设置好V2raya，如果你没有配置魔法就注释掉
 
@@ -250,8 +254,8 @@ services:
       # 以下是为JF添加网络代理，自行准备好魔法，将IP改为NAS的IP，如需使用，去掉#号注释
       - NO_PROXY=172.17.0.1,127.0.0.1,localhost
       # 保持默认
-      - ALL_PROXY=http://【这里替换为你的NAS的IP地址】:20171
-      - HTTP_PROXY=http://【这里替换为你的NAS的IP地址】:20171
+      - ALL_PROXY=http://localhost:20171
+      - HTTP_PROXY=http://localhost:20171
       # 更换为自己的http代理
       # 切记设置好V2raya，如果你没有配置魔法就注释掉
 
@@ -341,12 +345,31 @@ services:
 #                                            #
 ##############################################
 
+  ani-rss:
+    image: wushuo894/ani-rss:latest
+    container_name: ani-rss
+    hostname: ani-rss
+    volumes:
+      - ./ani-rss:/config
+      # 配置文件目录
+      - /volume1/media/动漫:/ani-rss
+      # ANI-RSS，QB，TR统一的下载目录，见上目录结构说明的⑥⑦
+    environment:
+      - PORT=7789
+      # 自定义容器端口
+      - TZ=Asia/Shanghai
+    network_mode: host
+    restart: unless-stopped
+
+##############################################
+
   moviepilot-v2:
     image: jxxghp/moviepilot-v2:latest
     container_name: moviepilot-v2
     hostname: moviepilot-v2
     restart: unless-stopped
     network_mode: host
+
 ##############################################
 ## 第一次运行时，MoviePilot 会下载大量文件到本地，请在留意日志中的进度，如果有什么问题，可以寻找网友求助
     volumes:
@@ -370,193 +393,102 @@ services:
       - MOVIEPILOT_AUTO_UPDATE=true
       # 设置容器重启时自动更新，true/release/dev/false，默认release，插件的自动更新要设置为true
       # 需要能正常连接Github 注意：如果出现网络问题可以配置PROXY_HOST
-      - NGINX_PORT=55055
-      ## WebUI服务端口，预设为55055，默认为3000，可自行修改，不能和API服务端口3001冲突
-      - SUPERUSER=admin
-      # 超级管理者用户名，默认为admin，初次安装后失效
-      # 密码在日志里，只会在第一次部署出现，否则得删除/config/user.db这个文件重新配置，注意查看，初次安装后失效
+      - API_TOKEN=1234567890123456
+      # API密钥，V1版本默认为moviepilot，V2版本需要手动配置为大于等于16个字符的复杂字符串
+      # 如配置不符合要求将会强制重新生成，可在首次启动的启动日志或env配置文件中查看最新的值
+      # 在媒体服务器Webhook、微信回调等地址配置中需要加上 ?token= 该值
       
-      # - PROXY_HOST=【这里替换为你的NAS的IP地址】:20171
-      # 网络代理，访问themoviedb或者重启更新需要使用代理访问，如果你没有配置魔法就注释掉
-      # 格式为http(s)://ip:port、socks5://user:pass@host:port
-      # - BIG_MEMORY_MOD=true
-      # 是否使用大内存模式，true/false，默认不使用，开启后会增加缓存数量，占用更多的内存，但响应速度会更快
-      - UMASK=022
-      # 默认创建新文件的权限，一般写022，MP默认为000，可以不写，也可以考虑设置为022
+      - NGINX_PORT=55055
+      # WebUI服务端口，默认为3000，预设为55055，可自行修改
+      - PORT=55056
+      # API端口，默认为3001，预设为55056，可自行修改
+      
+      - SUPERUSER=admin
+      # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效
+      # 密码在日志里，只会在第一次部署出现，如果忘记，可以文本形式打开 /config/logs/moviepilot.log 该文件，查看日志获取
+      # 如果非初始密码忘记了，得删除pgsql的所有文件，然后重新配置，注意查看，可在MP内修改
+
       - TZ=Asia/Shanghai
       # 时区
 
-      - GITHUB_TOKEN=
-      - GITHUB_PROXY=https://mirror.ghproxy.com/
-      # Github token，提高自动更新、插件安装等请求Github Api的限流阈值，格式：ghp_**** 或 github_pat_****，切勿泄露
-      # Github代理地址，用于加速版本及插件升级安装
-
       # - MOVIE_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/{{title}}.{{original_name}}
       # - TV_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/S0{{season}}/{{original_name}}
-      # 电影和电视剧重命名格式，个人自用，默认不使用
+      # 电影和电视剧重命名格式，个人自用，默认不使用，仅作记录
+
+########################################
+#### 数据库 ####
+# 不需要修改，照抄
+
+      ### 如果你有一个pgsql的容器，懂得使用方法，可以根据实际情况填写 ###
+      - DB_TYPE=postgresql
+      - DB_POSTGRESQL_HOST=localhost
+      - DB_POSTGRESQL_PORT=55053
+      # pgsql数据库的访问端口，本模板pgsql的端口预设为55053
+      - DB_POSTGRESQL_DATABASE=moviepilot
+      - DB_POSTGRESQL_USERNAME=moviepilot
+      - DB_POSTGRESQL_PASSWORD=moviepilot
+      # pgsql数据库的子数据库的名字、账号、密码，统一为 moviepilot
+
+      ### 如果你有一个redis的容器，懂得使用方法，可以根据实际情况填写 ###
+      - CACHE_BACKEND_TYPE=redis
+      - CACHE_BACKEND_URL=redis://:moviepilot@localhost:55054
+      # 连接redis，本模板redis的访问端口预设为55054
+    depends_on:
+      mp-pgsql:
+        condition: service_healthy
+      mp-redis:
+        condition: service_healthy
+    # 关联pgsql和redis，照抄
 
 ##############################################
-#### 认证站点 ####
-      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt,hspt,xingyunge,cspt,tmpt,raingfh,gtkpw,ptlgs,hdbao,sewerpt,ptskit
-      ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔，会依次执行认证操作，直到有一个站点认证成功
-      ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
-      ## 密钥在控制面板中查看，切勿泄露
-      ## 以下认证写好后记得把#注释去掉
-      ## 推荐红豆饭，因为支持iyuu和mp的认证（2024年5月注释）
-      ## 这部分可以选择不写，MP已经支持在WebUI上进行认证
+#                                            #
+#         给MP配上数据库，模板包含，必须        #
+#                                            #
 ##############################################
-      # - IYUU_SIGN=
-      # iyuu的认证，输入IYUU的登录令牌即可，IYUU本身也是需要认证的
-##############################################
-      # - HHCLUB_USERNAME=
-      # - HHCLUB_PASSKEY=
-      # hhclub的用户名和密钥，注意这里是用户名
-##############################################
-      # - AUDIENCES_UID=
-      # - AUDIENCES_PASSKEY=
-      # audiences的用户UID和密钥
-##############################################
-      # - HDDOLBY_ID=
-      # - HDDOLBY_PASSKEY=
-      # hddolby的用户ID和密钥，注意这里是用户ID
-##############################################
-      # - ZMPT_UID=
-      # - ZMPT_PASSKEY=
-      # zmpt的用户UID和密钥
-##############################################
-      # - FREEFARM_UID=
-      # - FREEFARM_PASSKEY=
-      # freefarm的用户UID和密钥
-##############################################
-      # - HDFANS_UID=
-      # - HDFANS_PASSKEY=
-      # hdfans的用户UID和密钥
-##############################################
-      # - WINTERSAKURA_UID=
-      # - WINTERSAKURA_PASSKEY=
-      # wintersakura的用户UID和密钥
-##############################################
-      # - LEAVES_UID=
-      # - LEAVES_PASSKEY=
-      # leaves的用户UID和密钥
-##############################################
-      # - PTBA_UID=
-      # - PTBA_PASSKEY=
-      # ptba的用户UID和密钥
-##############################################
-      # - ICC2022_UID=
-      # - ICC2022_PASSKEY=
-      # icc2022的用户UID和密钥
-##############################################
-      # - XINGTAN_UID=
-      # - XINGTAN_PASSKEY=
-      # xingtan的用户UID和密钥
-##############################################
-      # - PTVICOMO_UID=
-      # - PTVICOMO_PASSKEY=
-      # ptvicomo的用户UID和密钥
-##############################################
-      # - AGSVPT_UID=
-      # - AGSVPT_PASSKEY
-      # agsvpt用户UID和密钥
-##############################################
-      # - HDKYL_UID=
-      # - HDKYL_PASSKEY=
-      # hdkyl的用户UID和密钥
-##############################################
-      # - QINGWA_UID=
-      # - QINGWA_PASSKEY=
-      # qingwa的用户UID和密钥
-##############################################
-      # - DISCFAN_UID=
-      # - DISCFAN_PASSKEY=
-      # discfan的用户UID和密钥
-##############################################
-      # - HAIDAN_ID=
-      # - HAIDAN_PASSKEY=
-      # haidan的用户ID和密钥，注意这里是用户ID
-##############################################
-      # - ROUSI_UID=
-      # - ROUSI_PASSKEY=
-      # rousi的用户UID和密钥
-##############################################
-      # - SUNNY_UID=
-      # - SUNNY_PASSKEY=
-      # sunny的用户UID和密钥
-##############################################
-      # - PTCAFE_UID=
-      # - PTCAFE_PASSKEY=
-      # ptcafe的用户UID和密钥
-##############################################
-      # - PTZONE_UID=
-      # - PTZONE_PASSKEY=
-      # ptzone的用户UID和密钥
-##############################################
-      # - KUFEI_UID=
-      # - KUFEI_PASSKEY=
-      # kufei的用户UID和密钥
-##############################################
-      # - YEMAPT_UID=
-      # - YEMAPT_AUTH=
-      # yemapt的用户UID和密钥
-##############################################
-      # - HSPT_UID=
-      # - HSPT_AUTH=
-      # hspt的用户UID和密钥
-##############################################
-      # - XINGYUNGE_UID=
-      # - XINGYUNGE_PASSKEY=
-      # xingyunge的用户UID和密钥
-##############################################
-      # - CSPT_UID=
-      # - CSPT_PASSKEY=
-      # cspt的用户UID和密钥
-##############################################
-      # - TMPT_UID=
-      # - TMPT_PASSKEY=
-      # tmpt的用户UID和密钥
-##############################################
-      # - RAINGFH_UID=
-      # - RAINGFH_PASSKEY=
-      # raingfh的用户UID和密钥
-##############################################
-      # - GTKPW_UID=
-      # - GTKPW_PASSKEY=
-      # gtkpw的用户UID和密钥
-##############################################
-      # - PTLGS_UID=
-      # - PTLGS_PASSKEY=
-      # ptlgs的用户UID和密钥
-##############################################
-      # - HDBAO_UID=
-      # - HDBAO_PASSKEY=
-      # hdbao的用户UID和密钥
-##############################################
-      # - SEWERPT_UID=
-      # - SEWERPT_PASSKEY=
-      # sewerpt的用户UID和密钥
-##############################################
-      # - PTSKIT_UID=
-      # - PTSKIT_PASSKEY=
-      # ptskit的用户UID和密钥
+# 不需要修改，照抄
 
-##############################################
-
-  ani-rss:
-    image: wushuo894/ani-rss:latest
-    container_name: ani-rss
-    hostname: ani-rss
+ mp-redis:
+    image: redis:latest
+    container_name: mp-redis
+    hostname: mp-redis
+    command: redis-server --save 600 1 --requirepass moviepilot
+    # 最后一串字符为redis的密码，预设为moviepilot
     volumes:
-      - ./ani-rss:/config
-      # 配置文件目录
-      - /volume1/media/动漫:/ani-rss
-      # ANI-RSS，QB，TR统一的下载目录，见上目录结构说明的⑥⑦
-    environment:
-      - PORT=7789
-      # 自定义容器端口
-      - TZ=Asia/Shanghai
-    network_mode: host
+      - ./moviepilot-v2/redis:/data
+      # 数据目录
+    network_mode: bridge
+    # 模板预设使用bridge网络模式，如果懂得使用方法，可以根据实际情况来修改
+    ports:
+      - 55054:6379/tcp
+      # 注意：并不存在WebUI，只需要通过IP:PORT调用即可，模板预设
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mp-pgsql:
+    image: postgres:latest
+    container_name: mp-pgsql
+    hostname: mp-pgsql
+    volumes:
+      - ./moviepilot-v2/pgsql:/var/lib/postgresql/data
+      # 数据目录
+    environment:    
+      - POSTGRES_DB=moviepilot
+      - POSTGRES_USER=moviepilot
+      - POSTGRES_PASSWORD=moviepilot
+      # 预设新建一个子数据库，子账号及其密码，统一为 moviepilot
+    network_mode: bridge
+    ports:
+      - 55053:5432/tcp
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U moviepilot -d moviepilot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 ##############################################
 #                                            #
