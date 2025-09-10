@@ -99,6 +99,8 @@
 # https://hub.docker.com/r/wushuo894/ani-rss
 # https://hub.docker.com/r/containrrr/watchtower
 # https://hub.docker.com/r/privoce/vocechat-server
+# https://hub.docker.com/_/redis
+# https://hub.docker.com/_/postgres
 
 ##############################################
 # MP 文档
@@ -140,8 +142,9 @@
 
 # 如果要使用peerbanhelper，QB和TR必须使用host网络模式，模板默认为host网络模式，且对QB和TR的版本号有要求，注意查看文档
 # redis和pgsql均使用bridge网络模式，仅提供给MP使用，如果你有单独已经部署好的redis和pgsql容器，懂得如何链接上，自行修改，本模板已经整合号，部署即可使用
-# 2025-09-10，本模板改为MP使用带数据库的版本，因某些原因，某些NAS无法好好地由现有版本升级为带数据库版本，所以改模板适合全新部署，如果需要迁移版，可以查看官方文档部署一个pgloader即可（单独写在了说明文档中，详见github）
-# 20255-09-10：实测以下NAS可以完美迁移：飞牛OS，群晖，绿联(仅amd64)，极空间
+# 2025-09-10：MP已经支持在WebUI上进行认证，因此删除掉认证部分，同时，部分变量在compose中写了，就无法在WebUI上随时修改，因此也删掉了
+# 2025-09-10：本模板改为MP使用带数据库的版本，因某些原因，某些NAS无法好好地由现有版本升级为带数据库版本，所以改模板适合全新部署，如果需要迁移版，可以查看官方文档部署一个pgloader即可（单独写在了说明文档中，详见github）
+# 2025-09-10：实测以下NAS可以完美迁移：飞牛OS，群晖，绿联(仅amd64)，极空间
 
 ##############################################
 
@@ -453,17 +456,15 @@ services:
 
       # - MOVIE_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/{{title}}.{{original_name}}
       # - TV_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/S0{{season}}/{{original_name}}
-      # 电影和电视剧重命名格式，个人自用，默认不使用
+      # 电影和电视剧重命名格式，个人自用，默认不使用，仅作记录
 
 ########################################
 #### 数据库 ####
-# 不需要修改
+# 不需要修改，照抄
 
       ### 如果你有一个pgsql的容器，懂得使用方法，可以根据实际情况填写 ###
       - DB_TYPE=postgresql
-      # 数据库类型，用的pgsql，保持默认
       - DB_POSTGRESQL_HOST=localhost
-      # pgsql数据库的IP地址，请根据实际情况填写
       - DB_POSTGRESQL_PORT=55053
       # pgsql数据库的访问端口，本模板pgsql的端口预设为55053
       - DB_POSTGRESQL_DATABASE=moviepilot
@@ -473,10 +474,8 @@ services:
 
       ### 如果你有一个redis的容器，懂得使用方法，可以根据实际情况填写 ###
       - CACHE_BACKEND_TYPE=redis
-      # 缓存类型，用的redis，保持默认
       - CACHE_BACKEND_URL=redis://:moviepilot@localhost:55054
       # 连接redis，本模板redis的访问端口预设为55054
-      # 书写格式为 redis://:【redis的密码】@【redis的IP地址】:【redis的访问端口】
 
 ##############################################
 #### 认证站点 ####
@@ -641,10 +640,50 @@ services:
 #         给MP配上数据库，模板包含，必须        #
 #                                            #
 ##############################################
+# 不需要修改，照抄
 
+ mp-redis:
+    image: redis:latest
+    container_name: mp-redis
+    hostname: mp-redis
+    command: redis-server --save 600 1 --requirepass moviepilot
+    # 最后一串字符为redis的密码，预设为moviepilot
+    volumes:
+      - /volume1/docker/moviepilot/redis:/data
+      # 数据目录
+    network_mode: bridge
+    # 模板预设使用bridge网络模式，如果懂得使用方法，可以根据实际情况来修改
+    ports:
+      - 55054:6379/tcp
+      # 注意：并不存在WebUI，只需要通过IP:PORT调用即可，模板预设
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-
-
+  mp-pgsql:
+    image: postgres:latest
+    container_name: mp-pgsql
+    hostname: mp-pgsql
+    volumes:
+      - /volume1/docker/moviepilot/pgsql:/var/lib/postgresql/data
+      # 数据目录
+    environment:    
+      - POSTGRES_DB=moviepilot
+      - POSTGRES_USER=moviepilot
+      - POSTGRES_PASSWORD=moviepilot
+      # 预设新建一个子数据库，子账号及其密码，统一为 moviepilot
+    network_mode: bridge
+    ports:
+      - 55053:5432/tcp
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U moviepilot -d moviepilot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 ##############################################
 #                                            #
