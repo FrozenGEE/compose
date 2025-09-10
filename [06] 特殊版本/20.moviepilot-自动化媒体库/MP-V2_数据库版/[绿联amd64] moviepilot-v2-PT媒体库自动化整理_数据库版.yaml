@@ -71,13 +71,6 @@ services:
     network_mode: host
     # 推荐自定义MP的WebUI端口，然后直接用host模式，webui为"nas的ip:55055"
 
-    depends_on:
-      mp-pgsql:
-        condition: service_healthy
-      mp-redis:
-        condition: service_healthy
-    # 关联pgsql和redis，照抄
-
 ########################################
 ## 第一次运行时，moviepilot 会下载大量文件到本地，请在留意日志中的进度，如果有什么问题，可以寻找网友求助
     volumes:
@@ -122,12 +115,14 @@ services:
       # - TV_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/S0{{season}}/{{original_name}}
       # 电影和电视剧重命名格式，个人自用，默认不使用
 
+########################################
+# 以下为MP链接到pgsql和redis，属于变量中的内容，照抄
 
       ### 如果你有一个pgsql的容器，懂得使用方法，可以根据实际情况填写 ###
       - DB_TYPE=postgresql
       # 数据库类型，用的pgsql，保持默认
-      - DB_POSTGRESQL_HOST=这里是数据库的IP地址，也就是你的NAS的IP地址
-      # pgsql数据库的IP地址，请根据实际情况填写
+      - DB_POSTGRESQL_HOST=localhost
+      # pgsql数据库的IP地址，直接 localhost 懂？
       - DB_POSTGRESQL_PORT=55053
       # pgsql数据库的访问端口，本模板pgsql的端口预设为55053
       - DB_POSTGRESQL_DATABASE=moviepilot
@@ -138,12 +133,21 @@ services:
 
       ### 如果你有一个redis的容器，懂得使用方法，可以根据实际情况填写 ###
       - CACHE_BACKEND_TYPE=redis
-      - CACHE_BACKEND_URL=redis://:moviepilot@【这里是redis的IP地址，也就是你的NAS的IP地址】:55054
+      - CACHE_BACKEND_URL=redis://:moviepilot@localhost:55054
       # 连接redis，本模板redis的访问端口预设为55054
-      # 书写格式为 redis://:【redis的密码】@【redis的IP地址】:【redis的访问端口】
+      # 书写格式为 redis://:【redis的密码】@【redis的IP地址，也可以直接写localhost】:【redis的访问端口】
 
+    depends_on:
+      mp-pgsql:
+        condition: service_healthy
+      mp-redis:
+        condition: service_healthy
+    # 关联pgsql和redis，照抄
 
-  redis:
+########################################
+# 以下内容除了路径要与实际情况对应，其余照抄
+
+  mp-redis:
     image: redis:latest
     # 镜像地址
     container_name: mp-redis
@@ -200,12 +204,11 @@ services:
     # 照抄
 
 
-
 # 最后这个是迁移数据库的，如果初次部署，不需要这个；如果是现有项目需要升级到数据库版，则需要迁移MP的数据库到pgsql中
 
   pgloader:
     image: fridus/pgloader:latest
-    # 镜像地址，fridus/pgloader 该镜像支持arm64，建议arm64y用户使用该镜像，而MP官方模板的镜像 dimitri/pgloader:latest 仅支持amd64，amd64用户直接用即可
+    # 镜像地址，fridus/pgloader 该镜像支持arm64和amd64，而MP官方模板的镜像 dimitri/pgloader:latest 仅支持amd64，因此替换掉
     container_name: pgloader
     # 容器名
     hostname: pgloader
@@ -215,6 +218,7 @@ services:
       sqlite:///mp_config/user.db
       postgresql://moviepilot:moviepilot@172.17.0.1:55053/moviepilot
      # 数据库迁移命令，如果你是使用我的模板，照抄即可，如果有自己的使用方式，可自行修改
+     # 由于pgloader和pgsql都使用bridge，都处于同一个docker子网中，所以ip地址可以用 bridge默认的 172.17.0.1
      # 书写格式 postgresql://【子数据库的账号】:【子数据库的密码】【pgsql的IP地址】:【pgsql的端口号】/【子数据库名字】
     volumes:
       - ./moviepilot-v2/config:/mp_config
