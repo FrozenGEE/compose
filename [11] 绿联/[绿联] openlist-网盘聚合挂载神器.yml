@@ -39,6 +39,8 @@ services:
     # 容器名字
     hostname: openlist
     # 主机名
+    user: root
+    # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射
     volumes:
       - ./alist:/opt/alist/data
       # 配置文件目录
@@ -54,9 +56,6 @@ services:
       # 注意需要额外部署一个aria2
       
     environment:
-      - PUID=0
-      - PGID=0
-      # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射
       - UMASK=022
       # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
