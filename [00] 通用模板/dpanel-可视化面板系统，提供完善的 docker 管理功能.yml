@@ -5,11 +5,11 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-11-28
+# 最后编辑时间：2025-09-10
 services:
   dpanel:
-    image: registry.cn-hangzhou.aliyuncs.com/dpanel/dpanel:latest
-    # 镜像地址，tag可选 latest/lite
+    image: registry.cn-hangzhou.aliyuncs.com/dpanel/dpanel:lite
+    # 镜像地址，tag可选 latest/lite，本模板使用精简版lite
     # lite 版去掉了域名转发相关，需要自行转发域名绑定容器，不需要绑定 80 及 443 端口
     container_name: dpanel
     # 容器名字
@@ -20,18 +20,20 @@ services:
       # docker核心
       - 【这里替换为你的docker数据存放目录】/dpanel:/dpanel
       # 数据文件目录
+
       # - 【这里替换为你的系统创建docker compose文件的路径】:/dpanel/compose/【这里替换为docker项目名字】/compose.yaml
       # 例子：- /xxx/yyy/alist.yaml:/dpanel/compose/alist/compose.yaml
       # 可以写多条，必须在容器路径：/dpanel/compose 之下，具体内容可见下官方文档
       # https://dpanel.cc/#/zh-cn/manual/compose/external
-    network_mode: bridge
-    # 推荐使用bridge模式，8080有别的要用
-    ports:
-      - 8807:8080/tcp
-      # WebUI 端口
-      - 11180:80/tcp
-      - 11443:443/tcp
-      # 域名转发相关，lite版不需要
+
+    environment:
+      - APP_SERVER_PORT=8807
+      # 自定义容器 WebUI 端口
+      - APP_NAME=dpanel
+      # 程序名称
+    network_mode:host
+    # 推荐自定义容器WebUI端口+ host网络模式
+    
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
@@ -41,8 +43,9 @@ services:
       # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
       ########################################
       net.unraid.docker.managed: dockerman
-      net.unraid.docker.webui: http://[IP]:[PORT:8080]
+      net.unraid.docker.webui: http://[IP]:[PORT:8807]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
       net.unraid.docker.icon: /mnt/user/LOGO/dpanel.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
