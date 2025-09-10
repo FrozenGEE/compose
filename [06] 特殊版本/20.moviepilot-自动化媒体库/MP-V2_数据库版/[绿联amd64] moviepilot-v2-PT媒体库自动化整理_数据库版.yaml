@@ -208,7 +208,7 @@ services:
 
   pgloader:
     image: fridus/pgloader:latest
-    # 镜像地址，fridus/pgloader 该镜像支持arm64和amd64，而MP官方模板的镜像 dimitri/pgloader:latest 仅支持amd64，因此替换掉
+    # 镜像地址，fridus/pgloader:latest 该镜像支持arm64和amd64，而MP官方模板的镜像 dimitri/pgloader:latest 仅支持amd64，因此替换掉
     container_name: pgloader
     # 容器名
     hostname: pgloader
