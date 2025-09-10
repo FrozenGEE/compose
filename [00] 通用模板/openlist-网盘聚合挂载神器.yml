@@ -39,7 +39,9 @@ services:
     # 容器名字
     hostname: openlist
     # 主机名
+    # 主机名
     user: root
+    # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射
     volumes:
       - 【这里替换为你的docker数据存放目录】/openlist:/opt/openlist/data
       # 配置文件目录
