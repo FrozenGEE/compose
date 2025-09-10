@@ -28,7 +28,7 @@
 
 ---
 version: "3.3"
-# 最后编辑时间：2025-07-10
+# 最后编辑时间：2025-09-10
 # alist被售了，暂时锁版本为3.40，等后续观望，可以follow/fork/star 这个组织后续项目 https://github.com/AlistTeam
 # 2025-07-10更新：翻新为 openlist
 services:
@@ -39,6 +39,8 @@ services:
     # 容器名字
     hostname: openlist
     # 主机名
+    user: root
+    # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射
     volumes:
       - /vol1/1000/alist:/opt/alist/data
       # 配置文件目录
