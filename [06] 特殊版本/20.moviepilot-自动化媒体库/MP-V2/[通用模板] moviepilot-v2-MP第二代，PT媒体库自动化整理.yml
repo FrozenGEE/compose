@@ -62,8 +62,6 @@ services:
     # 容器名字
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
-    # privileged: true
-    # 特权模式，赋予容器几乎与主机相同的权限
     network_mode: host
     # 推荐自定义MP的WebUI端口，然后直接用host模式，webui为"nas的ip:55055"
     labels:
@@ -227,6 +225,7 @@ services:
       # - YEMAPT_PASSKEY=
       # yemapt的用户UID和密钥
 ########################################
+
 
 
 
