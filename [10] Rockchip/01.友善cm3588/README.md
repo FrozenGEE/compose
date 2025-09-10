@@ -29,7 +29,6 @@
 1. 打开ssh，此处用xshell和xftp作为演示，添加ssh登录信息，账号密码均为```pi```(根据实际情况填写，此乃友善cm3588初始账号pi默认密码，如有其他账号则使用其他账号)
 2. 先 ```sudo -i``` 提权，然后再次输入pi的密码```pi```
 3. 输入```nano /etc/fstab```，将```/srv/dev-disk-by-uuid-2692a155-0242-4c73-b968-159e0656471c```修改为```/srv/sd-card```，内容自定义，接着退出保存 (按 Ctrl+X，回车键，Y)
-此处缺图
 4. 输入```nano /etc/openmediavault/config.xml```，找到下图内容，修改好，退出保存(按 Ctrl+X，回车键，Y)，
 ```
 /srv/dev/disk-by-uuid/2692a155-0242-4c73-b968-159e0656471c
@@ -41,7 +40,6 @@
 修改为
 /srv/sdcard
 ```
-此处缺图
 5. 重启一次系统
 
 ### ⭐友善cm3588 docker部署推荐
