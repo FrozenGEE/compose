@@ -22,7 +22,7 @@ services:
       # 数据文件目录
 
       # - 【这里替换为你的系统创建docker compose文件的路径】:/dpanel/compose/【这里替换为docker项目名字】/compose.yaml
-      # 例子：- /xxx/yyy/alist.yaml:/dpanel/compose/alist/compose.yaml
+      # 例子：- /xxx/yyy/openlist.yaml:/dpanel/compose/openlist/compose.yaml
       # 可以写多条，必须在容器路径：/dpanel/compose 之下，具体内容可见下官方文档
       # https://dpanel.cc/#/zh-cn/manual/compose/external
 
@@ -36,6 +36,7 @@ services:
     
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
 
 
 
