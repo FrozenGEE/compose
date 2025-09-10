@@ -72,9 +72,9 @@ services:
     # 推荐自定义MP的WebUI端口，然后直接用host模式，webui为"nas的ip:55055"
 
     depends_on:
-      postgresql:
+      mp-pgsql:
         condition: service_healthy
-      redis:
+      mp-redis:
         condition: service_healthy
     # 关联pgsql和redis，照抄
 
@@ -170,8 +170,8 @@ services:
     # 照抄
 
 
-  postgresql:
-    image: postgres
+  mp-pgsql:
+    image: postgres:latest
     # 镜像地址
     container_name: mp-pgsql
     # 容器名
