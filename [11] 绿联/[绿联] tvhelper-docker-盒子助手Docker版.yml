@@ -9,7 +9,7 @@
 # ADB多功能一键脚本
 # wget -O tv.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wukongdaily/tvhelper/master/shells/tv.sh && chmod +x tv.sh && ./tv.sh proxy
 
-#不带Bash环境的
+# 不带Bash环境的
 # wget -O env.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wukongdaily/tvhelper/master/shells/env.sh && chmod +x env.sh && ./env.sh proxy
 
 # SSH常见错误举例和新手指南详见
