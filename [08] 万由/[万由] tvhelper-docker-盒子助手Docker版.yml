@@ -17,7 +17,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2024-05-05
+# 最后编辑时间：2025-09-11
 services:
   tvhelper:
     image: wukongdaily/box:latest
@@ -32,13 +32,17 @@ services:
     environment:
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/android-sdk/platform-tools
       # PATH环境变量，照抄
-    network_mode: bridge
-    # 80端口被占用，不能用host
-    ports:
-      - 2288:80/tcp
-      # WebUI 端口
+    # network_mode: bridge
+    network_mode: host
+    # 设置内可以自定义容器端口，这样就可以愉快地用host模式
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 2280:2280/tcp
+      # 用于重定向到相关介绍网页
       # 如果部署成功，直接在这个容器的SSH终端上输入 ./tv.sh 即可使用
-      - 2299:22/tcp
+      # - 2299:2299/tcp
       # tvhelper的SSH 端口
+      # - 15000:15000/tcp
+      # 用于上传apk，xapk，apkm文件的WebUI
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
