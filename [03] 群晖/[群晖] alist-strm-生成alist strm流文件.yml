@@ -7,8 +7,8 @@ version: "3"
 # 最后编辑时间：2025-06-01
 services:
   alist-strm:
-    image: itefuir/alist-strm:test
-    # 镜像地址，正式版tag为latest，测试版为test
+    image: itefuir/alist-strm:latest
+    # 镜像地址
     container_name: alist-strm
     # 容器名字
     hostname: alist-strm
