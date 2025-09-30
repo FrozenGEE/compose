@@ -28,6 +28,12 @@ services:
       # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
       # 时区
+
+      # - MYSQL_DATABASE=
+      # - MYSQL_USER=
+      # - MYSQL_PASSWORD=
+      # 在创建容器时，自动创建一个预设的子数据库，子账号及其密码，默认不使用
+
       # - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql
       # 远程连接别的服务器上的数据库，需要就写
     network_mode: bridge
