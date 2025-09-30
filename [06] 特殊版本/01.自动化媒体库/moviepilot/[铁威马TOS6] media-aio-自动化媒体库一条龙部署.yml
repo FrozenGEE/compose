@@ -9,7 +9,7 @@
 # 根据PT站站规，MP作者文档，ANI-RSS作者声明，严禁在互联网任何公开场合讨论相关内容，本模板同上
 ##############################################
 # 如果docker网络拉取失败，可以给镜像地址加上加速源，使用文本批量替换即可将下方中括号的内容批量替换掉
-# [images: ] → [images: k-docker.asia/]，注意"images: "是带空格
+# [images: ] → [images: docker.1ms.run/]，注意"images: "是带空格
 ##############################################
 # 自动化媒体库的工作流程
 # MP负责订阅搜刮PT站内的资源，将种子以及下载路径(容器的路径)，发送给QB/TR进行下载
@@ -468,7 +468,7 @@ services:
       retries: 5
 
   mp-pgsql:
-    image: postgres:latest
+    image: postgres:17
     container_name: mp-pgsql
     hostname: mp-pgsql
     volumes:
