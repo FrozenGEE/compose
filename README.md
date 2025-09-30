@@ -1,9 +1,7 @@
 # 【更新日志-2025-09-10】
-- NS2真好玩
-- 新增 MP-v2数据库版，单独部署的已新增，修正openlist部分问题
-- media-aio那些模板已经修改为 MP数据库版，响应速度快不少，推荐改用数据库版，模板为全新部署，非原有数据库迁移
-- MP-v2数据库带迁移模板，unRAID还存在问题未解决，其余模板都写好，绿联/群晖/飞牛/极空间实测迁移均没问题，威联通/铁威马/万由这些没有设备，故没测试，应该都没问题
-- dpanel统一改为使用lite精简版
+- 黑猴桌游真容易买
+- 修正openlist模板内容，新增OPENLIST_ADMIN_PASSWORD该变量，现在支持在变量中自定义管理员密码了，再也不用新建容器后ssh终端中找密码了
+- 修改MP带数据库版中postgres的tag为17，锁版本，免得使用latest更新了镜像导致数据库无法写入的问题
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
