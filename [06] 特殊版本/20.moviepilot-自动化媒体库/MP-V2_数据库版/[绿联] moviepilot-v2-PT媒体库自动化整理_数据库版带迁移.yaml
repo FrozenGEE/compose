@@ -178,7 +178,7 @@ services:
 
 
   mp-pgsql:
-    image: postgres:latest
+    image: postgres:17
     # 镜像地址
     container_name: mp-pgsql
     # 容器名
