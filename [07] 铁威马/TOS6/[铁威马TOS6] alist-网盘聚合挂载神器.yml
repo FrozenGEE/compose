@@ -4,7 +4,7 @@
 # https://github.com/AlistGo/alist/issues/8649（不用看了，这个issuse已经删掉了）
 
 # 官方文档
-# https://github.com/AlistTeam
+# https://github.com/OpenListTeam/OpenList
 # https://docs.openlist.team/zh
 # https://hub.docker.com/r/openlistteam/openlist
 
@@ -52,8 +52,7 @@ services:
       # - 【这里替换为你的aria2离线下载目录】:/opt/openlist/data/temp/aria2
       # - 【这里替换为你的qbittorrent离线下载目录】:/opt/openlist/data/temp/qBittorrent
       # 出处 https://docs.openlist.team/zh/guide/advanced/offline-download.html
-      # 注意需要额外部署一个aria2
-      
+
     environment:
       - PUID=0
       - PGID=0
