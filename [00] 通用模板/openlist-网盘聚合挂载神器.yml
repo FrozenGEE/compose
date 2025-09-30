@@ -35,7 +35,7 @@ version: "3.3"
 services:
   openlist:
     image: openlistteam/openlist:latest-aio
-    # 镜像地址，可选tag有不少，具体去dockerhub看，预设为latest-aio
+    # 镜像地址，可选tag有不少，具体去dockerhub看，预设为latest-aio，自带ffmpeg和aria2，开箱即用
     container_name: openlist
     # 容器名字
     hostname: openlist
@@ -51,7 +51,6 @@ services:
       # - 【这里替换为你的aria2离线下载目录】:/opt/openlist/data/temp/aria2
       # - 【这里替换为你的qbittorrent离线下载目录】:/opt/openlist/data/temp/qBittorrent
       # 出处 https://docs.openlist.team/zh/guide/advanced/offline-download.html
-      # 注意需要额外部署一个aria2
       
     environment:
       - UMASK=022
