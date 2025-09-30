@@ -28,21 +28,22 @@
 
 ---
 version: "3.3"
-# 最后编辑时间：2025-09-10
+# 最后编辑时间：2025-10-01
 # alist被售了，暂时锁版本为3.40，等后续观望，可以follow/fork/star 这个组织后续项目 https://github.com/AlistTeam
 # 2025-07-10更新：翻新为 openlist
+# 2025-10-01更新：openlist支持使用变量设置管理员密码，本模板预设密码为openlist
 services:
   openlist:
     image: openlistteam/openlist:latest-aio
-    # 镜像地址，可选tag有不少，具体去dockerhub看，预设为latest-aio
+    # 镜像地址，可选tag有不少，具体去dockerhub看，预设为latest-aio，自带ffmpeg和aria2，开箱即用
     container_name: openlist
     # 容器名字
     hostname: openlist
     # 主机名
     user: root
-    # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射
+    # 给最高权限，直接让它可以访问到你的全部东西，注意要做好映射，4.10版本以后必须的参数，否则会因为权限问题导致无法写入数据从而不断重启
     volumes:
-      - ./alist:/opt/alist/data
+      - ./openlist:/opt/openlist/data
       # 配置文件目录
       - /home:/openlist/绿联个人文件夹
       - /volume1:/openlist/存储池1
@@ -53,7 +54,6 @@ services:
       # - 【这里替换为你的aria2离线下载目录】:/opt/openlist/data/temp/aria2
       # - 【这里替换为你的qbittorrent离线下载目录】:/opt/openlist/data/temp/qBittorrent
       # 出处 https://docs.openlist.team/zh/guide/advanced/offline-download.html
-      # 注意需要额外部署一个aria2
       
     environment:
       - UMASK=022
@@ -66,5 +66,6 @@ services:
     # ports:
       # - 5244:5244/tcp
       # WebUI 端口
+      # 如何自定义容器端口：https://doc.oplist.org/configuration/configuration
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
