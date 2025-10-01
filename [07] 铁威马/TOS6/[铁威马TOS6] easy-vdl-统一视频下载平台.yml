@@ -2,30 +2,49 @@
 # https://hub.docker.com/r/qq918652593/easy-vdl
 # 软件作者：隔壁小王
 
-# easy-vdl 是一款支持多平台（某音、某书、YouTube等）的视频解析与下载的可视化平台。内置智能缓存、批量解析、Emby/Jellyfin 元数据自动生成，界面美观，操作简单，适合个人和媒体库用户
+# easy-vdl 是一款支持多平台（某音、某书、B某、YouTube、更多平台、多平台博主订阅功能、批量下载、文件管理）的视频解析与下载的可视化平台。内置智能缓存、批量下载、Emby/Jellyfin 元数据自动刮削生成，界面美观，操作简单，适合个人和媒体库用户。
 
 ---
 version: "3"
-# 最后编辑时间：2026-07-04
+# 最后编辑时间：2025-10-01
 services:
   easy-vdl:
     image: qq918652593/easy-vdl:latest
-    # 镜像地址，仅支持amd64
+    # 镜像地址，latest仅支持amd64，arm64的tag为arm64
     container_name: easy-vdl
     # 容器名字
     hostname: easy-vdl
     # 主机名
     volumes:
       - 【这里替换为你的数据下载存放目录】/easy-vdl:/app/downloads
-      # 视频下载及管理目录，可自定义挂载
+      # 视频下载及管理目录，存储所有下载的视频文件，可自定义挂载
       - /Volume1/docker/easy-vdl/database:/app/database
-      # 日志目录，建议挂载本地便于排查问题
+      # 日志目录，包含应用运行日志，建议挂载本地便于排查问题
       - /Volume1/docker/easy-vdl/logs:/app/logs
-      # 数据库目录，建议挂载本地保证数据持久化
-    network_mode: bridge
-    # 80端口被占用，不能用host
-    ports:
-      - 8170:80/tcp
+      # 数据库目录，包含PostgreSQL数据库文件和Chrome用户数据，建议挂载本地保证数据持久化
+    environment:
+      - EASY_VDL_PORT=8170
+      # 自定义容器端口，官方默认为80，强烈推荐自定义
+      - EASY_VDL_ADMIN_USERNAME=admin
+      - EASY_VDL_ADMIN_PASSWORD=admin123456
+      # 自定义管理员账号密码，可选，不设置时首次进入UI可图形化设置，默认为admin/admin123456，请及时修改
+
+      # - COMMUNITY_API_KEY=
+      # 社区功能特权密匙，通过爱发电可以获得：https://afdian.com/a/docker
+      # - SNIFFER_LICENSE_KEY=
+      # 内测功能特权密匙，加入tg群即可获得：https://t.me/+7jcTMePlNVwwZjg1
+
+      - TZ=Asia/Shanghai
+      # 时区
+      # - PUID=0
+      # - PGID=0
+      # 不设置PUID/PGID时使用系统默认用户ID，适合大部分用户，在遇到数据库权限问题时可按需要设置PUID/PGID，模板直接预设为0 0，如果有需要就去掉注释变成参数使用
+
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8170:8170/tcp
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
