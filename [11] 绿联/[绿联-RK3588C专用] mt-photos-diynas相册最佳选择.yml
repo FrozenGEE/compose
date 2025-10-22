@@ -35,12 +35,18 @@
 
 # CUDA版本镜像，未内置buffalo_l相关的模型文件；如果容器启动后，下载模型文件失败；请查看下载模型后目录映射给容器
 
+# MT Photos AI 识别相关任务独立部署项目 (RKNN 移植版)
+# 项目地址：https://github.com/a15355447898a/mt-photos-ai-rk
+# 基于PaddleOCR实现的文本识别(OCR)接口，利用 RKNN 进行加速
+# 基于Chinese-CLIP（OpenAI CLIP模型的中文版本）实现的图片、文本提取特征接口，利用 RKNN 进行加速
+
 ---
 version: "3"
-# 最后编辑时间：2025-05-28
+# 最后编辑时间：2025-10-23
 # 2025-01-07 更新日志：mtphotos/mt-photos-ai 容器端口很早之前就修改为8060，补漏；某些arm设备如果mt-photos的日志提示数据库相关日志问题，那就把mt-photos-pgsql跑起来，关联上
 # 2024-11-27 更新日志：增加mt-photos-insightface的compose，insightface和deepface两者选其一即可，新增各种类型的镜像及说明
 # 2024-04-28 更新日志：新增mt-photos-deepface，修正部分错误内容，删减不需要的内容，新增人脸识别API使用支持cpu无avx指令的镜像，新增N卡驱动AI识别镜像编译教程
+# 2025-10-23 更新日志：新增mt-photos-ai-rk，并且替换到RK3588的模板当中使用，能调用NPU，处理效果很不错，镜像需要到作者github项目地址中下载、该后缀为tar，导入到docker中，仅支持RK3588系列，例如绿联DH4300，香橙派5plus/pro
 services:
   mt-photos:
     image: mtphotos/mt-photos:latest
@@ -119,13 +125,24 @@ services:
 
 ############################################################################
 
-  mt-photos-ai:
-    image: mtphotos/mt-photos-ai:arm-latest
-    # 镜像地址
-    container_name: mt-photos-ai
+  mt-photos-ai-rk:
+    image: mt-photos-ai-rknn:latest
+    # 镜像仅支持部分rk3588，需要在本地中下载项目文件，执行命令进行编译构建，还需要良好的网络环境
+    # 作者项目地址中有一个构建好的镜像文件，把后缀.zst去掉(即后缀为.tar)，导入到docker即可，实测绿联DH4300(RK3588C)可以使用
+    # 镜像文件下载地址：https://github.com/a15355447898a/mt-photos-ai-rk/releases/download/1.0/mt-photos-ai-rknn.tar.zst
+    container_name: mt-photos-ai-rk
     # 容器名字
-    hostname: mt-photos-ai
+    hostname: mt-photos-ai-rk
     # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    devices:
+      - /dev/dri:/dev/dri
+    # 调用核显
+    volumes:
+        - /proc/device-tree/compatible:/proc/device-tree/compatible
+        - /usr/lib/librknnrt.so:/usr/lib/librknnrt.so
+        # 照抄
     environment:
       - API_AUTH_KEY=1234567890
       # 智能识别API，可以随便写，在mt-photos内设置要对应该项
