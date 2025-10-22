@@ -29,8 +29,6 @@ services:
     environment:
       - APP_SERVER_PORT=8807
       # 自定义容器 WebUI 端口
-      - APP_NAME=dpanel
-      # 程序名称
     network_mode: host
     # 推荐自定义容器WebUI端口+ host网络模式
     
@@ -43,6 +41,7 @@ services:
       net.unraid.docker.icon: /mnt/user/LOGO/dpanel.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
+
 
 
 
