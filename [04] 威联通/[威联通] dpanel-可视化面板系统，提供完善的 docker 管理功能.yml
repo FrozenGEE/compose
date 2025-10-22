@@ -29,13 +29,12 @@ services:
     environment:
       - APP_SERVER_PORT=8807
       # 自定义容器 WebUI 端口
-      - APP_NAME=dpanel
-      # 程序名称
     network_mode: host
     # 推荐自定义容器WebUI端口+ host网络模式
     
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
 
 
 
