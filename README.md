@@ -1,7 +1,6 @@
 # 【更新日志-2025-10-01】
-- 黑猴桌游真容易买
-- 修正openlist模板内容，新增OPENLIST_ADMIN_PASSWORD该变量，现在支持在变量中自定义管理员密码了，再也不用新建容器后ssh终端中找密码了
-- 修改MP带数据库版中postgres的tag为17，锁版本，免得使用latest更新了镜像导致数据库无法写入的问题
+- MT相册更新RK3588的特供模板，支持调用NPU进行AI处理，仅支持部分RK3588，实测绿联DH4300是能用的，香橙派5也可以
+- 强烈推荐给作者送上一个Star：https://github.com/a15355447898a/mt-photos-ai-rk
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
