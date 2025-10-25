@@ -14,11 +14,11 @@ services:
     hostname: dysync
     # 主机名
     volumes:
-      - 【这里替换为你的数据存放目录】/collect:/app/collect
+      - 【这里替换为你的数据存放目录】/dysync/collect:/app/collect
       # 收藏的视频保存目录
-      - 【这里替换为你的数据存放目录】/favorite:/app/favorite
+      - 【这里替换为你的数据存放目录】/dysync/favorite:/app/favorite
       # 喜欢的视频保存目录
-      - 【这里替换为你的docker数据存放目录】/db:/app/db
+      - 【这里替换为你的docker数据存放目录】/dysync:/app/db
       # 数据库目录
     # network_mode: bridge
     network_mode: host
