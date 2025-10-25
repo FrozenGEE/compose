@@ -9,7 +9,7 @@
 version: "3"
 # 最后编辑时间：2025-10-25
 services:
-  amilys-emby:
+  easyvoice:
     image: cosincox/easyvoice:latest
     # 镜像地址
     container_name: easyvoice
