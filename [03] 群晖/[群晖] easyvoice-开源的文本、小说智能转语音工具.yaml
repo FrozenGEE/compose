@@ -6,7 +6,7 @@
 # 体验地址：https://easyvoice.ioplus.tech/generate
 ---
 version: "3"
-# 最后编辑时间：2024-03-11
+# 最后编辑时间：2025-10-25
 services:
   amilys-emby:
     image: cosincox/easyvoice:latest
