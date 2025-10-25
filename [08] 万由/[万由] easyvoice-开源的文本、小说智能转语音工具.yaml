@@ -4,11 +4,12 @@
 # https://hub.docker.com/r/cosincox/easyvoice
 
 # 体验地址：https://easyvoice.ioplus.tech/generate
+
 ---
 version: "3"
 # 最后编辑时间：2025-10-25
 services:
-  amilys-emby:
+  easyvoice:
     image: cosincox/easyvoice:latest
     # 镜像地址
     container_name: easyvoice
