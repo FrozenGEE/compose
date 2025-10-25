@@ -16,7 +16,7 @@ version: "3"
 services:
   ra2web:
     image: heizicao/ra2web:latest
-    # 镜像地址
+    # 镜像地址，仅支持x86
     container_name: ra2web
     # 容器名字
     hostname: ra2web
