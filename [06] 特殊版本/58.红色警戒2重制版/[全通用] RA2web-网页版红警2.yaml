@@ -1,0 +1,42 @@
+# 官方文档
+# https://github.com/ra2web/ra2web.github.io
+# https://hub.docker.com/r/heizicao/ra2web
+
+# 官网
+# https://chronodivide.com
+# https://ra2web.com
+# https://www.ra2web.com
+
+# 背景故事
+# https://zhuanlan.zhihu.com/p/1959574914458711924
+
+---
+version: "3"
+# 最后编辑时间：2025-10-25
+services:
+  ra2web:
+    image: heizicao/ra2web:latest
+    # 镜像地址
+    container_name: ra2web
+    # 容器名字
+    hostname: ra2web
+    # 主机名
+    network_mode: bridge
+    # 不推荐用host，除非没有被占用，有别的服务或docker需要用到3000
+    # ports:
+      # - 3000:3000/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/ra2web_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:3000]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/ra2web.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
