@@ -1,0 +1,36 @@
+# 官方文档
+# https://easyvoice.ioplus.tech
+# https://github.com/cosin2077/easyVoice
+# https://hub.docker.com/r/cosincox/easyvoice
+
+# 体验地址：https://easyvoice.ioplus.tech/generate
+
+---
+version: "3"
+# 最后编辑时间：2025-10-25
+services:
+  amilys-emby:
+    image: cosincox/easyvoice:latest
+    # 镜像地址
+    container_name: easyvoice
+    # 容器名字
+    hostname: easyvoice
+    # 主机名
+    volumes:
+      - /Volume1/docker/easyvoice:/app/audio
+      # 导出音频的目录
+    environment:
+      - PORT=3024
+      # 自定义容器端口，默认为3000，预设为3024
+      # - OPENAI_BASE_URL=
+      # - OPENAI_API_KEY=
+      # OpenAI 兼容 API 地址和密钥，默认不启用，可在WebUI上设置
+    # network_mode: bridge
+    network_mode: host
+    # 设置内可以自定义容器端口，这样就可以愉快地用host模式
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 3024:3024/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
