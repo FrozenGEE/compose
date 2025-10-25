@@ -1,0 +1,31 @@
+# 教程
+# https://post.smzdm.com/p/azz5le35
+# https://club.fnnas.com/forum.php?mod=viewthread&tid=40104
+
+---
+version: "3"
+# 最后编辑时间：2025-10-25
+services:
+  dysync:
+    image: registry.cn-hangzhou.aliyuncs.com/jianzhichu/dysync.net:latest
+    # 镜像地址，仅支持x86，不支持arm
+    container_name: dysync
+    # 容器名字
+    hostname: dysync
+    # 主机名
+    volumes:
+      - ./collect:/app/collect
+      # 收藏的视频保存目录
+      - ./favorite:/app/favorite
+      # 喜欢的视频保存目录
+      - ./db:/app/db
+      # 数据库目录
+    # network_mode: bridge
+    network_mode: host
+    # 设置内可以自定义容器端口，这样就可以愉快地用host模式
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 10101:10101/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
