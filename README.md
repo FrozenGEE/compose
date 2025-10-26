@@ -1,6 +1,8 @@
 # 【更新日志-2025-10-22】
 - MT相册更新RK3588的特供模板，支持调用NPU进行AI处理，仅支持部分RK3588，实测绿联DH4300是能用的，香橙派5也可以
 - 强烈推荐给作者送上一个Star：https://github.com/a15355447898a/mt-photos-ai-rk
+https://github.com/a15355447898a/mt-photos-insightface-rk
+- MT官网教程：https://mtmt.tech/docs/advanced/rknn
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
