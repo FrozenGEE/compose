@@ -176,9 +176,9 @@ services:
       - /dev/dri:/dev/dri
     # 调用核显
     volumes:
-        - /proc/device-tree/compatible:/proc/device-tree/compatible
-        - /usr/lib/librknnrt.so:/usr/lib/librknnrt.so
-        # 照抄
+      - /proc/device-tree/compatible:/proc/device-tree/compatible
+      - /usr/lib/librknnrt.so:/usr/lib/librknnrt.so
+      # 照抄
     environment:
       - API_AUTH_KEY=1234567890
       # 人脸识别API，可以随便写，在mt-photos内设置要对应该项
