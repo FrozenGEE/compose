@@ -27,7 +27,7 @@ services:
       # 数据库目录
       - /volume1/docker/filebrowser/srv:/srv
       - /volume1:/volume1
-      # 映射本地其他路径使其可以访问，可以自定义多个，必须再/srv之下
+      # 映射本地其他路径使其可以访问，可以自定义多个，必须在/srv之下
     environment:
       - TZ=Asia/Shanghai
       # 时区
