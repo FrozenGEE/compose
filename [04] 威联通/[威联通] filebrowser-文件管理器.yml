@@ -26,8 +26,8 @@ services:
       - /share/Container/filebrowser/database:/database
       # 数据库目录
       - /share/Container:/srv
-      - /share:/data
-      # 映射本地其他路径使其可以访问，可以自定义多个
+      - /share:/srv/data
+      # 映射本地其他路径使其可以访问，可以自定义多个，必须在/srv之下
     environment:
       - TZ=Asia/Shanghai
       # 时区
