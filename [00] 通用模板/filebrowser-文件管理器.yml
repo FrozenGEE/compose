@@ -25,11 +25,9 @@ services:
       # 配置目录
       - 【这里替换为你的docker数据存放目录】/filebrowser/database:/database
       # 数据库目录
-      # - 【这里替换为你的数据存放目录】/filebrowser/users:/users
-      # 用户主目录的路径，默认情况下不需要
       - 【这里替换为你的数据存放目录】/filebrowser/srv:/srv
       - 【这里替换为你的数据存放目录】:/srv/【这里替换为你的数据存放目录的名字】
-      # 映射本地其他路径使其可以访问，可以自定义多个，必须再/srv之下
+      # 映射本地其他路径使其可以访问，可以自定义多个，必须在/srv之下
     environment:
       - TZ=Asia/Shanghai
       # 时区
