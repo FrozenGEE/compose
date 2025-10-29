@@ -145,9 +145,9 @@ services:
       - /dev/dri:/dev/dri
     # 调用核显
     volumes:
-        - /proc/device-tree/compatible:/proc/device-tree/compatible
-        - /usr/lib/librknnrt.so:/usr/lib/librknnrt.so
-        # 照抄
+      - /proc/device-tree/compatible:/proc/device-tree/compatible
+      - /usr/lib/librknnrt.so:/usr/lib/librknnrt.so
+      # 照抄
     environment:
       - API_AUTH_KEY=1234567890
       # 智能识别API，可以随便写，在mt-photos内设置要对应该项
@@ -163,12 +163,12 @@ services:
 
 ############################################################################
 
-  mt-photos-insightface:
+  mt-photos-insightface-rk:
     image: a15355447898a/mt-photos-insightface-rknn:latest
     # 镜像地址，大佬做的适配了rk3588系列的镜像，支持调用NPU处理
-    container_name: mt-photos-insightface
+    container_name: mt-photos-insightface-rk
     # 容器名字
-    hostname: mt-photos-insightface
+    hostname: mt-photos-insightface-rk
     # 主机名
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
