@@ -24,7 +24,7 @@
 # https://github.com/MT-Photos/mt-photos-deepface/issues/16
 # https://gitee.com/mt-photos/mt-photos-deepface/issues/IAM6GM
 
-# ayaya大佬 针对mt-photos-ai 开发了RKNN 移植版本，可以调用RK3588的NPU来处理识别任务
+# ayaya大佬 针对 mt-photos-ai 和 mt-photos-insightface 开发了RKNN移植版本，可以调用RK3588的NPU来处理识别任务
 # https://github.com/a15355447898a
 # https://mtmt.tech/docs/advanced/rknn
 # https://github.com/a15355447898a/mt-photos-ai-rk
@@ -52,7 +52,8 @@ version: "3"
 # 2025-01-07 更新日志：mtphotos/mt-photos-ai 容器端口很早之前就修改为8060，补漏；某些arm设备如果mt-photos的日志提示数据库相关日志问题，那就把mt-photos-pgsql跑起来，关联上
 # 2024-11-27 更新日志：增加mt-photos-insightface的compose，insightface和deepface两者选其一即可，新增各种类型的镜像及说明
 # 2024-04-28 更新日志：新增mt-photos-deepface，修正部分错误内容，删减不需要的内容，新增人脸识别API使用支持cpu无avx指令的镜像，新增N卡驱动AI识别镜像编译教程
-# 2025-10-23 更新日志：更新mt-photos-insightface，mt-photos-ai-rk，仅且换到RK3588的模板当中使用，能调用NPU，处理效果很不错，仅支持RK3588系列，例如绿联DH4300，香橙派5plus/pro
+# 2025-10-23 更新日志：更新mt-photos-insightface，mt-photos-ai-rk，仅且换到RK3588的模板当中使用，能调用NPU，处理效果很不错，仅支持RK3588系列，例如绿联DH4300plus，香橙派5系列，友善cm3588等开发板均可，可在ssh中使用该命令查看npu调度情况：watch -n 1 cat /sys/kernel/debug/rknpu/load
+
 services:
   mt-photos:
     image: mtphotos/mt-photos:latest
