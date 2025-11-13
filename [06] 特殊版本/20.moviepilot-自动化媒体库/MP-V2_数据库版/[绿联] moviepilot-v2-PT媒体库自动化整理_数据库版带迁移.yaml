@@ -60,7 +60,7 @@
 
 ---
 version: "3"
-# 最后编辑时间：2025-09-10
+# 最后编辑时间：2025-11-14
 services:
   moviepilot-v2:
     image: jxxghp/moviepilot-v2:latest
