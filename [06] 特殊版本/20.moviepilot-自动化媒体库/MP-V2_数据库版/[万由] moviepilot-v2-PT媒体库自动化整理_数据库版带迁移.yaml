@@ -109,12 +109,6 @@ services:
 
       - UMASK=022
       # 默认创建新文件的权限，一般写022，MP默认为000，可以不写，也可以考虑设置为022
-      - TZ=Asia/Shanghai
-      # 时区
-
-      # - MOVIE_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/{{title}}.{{original_name}}
-      # - TV_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/S0{{season}}/{{original_name}}
-      # 电影和电视剧重命名格式，个人自用，默认不使用
 
 ########################################
 # 以下为MP链接到pgsql和redis，属于变量中的内容，照抄
