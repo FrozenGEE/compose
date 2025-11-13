@@ -405,13 +405,6 @@ services:
       # 密码在日志里，只会在第一次部署出现，如果忘记，可以文本形式打开 /config/logs/moviepilot.log 该文件，查看日志获取
       # 如果非初始密码忘记了，得删除pgsql的所有文件，然后重新配置，注意查看，可在MP内修改
 
-      - TZ=Asia/Shanghai
-      # 时区
-
-      # - MOVIE_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/{{title}}.{{original_name}}
-      # - TV_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/S0{{season}}/{{original_name}}
-      # 电影和电视剧重命名格式，个人自用，默认不使用，仅作记录
-
 ########################################
 #### 数据库 ####
 # 不需要修改，照抄
