@@ -72,7 +72,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # 使MP支持内建的重启操作，用于自动更新后重启
-      - ./moviepilot-v2/core:/moviepilot
+      - ./moviepilot-v2/core:/moviepilot/.cache/ms-playwright
       # 程序主目录
       - ./moviepilot-v2/config:/config
       # 配置目录
@@ -85,9 +85,6 @@ services:
 
 ########################################
     environment:
-      - MOVIEPILOT_AUTO_UPDATE=true
-      # 设置容器重启时自动更新，true/release/dev/false，默认release，插件的自动更新要设置为true
-      # 需要能正常连接Github 注意：如果出现网络问题可以配置PROXY_HOST
       - API_TOKEN=1234567890123456
       # API密钥，V1版本默认为moviepilot，V2版本需要手动配置为大于等于16个字符的复杂字符串
       # 如配置不符合要求将会强制重新生成，可在首次启动的启动日志或env配置文件中查看最新的值
@@ -99,119 +96,9 @@ services:
       # API端口，默认为3001，预设为55056，可自行修改
 
       - SUPERUSER=admin
-      # 超级管理者用户名，默认为admin，可在MP内修改，初次安装后失效
-      # 密码在日志里，只会在第一次部署出现，如果忘记，可以文本形式打开 /config/logs/moviepilot.log 该文件，查看日志获取，否则得删除pgsql的所有文件，然后重新配置，注意查看，可在MP内修改
+      - SUPERUSER_PASSWORD=password
+      # 超级管理者用户名和密码，默认为admin/password，可在MP内修改，初次安装后失效
+      # 密码如果忘记，可以文本形式打开 /config/logs/moviepilot.log 该文件，查看日志获取，否则得删除pgsql的所有文件，然后重新配置，注意查看，可在MP内修改
 
       - UMASK=022
       # 默认创建新文件的权限，一般写022，MP默认为000，可以不写，也可以考虑设置为022
-      - TZ=Asia/Shanghai
-      # 时区
-
-      # - MOVIE_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/{{title}}.{{original_name}}
-      # - TV_RENAME_FORMAT={{title}}{% if year %} ({{year}}){% endif %}/S0{{season}}/{{original_name}}
-      # 电影和电视剧重命名格式，个人自用，默认不使用，仅记录
-      
-########################################
-#### 认证站点 ####
-      - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt
-      ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔，会依次执行认证操作，直到有一个站点认证成功
-      ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
-      ## 密钥在控制面板中查看，切勿泄露
-      ## 以下认证只需要写一个即可，记得把#注释去掉
-      ## 推荐红豆饭，因为支持iyuu和mp的认证（2024年5月注释）
-########################################
-      # - IYUU_SIGN=
-      # iyuu的认证，输入IYUU的登录令牌即可，IYUU本身也是需要认证的
-########################################
-      # - HHCLUB_USERNAME=
-      # - HHCLUB_PASSKEY=
-      # hhclub的用户名和密钥，注意这里是用户名
-########################################
-      # - AUDIENCES_UID=
-      # - AUDIENCES_PASSKEY=
-      # audiences的用户UID和密钥
-########################################
-      # - HDDOLBY_UID=
-      # - HDDOLBY_PASSKEY=
-      # hddolby的用户UID和密钥
-########################################
-      # - ZMPT_UID=
-      # - ZMPT_PASSKEY=
-      # zmpt的用户UID和密钥
-########################################
-      # - FREEFARM_UID=
-      # - FREEFARM_PASSKEY=
-      # freefarm的用户UID和密钥
-########################################
-      # - HDFANS_UID=
-      # - HDFANS_PASSKEY=
-      # hdfans的用户UID和密钥
-########################################
-      # - WINTERSAKURA_UID=
-      # - WINTERSAKURA_PASSKEY=
-      # wintersakura的用户UID和密钥
-########################################
-      # - LEAVES_UID=
-      # - LEAVES_PASSKEY=
-      # leaves的用户UID和密钥
-########################################
-      # - PTBA_UID=
-      # - PTBA_PASSKEY=
-      # ptba的用户UID和密钥
-########################################
-      # - ICC2022_UID=
-      # - ICC2022_PASSKEY=
-      # icc2022的用户UID和密钥
-########################################
-      # - XINGTAN_UID=
-      # - XINGTAN_PASSKEY=
-      # xingtan的用户UID和密钥
-########################################
-      # - PTVICOMO_UID=
-      # - PTVICOMO_PASSKEY=
-      # ptvicomo的用户UID和密钥
-########################################
-      # - AGSVPT_UID=
-      # - AGSVPT_PASSKEY
-      # agsvpt用户UID和密钥
-########################################
-      # - HDKYL_UID=
-      # - HDKYL_PASSKEY=
-      # hdkyl的用户UID和密钥
-########################################
-      # - QINGWA_UID=
-      # - QINGWA_PASSKEY=
-      # qingwa的用户UID和密钥
-########################################
-      # - DISCFAN_UID=
-      # - DISCFAN_PASSKEY=
-      # discfan的用户UID和密钥
-########################################
-      # - HAIDAN_UID=
-      # - HAIDAN_PASSKEY=
-      # haidan的用户UID和密钥
-########################################
-      # - ROUSI_UID=
-      # - ROUSI_PASSKEY=
-      # rousi的用户UID和密钥
-########################################
-      # - SUNNY_UID=
-      # - SUNNY_PASSKEY=
-      # sunny的用户UID和密钥
-########################################
-      # - PTCAFE_UID=
-      # - PTCAFE_PASSKEY=
-      # ptcafe的用户UID和密钥
-########################################
-      # - PTZONE_UID=
-      # - PTZONE_PASSKEY=
-      # ptzone的用户UID和密钥
-########################################
-      # - KUFEI_UID=
-      # - KUFEI_PASSKEY=
-      # kufei的用户UID和密钥
-########################################
-      # - YEMAPT_UID=
-      # - YEMAPT_PASSKEY=
-      # yemapt的用户UID和密钥
-########################################
