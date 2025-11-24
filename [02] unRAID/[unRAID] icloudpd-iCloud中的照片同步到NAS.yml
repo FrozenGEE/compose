@@ -19,7 +19,7 @@ services:
     hostname: icloudpd
     # 主机名
     command: icloudpd --directory /data --domain cn --username your@email.com --password-provider webui --mfa-provider webui --watch-with-interval 3600
-    # /data为容器目录，不要
+    # /data为容器目录，不动
     # --domain cn，国区账号需添加此参数，外区不需要这一段内容
     # your@email.com为ios账号，根据实际情况修改
     # --password-provider webui，不需要修改，将在WebUI上输入密码进行登录
