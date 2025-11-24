@@ -1,8 +1,3 @@
-# 前言
-# alist被卖了，详情见下链接。暂时锁版本为3.40，等后续观望，可以follow/fork/star 这个组织后续项目 https://github.com/AlistTeam
-# https://linux.do/t/topic/714827
-# https://github.com/AlistGo/alist/issues/8649（不用看了，这个issuse已经删掉了）
-
 # 官方文档
 # https://github.com/OpenListTeam/OpenList
 # https://docs.openlist.team/zh
@@ -29,9 +24,6 @@
 ---
 version: "3.3"
 # 最后编辑时间：2025-10-01
-# alist被售了，暂时锁版本为3.40，等后续观望，可以follow/fork/star 这个组织后续项目 https://github.com/AlistTeam
-# 2025-07-10更新：翻新为 openlist
-# 2025-10-01更新：openlist支持使用变量设置管理员密码，本模板预设密码为openlist
 services:
   openlist:
     image: openlistteam/openlist:latest-aio
@@ -54,6 +46,8 @@ services:
       # 出处 https://docs.openlist.team/zh/guide/advanced/offline-download.html
       
     environment:
+      - OPENLIST_ADMIN_PASSWORD=password
+      # 自定义预设管理员账号的密码，预设为password
       - UMASK=022
       # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
