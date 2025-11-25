@@ -51,12 +51,11 @@ services:
       # 定义日志文件路径，不管，照抄
       - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
       # V2RAYA_V2RAY_BIN 的值应当是 /usr/local/bin/v2ray 或 /usr/local/bin/xray，默认的核心是 xray
-      - V2RAYA_NFTABLES_SUPPORT=off
+      - V2RAYA_NFTABLES_SUPPORT=on
       # 如果你的宿主系统使用原生的 nftables，那么就把 V2RAYA_NFTABLES_SUPPORT 设置为 on
 
-      - IPTABLES_MODE=iptables
+      - IPTABLES_MODE=nftables
       # 如果你的宿主系统使用 iptables，那么可以通过 IPTABLES_MODE 变量来指定后端，将该变量的值设置为 nftables 将使用 nft 后端，设置为 legacy 则将使用传统后端
-      # 默认预设为 iptables，判断方法见最上，实测x86设备是 iptables v1.8.9 (nf_tables)
 
     volumes:
       - /lib/modules:/lib/modules:ro
