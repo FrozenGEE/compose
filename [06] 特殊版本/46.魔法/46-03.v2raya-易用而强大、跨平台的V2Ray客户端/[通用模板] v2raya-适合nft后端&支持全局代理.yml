@@ -61,7 +61,7 @@ services:
     volumes:
       - /lib/modules:/lib/modules:ro
       # 内核，请确保支持使用全局透明代理
-      - 【这里替换为你的docker数据存放目录】/v2raya/v2raya:/etc/v2raya
+      - 【这里替换为你的docker数据存放目录】/v2raya:/etc/v2raya
       # 配置文件目录
 
       - /etc/resolv.conf:/etc/resolv.conf
