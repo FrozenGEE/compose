@@ -19,9 +19,8 @@ ssh 中执行```iptables --version```得出以下结果
 | 万由U-NAS | U-NAS 6.0  | 5.10.0-34-amd64 | iptables v1.8.7 (nf_tables) |  | 猜的✅ | 
 | 铁威马TOS5 | 没设备 | 不写  |  |  | 猜的✅ | 
 | 铁威马TOS6 | 没设备 | 不写  |  |  | 猜的✅ | 
-| 绿联dx4600 | UGOS Pro 1.4.0 | 6.1.27 | iptables v1.8.9 (nf_tables) |  | ✅ | 
-| 绿联dxp2800 | UGOS Pro 1.4.0 | 6.1.27 | iptables v1.8.9 (nf_tables) |  | ✅ | 
-| 绿联dh4300 | UGOS Pro 1.4.2 | 6.1.84 | iptables v1.8.9 (nf_tables) |  | ✅ | 
+| 绿联amd64 | UGOS Pro 1.4.0 | 6.1.27 | iptables v1.8.9 (nf_tables) |  | ✅ | 
+| 绿联arm64 | UGOS Pro 1.4.2 | 6.1.84 | iptables v1.8.9 (nf_tables) |  | ✅ | 
 | 飞牛OS | fnOS 0.9.2 | 6.12.24-trim  | iptables v1.8.9 (nf_tables) |  | ✅ | 
 | 极空间T2 | zos 1.2.0 | 5.10.110 | iptables v1.8.7 (nf_tables) |  | ✅ | 
 | 香橙派5plus | Ubuntu 22.04.5 LTS | 5.10.160 | iptables v1.8.7 (nf_tables) |  | ✅ | 
