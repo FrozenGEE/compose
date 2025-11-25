@@ -51,7 +51,7 @@ services:
       # 定义日志文件路径，不管，照抄
       - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
       # V2RAYA_V2RAY_BIN 的值应当是 /usr/local/bin/v2ray 或 /usr/local/bin/xray，默认的核心是 xray
-      - V2RAYA_NFTABLES_SUPPORT=off
+      - V2RAYA_NFTABLES_SUPPORT=on
       # 如果你的宿主系统使用原生的 nftables，那么就把 V2RAYA_NFTABLES_SUPPORT 设置为 on
 
       - IPTABLES_MODE=nftables
