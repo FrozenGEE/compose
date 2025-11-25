@@ -56,7 +56,6 @@ services:
 
       - IPTABLES_MODE=legacy
       # 如果你的宿主系统使用 iptables，那么可以通过 IPTABLES_MODE 变量来指定后端，将该变量的值设置为 nftables 将使用 nft 后端，设置为 legacy 则将使用传统后端
-      # 默认预设为 iptables，判断方法见最上，本人手头上的机器部署时试过使用 legacy 导致无法连接到其他容器，个人网络水平有限，不懂，欢迎解答，虽然我还是听不懂
 
     volumes:
       - /lib/modules:/lib/modules:ro
