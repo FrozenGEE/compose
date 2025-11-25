@@ -1,0 +1,64 @@
+# 官方文档
+# https://v2raya.org
+# https://v2raya.org/docs/prologue/introduction
+# https://v2raya.org/docs/prologue/installation/docker
+# https://hub.docker.com/r/mzz2017/v2raya
+
+# 建议看看官方文档，如果你使用 macOS 或其他不支持 host 模式的环境，在该情况下无法使用全局透明代理，或者你不希望使用全局透明代理，docker 命令会略有不同
+# 注意此为适合 nft/legacy 后端&支持全局代理的部署模板，默认使用的是 iptables (即 nft )
+
+# nft 和 legacy 的支持查询方法如下，最好直接问deepseek
+# 群晖根据【方法1】实测是 iptables v1.8.9 (nf_tables)
+
+# 按照 Docker安装 之后，启用redirect或tproxy透明代理模式，类似旁路由模式，就会遇到iptables缺失相关的报错
+# 因此本模板针对群晖使用不需要或不支持全局代理的模板
+# 群晖系统是一个定制版Linux系统，透明代理需要的iptables相关模块并没有包含
+# 所以解决方案就是补齐缺失的iptables模块，具体参考 syno-iptables 下载安装预编译模块或者自编译，具体内容见下项目
+# https://github.com/sjtuross/syno-iptables
+
+# 【方法1】查看iptables版本信息
+# iptables --version
+# 若输出包含 nf_tables 或 nftables，如 iptables v1.8.7 (nf_tables)，则使用 nft 后端
+# 若未提及这些关键词，如 iptables v1.6.0，则使用 legacy 后端
+
+---
+version: "3"
+# 最后编辑时间：2025-05-12
+services:
+  v2raya:
+    image: mzz2017/v2raya:latest
+    # 镜像地址
+    container_name: v2raya
+    # 容器名字
+    hostname: v2raya
+    # 主机名
+    environment:
+      - V2RAYA_LOG_FILE=/tmp/v2raya.log
+      # 定义日志文件路径，不管，照抄
+      - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
+      # V2RAYA_V2RAY_BIN 的值应当是 /usr/local/bin/v2ray 或 /usr/local/bin/xray，默认的核心是 xray
+    volumes:
+      - ./v2raya:/etc/v2raya
+      # 配置文件目录
+      - /etc/resolv.conf:/etc/resolv.conf
+      # 照抄，踩点了，有该文件存在
+      # 上面这条如果 /etc 内没有或不会进去新建 resolv.conf 文件，可以写下面这条，注意新建好 resolv.conf 文件，这是文件映射
+      # - 【这里替换为你的docker数据存放目录】/v2raya/resolv.conf:/etc/resolv.conf
+
+    # network_mode: bridge
+    network_mode: host
+    # 可 host 也可 bridge，如果端口冲突，预设使用host
+
+    # bridge 时，在同一个docker容器子网 bridge 中，其他容器可以通过 172.17.0.1:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
+    # host 时，在同一个docker容器子网 host 中，其他容器可以通过 127.0.0.1:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
+    # 但是不在统一docker容器子网的，无法通过以上方式通讯，可通过以下方式
+    # 对于局域网中其他设备，你直接写 服务器的IP:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
+
+      # - 2017:2017/tcp
+      # WebUI 端口：2017
+      # - 20170-20172:20170-20172/tcp
+      # sock 代理端口：20170
+      # http 代理端口：20171
+      # http 代理端口(带分流规则)：20172
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
