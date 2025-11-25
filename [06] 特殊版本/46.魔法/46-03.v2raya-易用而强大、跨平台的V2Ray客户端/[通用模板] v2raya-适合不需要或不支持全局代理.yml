@@ -23,7 +23,7 @@ services:
       - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
       # V2RAYA_V2RAY_BIN 的值应当是 /usr/local/bin/v2ray 或 /usr/local/bin/xray，默认的核心是 xray
     volumes:
-      - 【这里替换为你的docker数据存放目录】/v2raya/v2raya:/etc/v2raya
+      - 【这里替换为你的docker数据存放目录】/v2raya:/etc/v2raya
       # 配置文件目录
       
       - /etc/resolv.conf:/etc/resolv.conf
@@ -48,3 +48,4 @@ services:
       # http 代理端口(带分流规则)：20172
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
