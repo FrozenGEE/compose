@@ -41,6 +41,8 @@
     # 镜像地址
 ```
 >  指定数据库，注意tag，截至2025-01-08前，官方支持 pg14/15/16，pg17名义上是兼容的
+> 
 >  为确保安装的pgvecto.rs版本兼容，tag范围是 >= 0.2.0, < 0.4.0，本人的模板使用的是 pg16-v0.3.0
->  https://hub.docker.com/r/tensorchord/pgvecto-rs
+> 
+>  [tensorchord/pgvecto-rs](https://hub.docker.com/r/tensorchord/pgvecto-rs)
 
