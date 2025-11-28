@@ -28,7 +28,6 @@
 ---
 version: "3"
 # 最后编辑时间：2025-11-28
-# 注意该项目由于cookie获取失败，暂时没有部署成功
 services:
   mi-note-sync:
     image: idootop/mi-note-sync:latest
