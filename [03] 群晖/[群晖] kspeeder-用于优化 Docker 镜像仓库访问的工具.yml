@@ -1,0 +1,31 @@
+# 官方文档
+# https://kspeeder.com
+# https://github.com/kspeeder/docker_kspeeder
+# https://hub.docker.com/r/linkease/kspeeder
+
+---
+version: "3"
+# 最后编辑时间：2025-11-28
+services:
+  kspeeder:
+    image: linkease/kspeeder:latest
+    # 镜像地址
+    container_name: kspeeder
+    # 容器名字
+    hostname: kspeeder
+    # 主机名
+    volumes:
+      - /volume1/docker/kspeeder/kspeeder-data:/kspeeder-data
+      # 数据文件目录
+      - /volume1/docker/kspeeder/kspeeder-config:/kspeeder-config
+      # 配置文件目录
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5003:5003/tcp
+      # WebUI 管理端口
+      # - 5443:5443/tcp
+      # KSpeeder 主服务端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
