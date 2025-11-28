@@ -1,12 +1,12 @@
-# 官网
-# https://wiki.vertex.icu
 # 官方文档
+# https://wiki.vertex-app.top
+# https://github.com/vertex-app/vertex
 # https://hub.docker.com/r/lswl/vertex
-# https://wiki.vertex.icu/xin-shou-ru-men/an-zhuang-cao-zuo
+# https://wiki.vertex-app.top/xin-shou-ru-men/an-zhuang-cao-zuo
 
 ---
 version: "3"
-# 最后编辑时间：2024-04-25
+# 最后编辑时间：2025-11-28
 services:
   vertex:
     image: lswl/vertex:stable
@@ -19,18 +19,16 @@ services:
       - /volume1/docker/vertex:/vertex
       # 配置文件目录
     environment:
-      - HTTP_PORT=32110
-      # 自定义容器http端口
-      - HTTPS_PORT=32443
-      # 自定义容器https端口
-      # - HTTPS_ENABLE=ture
-      # 开启https支持，前提是已经生成或下载 HTTPS 证书并放入ssl文件夹
-      - TZ=Asia/Shanghai
-      # 时区
-      - PUID=1000
-      - PGID=100
-      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
-      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1，默认为0
+      - PORT=32110
+      # 自定义容器 WebUI http 端口
+      - REDISPORT=9673
+      # 自定义容器内 redis 的端口，预设为9763避免使用host产生冲突
+    # network_mode: bridge
     network_mode: host
-    restart: always
+    # 推荐自定义VERTEX的WebUI端口，然后直接用host模式，因为3000端口很多docker镜像都用
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 32110:32110/tcp
+      # WebUI HTTP端口
+    restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
