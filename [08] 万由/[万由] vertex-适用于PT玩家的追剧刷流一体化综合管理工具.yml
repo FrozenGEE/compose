@@ -27,8 +27,8 @@ services:
       # 开启https支持，前提是已经生成或下载 HTTPS 证书并放入ssl文件夹
       - TZ=Asia/Shanghai
       # 时区
-      - PUID=1000
-      - PGID=100
+      - PUID=0
+      - PGID=0
       # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
       # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1，默认为0
     network_mode: host
