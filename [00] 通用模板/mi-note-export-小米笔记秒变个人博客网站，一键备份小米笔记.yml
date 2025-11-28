@@ -5,14 +5,14 @@
 # 演示网站：https://mi-note-export.vercel.app
 # 部署教程：https://post.smzdm.com/p/a0vv7g0z
 
-
 # 获取 cookie 失败问题：https://github.com/idootop/mi-note-export/issues/8
 # 获取 Cookie 教程：https://github.com/idootop/mi-note-export/issues/4
 # 1. 在浏览器登录小米云服务官网 https://i.mi.com 然后打开笔记。
 # 2. 然后按 F12 打开调试控制台，切换到网络面板，复制 Cookie。
 # 3. 最后将复制好的 Cookie 字符串写入到配置单中的变量，注意，Cookie 相当于你的小米账号密码，请勿泄露给其他人。
 
-# 注意：还需要从官方 github 下载他的项目，复制 apps/web/dist 下的静态文件到 public，然后将 public 文件夹打包上传到NAS中的 /.../mi-note-export 内，注意目录结构
+# 注意：需要从官方 github 下载他的项目，复制 apps/web/dist 下的静态文件到 public，然后将 public 文件夹打包上传到 mi-note-export 内，注意目录结构
+# 注意：用文本编辑器把 cookie 内容写进到 MI_COOKIE='XXX' 的XXX中，然后保存为 .env 文件，再把文件放到 compose文件 旁边
 # 注意：暂不支持备份私密笔记、待办和思维导图
 # 目录结构
 # public
@@ -28,6 +28,7 @@
 ---
 version: "3"
 # 最后编辑时间：2025-11-28
+# 注意该项目由于cookie获取失败，暂时没有部署成功
 services:
   mi-note-sync:
     image: idootop/mi-note-sync:latest
@@ -43,7 +44,7 @@ services:
     environment:
       - MI_COOKIE=【这里修改为你的小米cookie】
       # 这里修改为你的小米cookie，具体看最上面的教程
-    network_mode: host
+    network_mode: brige
     # 不存在WebUI端口，设置为host只是为了减少docker子网的创建
     restart: no
     # 重启策略设置为no，防止触发风控，需要定期运行起来才可以同步
