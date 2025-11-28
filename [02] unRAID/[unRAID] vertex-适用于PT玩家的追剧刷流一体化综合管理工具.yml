@@ -19,17 +19,16 @@ services:
       - /mnt/user/appdata/vertex:/vertex
       # 配置文件目录
     environment:
-      # - HTTP_PORT=3110
+      - HTTP_PORT=3110
       # 自定义容器http端口
-      # - HTTPS_PORT=3443
+      - HTTPS_PORT=3443
       # 自定义容器https端口
       # - HTTPS_ENABLE=ture
       # 开启https支持，前提是已经生成或下载 HTTPS 证书并放入ssl文件夹
       - TZ=Asia/Shanghai
       # 时区
-      - PUID=1026
-，默认为0
-      - PGID=100
+      - PUID=0
+      - PGID=0
       # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
       # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1，默认为0
     network_mode: host
@@ -37,7 +36,7 @@ services:
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
-      net.unraid.docker.webui: http://[IP]:[PORT:3000]
+      net.unraid.docker.webui: http://[IP]:[PORT:3110]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
       net.unraid.docker.icon: /mnt/user/LOGO/vertex_A.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
