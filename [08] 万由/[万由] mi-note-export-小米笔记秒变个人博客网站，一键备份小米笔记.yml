@@ -38,7 +38,7 @@ services:
     hostname: mi-note-sync
     # 主机名
     volumes:
-      - 【这里替换为你的docker数据存放目录】/mi-note-export/public/data:/app/public/data
+      - /mnt/unas/data/docker/mi-note-export/public/data:/app/public/data
       # 注意，还需要从官方 github 下载他的项目，复制 apps/web/dist 下的静态文件到 public，然后将 public 文件夹打包上传到 mi-note-export 内，注意目录结构
       # 用于下载小米笔记和图片/录音等附件到本地
     environment:
@@ -57,7 +57,7 @@ services:
     hostname: mi-note-web
     # 主机名
     volumes:
-      - 【这里替换为你的docker数据存放目录】/mi-note-export/public/data:/home/static/data:ro
+      - /mnt/unas/data/docker/mi-note-export/public/data:/home/static/data:ro
       # 注意，还需要从官方 github 下载他的项目，复制 apps/web/dist 下的静态文件到 public，然后将 public 文件夹打包上传到 mi-note-export 内，注意目录结构
       # 将笔记转换为博客显示的静态页面，只读
     network_mode: bridge
