@@ -1,0 +1,69 @@
+
+# 官方文档
+# https://github.com/idootop/mi-note-export
+# https://hub.docker.com/r/idootop/mi-note-export
+# 小米云服务官网：i.mi.com
+# 演示网站：https://mi-note-export.vercel.app
+# 部署教程：https://post.smzdm.com/p/a0vv7g0z
+
+# 获取 cookie 失败问题：https://github.com/idootop/mi-note-export/issues/8
+# 获取 Cookie 教程：https://github.com/idootop/mi-note-export/issues/4
+# 1. 在浏览器登录小米云服务官网 https://i.mi.com 然后打开笔记。
+# 2. 然后按 F12 打开调试控制台，切换到网络面板，复制 Cookie。
+# 3. 最后将复制好的 Cookie 字符串写入到配置单中的变量，注意，Cookie 相当于你的小米账号密码，请勿泄露给其他人。
+
+# 注意：需要从官方 github 下载他的项目，复制 apps/web/dist 下的静态文件到 public，然后将 public 文件夹打包上传到 mi-note-export 内，注意目录结构
+# 注意：用文本编辑器把 cookie 内容写进到 MI_COOKIE='XXX' 的XXX中，然后保存为 .env 文件，再把文件放到 compose文件 旁边
+# 注意：暂不支持备份私密笔记、待办和思维导图
+# 目录结构
+# public
+# ├── assets
+# │   ├── index-Bu60GB9I.css
+# │   └── index-CprafGi1.js
+# ├── data
+# │   ├── assets      # 下载的文件
+# │   ├── notes.json  # 小米笔记数据
+# ├── index.html      # 静态网站首页
+# └── logo.png
+
+---
+version: "3"
+# 最后编辑时间：2025-11-28
+services:
+  mi-note-sync:
+    image: idootop/mi-note-sync:latest
+    # 镜像地址
+    container_name: mi-note-sync
+    # 容器名字
+    hostname: mi-note-sync
+    # 主机名
+    volumes:
+      - /share/Container/mi-note-export/public/data:/app/public/data
+      # 注意，还需要从官方 github 下载他的项目，复制 apps/web/dist 下的静态文件到 public，然后将 public 文件夹打包上传到 mi-note-export 内，注意目录结构
+      # 用于下载小米笔记和图片/录音等附件到本地
+    environment:
+      - MI_COOKIE=【这里修改为你的小米cookie】
+      # 这里修改为你的小米cookie，具体看最上面的教程
+    network_mode: brige
+    # 不存在WebUI端口，设置为host只是为了减少docker子网的创建
+    restart: no
+    # 重启策略设置为no，防止触发风控，需要定期运行起来才可以同步
+
+  mi-note-web:
+    image: idootop/mi-note-web:latest
+    # 镜像地址
+    container_name: mi-note-web
+    # 容器名字
+    hostname: mi-note-web
+    # 主机名
+    volumes:
+      - /share/Container/mi-note-export/public/data:/home/static/data:ro
+      # 注意，还需要从官方 github 下载他的项目，复制 apps/web/dist 下的静态文件到 public，然后将 public 文件夹打包上传到 mi-note-export 内，注意目录结构
+      # 将笔记转换为博客显示的静态页面，只读
+    network_mode: bridge
+    # 3000 端口很多别的服务到，所以不推荐使用host网络模式
+    ports:
+      - 35400:3000/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
