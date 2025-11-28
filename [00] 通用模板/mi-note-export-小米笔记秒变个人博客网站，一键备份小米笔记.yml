@@ -5,13 +5,15 @@
 # 演示网站：https://mi-note-export.vercel.app
 # 部署教程：https://post.smzdm.com/p/a0vv7g0z
 
+
 # 获取 cookie 失败问题：https://github.com/idootop/mi-note-export/issues/8
 # 获取 Cookie 教程：https://github.com/idootop/mi-note-export/issues/4
 # 1. 在浏览器登录小米云服务官网 https://i.mi.com 然后打开笔记。
 # 2. 然后按 F12 打开调试控制台，切换到网络面板，复制 Cookie。
 # 3. 最后将复制好的 Cookie 字符串写入到配置单中的变量，注意，Cookie 相当于你的小米账号密码，请勿泄露给其他人。
 
-# 注意，还需要从官方 github 下载他的项目，复制 apps/web/dist 下的静态文件到 public，然后将 public 文件夹打包上传到 mi-note-export 内，注意目录结构
+# 注意：还需要从官方 github 下载他的项目，复制 apps/web/dist 下的静态文件到 public，然后将 public 文件夹打包上传到NAS中的 /.../mi-note-export 内，注意目录结构
+# 注意：暂不支持备份私密笔记、待办和思维导图
 # 目录结构
 # public
 # ├── assets
