@@ -11,15 +11,16 @@
 # https://www.hqshi.cn/info/knowledge/sillytavern-guide
 
 # 初次部署以后，会在 /config 文件夹内生成一份config.yaml，按照以下要求修改并保存，然后重启一次容器
-# 第03行 改为 listen: true (必须)
-# 第09行 改为 ipv6: ture (可选)
-# 第12行 改为 port: 48000 (可选，华硕NAS推荐修改)
-# 在18行后面按回车键，输入：- 172.17.0.* (必须，照抄即可，此为你的查看bridge网段的网关，如果你有使用macvlan/ipvlan，则额外添加，根据本人观察docker的bridge网关均为172.17.0.1)
-# 第22、23行为账号密码，建议修改，默认为 user/password
+# 【必须改】listen: false 改为 listen: true
+# 【可选】   ipv6: false这一行内容改为 ipv6: ture
+# 【可选】port: 8000 改为 port: 48000，华硕NAS推荐修改，这是自定义容器的端口
+# 【必须改】在 whitelist: 的下一行输入：- 172.17.0.* ，记得对齐格式，照抄即可，此为你的查看bridge网段的网关，如果你有使用macvlan/ipvlan，则额外添加，根据本人观察docker的bridge网关均为172.17.0.1
+# 【可选】username: "user"和password: "password"为账号密码，建议修改，默认为 user/password
 
 ---
 version: "3"
-# 最后编辑时间：2025-02-27
+# 最后编辑时间：2025-12-04
+# 更新日志：修改上方的初始化教程，部分内容可能具有时效性，需要根据实际情况修改
 services:
   sillytavern:
     image: ghcr.nju.edu.cn/sillytavern/sillytavern:latest
