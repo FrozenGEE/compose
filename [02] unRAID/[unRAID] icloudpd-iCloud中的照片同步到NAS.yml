@@ -30,6 +30,11 @@ services:
       - /mnt/user/icloudpd:/data
       # icloud同步数据目录
     environment:
+      - PUID=0
+      - PGID=0
+      # 赋予最高权限以便于能写入数据
+      - UMASK=022
+      # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
       # 时区
     dns:
