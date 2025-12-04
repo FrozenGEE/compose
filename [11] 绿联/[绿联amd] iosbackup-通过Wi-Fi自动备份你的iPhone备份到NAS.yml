@@ -1,0 +1,40 @@
+# 官方文档
+# https://www.bilibili.com/video/BV1btMbzKEsM
+# https://razeen.me/posts/easy-ways-backup-iphone-over-wifi
+# https://hub.docker.com/r/razeencheng/iosbackup
+
+---
+version: "3"
+# 最后编辑时间：2025-06-16
+services:
+  iosbackup:
+    image: razeencheng/iosbackup:latest
+    # 镜像地址，仅支持amd64，不支持arm
+    container_name: iosbackup
+    # 容器名字
+    hostname: iosbackup
+    # 主机名
+    privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    volumes:
+      - ./iosbackup/lockdown:/var/lib/lockdown
+      - ./iosbackup/configs:/configs
+      # 配置文件夹
+      - ./iosbackup/backups/:/backups
+      # iOS 数据备份文件夹
+      - /var/run/dbus:/run/dbus
+      - /dev/bus/usb:/dev/bus/usb
+      # 照抄
+    environment:
+      - PORT=9510
+      # 自定义 Web 服务监听的端口，预设为9510
+      - LOG_LEVEL=INFO
+      # 日志级别，默认 WARN，预设为INFO
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 9510:9510/tcp
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
