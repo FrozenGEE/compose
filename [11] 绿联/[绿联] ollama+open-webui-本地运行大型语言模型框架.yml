@@ -57,7 +57,7 @@ services:
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:latest
+    image: ghcr.nju.edu.cn/open-webui/open-webui:latest
     # 镜像地址，模板默认为使用cpu进行推理运算
     # 如果拉取缓慢，可选 dyrnq/open-webui 作为替代
     container_name: open-webui
@@ -72,7 +72,7 @@ services:
 #                  count: all
 #                  capabilities:
 #                    - gpu
-# 如果有N卡才用到，并且镜像替换为 ghcr.io/open-webui/open-webui:cuda
+# 如果有N卡才用到，并且镜像替换为 ghcr.nju.edu.cn/open-webui/open-webui:cuda
     environment:
       - OLLAMA_BASE_URL=127.0.0.1:11434
       # 修改为你本地ollama的访问地址和端口，默认端口为11434

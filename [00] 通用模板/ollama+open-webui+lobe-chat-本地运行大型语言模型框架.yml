@@ -109,7 +109,7 @@ services:
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:latest
+    image: ghcr.nju.edu.cn/open-webui/open-webui:latest
     # 镜像地址，模板默认为使用cpu进行推理运算
     # 如果拉取缓慢，可选 dyrnq/open-webui 作为替代
     container_name: open-webui
@@ -124,7 +124,7 @@ services:
 #                  count: all
 #                  capabilities:
 #                    - gpu
-# 如果有N卡才用到，并且镜像替换为 ghcr.io/open-webui/open-webui:cuda
+# 如果有N卡才用到，并且镜像替换为 ghcr.nju.edu.cn/open-webui/open-webui:cuda
     environment:
       - PORT=11435
       # 自定义容器端口，默认为8080，这里修改为11435

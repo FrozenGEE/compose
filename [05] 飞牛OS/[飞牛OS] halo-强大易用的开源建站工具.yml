@@ -13,7 +13,7 @@
 # 目前 Halo 官方维护的 Docker 镜像仓库，可以根据自己的需求选择合适的镜像源
 # registry.fit2cloud.com/halo/halo
 # halohub/halo
-# ghcr.io/halo-dev/halo
+# ghcr.nju.edu.cn/halo-dev/halo
 
 ---
 version: "3"

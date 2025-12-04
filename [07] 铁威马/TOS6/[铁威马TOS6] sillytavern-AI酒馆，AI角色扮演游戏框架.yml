@@ -22,7 +22,7 @@ version: "3"
 # 最后编辑时间：2025-02-27
 services:
   sillytavern:
-    image: ghcr.io/sillytavern/sillytavern:latest
+    image: ghcr.nju.edu.cn/sillytavern/sillytavern:latest
     # 镜像地址
     container_name: sillytavern
     # 容器名字

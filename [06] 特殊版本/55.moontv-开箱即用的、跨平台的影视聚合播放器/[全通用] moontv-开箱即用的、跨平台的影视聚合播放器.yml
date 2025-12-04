@@ -9,7 +9,7 @@ version: "3"
 # 最后编辑时间：2026-07-04
 services:
   moontv:
-    image: ghcr.io/senshinya/moontv:latest
+    image: ghcr.nju.edu.cn/senshinya/moontv:latest
     # 镜像地址
     container_name: moontv
     # 容器名字

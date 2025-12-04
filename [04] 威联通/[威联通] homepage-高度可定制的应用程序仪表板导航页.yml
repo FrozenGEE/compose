@@ -10,7 +10,7 @@ version: "3"
 # 最后编辑时间：2025-03-22
 services:
   homepage:
-    image: ghcr.io/gethomepage/homepage:latest
+    image: ghcr.nju.edu.cn/gethomepage/homepage:latest
     # 镜像地址
     container_name: homepage
     # 容器名字

@@ -43,7 +43,7 @@ version: "3.8"
 # 2025-01-08：更新模板，添加immich相册反向地理编码设置为中文的路径映射
 services:
   immich-server:
-    image: ghcr.io/immich-app/immich-server:release
+    image: ghcr.nju.edu.cn/immich-app/immich-server:release
     # 镜像地址
     container_name: immich-server
     # 容器名字
@@ -90,7 +90,7 @@ services:
 ############################################################################
 
   immich-machine-learning:
-    image: ghcr.io/immich-app/immich-machine-learning:release
+    image: ghcr.nju.edu.cn/immich-app/immich-machine-learning:release
     # 镜像地址
     # 如果使用n卡，则tag改为release-cuda，同理还有 armnn, openvino, openvino-wsl
     container_name: immich-machine-learning

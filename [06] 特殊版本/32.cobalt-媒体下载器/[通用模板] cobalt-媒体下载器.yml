@@ -8,7 +8,7 @@
 version: '3'
 services:
   cobalt-web:
-    image: ghcr.io/imputnet/cobalt:latest
+    image: ghcr.nju.edu.cn/imputnet/cobalt:latest
     # 镜像地址
     container_name: cobalt-web
     # 容器名字
@@ -43,7 +43,7 @@ services:
 
 
   cobalt-api:
-    image: ghcr.io/imputnet/cobalt:latest
+    image: ghcr.nju.edu.cn/imputnet/cobalt:latest
     # 镜像地址
     container_name: cobalt-api
     # 容器名字

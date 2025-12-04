@@ -18,7 +18,7 @@ version: '3'
 # 最后编辑时间：2025-04-15
 services:
   metacubexd:
-    image: ghcr.io/metacubex/metacubexd:latest
+    image: ghcr.nju.edu.cn/metacubex/metacubexd:latest
     # 镜像名字，拉取不动可以选择该镜像 gzxhwq/metacubexd:latest
     container_name: metacubexd
     # 容器名字

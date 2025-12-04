@@ -60,7 +60,7 @@ services:
 
 # 非必要
   # rustdesk-api-server:
-    # image: ghcr.io/kingmo888/rustdesk-api-server:latest
+    # image: ghcr.nju.edu.cn/kingmo888/rustdesk-api-server:latest
     # 镜像地址
     # container_name: rustdesk-api-server
     # 容器名字

@@ -9,7 +9,7 @@ version: "3"
 # 最后编辑时间：2024-03-11
 services:
   memos:
-    image: ghcr.io/usememos/memos:latest
+    image: ghcr.nju.edu.cn/usememos/memos:latest
     # 镜像地址
     container_name: memos
     # 容器名字

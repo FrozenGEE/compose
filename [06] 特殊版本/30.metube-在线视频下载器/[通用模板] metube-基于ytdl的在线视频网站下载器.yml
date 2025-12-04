@@ -16,7 +16,7 @@ version: "3"
 # 最后编辑时间：2024-11-24
 services:
   metube:
-    image: ghcr.io/alexta69/metube:latest
+    image: ghcr.nju.edu.cn/alexta69/metube:latest
     # 镜像地址
     container_name: metube
     # 容器名字

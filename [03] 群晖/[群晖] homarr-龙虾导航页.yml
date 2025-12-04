@@ -11,7 +11,7 @@ version: "3"
 # 最后编辑时间：2024-07-11
 services:
   homarr:
-    image: ghcr.io/ajnart/homarr:latest
+    image: ghcr.nju.edu.cn/ajnart/homarr:latest
     # 镜像地址
     container_name: homarr
     # 容器名字

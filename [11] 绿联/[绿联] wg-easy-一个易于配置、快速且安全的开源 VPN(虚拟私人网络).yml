@@ -39,7 +39,7 @@ version: "3"
 # 最后编辑时间：2024-11-03
 services:
   wg-easy:
-    image: ghcr.io/wg-easy/wg-easy:latest
+    image: ghcr.nju.edu.cn/wg-easy/wg-easy:latest
     # 镜像地址
     container_name: wg-easy
     # 容器名字

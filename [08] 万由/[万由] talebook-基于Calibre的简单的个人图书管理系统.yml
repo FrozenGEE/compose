@@ -67,7 +67,7 @@ services:
 
 
   douban-rs-api:
-    image: ghcr.io/cxfksword/douban-api-rs:latest
+    image: ghcr.nju.edu.cn/cxfksword/douban-api-rs:latest
     # 镜像地址
     container_name: douban-api-rs
     # 容器名字

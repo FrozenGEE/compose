@@ -16,7 +16,7 @@ version: "3"
 # 最后编辑时间：2025-10-25
 services:
   suwayomi:
-    image: ghcr.io/suwayomi/suwayomi-server:stable
+    image: ghcr.nju.edu.cn/suwayomi/suwayomi-server:stable
     # 镜像地址
     container_name: suwayomi
     # 容器名字
@@ -63,7 +63,7 @@ services:
 
 
   flaresolverr:
-    image: ghcr.io/thephaseless/byparr:latest
+    image: ghcr.nju.edu.cn/thephaseless/byparr:latest
     # 镜像地址
     container_name: flaresolverr
     # 容器名字
