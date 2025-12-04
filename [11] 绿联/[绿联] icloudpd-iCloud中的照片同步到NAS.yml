@@ -1,0 +1,47 @@
+# 官方文档
+# https://github.com/icloud-photos-downloader/icloud_photos_downloader
+# https://icloud-photos-downloader.github.io/icloud_photos_downloader
+# https://hub.docker.com/r/icloudpd/icloudpd
+# https://post.smzdm.com/p/a96vwnw5
+
+# 需要打开iOS设备上的iCloud照片功能
+# 如有使用问题，可在容器ssh终端中执行 icloudpd --help 进行查询
+
+---
+version: "3"
+# 最后编辑时间：2025-03-23
+services:
+  icloudpd:
+    image: icloudpd/icloudpd:latest
+    # 镜像地址
+    container_name: icloudpd
+    # 容器名字
+    hostname: icloudpd
+    # 主机名
+    command: icloudpd --directory /data --domain cn --username your@email.com --password-provider webui --mfa-provider webui --watch-with-interval 3600
+    # /data为容器目录，不动
+    # --domain cn，国区账号需添加此参数，外区不需要这一段内容
+    # your@email.com为ios账号，根据实际情况修改
+    # --password-provider webui，不需要修改，将在WebUI上输入密码进行登录
+    # --mfa-provider webui，不需要修改，如果你的账号开启了MFA的话，设备会继续弹出验证码，然后在WebUI上进行验证
+    # --watch-with-interval 3600，定时同步的时间间隔，默认3600秒，根据实际情况修改
+    # 更多内容详见：https://icloud-photos-downloader.github.io/icloud_photos_downloader/reference.html#domain-parameter
+    volumes:
+      - ./icloudpd:/data
+      # icloud同步数据目录
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+    dns:
+      - 8.8.8.8
+      - 114.114.114.114
+      - 223.6.6.6
+      - 119.29.29.29
+    # 指定 DNS 服务器
+    network_mode: bridge
+    # 8080端口有别的服务要用，所以使用bridge
+    ports:
+      - 8105:8080/tcp
+      # WebUI http端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
