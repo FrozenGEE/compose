@@ -1,0 +1,81 @@
+# 官方文档
+# https://handbrake.fr
+# https://hub.docker.com/r/jlesage/mkvtoolnix
+# https://github.com/jlesage/docker-mkvtoolnix
+
+# 教程
+# https://zhuanlan.zhihu.com/p/1910082559209116916
+
+---
+services:
+# 最后编辑时间：2025-12-21
+  mkvtoolnix:
+    image: jlesage/mkvtoolnix:latest
+    # 镜像地址
+    container_name: mkvtoolnix
+    # 容器名字
+    hostname: mkvtoolnix
+    # 主机名
+    # privileged: true
+    # 特权模式，赋予容器几乎与主机相同的权限
+    devices:
+      - /dev/dri:/dev/dri
+      # 调用核显，必须
+    # runtime: nvidia
+    # 使用N卡的需要装好N卡驱动，并且设置这个参数
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+          cpus: '1'
+          # 例如N100处理器4核4线程，0.5代表最高占用2核心，0.25代表1核
+    # 限制容器CPU和内存的最高占用率，避免占用过多资源，默认一半核心和2G
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # 用于重启自己
+      - 【这里替换为你的docker数据存放目录】/mkvtoolnix:/config
+      # 配置文件目录
+      - 【这里替换为你的数据存放目录】:/storage
+      # 数据目录，可自定义多个
+    environment:
+      - LANG=zh_CN.UTF-8
+      # 区域设置，预设为中国区域
+      - TZ=Asia/Shanghai
+      # 时区
+      - ENABLE_CJK_FONT=1
+      # 安装字符，该字体包含大量中文/日文/韩文字符，第一次下载会非常久，不下载，中文字符会显示乱码
+      
+      - DISPLAY_WIDTH=1920
+      - DISPLAY_HEIGHT=1080
+      # 应用程序窗口的宽度和高度，预设为1920x1080
+      - WEB_AUDIO=0
+      # 音频可通过浏览器播放，1为启用，0为不启用，预设为0，除非你要在线预览视频听声音才改为1
+      
+      - WEB_LISTENING_PORT=7603
+      # VNC默认的容器端口(http)，建议修改以免和别的VNC冲突，预设为7603
+      - VNC_LISTENING_PORT=7703
+      # VNC默认的容器端口(https)，建议修改以免和别的VNC冲突，预设为7703
+      # - VNC_PASSWORD=passwd
+      # VNC的密码，默认为passwd，如果在外使用，记得设置高强度密码，局域网内使用可不写
+      
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # 很多VNC都是用5800端口，如果有多个，建议使用bridge或者修改容器端口默认的变量
+    ports:
+      - 7603:7603/tcp
+      # WebUI 端口，这里按照变量预设的7603，容器端口默认为5800
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      icon: http://IP:PORT/i/user_01/mkvtoolnix_A.png
+      # 适用于CasaOS导入时自动写上图标地址
+      # 注意：在导入CasaOS时，记得补全本机端口号
+      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
+      ########################################
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:7603]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/mkvtoolnix.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
