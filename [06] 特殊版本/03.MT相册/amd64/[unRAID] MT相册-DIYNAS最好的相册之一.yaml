@@ -41,17 +41,17 @@ version: "3"
 # 2025-01-07 更新日志：mtphotos/mt-photos-ai 容器端口很早之前就修改为8060，补漏；某些arm设备如果mt-photos的日志提示数据库相关日志问题，那就把mt-photos-pgsql跑起来，关联上
 # 2024-11-27 更新日志：增加mt-photos-insightface的compose，insightface和deepface两者选其一即可，新增各种类型的镜像及说明
 # 2024-04-28 更新日志：新增mt-photos-deepface，修正部分错误内容，删减不需要的内容，新增人脸识别API使用支持cpu无avx指令的镜像，新增N卡驱动AI识别镜像编译教程
+# 2025-12-20 更新日志：mtphotos镜像支持调用N卡进行视频转码，移除mtphotos/mt-photos-deepface，该部分内容在github项目中的说明中
 services:
   mt-photos:
     image: mtphotos/mt-photos:latest
-    # 镜像地址，支持arm64v8
-    # 注意nodb-latest和arm64v8不存在内置数据库，需要额外部署一个外部数据库
+    # 镜像地址
     container_name: mt-photos
     # 容器名字
     hostname: mt-photos
     # 主机名
-    # privileged: true
-    # 特权模式，赋予容器几乎与主机相同的权限
+    command: --gpus=all
+    # 调用GPU进行视频转码，N卡需要该参数
     devices:
       - /dev/dri:/dev/dri
       # 开启硬件加速支持，注意：arm设备不支持硬件加速
@@ -69,10 +69,9 @@ services:
     environment:
       - MT_SERVER_PORT=8063
       # 指定MT Photos服务端的端口，默认为8063，可自定义端口后直接使用host网络模式
-      - PUID=1000
-      - PGID=100
-      # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
-      # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      - PUID=0
+      - PGID=0
+      # 用户和用户组权限，建议直接给root权限
       - UMASK=022
       # 默认创建新文件的权限，一般写022
       - TZ=Asia/Shanghai
@@ -84,15 +83,6 @@ services:
       # 指定要连接的Redis的端口号，默认为6379
       # - REDIS_PASSWORD=Redis的密码
       # 指定要连接的Redis的密码，具体看自己的配置单
-      ######################################
-      # 仅当使用 nodb-latest 或 arm-latest 时才需要使用，amd64默认镜像内已内置
-      # - POSTGRES_HOST=127.0.0.1
-      # - POSTGRES_PORT=8062
-      # 指定要连接的PGSQL的地址，默认IP为127.0.0.1，端口修改为8062
-      # - POSTGRES_DATABASE=postgres
-      # - POSTGRES_USER=postgres
-      # - POSTGRES_PASSWORD=postgres
-      # 指定要连接的PGSQL的数据库，账号密码，预设均为postgres
       ######################################
       # https://mtmt.tech/docs/advanced/env
       # 以下内容来源于官方文档，均为默认，可以不写
@@ -127,11 +117,6 @@ services:
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
-      icon: http://IP:PORT/i/user_01/MT-photos-3.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：在导入CasaOS时，记得补全本机端口号
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:8063]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
@@ -165,61 +150,10 @@ services:
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
-      icon: http://IP:PORT/i/user_01/MT-photos-2.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: https://mtmt.tech/docs/advanced/ocr_api
       # 因不存在WebUI，所以此处为官方说明文档
       net.unraid.docker.icon: /mnt/user/LOGO/MT-photos-2.png
-      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
-      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
-
-############################################################################
-#### 以下两个选择其中一个部署即可，因为均使用8066端口，所以模板默认使用bridge ####
-############################################################################
-
-  mt-photos-deepface:
-    image: mtphotos/mt-photos-deepface:latest
-    # 镜像地址，不支持arm架构
-    # noavx-latest: 如果改容器无法启动，尝试使用这支持cpu无avx指令的tag
-    # cuda-latest: CUDA版本镜像，N卡用户可以选择这个tag
-    container_name: mt-photos-deepface
-    # 容器名字
-    hostname: mt-photos-deepface
-    # 主机名
-    environment:
-      - API_AUTH_KEY=1234567890
-      # 人脸识别API，可以随便写，在mt-photos内设置要对应该项
-      ######################################
-    # volumes:
-      # - 【这里替换为你的docker数据存放目录】/mt-photos/deepface/models:/models
-      ## 镜像已内置 retinaface.h5 和 facenet512_weights.h5，如果不修改识别模型，不需要添加目录映射
-      ## 当指定了别的模型，容器内下载模型很慢，可以增加 /models 目录映射
-      ## 预训练模型下载地址：https://github.com/serengil/deepface_models/releases/tag/v1.0
-      ## 如果访问下载github速度慢，请打开下面这个github代理加速下载网站进行下载
-      ## https://mirror.ghproxy.com/
-      ## 将对应的预训练模型放到容器内的 /models/.deepface/weights/ 下，请对应放到实际路径上
-      ######################################
-    network_mode: bridge
-    # network_mode: host
-    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    ports:
-      - 8065:8066/tcp
-      # API 端口
-      # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
-    restart: always
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
-    labels:
-      icon: http://IP:8089/i/user_1/mt-photos-deepface.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
-      net.unraid.docker.managed: dockerman
-      net.unraid.docker.webui: https://mtmt.tech/docs/advanced/facial_api
-      # 因不存在WebUI，所以此处为官方说明文档
-      net.unraid.docker.icon: /mnt/user/LOGO/mt-photos-deepface.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
 
@@ -246,60 +180,19 @@ services:
       ## 需要把 buffalo_l.zip 的文件解压到 /....../mt-photos/insightface/modelss/buffalo_l 这个目录
       ## 解压完成后，在 /....../mt-photos/insightface/modelss/buffalo_l 目录下，可以看到 1k3d68.onnx、2d106det.onnx、det_10g.onnx、genderage.onnx、w600k_r50.onnx 5个文件
       ######################################
-    network_mode: bridge
-    # network_mode: host
+    # network_mode: bridge
+    network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    ports:
-      - 8066:8066/tcp
+    # ports:
+      # - 8066:8066/tcp
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
-      icon: http://IP:8089/i/user_1/mt-photos-insightface.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: https://mtmt.tech/docs/advanced/insightface_api
       # 因不存在WebUI，所以此处为官方说明文档
       net.unraid.docker.icon: /mnt/user/LOGO/mt-photos-insightface.png
-      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
-      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
-
-############################################################################
-
-#  mt-photos-pgsql:
-#    image: mtphotos/mt-photos-pg:latest
-    # 镜像地址，arm64v8使用 mtphotos/mt-photos-pg:arm-latest
-#    container_name: mt-photos-pgsql
-    # 容器名字
-#    hostname: mt-photos-pgsql
-    # 主机名
-#    environment:
-#      - POSTGRES_PASSWORD=mtphotos
-      # 数据库默认密码，账号为postgres
-#      - PGDATA=/var/lib/postgresql/data/pgdata
-      # 自定义容器数据库文件目录
-#    volumes:
-#      - 【这里替换为你的docker数据存放目录】/mt-photos/pgsql:/var/lib/postgresql/data
-      # 数据库文件目录
-#    network_mode: bridge
-    # 为了和pgsql避免冲突，因此使用bridge
-#    ports:
-#      - 8062:5432/tcp
-      # API 端口
-      # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
-#    restart: always
-    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
-#    labels:
-#      icon: http://IP:8089/i/user_1/mt-photos-insightface.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
-#      net.unraid.docker.managed: dockerman
-#      net.unraid.docker.webui: https://mtmt.tech/docs/advanced/db
-      # 因不存在WebUI，所以此处为官方说明文档
-#      net.unraid.docker.icon: /mnt/user/LOGO/mt-photos-insightface.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
       # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
