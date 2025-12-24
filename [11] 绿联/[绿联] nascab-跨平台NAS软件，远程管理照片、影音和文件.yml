@@ -38,13 +38,13 @@ services:
     network_mode: bridge
     # 有多个端口冲突，不推荐host网络模式
     ports:
-      - 4747:80/tcp
+      - 4747:80
       # WebUI HTTP端口
-      - 47443:443/tcp
+      - 47443:443
       # WebUI HTTPS端口
-      - 4790:90/tcp
+      - 4790:90
       # WebDAV分享端口
-      - 4721:21/tcp
+      - 4721:21
       # FTP分享端口
       # 如不需要设置文件分享，可以不映射90和21端口
     restart: unless-stopped

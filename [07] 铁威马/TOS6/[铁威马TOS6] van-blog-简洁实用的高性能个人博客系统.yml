@@ -33,9 +33,9 @@ services:
       - EMAIL=someone@mereith.com
       # 邮箱地址，用于自动申请 https 证书
     ports:
-      - 5747:80/tcp
+      - 5747:80
       # WebUI HTTP端口
-      - 57443:443/tcp
+      - 57443:443
       # WebUI HTTPS端口
 
   mongo:

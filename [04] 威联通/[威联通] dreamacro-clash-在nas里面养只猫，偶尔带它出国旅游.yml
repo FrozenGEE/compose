@@ -29,11 +29,11 @@ services:
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # 注意：minio用到9090端口，如果都要部署，建议修改config.yaml中的9090端口再用host模式，或者使用bridge模式把9090端口改成别的，只要保证不冲突即可
     # ports:
-      # - 7890:7890/tcp
+      # - 7890:7890
       # http/https 监听端口
-      # - 7891:7891/tcp
+      # - 7891:7891
       # 7891 为 socks5 监听端口
-      # - 9090:9090/tcp
+      # - 9090:9090
       # 后端地址的端口
       # 该镜像无WebUI
     restart: always
@@ -56,7 +56,7 @@ services:
 #    network_mode: bridge
     # 80端口被占用，不能用host
 #    ports:
-#      - 5080:80/tcp
+#      - 5080:80
       # WebUI 端口
 #    restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

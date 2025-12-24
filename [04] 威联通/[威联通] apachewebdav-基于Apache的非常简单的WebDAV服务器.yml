@@ -41,7 +41,7 @@ services:
     network_mode: bridge
     # 80端口被占用，不能用host
     ports:
-      - 10101:80/tcp
+      - 10101:80
       # 访问端口，可在Web上打开
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

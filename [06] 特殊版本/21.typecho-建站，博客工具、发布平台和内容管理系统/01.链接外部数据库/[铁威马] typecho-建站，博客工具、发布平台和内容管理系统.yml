@@ -53,9 +53,9 @@ services:
     network_mode: host
     # 80 和 9000 如果有别的端口被占用，则不能用host
     # ports:
-      # - 5580:80/tcp
+      # - 5580:80
       # WebUI 端口(apache)
-      # - 5590:9000/tcp
+      # - 5590:9000
       # WebUI 端口(fpm)
       # 根据实际的镜像选择
     restart: unless-stopped

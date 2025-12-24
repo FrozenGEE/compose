@@ -93,7 +93,7 @@ services:
     ports:
       - 51820:51820/udp
       # 数据传输端口，左侧要和 <WG_CONFIG_PORT> 保持一致；右侧需要和上面的 <WG_PORT> 的容器端口保持一致
-      - 51821:51821/tcp
+      - 51821:51821
       # WebUI 端口，左侧随意，右侧需要和上面的 <PORT> 的容器端口保持一致
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

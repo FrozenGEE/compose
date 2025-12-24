@@ -447,7 +447,7 @@ services:
     network_mode: bridge
     # 模板预设使用bridge网络模式，如果懂得使用方法，可以根据实际情况来修改
     ports:
-      - 55054:6379/tcp
+      - 55054:6379
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可，模板预设
     restart: unless-stopped
     healthcheck:
@@ -470,7 +470,7 @@ services:
       # 预设新建一个子数据库，子账号及其密码，统一为 moviepilot
     network_mode: bridge
     ports:
-      - 55053:5432/tcp
+      - 55053:5432
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U moviepilot -d moviepilot"]
@@ -507,7 +507,7 @@ services:
     hostname: cookiecloud
     network_mode: bridge
     ports:
-      - 8188:8088/tcp
+      - 8188:8088
       # WebUI 端口，可能会有别的服务使用8088，所以改用bridge
     restart: unless-stopped
 
@@ -561,9 +561,9 @@ services:
     # 由于书写有不同方式，这里统一采用bridge，使用不支持透明代理的模板，如果你清楚如何使用，则自行修改
     # 你直接写 服务器的IP:[201710-20172] 进行访问，例如 emby/JF 变量中的网络代理参数
     ports:
-      - 2017:2017/tcp
+      - 2017:2017
       # WebUI 端口：2017
-      - 20170-20172:20170-20172/tcp
+      - 20170-20172:20170-20172
       # sock 代理端口：20170
       # http 代理端口：20171
       # http 代理端口(带分流规则)：20172
@@ -579,7 +579,7 @@ services:
     network_mode: bridge
     # 推荐使用bridge模式，3000有别的docker镜像要用
     ports:
-      - 3456:3000/tcp 
+      - 3456:3000 
       # WebUI http端口
     restart: unless-stopped
 

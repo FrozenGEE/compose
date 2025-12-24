@@ -52,7 +52,7 @@ services:
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 12345:12345/tcp
+      # - 12345:12345
       # WebUI 端口
       # 程序默认绑定 0.0.0.0:12345 运行 http 服务
       # 可同时修改 compose 文件与 config.toml 变更服务运行的端口

@@ -97,11 +97,6 @@ services:
     network_mode: host
     restart: unless-stopped
     labels:
-      icon: http://IP:PORT/i/user_01/alist_A.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：在导入CasaOS时，记得补全本机端口号
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:5244]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
@@ -121,11 +116,6 @@ services:
     network_mode: host
     restart: unless-stopped
     labels:
-      icon: http://IP:PORT/i/user_01/cloudsaver_A.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：在导入CasaOS时，记得补全本机端口号
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:8008]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
@@ -205,11 +195,6 @@ services:
     network_mode: host
     restart: unless-stopped
     labels:
-      icon: http://IP:PORT/i/user_01/lss_A.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：在导入CasaOS时，记得补全本机端口号
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:8023]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
@@ -251,11 +236,6 @@ services:
       # http 代理端口(带分流规则)：20172
     restart: unless-stopped
     labels:
-      icon: http://IP:PORT/i/user_01/v2raya_A.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：在导入CasaOS时，记得补全本机端口号
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:2017]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改

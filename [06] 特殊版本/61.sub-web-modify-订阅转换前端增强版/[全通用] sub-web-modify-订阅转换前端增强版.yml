@@ -18,7 +18,7 @@ services:
     network_mode: bridge
     # 80端口被占用了，推荐使用bridge
     ports:
-      - 18090:80/tcp
+      - 18090:80
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -522,7 +522,7 @@ services:
       # 预设新建一个子数据库，子账号及其密码，统一为 moviepilot
     network_mode: bridge
     ports:
-      - 55053:5432/tcp
+      - 55053:5432
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U moviepilot -d moviepilot"]
@@ -663,7 +663,7 @@ services:
     network_mode: bridge
     # 推荐使用bridge模式，3000有别的docker镜像要用
     ports:
-      - 3456:3000/tcp 
+      - 3456:3000 
       # WebUI http端口
     restart: unless-stopped
     labels:
