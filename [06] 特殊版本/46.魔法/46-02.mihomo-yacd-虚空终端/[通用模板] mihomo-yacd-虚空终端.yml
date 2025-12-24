@@ -36,9 +36,9 @@ services:
     network_mode: bridge
     # 8080端口有别的服务要用，因此使用bridge
     ports:
-      - 7890:7890/tcp
+      - 7890:7890
       # 代理端口，如果占用，则改为7891
-      - 9098:8080/tcp
+      - 9098:8080
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

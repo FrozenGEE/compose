@@ -30,7 +30,7 @@
     # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     ports:
-      - 8065:8066/tcp
+      - 8065:8066
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
     restart: always

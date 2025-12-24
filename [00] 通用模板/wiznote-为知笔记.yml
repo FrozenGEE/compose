@@ -31,7 +31,7 @@ services:
     network_mode: bridge
     # 80端口被占用，不能用host
     ports:
-      - 8011:80/tcp
+      - 8011:80
       # WebUI 端口
       - 9269:9269/udp
       # 不知道干嘛用的，可以不映射

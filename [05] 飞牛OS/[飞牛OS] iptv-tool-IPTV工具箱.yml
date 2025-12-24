@@ -26,7 +26,7 @@ services:
     # 用host才可以获取到ipv6的电视源
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 6789:6789/tcp
+      # - 6789:6789
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

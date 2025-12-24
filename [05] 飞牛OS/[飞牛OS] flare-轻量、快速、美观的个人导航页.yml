@@ -32,7 +32,7 @@ services:
     network_mode: bridge
     # 不推荐用host，除非没有被占用，有别的服务或docker需要用到5005
     ports:
-      - 5005:5005/tcp
+      - 5005:5005
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

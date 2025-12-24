@@ -36,7 +36,7 @@ services:
     network_mode: bridge
     # 不能用host，威联通的WebUI端口为8080
     ports:
-      - 11808:8080/tcp
+      - 11808:8080
       # WebUI 端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

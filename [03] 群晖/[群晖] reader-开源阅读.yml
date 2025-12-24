@@ -83,7 +83,7 @@ services:
     network_mode: bridge
     # 8080端口有别的服务使用，所以不推荐host
     ports:
-      - 4396:8080/tcp
+      - 4396:8080
       # WebUI 端口
       # web端 http://localhost:4396
       # 接口地址 http://localhost:4396/reader3

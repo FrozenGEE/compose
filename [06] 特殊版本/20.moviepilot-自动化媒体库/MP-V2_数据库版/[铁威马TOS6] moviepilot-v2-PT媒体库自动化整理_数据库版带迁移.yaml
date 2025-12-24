@@ -158,7 +158,7 @@ services:
     network_mode: bridge
     # 模板预设使用bridge网络模式，如果懂得使用方法，可以根据实际情况来修改
     ports:
-      - 55054:6379/tcp
+      - 55054:6379
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可，模板预设
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
@@ -188,7 +188,7 @@ services:
     network_mode: bridge
     # 模板预设使用bridge网络模式，如果懂得使用方法，可以根据实际情况来修改
     ports:
-      - 55053:5432/tcp
+      - 55053:5432
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可，模板预设
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

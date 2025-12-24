@@ -41,7 +41,7 @@ services:
     network_mode: bridge
     # 8080端口有别的服务要用，所以使用bridge
     ports:
-      - 8105:8080/tcp
+      - 8105:8080
       # WebUI http端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

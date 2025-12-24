@@ -30,10 +30,10 @@ services:
     network_mode: bridge
     # 推荐使用bridge模式，8080有别的要用
     ports:
-      - 8807:8080/tcp
+      - 8807:8080
       # WebUI 端口
-      - 11180:80/tcp
-      - 11443:443/tcp
+      - 11180:80
+      - 11443:443
       # 域名转发相关，lite版不需要
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

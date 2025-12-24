@@ -64,9 +64,9 @@ services:
     # 如需修改WebUI的端口，到/config/setting.json中第54行的"rpc-port": 9091的端口改为自定义端口
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 9091:9091/tcp
+      # - 9091:9091
       # WebUI 端口
-      # - 24680:24680/tcp
+      # - 24680:24680
       # - 24680:24680/udp
       # 传输端口
     restart: unless-stopped

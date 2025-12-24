@@ -25,7 +25,7 @@ services:
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # 群晖的WebUI默认端口为5000，如果要使用，需要改为bridge网络，端口映射为15000，或者修改掉群晖WebUI的默认端口，只要不冲突就行
     ports:
-      - 15000:5000/tcp
+      - 15000:5000
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -55,9 +55,9 @@ services:
     network_mode: bridge
     # 80 443端口被占用，不能用host
     ports:
-      - 8882:80/tcp
+      - 8882:80
       # WebUI HTTP 端口
-      - 8883:443/tcp
+      - 8883:443
       # WebUI HTTPS 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
@@ -83,7 +83,7 @@ services:
     network_mode: bridge
     # 80 端口被占用，不能用host
     ports:
-      - 8884:80/tcp
+      - 8884:80
       # 调用端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -44,7 +44,7 @@ services:
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 21115-21119:21115-21119/tcp
+      # - 21115-21119:21115-21119
       # - 21116:21116/udp
       # 21115用于 NAT 类型测试
       # 21116用于 TCP打洞和连接服务，ID 注册和心跳服务
@@ -83,7 +83,7 @@ services:
     # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 21114:21114/tcp
+      # - 21114:21114
       # WebUI 端口
     # restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

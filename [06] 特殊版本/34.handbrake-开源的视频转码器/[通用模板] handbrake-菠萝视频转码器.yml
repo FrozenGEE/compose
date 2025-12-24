@@ -143,7 +143,7 @@ services:
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # 很多VNC都是用5800端口，如果有多个，建议使用bridge或者修改容器端口默认的变量
     # ports:
-      # - 7803:7803/tcp
+      # - 7803:7803
       # WebUI 端口，这里按照变量预设的7803，容器端口默认为5800
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -29,7 +29,7 @@ services:
       # false: 生成普通链接，如 domain.com/view/hash（默认）
     network_mode: bridge
     ports:
-      - 5270:5270/tcp
+      - 5270:5270
       # WebUI 端口，与群晖的WebUI端口冲突，因此使用bridg
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

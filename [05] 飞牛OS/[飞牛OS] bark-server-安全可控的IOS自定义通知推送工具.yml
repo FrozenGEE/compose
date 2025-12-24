@@ -36,7 +36,7 @@ services:
     network_mode: bridge
     # 不推荐用host，除非没有被占用，有别的服务或docker需要用到8080
     ports:
-      - 11808:8080/tcp
+      - 11808:8080
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

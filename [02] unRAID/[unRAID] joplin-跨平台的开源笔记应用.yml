@@ -41,7 +41,7 @@ services:
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 22300:22300/tcp
+      # - 22300:22300
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
@@ -77,7 +77,7 @@ services:
     network_mode: bridge
     # 为了避免和其他pgsql冲突因此修改为25432
     ports:
-      - 25432:5432/tcp
+      - 25432:5432
       # 数据库访问端口，不具有WebUI，调用即可
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

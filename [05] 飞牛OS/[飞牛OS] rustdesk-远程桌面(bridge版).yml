@@ -35,13 +35,13 @@ services:
       # 配置文件目录
     network_mode: bridge
     ports:
-      - 21115:21115/tcp
+      - 21115:21115
       # 用于 NAT 类型测试
-      - 21116:21116/tcp
+      - 21116:21116
       # 用于 TCP打洞和连接服务
       - 21116:21116/udp
       # 用于 ID 注册和心跳服务
-      - 21118:21118/tcp
+      - 21118:21118
       # 用于支持 web 客户端
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
@@ -61,9 +61,9 @@ services:
       # 配置文件目录
     network_mode: bridge
     ports:
-      - 21117:21117/tcp
+      - 21117:21117
       # 用于中继服务
-      - 21119:21119/tcp
+      - 21119:21119
       # 用于支持 web 客户端
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

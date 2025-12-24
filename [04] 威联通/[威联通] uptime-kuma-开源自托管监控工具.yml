@@ -21,7 +21,7 @@ services:
     network_mode: bridge
     # 3001有别的服务可能要用，因此推荐使用bridge
     ports:
-      - 3331:3001/tcp
+      - 3331:3001
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

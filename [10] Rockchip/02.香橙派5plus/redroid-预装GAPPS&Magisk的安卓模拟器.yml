@@ -32,7 +32,7 @@ services:
       # 数据存放目录
     network_mode: bridge
     ports:
-      - 6666:5555/tcp
+      - 6666:5555
       # scrcpy(adb) 远程连接端口，默认端口为5555，但提示已经占用，如果5555可用就写5555，提示占用就保持预设的6666
       # 不存在WebUI，需要通过 scrcpy(adb) 连接才可以访问设备
     restart: no

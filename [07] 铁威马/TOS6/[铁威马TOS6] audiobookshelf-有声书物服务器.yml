@@ -34,7 +34,7 @@ services:
     # network_mode: bridge
     # 默认的容器端口为80，建议自定义容器端口，然后使用host网络模式，因为80端口被占用了，所以使用bridge
     # ports:
-      # - 13378:13378/tcp
+      # - 13378:13378
       # WebUI http端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

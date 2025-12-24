@@ -24,11 +24,11 @@ services:
     network_mode: bridge
     # 端口均被占用，只能bridge网络模式进行端口映射
     ports:
-      - 19022:22/tcp
+      - 19022:22
       # gitlab-ce的 SSH 端口
-      - 19080:80/tcp
+      - 19080:80
       # WebUI http端口
-      - 19443:443/tcp
+      - 19443:443
       # WebUI https端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

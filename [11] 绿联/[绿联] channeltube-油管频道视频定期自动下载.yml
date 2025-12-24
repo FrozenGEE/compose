@@ -36,7 +36,7 @@ services:
       # 时区
     network_mode: bridge
     ports:
-      - 5400:5000/tcp
+      - 5400:5000
       # WebUI 端口，群晖的WebUI端口默认为5000，所以改用bridge
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

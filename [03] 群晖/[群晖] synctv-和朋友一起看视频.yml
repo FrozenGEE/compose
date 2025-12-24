@@ -19,7 +19,7 @@ services:
     network_mode: bridge
     # 推荐使用bridge模式，8080有别的docker镜像要用
     ports:
-      - 20202:8080/tcp
+      - 20202:8080
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -63,7 +63,7 @@ services:
     network_mode: bridge
     # 3000 端口很多别的服务到，所以不推荐使用host网络模式
     ports:
-      - 35400:3000/tcp
+      - 35400:3000
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

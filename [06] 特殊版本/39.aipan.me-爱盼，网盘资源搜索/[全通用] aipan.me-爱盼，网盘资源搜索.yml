@@ -20,7 +20,7 @@ services:
     network_mode: bridge
     # 3000有别的服务用到，因此使用bridge
     ports:
-      - 3055:3000/tcp
+      - 3055:3000
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

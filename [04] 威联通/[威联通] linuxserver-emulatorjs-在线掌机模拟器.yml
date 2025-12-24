@@ -33,11 +33,11 @@ services:
     network_mode: bridge
     # 80端口被占用，不能用host，3000端口有别的镜像要用
     ports:
-      - 13180:80/tcp
+      - 13180:80
       # WebUI 端口
-      - 4001:4001/tcp
+      - 4001:4001
       # IPFS 对等端口，如果您想参与 P2P 网络分发前端艺术品请将此转发到互联网
-      - 3100:3000/tcp
+      - 3100:3000
       # Rom/艺术品管理界面，用于生成/管理配置文件和下载艺术品
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

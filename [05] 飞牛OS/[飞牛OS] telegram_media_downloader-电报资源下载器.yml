@@ -37,7 +37,7 @@ services:
     # 不推荐用host，除非没有被占用，有别的服务或docker需要用到5000端口
     # 可选择修改 config.yaml 中的 "web_port"，然后使用host网络模式
     ports:
-      - 5230:5000/tcp
+      - 5230:5000
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

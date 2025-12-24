@@ -372,7 +372,7 @@ services:
     # 推荐使用bridge模式，3000有别的docker镜像要用，也可以使用host模式，设置内可以修改容器端口
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     ports:
-      - 22022:3000/tcp
+      - 22022:3000
       # WebUI http端口
     restart: unless-stopped
     depends_on:
@@ -449,7 +449,7 @@ services:
     hostname: cookiecloud
     network_mode: bridge
     ports:
-      - 8188:8088/tcp
+      - 8188:8088
       # WebUI 端口，可能会有别的服务使用8088，所以改用bridge
     restart: unless-stopped
 
@@ -541,9 +541,9 @@ services:
         # 如果 PLEX/EMBY/JF/NASTOOL/V2RAYA 都保持使用bridge，上面两条172.17.0.1保持不动
         # 如果不是，将 172.17.0.1 改为 你的NAS的IP
     ports:
-      - 2017:2017/tcp
+      - 2017:2017
       # WebUI 端口：2017
-      - 20170-20172:20170-20172/tcp
+      - 20170-20172:20170-20172
       # sock 代理端口：20170
       # http 代理端口：20171
       # http 代理端口(带分流规则)：20172
@@ -590,11 +590,11 @@ services:
       # 保存磁力链接为种子文件
     network_mode: host
     # ports:
-      # - 5321:5321/tcp
+      # - 5321:5321
       # WebUI 端口
-      # - 6800:6800/tcp
+      # - 6800:6800
       # RPC 通讯端口映射
-      # - 32516:32516/tcp
+      # - 32516:32516
       # - 32516:32516/udp
       # 下载传输端口
     restart: unless-stopped

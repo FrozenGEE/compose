@@ -39,7 +39,7 @@ services:
       - TZ=Asia/Shanghai
       # 时区
     ports:
-      - 8088:8088/tcp
+      - 8088:8088
       # WebUI 端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
@@ -58,9 +58,9 @@ services:
       - TZ=Asia/Shanghai
       # 时区
     ports:
-      - 7070:80/tcp
+      - 7070:80
       # 管理页面 端口
-      - 7071:8089/tcp
+      - 7071:8089
       # 博客页面 端口
       # ↓切勿修改
     depends_on:

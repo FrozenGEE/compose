@@ -23,7 +23,7 @@ services:
     network_mode: bridge
     # 推荐使用bridge模式，8000有别的docker镜像要用
     ports:
-      - 8660:8000/tcp
+      - 8660:8000
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

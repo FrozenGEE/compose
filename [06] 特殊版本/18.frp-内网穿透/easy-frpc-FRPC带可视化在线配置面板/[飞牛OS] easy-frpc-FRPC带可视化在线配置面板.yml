@@ -32,7 +32,7 @@ services:
     # 推荐直接使用bridge网络模式，frpc只需要写好配置文件就可以生效，除非5000端口没有占用，模板预设使用bridge
     # easy-frpc的可视化在线配置面板端口默认为5000，具体看 frps.toml 中的设置
     ports:
-      - 50001:5000/tcp
+      - 50001:5000
       # easy-frpc的可视化在线配置面板
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

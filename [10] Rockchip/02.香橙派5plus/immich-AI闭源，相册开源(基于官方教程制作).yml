@@ -78,7 +78,7 @@ services:
       # 时区
     network_mode: immich-net
     ports:
-      - 2283:2283/tcp
+      - 2283:2283
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -30,7 +30,7 @@ services:
     network_mode: bridge
     # 8080端口有别的服务使用，所以不推荐host
     ports:
-      - 10240:8080/tcp
+      - 10240:8080
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

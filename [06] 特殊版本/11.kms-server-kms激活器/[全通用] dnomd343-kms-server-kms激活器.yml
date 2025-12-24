@@ -29,9 +29,9 @@ services:
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 1688:1688/tcp
+      # - 1688:1688
       # kms服务器端口
-      # - 1689:1689/tcp
+      # - 1689:1689
       # WebUI 端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

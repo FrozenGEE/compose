@@ -77,7 +77,7 @@ services:
     network_mode: host
     # 推荐直接host网络模式
     # ports:
-      # - 5201:5201/tcp
+      # - 5201:5201
       # 数据传输端口，不存在WebUI，默认为5201
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

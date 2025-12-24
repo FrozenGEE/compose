@@ -27,7 +27,7 @@ services:
     # network_mode: host
     # 推荐直接使用bridge网络模式，除非5000端口没有占用，模板预设使用bridge
     ports:
-      - 50005:5000/tcp
+      - 50005:5000
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

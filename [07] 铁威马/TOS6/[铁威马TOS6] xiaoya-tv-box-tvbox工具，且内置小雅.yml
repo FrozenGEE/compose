@@ -36,9 +36,9 @@ services:
     network_mode: bridge
     # 80端口被占用，不能用host
     ports:
-      - 4567:4567/tcp
+      - 4567:4567
       # WebUI 端口
-      - 5344:80/tcp
+      - 5344:80
       # 内置的小雅ALIST的端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

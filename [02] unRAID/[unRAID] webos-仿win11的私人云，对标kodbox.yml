@@ -35,7 +35,7 @@ services:
     network_mode: bridge
     # 有别的docker可能会用到8088，推荐bridge模式
     ports:
-      - 8188:8088/tcp
+      - 8188:8088
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

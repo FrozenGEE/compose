@@ -24,7 +24,7 @@ services:
     # 推荐自定义容器端口，然后使用host模式，可以获取到iptv6源，如果不需要则忽略
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 8089:8089/tcp
+      # - 8089:8089
       # WebUI 端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

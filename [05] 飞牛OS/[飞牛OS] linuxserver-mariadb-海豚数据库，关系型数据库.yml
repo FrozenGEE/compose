@@ -39,7 +39,7 @@ services:
     network_mode: bridge
     # 不能用host部署
     ports:
-      - 3306:3306/tcp
+      - 3306:3306
       # 非WebUI网页界面，直接调用即可
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

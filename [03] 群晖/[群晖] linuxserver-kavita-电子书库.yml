@@ -34,7 +34,7 @@ services:
     network_mode: bridge
     # 自定义容器WebUI端口，默认为5000，由于群晖也用了5000，所以这里修改掉
     ports:
-      - 5520:5000/tcp
+      - 5520:5000
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -25,7 +25,7 @@ services:
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 9630:9630/tcp
+      # - 9630:9630
       # WebUI 端口
     volumes: 
       # - 【这里替换为你的docker数据存放目录】/subgen/subgen.py:/subgen/subgen.py

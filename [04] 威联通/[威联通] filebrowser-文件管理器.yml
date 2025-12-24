@@ -35,7 +35,7 @@ services:
     # 80端口被占用，不能用host
     # 你可以选择在 /config/settings.json 中的80端口号为自定义容器端口，再使用host网络模式
     ports:
-      - 3670:80/tcp
+      - 3670:80
       # WebUI http端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

@@ -41,7 +41,7 @@ services:
       - MAX_EXPIRATION=360
       # 最大过期时间(分钟)，默认为360
     ports:
-      - 8270:8000/tcp
+      - 8270:8000
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3

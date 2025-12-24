@@ -123,7 +123,7 @@ services:
     # 推荐自定义MT的WebUI端口，然后直接用host模式
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 8063:8063/tcp
+      # - 8063:8063
       # WebUI http端口
     restart: always
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
@@ -148,7 +148,7 @@ services:
     network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     # ports:
-      # - 8060:8060/tcp
+      # - 8060:8060
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
     restart: always
@@ -184,7 +184,7 @@ services:
     # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     ports:
-      - 8065:8066/tcp
+      - 8065:8066
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
     restart: always
@@ -217,7 +217,7 @@ services:
     # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
     ports:
-      - 8066:8066/tcp
+      - 8066:8066
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
     restart: always
@@ -243,7 +243,7 @@ services:
 #    network_mode: bridge
     # 为了和pgsql避免冲突，因此使用bridge
 #    ports:
-#      - 8062:5432/tcp
+#      - 8062:5432
       # API 端口
       # 注意：并不存在WebUI，只需要通过IP:PORT调用即可
 #    restart: always
