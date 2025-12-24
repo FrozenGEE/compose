@@ -24,6 +24,7 @@ services:
       - USER_GID=100
       # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
       # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
+      
       - HTTP_PORT=3200
       # HTTP 监听端口，默认为3000
       - SSH_LISTEN_PORT=4222
@@ -31,9 +32,13 @@ services:
       # - ROOT_URL="http://【IP:PORT】"
       # 覆盖自动生成的公共 URL。如果内部 URL 和外部 URL 不匹配（例如在 Docker 中），这很有用。
       # IP:PORT为宿主机的IP和端口
+    # network_mode: bridge
     network_mode: host
-    restart: always
-    # 重启策略
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+    #   - 3200:3200
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:3200]
