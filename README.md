@@ -2,6 +2,8 @@
 - 清理了一下一些内容
 - 飞牛OS支持ARM了，还在测试版中，docker可以用，大部分docker镜像都支持ARM，暂时先不在名字中区分是否支持ARM
 - 特别说明：飞牛和绿联均支持让docker容器通过官方的内网穿透在外网访问，但是host网络模式不需要进行映射端口，但这样就无法在WebUI/手机端上快捷访问的，因此建议它俩使用host的容器，compose上也把端口映射那部分内容也写上就可以调出便捷访问的入口，本模板就不写了，等以后官方支持吧
+- 另外再顺便diss一下飞牛的docker compose UI操作体验，compose内容编辑文本框不支持全屏最大化=-=，还有dpanel也是，垃圾
+- 绿联的docker compose是我目前体验过的成品NAS中操作体验最好的
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
