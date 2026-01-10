@@ -4,7 +4,7 @@
 # https://hub.docker.com/r/amtoaer/bili-sync-rs
 
 # 部署教程
-# https://blog.hesuisui.top/archives/Docker-Bili-Sync
+# https://club.ugnas.com/forum.php?mod=viewthread&tid=2233&highlight=bili-sync
 # https://bili-sync.allwens.work/quick-start
 
 # 配置文件
@@ -31,7 +31,7 @@
 ---
 version: "3"
 # 最后编辑时间：2026-01-10
-# 更新日志：翻新内容，认证密钥在初次部署时的日志中找到，进入后请第一时间在 设置-基本设置 中修改，以免忘记
+# 更新日志：翻新内容，认证密钥在初次部署时的日志中找到，进入后请第一时间在 设置-基本设置 中修改，以免忘记，进入后请第一时间在 设置-基本设置 中修改，以免忘记
 services:
   bili-sync-rs:
     image: amtoaer/bili-sync-rs:latest
