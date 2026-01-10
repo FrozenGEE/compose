@@ -9,10 +9,15 @@
 # https://jinghuashang.cn/posts/8f622332.html
 
 # 默认 用户名: admin 密码: admin
+# https://docs.wushuo.top/change-the-password#忘记密码
+
+# 密码重置说明：本程序的密码存储为 MD5 摘要，无法查看原密码。将 config.v2.json 上传并修改用户名与密码，下载后替换掉原 config.v2.json 文件并重启程序即可
+# 或者直接修改 config.v2.json ，找到 login":{"username":"admin","password":"21232f297a57a5a743894a0e4a801fc3"} 这部分内容，然后替换掉{}中的内容，接着重启 ani-rss，账号密码恢复为 admin
+# 解释一下，username意思是用户名，password是密码，密码存储为 MD5 摘要，无法查看原密码，而默认密码 admin 的 MD5 则是 21232f297a57a5a743894a0e4a801fc3，手动替换即可
 
 ---
 version: "3"
-# 最后编辑时间：2024-10-03
+# 最后编辑时间：2026-01-10
 services:
   ani-rss:
     image: wushuo894/ani-rss:latest
@@ -42,3 +47,4 @@ services:
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+
