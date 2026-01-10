@@ -27,16 +27,12 @@ services:
       # 媒体库目录，可以自定义多个，对映射不熟练的建议两边都写相同的nas本机的绝对路径
       # 记得把该路径映射到EMBY和JF上，不然无法使其添加入库
       # - 【这里替换为你的数据存放目录】:/【这里替换为你的数据存放目录的名字】
+      
     network_mode: host
     # 不存在webui，这一条网络模式仅用于不然它创建一个私有网段，强迫症而已
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
-      # 该镜像只在后台运行，无WebUI
-      icon: http://IP:PORT/i/user_01/autofilm_A.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.icon: /mnt/user/LOGO/autofilm.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
