@@ -17,10 +17,10 @@ services:
     privileged: true
     # 特权模式，赋予容器几乎与主机相同的权限
     volumes:
-      - /mnt/unas/data/docker/iosbackup/lockdown:/var/lib/lockdown
-      - /mnt/unas/data/docker/iosbackup/configs:/configs
+      - /Volume1/docker/iosbackup/lockdown:/var/lib/lockdown
+      - /Volume1/docker/iosbackup/configs:/configs
       # 配置文件夹
-      - /mnt/unas/data/docker/iosbackup/backups/:/backups
+      - /Volume1/docker/iosbackup/backups/:/backups
       # iOS 数据备份文件夹
       - /var/run/dbus:/run/dbus
       - /dev/bus/usb:/dev/bus/usb
