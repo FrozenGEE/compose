@@ -1,12 +1,14 @@
 # 官方文档
 # https://hub.docker.com/r/qq918652593/easy-vdl
+# https://github.com/wlaosj/easy-vdl
 # 软件作者：隔壁小王
 
 # easy-vdl 是一款支持多平台（某音、某书、B某、YouTube、更多平台、多平台博主订阅功能、批量下载、文件管理）的视频解析与下载的可视化平台。内置智能缓存、批量下载、Emby/Jellyfin 元数据自动刮削生成，界面美观，操作简单，适合个人和媒体库用户。
 
 ---
 version: "3"
-# 最后编辑时间：2025-10-01
+# 最后编辑时间：2025-01-10
+# 特别提醒：有浏览器插件搭配
 services:
   easy-vdl:
     image: qq918652593/easy-vdl:arm64
@@ -15,6 +17,9 @@ services:
     # 容器名字
     hostname: easy-vdl
     # 主机名
+    mem_limit: 4g
+    memswap_limit: 4g
+    # 内存限制，默认都是4g
     volumes:
       - 【这里替换为你的数据下载存放目录】/easy-vdl:/app/downloads
       # 视频下载及管理目录，存储所有下载的视频文件，可自定义挂载
