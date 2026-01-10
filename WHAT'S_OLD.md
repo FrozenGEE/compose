@@ -1,4 +1,10 @@
 # 历史更新内容
+## 【更新日志-2025-10-31】
+- MT相册更新RK3588的特供模板，支持调用NPU进行AI识别，并且可多线程调用（npu3个核心的使用率均为40~50%），实测绿联DH4300plus是能用的，香橙派5系列，友善CM3588也可以，理论上RK3588系列的开发板/nas均可使用
+- 强烈推荐给作者送上一个Star：https://github.com/a15355447898a/mt-photos-ai-rk
+https://github.com/a15355447898a/mt-photos-insightface-rk
+- MT官网教程：https://mtmt.tech/docs/advanced/rknn
+
 ## 【更新日志-2025-10-01】
 - 黑猴桌游真容易买
 - 修正openlist模板内容，新增OPENLIST_ADMIN_PASSWORD该变量，现在支持在变量中自定义管理员密码了，再也不用新建容器后ssh终端中找密码了
