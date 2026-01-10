@@ -1,6 +1,7 @@
 # 【更新日志-2026-01-10】
 - 清理了一下一些内容
 - 飞牛OS支持ARM了，还在测试版中，docker可以用，大部分docker镜像都支持ARM，暂时先不在名字中区分是否支持ARM
+- 特别说明：飞牛和绿联均支持让docker容器通过官方的内网穿透在外网访问，但是host网络模式没有映射端口是无法在WebUI/手机端上快捷访问的，因此建议它俩使用host的均把端口映射也写上就可以调出便捷访问的入口
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
