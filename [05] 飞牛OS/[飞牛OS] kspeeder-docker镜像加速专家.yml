@@ -1,0 +1,28 @@
+# 官方文档
+# https://kspeeder.com
+# https://kspeeder.com/zhcn/getting-started/installation
+
+---
+version: "3"
+# 最后编辑时间：2026-01-10
+services:
+  kspeeder:
+    image: registry.kspeeder.com/linkease/kspeeder:latest
+    # 镜像地址
+    container_name: kspeeder
+    # 容器名字
+    hostname: kspeeder
+    # 主机名
+    volumes:
+      - /vol1/1000/docker/kspeeder/config:/kspeeder-config
+      - /vol1/1000/docker/kspeeder/data:/kspeeder-data
+      # 配置文件和数据文件存放目录
+    network_mode: bridge
+    # 绿联NAS用host会提示端口被占用，但是bridge映射使用5003和5443是可以用的，而飞牛用host是正常的，不晓得为啥，没有测试其他NAS上的情况，所以统一直接bridge模式
+    ports:
+      - 5003:5003
+      # WebUI 端口
+      - 5445:5443
+      # 加速源的端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
