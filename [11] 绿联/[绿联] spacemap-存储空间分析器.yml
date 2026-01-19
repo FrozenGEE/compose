@@ -25,7 +25,7 @@ services:
       - /home:/绿联个人文件夹:ro
       # 映射宿主机目录到容器内，并设置为 ro(只读)
 
-      # 书写示例，data01为共享文件夹：- /volume1/data01:/data01:ro
+      # 书写示例，假设data01为存储池1中的共享文件夹：- /volume1/data01:/data01:ro
       # 【这里替换为你想要扫描NAS的目录】:/【这里替换为任意名字】:ro
 
     environment:
@@ -36,8 +36,7 @@ services:
       # 设置预设的自动识别的扫描路径，多个路径用冒号 : 分隔
       # 这里的路径必须与 volumes(路径映射) 的容器内路径一致
 
-      # - TRIM_DATA_SHARE_PATHS=/绿联个人文件夹:/data01
-      # 书写示例，data01为共享文件夹(示例)：- TRIM_DATA_SHARE_PATHS=/绿联个人文件夹:/data01
+      # 书写示例，假设路径映射中容器路径是/绿联个人文件夹和/data01：- TRIM_DATA_SHARE_PATHS=/绿联个人文件夹:/data01
 
     # network_mode: bridge
     network_mode: host
