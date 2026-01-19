@@ -19,7 +19,7 @@ services:
     # user: root
     # 赋予root最高管理员权限，一般用不上，先写着注释掉
     volumes:
-      - ./data:/app/data
+      - /vol1/1000/docker/spacemap:/app/data
       # 配置文件目录
 
       - /vol1/1000:/飞牛存储池1:ro
