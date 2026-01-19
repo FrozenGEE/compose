@@ -1,0 +1,55 @@
+# 官网
+# https://github.com/Danborad/spacemap
+# https://hub.docker.com/r/zhong12138/spacemap
+
+# 如果你懂docker容器路径映射的话，可以将全部需要的路径映射套在同一层容器路径之下(比如：/data)
+# 然后变量中设置自动识别的扫描路径就直接写一个/data即可，而不需要每次新增路径映射后，变量中也要补上
+# 但同时这种做法，会增加更长的文件扫描时间
+
+version: '3'
+# 最后编辑时间：2026-01-19
+services:
+  spacemap:
+    image: zhong12138/spacemap:latest
+    # 镜像名字
+    container_name: spacemap
+    # 容器名字
+    hostname: spacemap
+    # 主机名
+    # user: root
+    # 赋予root最高管理员权限，一般用不上，先写着注释掉
+    volumes:
+      - /mnt/user/appdata/spcaemap:/app/data
+      # 配置文件目录
+
+      - /mnt/user/【这里替换为unRAID的共享文件夹】:/【这里替换为unRAID的共享文件夹的名字】:ro
+      # 映射宿主机目录到容器内，并设置为 ro(只读)
+
+      # 书写示例，假设需要映射unRAID的media目录：- /mnt/user/media:/media:ro
+      # 【这里替换为你想要扫描NAS的目录】:/【这里替换为任意名字】:ro
+
+    environment:
+      - PORT=7080
+      # 自定义容器 WebUI 端口，默认为7080
+
+      - TRIM_DATA_SHARE_PATHS=/media
+      # 设置预设的自动识别的扫描路径，多个路径用冒号 : 分隔
+      # 这里的路径必须与 volumes(路径映射) 的容器内路径一致
+
+      # 书写示例，假设路径映射中容器路径有/media和/photos：- TRIM_DATA_SHARE_PATHS=/media:/photos
+
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 7080:7080
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:7080]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/spacemap.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
