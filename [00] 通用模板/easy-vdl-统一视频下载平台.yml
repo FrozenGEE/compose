@@ -1,25 +1,34 @@
 # 官方文档
-# https://hub.docker.com/r/qq918652593/easy-vdl
 # https://github.com/wlaosj/easy-vdl
+# https://hub.docker.com/r/qq918652593/easy-vdl
 # 软件作者：隔壁小王
 
 # easy-vdl 是一款支持多平台（某音、某书、B某、YouTube、更多平台、多平台博主订阅功能、批量下载、文件管理）的视频解析与下载的可视化平台。内置智能缓存、批量下载、Emby/Jellyfin 元数据自动刮削生成，界面美观，操作简单，适合个人和媒体库用户。
 
+# 浏览器插件：https://github.com/wlaosj/easy-vdl/releases
+
 ---
-version: "3"
-# 最后编辑时间：2025-01-10
+version: "3.8"
+# 最后编辑时间：2025-01-21
 # 特别提醒：有浏览器插件搭配
 services:
   easy-vdl:
     image: qq918652593/easy-vdl:latest
-    # 镜像地址，latest仅支持amd64，arm64的tag为arm64
+    # 镜像地址，仅支持amd64
     container_name: easy-vdl
     # 容器名字
     hostname: easy-vdl
     # 主机名
+    
     mem_limit: 4g
     memswap_limit: 4g
-    # 内存限制，默认都是4g
+    # 内存建议：
+    # 轻量使用（订阅数量较少、偶尔解析下载）：可以将 --memory / mem_limit 调整为 2g。
+    # 中重度使用（约 50 个以上订阅、经常进行批量检测/批量同步）：推荐使用 4g，以保证浏览器嗅探和数据库在高负载场景下更稳定。
+    devices:
+      - /dev/dri:/dev/dri
+      # 启用 Intel 核显硬件加速，支持 Intel 第 6 代（Skylake）及更新的核显和 Intel Arc 系列，播放器会显示 qsv、vaapi 或 cpu 标识
+      
     volumes:
       - 【这里替换为你的数据下载存放目录】/easy-vdl:/app/downloads
       # 视频下载及管理目录，存储所有下载的视频文件，可自定义挂载
@@ -32,7 +41,7 @@ services:
       # 自定义容器端口，官方默认为80，强烈推荐自定义
       - EASY_VDL_ADMIN_USERNAME=admin
       - EASY_VDL_ADMIN_PASSWORD=admin123456
-      # 自定义管理员账号密码，可选，不设置时首次进入UI可图形化设置，默认为admin/admin123456，请及时修改
+      # 自定义管理员账号密码，默认为admin/admin123456，请及时修改
 
       # - COMMUNITY_API_KEY=
       # 社区功能特权密匙，通过爱发电可以获得：https://afdian.com/a/docker
@@ -45,20 +54,16 @@ services:
       # - PGID=0
       # 不设置PUID/PGID时使用系统默认用户ID，适合大部分用户，在遇到数据库权限问题时可按需要设置PUID/PGID，模板直接预设为0 0，如果有需要就去掉注释变成参数使用
 
-    # network_mode: bridge
-    network_mode: host
+    network_mode: bridge
+    # network_mode: host
     # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
-    # ports:
-      # - 8170:8170
+    # 绿联NAS使用host网络模式会导致pgsql数据库所使用的5432端口和官方pgsql端口冲突，因此绿联用户切勿使用host网络模式，其余没测试，因此模板均使用bridge网络模式
+    ports:
+      - 8170:8170
       # WebUI 端口
     restart: unless-stopped
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
-      icon: http://IP:PORT/i/user_01/easy-vdl_A.png
-      # 适用于CasaOS导入时自动写上图标地址
-      # 注意：在导入CasaOS时，记得补全本机端口号
-      # 注意：图标地址仅供参考，请根据实际填写，推荐自搭建兰空图床使用
-      ########################################
       net.unraid.docker.managed: dockerman
       net.unraid.docker.webui: http://[IP]:[PORT:8170]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
