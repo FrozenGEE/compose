@@ -37,7 +37,7 @@ services:
     # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
     labels:
       net.unraid.docker.managed: dockerman
-      net.unraid.docker.webui: http://[IP]:[PORT:5000]
+      net.unraid.docker.webui: http://[IP]:[PORT:9090]
       # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
       net.unraid.docker.icon: /mnt/user/LOGO/qilin-auto.png
       # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
