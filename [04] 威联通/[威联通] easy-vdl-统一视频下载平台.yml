@@ -41,7 +41,7 @@ services:
       # 自定义容器端口，官方默认为80，强烈推荐自定义
       - EASY_VDL_ADMIN_USERNAME=admin
       - EASY_VDL_ADMIN_PASSWORD=admin123456
-      # 自定义管理员账号密码，可选，不设置时首次进入UI可图形化设置，默认为admin/admin123456，请及时修改
+      # 自定义管理员账号密码，默认为admin/admin123456，请及时修改
 
       # - COMMUNITY_API_KEY=
       # 社区功能特权密匙，通过爱发电可以获得：https://afdian.com/a/docker
