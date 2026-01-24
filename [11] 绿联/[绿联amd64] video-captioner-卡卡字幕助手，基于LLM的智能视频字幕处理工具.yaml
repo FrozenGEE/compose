@@ -1,0 +1,36 @@
+# 官方文档
+# https://www.videocaptioner.cn
+# https://github.com/WEIFENG2333/VideoCaptioner
+# https://hub.docker.com/r/ywsj/video-captioner
+
+# docker版不适合中长视频生产字幕，更推荐电脑版
+
+# 系统要求
+# Windows: Windows 10/11 (64位)
+# macOS: macOS 10.15 或更高版本
+# Linux: Ubuntu 20.04+ / Debian 11+ / Fedora 35+
+# Python: Python 3.10 或更高版本（源码运行时需要）
+# 内存: 建议 4GB 以上（使用本地 Whisper 需要 8GB+）
+
+---
+version: "3"
+# 最后编辑时间：2026-01-24
+services:
+  video-captioner:
+    image: ywsj/video-captioner:latest
+    # 镜像地址
+    container_name: video-captioner
+    # 容器名字
+    hostname: video-captioner
+    # 主机名
+    volumes:
+      - ./video-captioner/temp:/app/temp
+      # 缓存目录
+    network_mode: host
+    # network_mode: bridge
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8501:8501
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
