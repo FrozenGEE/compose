@@ -1,0 +1,43 @@
+# 官方文档
+# https://github.com/yuwancumian2009/tunescout-v2
+# https://hub.docker.com/r/yuwancumian2009/tunescout-v2
+
+version: "3"
+# 最后编辑时间：2026-01-24
+services:
+  tunescout:
+    image: yuwancumian2009/tunescout-v2:latest
+    # 镜像名字
+    container_name: tunescout
+    # 容器名字
+    hostname: tunescout
+    # 主机名
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # docker核心，用于自动重启 Navidrome (可选)
+      - ./tunescout/config:/app/config
+      # 配置文件存放目录
+      - ./tunescout/library_cache.db:/app/library_cache.db
+      # 配置文件与数据库，提前去目录创建，需构建容器前手动在该位置创建同名空文件
+
+      - ./tunescout/临时下载:/download
+      # 临时下载目录
+      - 【这里替换为你的音乐库存放目录】:/music
+      # 音乐库目录，和Navidrome同目录，直接下载到这里面
+      - 【这里替换为你的歌单存放目录】:/playlists
+      # 歌单文件输出目录，navidrome相应挂载一条以下这样的路径
+      ################### - 【这里替换为你的歌单存放目录】:/music/Playlists
+
+    environment:
+      - TZ=Asia/Shanghai
+      # 时区
+      # - WEB_USERNAME=admin
+      # - WEB_PASSWORD=admin
+      # 自定义账号和密，默认都是admin，可选非必要
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 8503:8503
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
