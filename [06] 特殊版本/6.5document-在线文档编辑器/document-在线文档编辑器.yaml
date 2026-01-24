@@ -1,0 +1,21 @@
+# 官方文档
+# https://hub.docker.com/r/heizicao/document
+
+---
+version: "3"
+# 最后编辑时间：2026-01-24
+services:
+  document:
+    image: heizicao/document:latest
+    # 镜像地址
+    container_name: document
+    # 容器名字
+    hostname: document
+    # 主机名
+    network_mode: bridge
+    # 80端口被占用，因此推荐brdige网络模式
+    ports:
+      - 5858:80
+      # WebUI 端口
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
