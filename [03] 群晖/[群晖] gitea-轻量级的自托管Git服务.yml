@@ -51,5 +51,5 @@ services:
       # SSH 服务端口，此端口可以不向外界公开
       # - 3000:3000
       # WebUI http端口
-    restart: always
-    # 重启策略
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
