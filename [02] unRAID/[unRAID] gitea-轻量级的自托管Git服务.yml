@@ -24,7 +24,6 @@ services:
       - USER_GID=100
       # 用户和用户组权限，ssh中使用“id 用户名”查看，用户组一般为100(users)
       # 第一个用户而言，群晖为1026，新绿联为1001，linux类系统为1000，后续用户均+1
-      
       - HTTP_PORT=3200
       # HTTP 监听端口，默认为3000
       - SSH_LISTEN_PORT=4222
