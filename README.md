@@ -40,4 +40,4 @@
 7、[各nas dpanel 部署教程及食用方法](https://github.com/FrozenGEE/compose/blob/main/dpanel.md)
 
 
-[![Star History Chart](https://api.star-history.com/svg?repos=FrozenGEE/compose&type=Date)](https://star-history.com/#FrozenGEE/compose&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=FrozenGEE/compose&type=Date)](https://star-history.dera.page/#FrozenGEE/compose&Date)
