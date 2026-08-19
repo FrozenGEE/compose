@@ -11,7 +11,7 @@
 version: "3.8"
 # 最后编辑时间：2026-06-25
 services:
-  ani-rss:
+  litepan:
     image: ponphil/litepan:latest
     # 镜像地址，测试版的tag为beta
     container_name: litepan
