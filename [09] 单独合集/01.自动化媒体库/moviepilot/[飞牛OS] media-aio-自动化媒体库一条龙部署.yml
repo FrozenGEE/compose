@@ -144,11 +144,11 @@
 # redis和pgsql均使用bridge网络模式，仅提供给MP使用，如果你有单独已经部署好的redis和pgsql容器，懂得如何链接上，自行修改，本模板已经整合号，部署即可使用
 # 2025-09-10：MP已经支持在WebUI上进行认证，因此删除掉认证部分，同时，部分变量在compose中写了，就无法在WebUI上随时修改，因此也删掉了
 # 2025-09-10：本模板改为MP使用带数据库且全新部署的版本，如需原有数据库迁移升级，多加一个pgsql稍微修改一下路径即可，飞牛OS实测没问题
-
+# 2026-08-19：v2版本修改为v3版本
 
 ---
 version: "3"
-# 最后编辑时间：2025-09-10
+# 最后编辑时间：2026-08-19
 services:
 ##############################################
 #                                            #
@@ -360,10 +360,10 @@ services:
 
 ##############################################
 
-  moviepilot-v2:
-    image: jxxghp/moviepilot-v2:latest
-    container_name: moviepilot-v2
-    hostname: moviepilot-v2
+  moviepilot:
+    image: jxxghp/moviepilot-v3:latest
+    container_name: moviepilot
+    hostname: moviepilot
     restart: unless-stopped
     network_mode: host
 
