@@ -4,7 +4,7 @@
 
 其余的均没测试，手头上也就只有 绿联DH4300plus，香橙派5Plus，友善cm3588 这三个RK3588机器而已
 
-命令查看npu调度情况
+- 命令查看npu调度情况
 ```
 watch -n 1 cat /sys/kernel/debug/rknpu/load
 ```
