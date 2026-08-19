@@ -1,0 +1,53 @@
+# 官方文档
+# https://www.litepan.top/
+# https://github.com/Ponphil/LitePan
+# https://hub.docker.com/r/ponphil/litepan
+
+# 新手指南
+# https://www.litepan.top/guide/getting-started.html
+# 账号为admin，密码在WebUI中点击忘记密码，再按照指引去看日志中的密码
+
+---
+version: "3.8"
+# 最后编辑时间：2026-06-25
+services:
+  ani-rss:
+    image: ponphil/litepan:latest
+    # 镜像地址，测试版的tag为beta
+    container_name: litepan
+    # 容器名字
+    hostname: litepan
+    # 主机名
+    volumes:
+      - /mnt/user/appdata/litepan/data:/app/data
+      # SQLite 数据库、核心配置和程序运行数据
+      - /mnt/user/appdata/litepan/log:/app/log
+      # 系统运行日志，排查问题时优先查看
+      - /mnt/user/appdata/litepan/plugins:/app/plugins
+      # 扩展插件目录
+      - 【这里替换为你的数据存放目录】/litepan/strm:/app/strm
+      # STRM 媒体聚合文件输出目录
+      - 【这里替换为你的数据存放目录】/litepan/mounts:/app/mounts
+      # 网盘挂载到本地的目录
+    environment:
+      - PORT=5211
+      # 自定义容器端口，默认5211
+      - TZ=Asia/Shanghai
+      # 时区
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    # ports:
+      # - 5211:5211
+      # WebUI 端口
+      # - 8098:8098
+      # 如果在后台启用了 Emby 反代，并填写监听端口 8098，需要额外映射
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
+    labels:
+      net.unraid.docker.managed: dockerman
+      net.unraid.docker.webui: http://[IP]:[PORT:5211]
+      # 适用于unraid界面打开WebUI，注意端口号写的是容器端口，如有自定义，自行修改
+      net.unraid.docker.icon: /mnt/user/LOGO/litepan.png
+      # 适用于unraid的图标，可以写unRAID的路径地址，也可以写一个图标地址(局域网或广域网均可)
+      # 注意：通过compose创建的docker容器，无法在unRAID上进行编辑
