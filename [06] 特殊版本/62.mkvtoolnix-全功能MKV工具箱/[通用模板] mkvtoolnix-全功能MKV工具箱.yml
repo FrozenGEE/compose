@@ -35,6 +35,8 @@ services:
       # 用于重启自己
       - 【这里替换为你的docker数据存放目录】/mkvtoolnix:/config
       # 配置文件目录
+      - 【这里替换为你的docker数据存放目录】/fonts:/usr/share/fonts
+      # 字体文件，务必映射，不然每次启动都会下载字体文件
       - 【这里替换为你的数据存放目录】:/storage
       # 数据目录，可自定义多个
     environment:
