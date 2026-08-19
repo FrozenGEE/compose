@@ -1,0 +1,57 @@
+# 官方文档
+# https://github.com/ma303973022/junyao-ktv
+# https://hub.docker.com/r/ma303973022/junyao-ktv
+
+# 需要使用官方APP连接NAS服务端，下载地址见下
+# https://github.com/ma303973022/junyao-ktv/releases
+
+# AI时代就是好啊，活久见了，以前想要在NAS上搭建一个KTV服务器，就只有威联通特定机型才有，但是非常老旧了
+
+# 最后编辑时间：2026-08-19
+services:
+  junyao-ktv:
+    image: ma303973022/junyao-ktv:latest
+    # 镜像名字
+    container_name: junyao-ktv
+    # 容器名字
+    hostname: junyao-ktv
+    # 主机名
+
+    devices:
+      - /dev/dri:/dev/dri
+      # 硬件转码（可选）：宿主机有 Intel/AMD 核显或独显、且已安装好对应驱动时，把宿主机的 /dev/dri 设备直通进容器即可启用 VAAPI 硬件转码
+      # 没有核显/独显、或者不确定的话，保持注释即可，容器会自动使用 libx264 软件编码，只是转码速度会慢一些、更吃 CPU
+
+    volumes:
+      - ./data:/data
+      # 应用数据（数据库、封面等）文件夹
+      - 【这里替换为你的 MV 曲库存放目录】:/mv
+      # 映射你的 MV 曲库的文件夹
+      # - 【这里替换为你的网盘挂载的 MV 曲库存放目录】:/mv-net
+      # 映射你的网盘挂载的 MV 曲库的文件夹 (可选)
+      # - 【这里替换为你的歌手存放目录】:/singer
+      # 歌手文件夹 (可选)
+
+    environment:
+      - PORT=8083
+      # 自定义容器端口，默认8083
+      - DATA_DIR=/data
+      # 自定义容器的应用数据（数据库、封面等）的持久化存储路径， ，默认/data，不改动
+      - MV_DIR=/mv
+      # 自定义容器的 MV 曲库的持久化存储路径，默认/mv，不改动
+      - TZ=Asia/Shanghai
+      # 时区
+
+      - VAAPI_DEVICE=/dev/dri/renderD128
+      # VAAPI 硬件转码设备路径，宿主机没有核显/独显、或者没有启用的d evices 直通时，容器探测不到这个设备，会自动回退到 libx264 软件编码，不影响正常使用，只是转码速度/CPU占用有差别
+      - HLS_CACHE_MAX_AGE_DAYS=3
+      # HLS 缓存每日清理：距上次转码完成超过这个天数、且最近未被重新点唱的缓存会被自动清理释放磁盘空间，源 MV 文件不受影响，下次点唱会自动重新生成缓存。
+
+    # network_mode: bridge
+    network_mode: host
+    # host模式需要容器内的端口不被占用，不需要端口映射，后续端口映射全都开头加#注释掉，否则注释掉这条
+    ports:
+      - 8083:8083
+      # WebUI 端口，同时也是后台访问端口，默认 8083
+    restart: unless-stopped
+    # 重启策略，可根据实际情况而选择 no/always/unless-stopped/on-failure/on-failure:3
