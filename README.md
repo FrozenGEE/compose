@@ -3,6 +3,7 @@
 - 某些经常翻新的项目，以及AI相关的项目，都放在了```[09] 单独合集```里面（=-=不过我本人不是经常折腾AI）
 - 飞牛现在```unless-stopped```的问题解决了，镜像支持导出导入了，就差compose能一键更新，不停止情况下编辑内容，还有最重要的，compose文本编辑框无法全屏化问题解决了，就好用了
 - dpanel的compose文本编辑框也可以最大化窗口了
+- AI时代就是好啊，活久见了，以前NAS想玩KTV就只能买威联通特定机型才有，十分推荐这个项目[骏耀K歌 · junyao-ktv](https://github.com/ma303973022/junyao-ktv)
 
 [历史更新内容](https://github.com/FrozenGEE/compose/blob/main/WHAT'S_OLD.md)
 
