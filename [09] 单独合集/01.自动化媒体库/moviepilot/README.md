@@ -1,17 +1,19 @@
+
 # MoviePilot的参数说明
 - 所有配置项均支持环境变量、env配置文件、WEB界面 三种配置方式，且优先级为：环境变量 > env配置文件 == WEB界面。在环境变量中配置了的项，env配置文件及WEB界面配置将不会生效，以环境变量为准（摘抄自[MP官方文档](https://wiki.movie-pilot.org/zh/configuration)）
 - 由于MP本身就需要多个项目共同配合以完成一套完整的追片系统，单纯部署需要调整好参数，参数随时间流逝，会不断变化
 - 为了精简本人compose模板中一些不必要的参数，尽可能在WebUI上进行操作，下面列出一些个人认为比较重要的参数，来源于[MP官方文档](https://wiki.movie-pilot.org/zh/configuration)
 - 说实话参数越写越多，模板越写越长，注释也多，有时候又顾不上，其实最好还是多看看官方文档
+- 2026-08-19：已经V3版本了，v2版本+pgsql+redis 的可以直接修改镜像名字中的v2为v3即可升级
 
 ## 01. PT站点认证配置（变量）
-
+- v2.0.7及以上版本，已支持通过UI进行用户认证：点击用户头像 -> 用户认证，无需配置环境变量。
 <details>
 <summary>最后编辑时间：2025-11-14</summary>
-
 ```yaml
 ##############################################
 #### 认证站点 ####
+
       - AUTH_SITE=iyuu,agsvpt,audiences,discfan,freefarm,haidan,hddolby,hdfans,hhclub,icc2022,ptba,ptvicomo,wintersakura,xingtan,zmpt,sunny,ptcafe,ptzone,kufei,yemapt,hspt,xingyunge,cspt,tmpt,raingfh,gtkpw,ptlgs,hdbao,sewerpt,ptskit
       ## 只有通过后才能使用站点相关功能，支持配置多个认证站点，使用英文逗号，进行分隔，会依次执行认证操作，直到有一个站点认证成功
       ## UID为网站分配给你的数字ID，请在个人信息内查看，切勿泄露
